@@ -1,0 +1,3802 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: info@finbourne.com
+    name: FINBOURNE Technology
+    url: https://www.finbourne.com
+  termsOfService: https://www.finbourne.com/legal/terms-conditions
+  title: FINBOURNE Identity Service API
+  version: 0.0.2681
+  x-logo:
+    url: https://www.lusid.com/app/assets/logo_white.png
+    backgroundColor: '#415464'
+servers:
+- url: https://fbn-ci.lusid.com/identity
+security:
+- {}
+tags:
+- description: Endpoints for querying application metadata
+  name: Application Metadata
+- description: Endpoints for administering Applications
+  name: Applications
+- description: Endpoints for getting authentication details for the domain
+  name: Authentication
+- description: Endpoints for administering Identity Provider integration
+  name: Identity Provider
+- description: Endpoints for getting more information about the current User
+  name: Me
+- description: Endpoints for administering one's own Personal Access Tokens
+  name: Personal Authentication Tokens
+- description: Endpoints for administering Roles
+  name: Roles
+- description: Endpoints for administering Users
+  name: Tokens
+- description: Endpoints for querying the users directory
+  name: Users
+paths:
+  /api/applications:
+    get:
+      description: List the available applications
+      operationId: ListApplications
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: UniqueApplicationId
+                type: Native
+                displayName: Example Native Application
+                secret: "123456789"
+                clientId: my-example-native-app
+                issuer: https://exampleiusser.lusid.com
+              schema:
+                items:
+                  $ref: '#/components/schemas/OAuthApplication'
+                type: array
+          description: List the available applications
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListApplications: List Applications"
+      tags:
+      - Applications
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: Create a new Application
+      operationId: CreateApplication
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              displayName: My First Application
+              clientId: my-first-application
+              type: Native
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+          application/json:
+            example:
+              displayName: My First Application
+              clientId: my-first-application
+              type: Native
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+          text/json:
+            example:
+              displayName: My First Application
+              clientId: my-first-application
+              type: Native
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+          application/*+json:
+            example:
+              displayName: My First Application
+              clientId: my-first-application
+              type: Native
+            schema:
+              $ref: '#/components/schemas/CreateApplicationRequest'
+        description: Details of the application to be created
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: UniqueApplicationId
+                type: Native
+                displayName: Example Native Application
+                secret: "123456789"
+                clientId: my-example-native-app
+                issuer: https://exampleiusser.lusid.com
+              schema:
+                $ref: '#/components/schemas/OAuthApplication'
+          description: Create Application
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] CreateApplication: Create Application"
+      tags:
+      - Applications
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/applications/{id}:
+    delete:
+      description: Delete the specified application
+      operationId: DeleteApplication
+      parameters:
+      - description: The unique identifier for the application
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DeleteApplication: Delete Application"
+      tags:
+      - Applications
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    get:
+      description: "get the specified application, and optionally the OIDC secret"
+      operationId: GetApplication
+      parameters:
+      - description: The unique identifier for the application
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: "Optional. If set to true, the application secrets will be returned\
+          \ in plain text"
+        explode: true
+        in: query
+        name: includeSecret
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-nullable: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: UniqueApplicationId
+                type: Native
+                displayName: Example Native Application
+                secret: "123456789"
+                clientId: my-example-native-app
+                issuer: https://exampleiusser.lusid.com
+              schema:
+                $ref: '#/components/schemas/OAuthApplication'
+          description: Get the specified application
+        "404":
+          description: Not Found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetApplication: Get Application"
+      tags:
+      - Applications
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/applications/{id}/lifecycle/$newsecret:
+    post:
+      description: Rotate the secrets for the specified application
+      operationId: RotateApplicationSecrets
+      parameters:
+      - description: The unique identifier for the application
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: UniqueApplicationId
+                type: Native
+                displayName: Example Native Application
+                secret: "123456789"
+                clientId: my-example-native-app
+                issuer: https://exampleiusser.lusid.com
+              schema:
+                $ref: '#/components/schemas/OAuthApplication'
+          description: Rotate Application Secrets
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] RotateApplicationSecrets: Rotate Application Secrets"
+      tags:
+      - Applications
+      x-fbn-apistatus: Experimental
+      x-accepts: application/json
+  /api/authentication/information:
+    get:
+      description: "Get the AuthenticationInformation associated with the current\
+        \ domain. This includes all the\r\nnecessary information to login to this\
+        \ domain."
+      operationId: GetAuthenticationInformation
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                issuerUrl: https://myco.lusid.okta.com/12346
+                samlIdentityProviderId: 0oa14txx1jAiz7T302p7as
+                supportAccessExpiryWithRole: []
+              schema:
+                $ref: '#/components/schemas/AuthenticationInformation'
+          description: Get authentication information
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "GetAuthenticationInformation: Gets AuthenticationInformation"
+      tags:
+      - Authentication
+      x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/authentication/support:
+    delete:
+      description: This will result in a loss of access to your data for all FINBOURNE
+        support agents
+      operationId: InvalidateSupportAccess
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 37322a3efbf445fa861d39759ad22dcb
+                duration: PT24H
+                description: Investigate issues detailed in support ticket 0604
+                createdAt: 2020-01-06T12:05:00.0000000+00:00
+                expiry: 2020-01-07T12:05:00.0000000+00:00
+                createdBy: UserId-54213
+                terminated: false
+                permittedRoles:
+                - support-role
+              - id: 37322a3efbf445fa861d39759ad22dcb
+                duration: PT24H
+                description: Investigate issues detailed in support ticket 0604
+                createdAt: 2020-01-06T12:05:00.0000000+00:00
+                expiry: 2020-01-07T12:05:00.0000000+00:00
+                createdBy: UserId-54213
+                terminated: true
+                terminatedAt: 2020-01-06T16:05:00.0000000+00:00
+                terminatedBy: UserId-54213
+                permittedRoles:
+                - support-role
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportAccessResponse'
+                type: array
+          description: Invalidate all currently active support requests
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] InvalidateSupportAccess: Revoke any FINBOURNE support\
+        \ access to your account"
+      tags:
+      - Authentication
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    get:
+      description: "The active and inactive support requests will be returned, inactive\
+        \ support requests will have information pertaining to their termination\r\
+        \nincluding obfuscated userIds of those who created and terminated the request"
+      operationId: GetSupportAccessHistory
+      parameters:
+      - description: The start expiry date to query support access requests from
+        explode: true
+        in: query
+        name: start
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      - description: The end expiry date to query support access requests to
+        explode: true
+        in: query
+        name: end
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: 37322a3efbf445fa861d39759ad22dcb
+                duration: PT24H
+                description: Investigate issues detailed in support ticket 0604
+                createdAt: 2020-01-06T12:05:00.0000000+00:00
+                expiry: 2020-01-07T12:05:00.0000000+00:00
+                createdBy: UserId-54213
+                terminated: false
+                permittedRoles:
+                - support-role
+              - id: 37322a3efbf445fa861d39759ad22dcb
+                duration: PT24H
+                description: Investigate issues detailed in support ticket 0604
+                createdAt: 2020-01-06T12:05:00.0000000+00:00
+                expiry: 2020-01-07T12:05:00.0000000+00:00
+                createdBy: UserId-54213
+                terminated: true
+                terminatedAt: 2020-01-06T16:05:00.0000000+00:00
+                terminatedBy: UserId-54213
+                permittedRoles:
+                - support-role
+              schema:
+                items:
+                  $ref: '#/components/schemas/SupportAccessResponse'
+                type: array
+          description: Get support access history
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetSupportAccessHistory: Get the history of all support\
+        \ access granted and any information pertaining to their termination"
+      tags:
+      - Authentication
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: "Granting support access will allow FINBOURNE employees full access\
+        \ to your data with the express intent to investigate support issues\r\nYou\
+        \ can revoke this (and all) access at any time using the InvalidateSupportAccess\
+        \ endpoint."
+      operationId: GrantSupportAccess
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              duration: PT24H
+              description: Investigate issues detailed in support ticket 0604
+            schema:
+              $ref: '#/components/schemas/SupportAccessRequest'
+          application/json:
+            example:
+              duration: PT24H
+              description: Investigate issues detailed in support ticket 0604
+            schema:
+              $ref: '#/components/schemas/SupportAccessRequest'
+          text/json:
+            example:
+              duration: PT24H
+              description: Investigate issues detailed in support ticket 0604
+            schema:
+              $ref: '#/components/schemas/SupportAccessRequest'
+          application/*+json:
+            example:
+              duration: PT24H
+              description: Investigate issues detailed in support ticket 0604
+            schema:
+              $ref: '#/components/schemas/SupportAccessRequest'
+        description: Request detailing the duration and reasons for supplying support
+          access
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                id: 37322a3efbf445fa861d39759ad22dcb
+                duration: PT24H
+                description: Investigate issues detailed in support ticket 0604
+                createdAt: 2020-01-06T12:05:00.0000000+00:00
+                expiry: 2020-01-07T12:05:00.0000000+00:00
+                createdBy: UserId-54213
+                terminated: false
+                permittedRoles:
+                - support-role
+              schema:
+                $ref: '#/components/schemas/SupportAccessResponse'
+          description: Grant Support Access
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access\
+        \ to your account"
+      tags:
+      - Authentication
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/authentication/support-roles:
+    get:
+      description: "Get mapping of support roles, the internal representation to a\
+        \ human friendly representation"
+      operationId: GetSupportRoles
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                supportRoles:
+                - label: support-role
+                  description: Description of support role
+                  roleIdentifier:
+                    scope: scope
+                    code: code
+                  internalIdentifier: "1"
+              schema:
+                $ref: '#/components/schemas/SupportRolesResponse'
+          description: Get support roles
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the\
+        \ internal representation to a human friendly representation"
+      tags:
+      - Authentication
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/directory:
+    get:
+      description: Finds a maximum of 50 users by ID
+      operationId: FindUsersById
+      parameters:
+      - description: A list of unique identifiers for the users
+        explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                href: https://my-domain.lusid.com/access
+                values:
+                  "00ub0oNGTSWTBKOLGLNR":
+                    id: 00ub0oNGTSWTBKOLGLNR
+                    login: dennis.sierra
+                    email: Dennis
+                    firstName: Sierra
+                    lastName: dennis.sierra@my-awesome-company.com
+                    type: Personal
+                    links:
+                    - relation: User
+                      href: https://my-domain.lusid.com/access/api/users/00ub0oNGTSWTBKOLGLNR?includeRoles=false
+                      description: A link to access the full details of this user
+                      method: GET
+                    - relation: Activity
+                      href: https://my-domain.lusid.com/insights/api/requests?filter=user%20eq%20%2700ub0oNGTSWTBKOLGLNR%27
+                      description: A link to the LUSID Insights API to get all logs
+                        related to this user
+                      method: GET
+                  "00uijntSwJjSHtDY70g3":
+                    id: 00uijntSwJjSHtDY70g3
+                    login: rudi.kouma
+                    email: Rudi
+                    firstName: Kouma
+                    lastName: rudi.kouma@my-awesome-company.com
+                    type: Personal
+                    links:
+                    - relation: User
+                      href: https://my-domain.lusid.com/access/api/users/00uijntSwJjSHtDY70g3?includeRoles=false
+                      description: A link to access the full details of this user
+                      method: GET
+                    - relation: Activity
+                      href: https://my-domain.lusid.com/insights/api/requests?filter=user%20eq%20%2700uijntSwJjSHtDY70g3%27
+                      description: A link to the LUSID Insights API to get all logs
+                        related to this user
+                      method: GET
+                failed:
+                  "00u19uiKQa0xXkbdGLNR":
+                    id: 00u19uiKQa0xXkbdGLNR
+                    type: UserDoesNotExist
+                    detail: The specified user cannot be found or has been deleted
+                links:
+                - relation: RequestLogs
+                  href: https://mydomain.lusid.com/app/insights/logs/0ABCDEFGHIJKL:00000001
+                  description: A link to the LUSID Insights website showing all logs
+                    related to this request
+                  method: GET
+              schema:
+                $ref: '#/components/schemas/ListUsersResponse'
+          description: Success
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] FindUsersById: Find users by id endpoint"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/identityprovider/scim:
+    delete:
+      description: Deactivates any existing SCIM API token
+      operationId: RemoveScim
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] RemoveScim: Remove SCIM"
+      tags:
+      - Identity Provider
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: Generates an API token to be used for SCIM
+      operationId: AddScim
+      parameters:
+      - description: The action to take. For the API token. Defaults to "ensure"
+        explode: true
+        in: query
+        name: apiTokenAction
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Optional deactivation date for the old API token. Only used if
+          apiTokenAction is "regenerate"
+        explode: true
+        in: query
+        name: oldApiTokenDeactivation
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              example:
+                baseUrl: https://my-domain.lusid.com/identity/scim/v2
+                apiToken: ba5e8bed1cbd92f3cc4a893a48141ff23617b258cb7f1407f3567d1f35d0f0e0
+              schema:
+                $ref: '#/components/schemas/AddScimResponse'
+            application/json:
+              example:
+                baseUrl: https://my-domain.lusid.com/identity/scim/v2
+                apiToken: ba5e8bed1cbd92f3cc4a893a48141ff23617b258cb7f1407f3567d1f35d0f0e0
+              schema:
+                $ref: '#/components/schemas/AddScimResponse'
+            text/json:
+              example:
+                baseUrl: https://my-domain.lusid.com/identity/scim/v2
+                apiToken: ba5e8bed1cbd92f3cc4a893a48141ff23617b258cb7f1407f3567d1f35d0f0e0
+              schema:
+                $ref: '#/components/schemas/AddScimResponse'
+          description: The base URL and API token to be used
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] AddScim: Add SCIM"
+      tags:
+      - Identity Provider
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/keys:
+    get:
+      description: "Gets the meta data for all of the user's Personal Access Tokens\
+        \ that have not been deleted. They may be\r\ninvalid due to the deactivation\
+        \ date having passed."
+      operationId: ListOwnApiKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: f45fcf4e7942422bb6c99ff74de30f40
+                displayName: Automated system A's key
+                createdDate: 2020-01-01T00:00:00.0000000+00:00
+                deactivationDate: 2020-06-01T00:00:00.0000000+00:00
+              - id: 89762a35ce3649b5b92f47168611a534
+                displayName: Automated system B's key
+                createdDate: 2020-01-02T00:00:00.0000000+00:00
+                deactivationDate: 2020-06-02T00:00:00.0000000+00:00
+              - id: bd772a807cab49c0bcac565c8dbd7a20
+                displayName: Automated system C's key
+                createdDate: 2020-01-03T00:00:00.0000000+00:00
+                deactivationDate: 2020-06-03T00:00:00.0000000+00:00
+              schema:
+                items:
+                  $ref: '#/components/schemas/ApiKey'
+                type: array
+          description: List of user's existing Personal Access Tokens
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListOwnApiKeys: Gets the meta data for all of the user's\
+        \ existing Personal Access Tokens."
+      tags:
+      - Personal Authentication Tokens
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: Generates a Personal Access Token and returns the new key and its
+        associated metadata.
+      operationId: CreateApiKey
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              displayName: My API Key
+              deactivationDate: 2022-12-08T13:30:12.0000000+00:00
+            schema:
+              $ref: '#/components/schemas/CreateApiKey'
+          application/json:
+            example:
+              displayName: My API Key
+              deactivationDate: 2022-12-08T13:30:12.0000000+00:00
+            schema:
+              $ref: '#/components/schemas/CreateApiKey'
+          text/json:
+            example:
+              displayName: My API Key
+              deactivationDate: 2022-12-08T13:30:12.0000000+00:00
+            schema:
+              $ref: '#/components/schemas/CreateApiKey'
+          application/*+json:
+            example:
+              displayName: My API Key
+              deactivationDate: 2022-12-08T13:30:12.0000000+00:00
+            schema:
+              $ref: '#/components/schemas/CreateApiKey'
+        description: The request to create a new Personal Access Token
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                key: ba5e8bed1cbd92f3cc4a893a48141ff23617b258cb7f1407f3567d1f35d0f0e0
+                id: f45fcf4e7942422bb6c99ff74de30f40
+                displayName: Automated system A's key
+                createdDate: 2020-01-01T00:00:00.0000000+00:00
+                deactivationDate: 2020-06-01T00:00:00.0000000+00:00
+              schema:
+                $ref: '#/components/schemas/CreatedApiKey'
+          description: The Personal Access Token and associated meta data.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] CreateApiKey: Create a Personal Access Token"
+      tags:
+      - Personal Authentication Tokens
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/keys/{id}:
+    delete:
+      description: Immediately invalidates the specified Personal Access Token
+      operationId: DeleteApiKey
+      parameters:
+      - description: The id of the Personal Access Token to delete
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: f45fcf4e7942422bb6c99ff74de30f40
+                displayName: Automated system A's key
+                createdDate: 2020-01-01T00:00:00.0000000+00:00
+                deactivationDate: 2020-08-01T00:00:00.0000000+00:00
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+          description: Invalidates a Personal Access Token
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DeleteApiKey: Invalidate a Personal Access Token"
+      tags:
+      - Personal Authentication Tokens
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/me:
+    get:
+      description: Get the requesting user's basic info
+      operationId: GetUserInfo
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                type: Personal
+              schema:
+                $ref: '#/components/schemas/CurrentUserResponse'
+          description: Get the specified user's info
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetUserInfo: Get User Info"
+      tags:
+      - Me
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/me/password:
+    put:
+      description: "Set the password of the current user to the specified value.\r\
+        \n \r\nNote this is feature is only available to Service users authenticated\
+        \ using OpenID. For further information\r\nrelating to usage of this feature\
+        \ please consult the documentation."
+      operationId: SetPassword
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              value: ""
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          application/json:
+            example:
+              value: ""
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          text/json:
+            example:
+              value: ""
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+          application/*+json:
+            example:
+              value: ""
+            schema:
+              $ref: '#/components/schemas/SetPassword'
+        description: The request containing the new password value
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                updatedAt: 2022-12-25T12:00:00.0000000+00:00
+              schema:
+                $ref: '#/components/schemas/SetPasswordResponse'
+          description: Set the current user's password
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "SetPassword: Set password of current user"
+      tags:
+      - Me
+      x-fbn-apistatus: Stable
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/metadata/access/resources:
+    get:
+      description: Get the comprehensive set of resources that are available for access
+        control
+      operationId: ListAccessControlledResources
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ResourceListOfAccessControlledResource'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListOfAccessControlledResource'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListOfAccessControlledResource'
+          description: Success
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListAccessControlledResources: Get resources available\
+        \ for access control"
+      tags:
+      - Application Metadata
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/roles:
+    get:
+      description: List the available Roles
+      operationId: ListRoles
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: asnvr5ne35
+                roleId:
+                  scope: LUSID
+                  code: FrontOfficeAdministrator
+                source: LusidUser
+                name: LUSID:FrontOfficeAdministrator
+                description: Front office administration role
+              schema:
+                items:
+                  $ref: '#/components/schemas/RoleResponse'
+                type: array
+          description: List the available roles
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListRoles: List Roles"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: Creates a new Role
+      operationId: CreateRole
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              name: LUSID:FrontOfficeAdministrator
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+          application/json:
+            example:
+              name: LUSID:FrontOfficeAdministrator
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+          text/json:
+            example:
+              name: LUSID:FrontOfficeAdministrator
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+          application/*+json:
+            example:
+              name: LUSID:FrontOfficeAdministrator
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/CreateRoleRequest'
+        description: Details of the role to be created
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                id: asnvr5ne35
+                roleId:
+                  scope: LUSID
+                  code: FrontOfficeAdministrator
+                source: LusidUser
+                name: LUSID:FrontOfficeAdministrator
+                description: Front office administration role
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: Create a new role
+        "409":
+          description: A role with the same Name already exists.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] CreateRole: Create Role"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/roles/{id}:
+    delete:
+      description: Delete the specified role
+      operationId: DeleteRole
+      parameters:
+      - description: The unique identifier for the role
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DeleteRole: Delete Role"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    get:
+      description: Get the specified role
+      operationId: GetRole
+      parameters:
+      - description: The unique identifier for the role
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asnvr5ne35
+                roleId:
+                  scope: LUSID
+                  code: FrontOfficeAdministrator
+                source: LusidUser
+                name: LUSID:FrontOfficeAdministrator
+                description: Front office administration role
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: Get the specified role
+        "404":
+          description: Not Found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetRole: Get Role"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: Update the specified Role
+      operationId: UpdateRole
+      parameters:
+      - description: The unique identifier for the role to be updated
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+          application/json:
+            example:
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+          text/json:
+            example:
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+          application/*+json:
+            example:
+              description: Front office administration role
+            schema:
+              $ref: '#/components/schemas/UpdateRoleRequest'
+        description: The new definition of the role
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asnvr5ne35
+                roleId:
+                  scope: LUSID
+                  code: FrontOfficeAdministrator
+                source: LusidUser
+                name: LUSID:FrontOfficeAdministrator
+                description: Front office administration role
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: Update a role
+        "404":
+          description: Not Found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] UpdateRole: Update Role"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/roles/{id}/users:
+    get:
+      description: List all Users in the specified Role
+      operationId: ListUsersInRole
+      parameters:
+      - description: The unique identifier for the Role
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                type: Personal
+                status: ACTIVE
+                external: false
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+                type: array
+          description: The users in the role
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListUsersInRole: Get the users in the specified role."
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/roles/{id}/users/{userId}:
+    delete:
+      description: Removes the User from the specified Role
+      operationId: RemoveUserFromRole
+      parameters:
+      - description: The unique identifier for the Role
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The unique identifier for the User
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] RemoveUserFromRole: Remove User from Role"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: Adds the User to the specified Role
+      operationId: AddUserToRole
+      parameters:
+      - description: The unique identifier for the Role
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The unique identifier for the User
+        explode: false
+        in: path
+        name: userId
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] AddUserToRole: Add User to Role"
+      tags:
+      - Roles
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/tokens:
+    delete:
+      description: Log the current user out of all Finbourne platforms by invalidating
+        the current token
+      operationId: InvalidateToken
+      responses:
+        "204":
+          description: No Content
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] InvalidateToken: Invalidate current JWT token (sign\
+        \ out)"
+      tags:
+      - Tokens
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users:
+    get:
+      description: List the available Users
+      operationId: ListUsers
+      parameters:
+      - description: Flag indicating that the users roles should be included in the
+          response
+        explode: true
+        in: query
+        name: includeRoles
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+        x-nullable: true
+      - description: Include previously deleted (not purged) users
+        explode: true
+        in: query
+        name: includeDeactivated
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+        x-nullable: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                type: Personal
+                status: ACTIVE
+                external: false
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+                type: array
+          description: List the available users
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListUsers: List Users"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: Create a new User
+      operationId: CreateUser
+      parameters:
+      - description: Should the request wait until the newly created User is indexed
+          (available in List) before returning
+        explode: true
+        in: query
+        name: waitForReindex
+        required: false
+        schema:
+          default: false
+          type: boolean
+        style: form
+        x-nullable: true
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+              type: Personal
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+          application/json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+              type: Personal
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+          text/json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+              type: Personal
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+          application/*+json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+              type: Personal
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+        description: Details of the User to be created
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                type: Personal
+                status: ACTIVE
+                external: false
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: Create a new user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] CreateUser: Create User"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/users/$runnable:
+    get:
+      description: List the available runnable Users
+      operationId: ListRunnableUsers
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                type: Personal
+                status: ACTIVE
+                external: false
+              schema:
+                items:
+                  $ref: '#/components/schemas/UserResponse'
+                type: array
+          description: List the available runnable users
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListRunnableUsers: List Runable Users"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/{id}:
+    delete:
+      description: "By default the user will be de-provisioned and inactive, however\
+        \ their record will remain in the identity\r\nprovider for audit purposes.\
+        \ If this is not desirable and removal of all trace of the user is required,\r\
+        \nthe purge parameter can be specified to indicate the details should be purged\
+        \ completely."
+      operationId: DeleteUser
+      parameters:
+      - description: The unique identifier for the user
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: Whether to purge any trace of the user from the identity provider
+          (will affect audit)
+        explode: true
+        in: query
+        name: purge
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-nullable: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DeleteUser: Delete User"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    get:
+      description: Get the specified User
+      operationId: GetUser
+      parameters:
+      - description: The unique identifier for the User
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: Flag indicating that the users roles should be included in the
+          response
+        explode: true
+        in: query
+        name: includeRoles
+        required: false
+        schema:
+          type: boolean
+        style: form
+        x-nullable: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                type: Personal
+                status: ACTIVE
+                external: false
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: Get the specified user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetUser: Get User"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: Updates the specified User
+      operationId: UpdateUser
+      parameters:
+      - description: The unique identifier for the User to be updated
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+          application/json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+          text/json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+          application/*+json:
+            example:
+              firstName: Joe
+              lastName: Bloggs
+              emailAddress: joe.bloggs@myco.com
+              login: joe.bloggs@myco.com
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+        description: The new definition of the User
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                type: Personal
+                status: ACTIVE
+                external: false
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: Update a user
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] UpdateUser: Update User"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/users/{id}/lifecycle/$activate:
+    post:
+      description: Sends an activation email to the specified User
+      operationId: SendActivationEmail
+      parameters:
+      - description: The unique identifier for the User to be activated
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] SendActivationEmail: Sends an activation email to the\
+        \ User"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/{id}/lifecycle/$expirepassword:
+    post:
+      description: Resets the user's password to a temporary one which is then expired
+      operationId: ExpirePassword
+      parameters:
+      - description: The unique identifier for the User having its password reset
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemporaryPassword'
+          description: Reset the user's password
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ExpirePassword: Reset the user's password to a temporary\
+        \ one"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/{id}/lifecycle/$resetfactors:
+    post:
+      description: Resets the MFA factors of the specified User
+      operationId: ResetFactors
+      parameters:
+      - description: The unique identifier for the User having their MFA factors reset
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ResetFactors: Reset MFA factors"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/{id}/lifecycle/$resetpassword:
+    post:
+      description: Resets the password of the specified User
+      operationId: ResetPassword
+      parameters:
+      - description: The unique identifier for the User having their password reset
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ResetPassword: Reset Password"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/{id}/lifecycle/$unlock:
+    post:
+      description: Unlocks the specified User
+      operationId: UnlockUser
+      parameters:
+      - description: The unique identifier for the User to be unlocked
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] UnlockUser: Unlock User"
+      tags:
+      - Users
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/{id}/lifecycle/$unsuspend:
+    post:
+      description: Unsuspend the user
+      operationId: UnsuspendUser
+      parameters:
+      - description: The unique identifier for the User to Unsuspend
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] UnsuspendUser: Unsuspend user"
+      tags:
+      - Users
+      x-fbn-apistatus: Experimental
+      x-accepts: application/json
+components:
+  schemas:
+    AccessControlledAction:
+      additionalProperties: false
+      example:
+        limitedSet:
+        - identifier:
+            key: identifier
+          name: name
+          description: description
+          actions:
+          - activity: activity
+            scope: scope
+            entity: entity
+          - activity: activity
+            scope: scope
+            entity: entity
+        - identifier:
+            key: identifier
+          name: name
+          description: description
+          actions:
+          - activity: activity
+            scope: scope
+            entity: entity
+          - activity: activity
+            scope: scope
+            entity: entity
+        description: description
+        action:
+          activity: activity
+          scope: scope
+          entity: entity
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+      properties:
+        description:
+          minLength: 1
+          type: string
+        action:
+          $ref: '#/components/schemas/ActionId'
+        limitedSet:
+          items:
+            $ref: '#/components/schemas/IdSelectorDefinition'
+          nullable: true
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - action
+      - description
+      type: object
+    AccessControlledResource:
+      additionalProperties: false
+      example:
+        application: application
+        name: name
+        description: description
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        actions:
+        - limitedSet:
+          - identifier:
+              key: identifier
+            name: name
+            description: description
+            actions:
+            - activity: activity
+              scope: scope
+              entity: entity
+            - activity: activity
+              scope: scope
+              entity: entity
+          - identifier:
+              key: identifier
+            name: name
+            description: description
+            actions:
+            - activity: activity
+              scope: scope
+              entity: entity
+            - activity: activity
+              scope: scope
+              entity: entity
+          description: description
+          action:
+            activity: activity
+            scope: scope
+            entity: entity
+          links:
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+        - limitedSet:
+          - identifier:
+              key: identifier
+            name: name
+            description: description
+            actions:
+            - activity: activity
+              scope: scope
+              entity: entity
+            - activity: activity
+              scope: scope
+              entity: entity
+          - identifier:
+              key: identifier
+            name: name
+            description: description
+            actions:
+            - activity: activity
+              scope: scope
+              entity: entity
+            - activity: activity
+              scope: scope
+              entity: entity
+          description: description
+          action:
+            activity: activity
+            scope: scope
+            entity: entity
+          links:
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+        identifierParts:
+        - displayName: displayName
+          name: name
+          index: 0
+          description: description
+          links:
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          required: true
+        - displayName: displayName
+          name: name
+          index: 0
+          description: description
+          links:
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          required: true
+      properties:
+        application:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        description:
+          minLength: 1
+          type: string
+        actions:
+          items:
+            $ref: '#/components/schemas/AccessControlledAction'
+          type: array
+        identifierParts:
+          items:
+            $ref: '#/components/schemas/IdentifierPartSchema'
+          nullable: true
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - actions
+      - description
+      type: object
+    ActionId:
+      additionalProperties: false
+      example:
+        activity: activity
+        scope: scope
+        entity: entity
+      properties:
+        scope:
+          maxLength: 100
+          minLength: 3
+          type: string
+        activity:
+          maxLength: 25
+          minLength: 3
+          type: string
+        entity:
+          maxLength: 25
+          minLength: 3
+          type: string
+      required:
+      - activity
+      - entity
+      - scope
+      type: object
+    AddScimResponse:
+      additionalProperties: false
+      example:
+        baseUrl: https://openapi-generator.tech
+        apiToken: apiToken
+      properties:
+        baseUrl:
+          format: uri
+          nullable: true
+          type: string
+        apiToken:
+          nullable: true
+          type: string
+      type: object
+    ApiKey:
+      additionalProperties: false
+      description: The metadata of an API key
+      example:
+        deactivationDate: 2000-01-23T04:56:07.000+00:00
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        displayName: displayName
+        id: id
+      properties:
+        id:
+          description: The unique Id of the API key
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        displayName:
+          description: The display name of the API key
+          maxLength: 512
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        createdDate:
+          description: The creation date of the API key
+          format: date-time
+          type: string
+        deactivationDate:
+          description: The deactivation date of the API key
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - createdDate
+      - displayName
+      - id
+      type: object
+    AuthenticationInformation:
+      additionalProperties: false
+      example:
+        issuerUrl: issuerUrl
+        fallbackIssuerUrls:
+        - fallbackIssuerUrls
+        - fallbackIssuerUrls
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        supportAccessExpiryWithRole:
+        - permittedRole: permittedRole
+          expiry: 2000-01-23T04:56:07.000+00:00
+        - permittedRole: permittedRole
+          expiry: 2000-01-23T04:56:07.000+00:00
+        samlIdentityProviderId: samlIdentityProviderId
+        support:
+          expiry: 2000-01-23T04:56:07.000+00:00
+      properties:
+        issuerUrl:
+          minLength: 1
+          type: string
+        fallbackIssuerUrls:
+          items:
+            type: string
+          nullable: true
+          type: array
+        samlIdentityProviderId:
+          nullable: true
+          type: string
+        support:
+          $ref: '#/components/schemas/SupportAccessExpiry'
+        supportAccessExpiryWithRole:
+          items:
+            $ref: '#/components/schemas/SupportAccessExpiryWithRole'
+          nullable: true
+          type: array
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - issuerUrl
+      type: object
+    CreateApiKey:
+      additionalProperties: false
+      description: Create an API key
+      example:
+        deactivationDate: 2000-01-23T04:56:07.000+00:00
+        displayName: displayName
+      properties:
+        displayName:
+          description: The display name for the API key
+          maxLength: 512
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        deactivationDate:
+          description: The optional date at which the key should deactivate
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - displayName
+      type: object
+    CreateApplicationRequest:
+      additionalProperties: false
+      description: A request to create an application for authenticating the source
+        of token requests
+      example:
+        clientId: clientId
+        displayName: displayName
+        postLogoutRedirectUris:
+        - postLogoutRedirectUris
+        - postLogoutRedirectUris
+        type: type
+        redirectUris:
+        - redirectUris
+        - redirectUris
+      properties:
+        displayName:
+          description: The Display Name of the application
+          maxLength: 50
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        clientId:
+          description: The OpenID Connect ClientId of the application
+          maxLength: 50
+          minLength: 6
+          pattern: "^[a-zA-Z][a-zA-Z0-9-]{5,49}"
+          type: string
+        type:
+          description: The Type of the application. This must be either Native or
+            Web
+          maxLength: 20
+          minLength: 1
+          pattern: "^[a-zA-Z]*$"
+          type: string
+        redirectUris:
+          description: A web application's acceptable list of post-login redirect
+            URIs
+          items:
+            type: string
+          nullable: true
+          type: array
+        postLogoutRedirectUris:
+          description: A web application's acceptable list of post-logout redirect
+            URIs
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - clientId
+      - displayName
+      - type
+      type: object
+    CreatedApiKey:
+      additionalProperties: false
+      description: A newly created API key
+      example:
+        deactivationDate: 2000-01-23T04:56:07.000+00:00
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        displayName: displayName
+        id: id
+        key: key
+      properties:
+        key:
+          description: The API Key value
+          minLength: 1
+          type: string
+        id:
+          description: The unique Id of the API key
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        displayName:
+          description: The display name of the API key
+          maxLength: 512
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        createdDate:
+          description: The creation date of the API key
+          format: date-time
+          type: string
+        deactivationDate:
+          description: The deactivation date of the API key
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - createdDate
+      - displayName
+      - id
+      - key
+      type: object
+    CreateRoleRequest:
+      additionalProperties: false
+      description: Specifies the information required to create a new role.
+      example:
+        name: name
+        description: description
+      properties:
+        name:
+          description: "The role name, which must be unique within the system."
+          maxLength: 512
+          minLength: 1
+          pattern: "^[a-zA-Z][a-zA-Z0-9-_ +]{2,100}$"
+          type: string
+        description:
+          description: The description for this role
+          maxLength: 1024
+          minLength: 0
+          nullable: true
+          pattern: "^[\\s\\S]*$"
+          type: string
+      required:
+      - name
+      type: object
+    CreateUserRequest:
+      additionalProperties: false
+      description: Details necessary for creating a new user
+      example:
+        firstName: firstName
+        lastName: lastName
+        emailAddress: emailAddress
+        secondEmailAddress: secondEmailAddress
+        roles:
+        - code: code
+          scope: scope
+        - code: code
+          scope: scope
+        - code: code
+          scope: scope
+        - code: code
+          scope: scope
+        - code: code
+          scope: scope
+        login: login
+        type: type
+      properties:
+        firstName:
+          description: The first name of the user
+          maxLength: 50
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        lastName:
+          description: The last name of the user
+          maxLength: 50
+          minLength: 2
+          pattern: "^[\\s\\S]*$"
+          type: string
+        emailAddress:
+          description: "The user's email address - to which the account validation\
+            \ email will be sent. For user accounts\r\nthis should exactly match the\
+            \ Login."
+          maxLength: 80
+          minLength: 5
+          type: string
+        secondEmailAddress:
+          description: The user's second email address. Only allowed for Service users
+          maxLength: 80
+          minLength: 5
+          nullable: true
+          type: string
+        login:
+          description: "The user's login username, in the form of an email address,\
+            \ which must be unique within the system.\r\nFor user accounts this should\
+            \ exactly match the user's email address."
+          maxLength: 80
+          minLength: 5
+          type: string
+        roles:
+          description: Optional. Any known roles the user should be created with.
+          items:
+            $ref: '#/components/schemas/RoleId'
+          maxItems: 20
+          nullable: true
+          type: array
+        type:
+          description: The type of user (e.g. Personal or Service)
+          maxLength: 20
+          minLength: 1
+          pattern: "^[a-zA-Z]*$"
+          type: string
+      required:
+      - emailAddress
+      - firstName
+      - lastName
+      - login
+      - type
+      type: object
+    CurrentUserResponse:
+      additionalProperties: false
+      example:
+        emailAddress: emailAddress
+        domainType: domainType
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        id: id
+        type: type
+      properties:
+        id:
+          description: The user's system supplied unique identifier
+          minLength: 1
+          type: string
+        emailAddress:
+          description: The user's email address which may be null depending on the
+            authentication method
+          minLength: 1
+          type: string
+        type:
+          description: The type of user (e.g. Personal or Service)
+          minLength: 1
+          type: string
+        domainType:
+          description: The type of domain in which the user exists
+          nullable: true
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - emailAddress
+      - id
+      - type
+      type: object
+    ErrorDetail:
+      additionalProperties: false
+      description: Provides details about an entity error that occured
+      example:
+        id: id
+        detail: detail
+        type: type
+      properties:
+        id:
+          description: Id of the entity this error relates to
+          nullable: true
+          type: string
+        type:
+          description: Error type
+          nullable: true
+          type: string
+        detail:
+          description: Human readable description of the error
+          nullable: true
+          type: string
+      type: object
+    IdentifierPartSchema:
+      additionalProperties: false
+      example:
+        displayName: displayName
+        name: name
+        index: 0
+        description: description
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        required: true
+      properties:
+        index:
+          format: int32
+          type: integer
+        name:
+          minLength: 1
+          type: string
+        displayName:
+          minLength: 1
+          type: string
+        description:
+          minLength: 1
+          type: string
+        required:
+          type: boolean
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - description
+      - displayName
+      - index
+      - name
+      - required
+      type: object
+    IdSelectorDefinition:
+      additionalProperties: false
+      example:
+        identifier:
+          key: identifier
+        name: name
+        description: description
+        actions:
+        - activity: activity
+          scope: scope
+          entity: entity
+        - activity: activity
+          scope: scope
+          entity: entity
+      properties:
+        identifier:
+          additionalProperties:
+            type: string
+          minLength: 1
+          type: object
+        actions:
+          items:
+            $ref: '#/components/schemas/ActionId'
+          minItems: 1
+          type: array
+        name:
+          maxLength: 100
+          minLength: 0
+          nullable: true
+          type: string
+        description:
+          maxLength: 1024
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+      - actions
+      - identifier
+      type: object
+    Link:
+      additionalProperties: false
+      example:
+        method: method
+        description: description
+        href: https://openapi-generator.tech
+        relation: relation
+      properties:
+        relation:
+          type: string
+        href:
+          format: uri
+          type: string
+        description:
+          nullable: true
+          type: string
+        method:
+          type: string
+      required:
+      - href
+      - method
+      - relation
+      type: object
+    ListUsersResponse:
+      additionalProperties: false
+      description: Users directory query response
+      example:
+        values:
+          key:
+            firstName: firstName
+            lastName: lastName
+            secondEmail: secondEmail
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            id: id
+            login: login
+            type: type
+            email: email
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        href: https://openapi-generator.tech
+        failed:
+          key:
+            id: id
+            detail: detail
+            type: type
+      properties:
+        href:
+          description: Uri of this response
+          format: uri
+          nullable: true
+          type: string
+        values:
+          additionalProperties:
+            $ref: '#/components/schemas/UserSummary'
+          description: "Successful entities, indexed by their id"
+          nullable: true
+          type: object
+        failed:
+          additionalProperties:
+            $ref: '#/components/schemas/ErrorDetail'
+          description: "Failed entities, indexed by their id"
+          nullable: true
+          type: object
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      type: object
+    LusidProblemDetails:
+      additionalProperties: false
+      properties:
+        name:
+          minLength: 1
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          nullable: true
+          type: array
+        code:
+          format: int32
+          type: integer
+        type:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          nullable: true
+          type: integer
+        detail:
+          nullable: true
+          type: string
+        instance:
+          nullable: true
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    LusidValidationProblemDetails:
+      additionalProperties: false
+      properties:
+        name:
+          minLength: 1
+          type: string
+        errorDetails:
+          items:
+            additionalProperties:
+              type: string
+            type: object
+          nullable: true
+          type: array
+        code:
+          format: int32
+          type: integer
+        errors:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          nullable: true
+          type: object
+        type:
+          nullable: true
+          type: string
+        title:
+          nullable: true
+          type: string
+        status:
+          format: int32
+          nullable: true
+          type: integer
+        detail:
+          nullable: true
+          type: string
+        instance:
+          nullable: true
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    OAuthApplication:
+      additionalProperties: false
+      example:
+        clientId: clientId
+        displayName: displayName
+        id: id
+        secret: secret
+        type: type
+        issuer: issuer
+      properties:
+        id:
+          minLength: 1
+          type: string
+        type:
+          minLength: 1
+          type: string
+        displayName:
+          maxLength: 512
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        secret:
+          nullable: true
+          type: string
+        clientId:
+          minLength: 1
+          type: string
+        issuer:
+          minLength: 1
+          type: string
+      required:
+      - clientId
+      - displayName
+      - id
+      - issuer
+      - type
+      type: object
+    ResourceListOfAccessControlledResource:
+      additionalProperties: false
+      example:
+        previousPage: previousPage
+        nextPage: nextPage
+        values:
+        - application: application
+          name: name
+          description: description
+          links:
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          actions:
+          - limitedSet:
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            description: description
+            action:
+              activity: activity
+              scope: scope
+              entity: entity
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+          - limitedSet:
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            description: description
+            action:
+              activity: activity
+              scope: scope
+              entity: entity
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+          identifierParts:
+          - displayName: displayName
+            name: name
+            index: 0
+            description: description
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            required: true
+          - displayName: displayName
+            name: name
+            index: 0
+            description: description
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            required: true
+        - application: application
+          name: name
+          description: description
+          links:
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          - method: method
+            description: description
+            href: https://openapi-generator.tech
+            relation: relation
+          actions:
+          - limitedSet:
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            description: description
+            action:
+              activity: activity
+              scope: scope
+              entity: entity
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+          - limitedSet:
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            - identifier:
+                key: identifier
+              name: name
+              description: description
+              actions:
+              - activity: activity
+                scope: scope
+                entity: entity
+              - activity: activity
+                scope: scope
+                entity: entity
+            description: description
+            action:
+              activity: activity
+              scope: scope
+              entity: entity
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+          identifierParts:
+          - displayName: displayName
+            name: name
+            index: 0
+            description: description
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            required: true
+          - displayName: displayName
+            name: name
+            index: 0
+            description: description
+            links:
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            - method: method
+              description: description
+              href: https://openapi-generator.tech
+              relation: relation
+            required: true
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        href: https://openapi-generator.tech
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/AccessControlledResource'
+          type: array
+        href:
+          format: uri
+          nullable: true
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+        nextPage:
+          nullable: true
+          type: string
+        previousPage:
+          nullable: true
+          type: string
+      required:
+      - values
+      type: object
+    RoleId:
+      additionalProperties: false
+      example:
+        code: code
+        scope: scope
+      properties:
+        scope:
+          maxLength: 100
+          minLength: 3
+          type: string
+        code:
+          maxLength: 100
+          minLength: 3
+          type: string
+      required:
+      - code
+      - scope
+      type: object
+    RoleResponse:
+      additionalProperties: false
+      example:
+        roleId:
+          code: code
+          scope: scope
+        name: name
+        description: description
+        id: id
+        source: source
+      properties:
+        id:
+          description: The role's system supplied unique identifier
+          minLength: 1
+          type: string
+        roleId:
+          $ref: '#/components/schemas/RoleId'
+        source:
+          description: The source of the role
+          minLength: 1
+          type: string
+        name:
+          description: "The role name, which must be unique within the system."
+          minLength: 1
+          type: string
+        description:
+          description: The description for this role
+          nullable: true
+          type: string
+      required:
+      - id
+      - name
+      - roleId
+      - source
+      type: object
+    SetPassword:
+      additionalProperties: false
+      description: Set password request
+      example:
+        value: value
+      properties:
+        value:
+          description: The value of the new password
+          maxLength: 50
+          minLength: 12
+          type: string
+      required:
+      - value
+      type: object
+    SetPasswordResponse:
+      additionalProperties: false
+      description: The result of setting a password
+      example:
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        updatedAt:
+          description: The date and time at which the password was successfully updated
+          format: date-time
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - updatedAt
+      type: object
+    SupportAccessExpiry:
+      additionalProperties: false
+      description: Time at which the support access expires
+      example:
+        expiry: 2000-01-23T04:56:07.000+00:00
+      properties:
+        expiry:
+          description: DateTimeOffset at which the access will be revoked
+          format: date-time
+          type: string
+      required:
+      - expiry
+      type: object
+    SupportAccessExpiryWithRole:
+      additionalProperties: false
+      description: Time at which the support access granted for a role expires
+      example:
+        permittedRole: permittedRole
+        expiry: 2000-01-23T04:56:07.000+00:00
+      properties:
+        expiry:
+          description: DateTimeOffset at which the access will be revoked
+          format: date-time
+          type: string
+        permittedRole:
+          description: "Unique identifier for permitted role. \r\nUse GET /identity/api/authentication/support-roles\
+            \ to lookup role label/code from identifier."
+          minLength: 1
+          type: string
+      required:
+      - expiry
+      - permittedRole
+      type: object
+    SupportAccessRequest:
+      additionalProperties: false
+      description: A Request to grant support access to your account
+      example:
+        duration: duration
+        permittedRoles:
+        - permittedRoles
+        - permittedRoles
+        description: description
+      properties:
+        duration:
+          description: The duration for which access is requested (in any ISO-8601
+            format)
+          maxLength: 30
+          minLength: 2
+          pattern: ^P(?!$)((\d+Y)|(\d+\.\d+Y$))?((\d+M)|(\d+\.\d+M$))?((\d+W)|(\d+\.\d+W$))?((\d+D)|(\d+\.\d+D$))?(T(?=\d)((\d+H)|(\d+\.\d+H$))?((\d+M)|(\d+\.\d+M$))?(\d+(\.\d+)?S)?)??$
+          type: string
+        description:
+          description: The description of why the support access has been granted
+            (i.e. support ticket numbers)
+          maxLength: 1024
+          minLength: 0
+          nullable: true
+          pattern: "^[\\s\\S]*$"
+          type: string
+        permittedRoles:
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - duration
+      type: object
+    SupportAccessResponse:
+      additionalProperties: false
+      description: Timestamped successful response to grant access to your account
+      example:
+        duration: duration
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        terminatedAt: 2000-01-23T04:56:07.000+00:00
+        permittedRoles:
+        - permittedRoles
+        - permittedRoles
+        createdBy: createdBy
+        terminatedBy: terminatedBy
+        description: description
+        id: id
+        expiry: 2000-01-23T04:56:07.000+00:00
+        terminated: true
+      properties:
+        id:
+          description: ID of the support access request
+          minLength: 1
+          type: string
+        duration:
+          description: The duration for which access is requested (in any ISO-8601
+            format)
+          maxLength: 50
+          minLength: 3
+          type: string
+        description:
+          description: The description of why the support access has been granted
+            (i.e. support ticket numbers)
+          maxLength: 1024
+          minLength: 0
+          nullable: true
+          pattern: "^[\\s\\S]*$"
+          type: string
+        createdAt:
+          description: DateTimeOffset at which the access was granted
+          format: date-time
+          type: string
+        expiry:
+          description: DateTimeOffset at which the access will be revoked
+          format: date-time
+          type: string
+        createdBy:
+          description: Obfuscated UserId of the user who granted the support access
+          minLength: 1
+          type: string
+        terminated:
+          description: Whether or not that access has been invalidated
+          type: boolean
+        terminatedAt:
+          description: DateTimeOffset at which the access was invalidated
+          format: date-time
+          nullable: true
+          type: string
+        terminatedBy:
+          description: Obfuscated UserId of the user who revoked the access
+          nullable: true
+          type: string
+        permittedRoles:
+          description: "A list of permitted roles, valid for support staff to assume,\
+            \ for the duration of the access request"
+          items:
+            type: string
+          nullable: true
+          type: array
+      required:
+      - createdAt
+      - createdBy
+      - duration
+      - expiry
+      - id
+      type: object
+    SupportRole:
+      additionalProperties: false
+      example:
+        internalIdentifier: internalIdentifier
+        roleIdentifier:
+          key: roleIdentifier
+        description: description
+        label: label
+      properties:
+        label:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        roleIdentifier:
+          additionalProperties:
+            type: string
+          nullable: true
+          type: object
+        internalIdentifier:
+          nullable: true
+          type: string
+      type: object
+    SupportRolesResponse:
+      additionalProperties: false
+      example:
+        supportRoles:
+        - internalIdentifier: internalIdentifier
+          roleIdentifier:
+            key: roleIdentifier
+          description: description
+          label: label
+        - internalIdentifier: internalIdentifier
+          roleIdentifier:
+            key: roleIdentifier
+          description: description
+          label: label
+      properties:
+        supportRoles:
+          items:
+            $ref: '#/components/schemas/SupportRole'
+          nullable: true
+          type: array
+      type: object
+    TemporaryPassword:
+      additionalProperties: false
+      example:
+        password: password
+      properties:
+        password:
+          description: The user's temporary password
+          minLength: 1
+          type: string
+      required:
+      - password
+      type: object
+    UpdateRoleRequest:
+      additionalProperties: false
+      example:
+        description: description
+      properties:
+        description:
+          description: The description for this role
+          maxLength: 1024
+          minLength: 0
+          nullable: true
+          pattern: "^[\\s\\S]*$"
+          type: string
+      type: object
+    UpdateUserRequest:
+      additionalProperties: false
+      example:
+        firstName: firstName
+        lastName: lastName
+        emailAddress: emailAddress
+        secondEmailAddress: secondEmailAddress
+        roles:
+        - code: code
+          scope: scope
+        - code: code
+          scope: scope
+        login: login
+      properties:
+        firstName:
+          maxLength: 50
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 2
+          pattern: "^[\\s\\S]*$"
+          type: string
+        emailAddress:
+          maxLength: 80
+          minLength: 5
+          type: string
+        secondEmailAddress:
+          maxLength: 80
+          minLength: 5
+          nullable: true
+          type: string
+        login:
+          description: "The user's login username, in the form of an email address,\
+            \ which must be unique within the system.\r\nFor user accounts this should\
+            \ exactly match the user's email address."
+          maxLength: 80
+          minLength: 5
+          pattern: "^[\\s\\S]*$"
+          type: string
+        roles:
+          description: Deprecated. To update a user's roles use the AddUserToRole
+            and RemoveUserFromRole endpoints
+          items:
+            $ref: '#/components/schemas/RoleId'
+          nullable: true
+          type: array
+      required:
+      - emailAddress
+      - firstName
+      - lastName
+      - login
+      type: object
+    UserResponse:
+      additionalProperties: false
+      example:
+        firstName: firstName
+        lastName: lastName
+        emailAddress: emailAddress
+        external: true
+        secondEmailAddress: secondEmailAddress
+        roles:
+        - roleId:
+            code: code
+            scope: scope
+          name: name
+          description: description
+          id: id
+          source: source
+        - roleId:
+            code: code
+            scope: scope
+          name: name
+          description: description
+          id: id
+          source: source
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        id: id
+        login: login
+        type: type
+        status: status
+      properties:
+        id:
+          description: The user's system supplied unique identifier
+          minLength: 1
+          type: string
+        emailAddress:
+          description: "The user's emailAddress address, which must be unique within\
+            \ the system"
+          minLength: 1
+          type: string
+        secondEmailAddress:
+          description: The user's second email address. Only allowed for service users.
+          nullable: true
+          type: string
+        login:
+          minLength: 1
+          type: string
+        firstName:
+          description: The user's first name
+          minLength: 1
+          type: string
+        lastName:
+          description: The user's last name
+          minLength: 1
+          type: string
+        roles:
+          description: The roles that the user has.
+          items:
+            $ref: '#/components/schemas/RoleResponse'
+          nullable: true
+          type: array
+        type:
+          description: The type of user (e.g. Personal or Service)
+          minLength: 1
+          type: string
+        status:
+          description: The status of the user
+          minLength: 1
+          type: string
+        external:
+          description: Whether or not the user originates from an external identity
+            system
+          type: boolean
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - emailAddress
+      - external
+      - firstName
+      - id
+      - lastName
+      - login
+      - status
+      - type
+      type: object
+    UserSummary:
+      additionalProperties: false
+      description: Lightweight view of an user details
+      example:
+        firstName: firstName
+        lastName: lastName
+        secondEmail: secondEmail
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        id: id
+        login: login
+        type: type
+        email: email
+      properties:
+        id:
+          description: The user id
+          nullable: true
+          type: string
+        login:
+          description: The user login
+          nullable: true
+          type: string
+        email:
+          description: The email address registered for that user
+          nullable: true
+          type: string
+        secondEmail:
+          nullable: true
+          type: string
+        firstName:
+          description: User's first name
+          nullable: true
+          type: string
+        lastName:
+          description: User's last name
+          nullable: true
+          type: string
+        type:
+          description: "User's type (Personal, Service...)"
+          nullable: true
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      type: object
+  securitySchemes:
+    oauth2:
+      description: OAuth2 Implicit Grant
+      flows:
+        implicit:
+          authorizationUrl: https://lusid.okta.com/oauth2/default/v1/authorize
+          scopes: {}
+      type: oauth2
+x-tagGroups:
+  name: API
+  tags:
+  - Application Metadata
+  - Applications
+  - Authentication
+  - Identity Provider
+  - Me
+  - Personal Authentication Tokens
+  - Roles
+  - Tokens
+  - Users
+x-group-parameters: true
+
