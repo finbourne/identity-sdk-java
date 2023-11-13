@@ -62,10 +62,10 @@ import com.finbourne.identity.auth.OAuthFlow;
  */
 public class ApiClient {
 
-    private String basePath = "https://fbn-ci.lusid.com/identity";
+    private String basePath = "https://fbn-prd.lusid.com/identity";
     protected List<ServerConfiguration> servers = new ArrayList<ServerConfiguration>(Arrays.asList(
     new ServerConfiguration(
-      "https://fbn-ci.lusid.com/identity",
+      "https://fbn-prd.lusid.com/identity",
       "No description provided",
       new HashMap<String, ServerVariable>()
     )
@@ -225,7 +225,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g https://fbn-ci.lusid.com/identity
+     * @param basePath Base path of the URL (e.g https://fbn-prd.lusid.com/identity
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {

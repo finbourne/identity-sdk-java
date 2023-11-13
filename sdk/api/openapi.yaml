@@ -6,12 +6,12 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2691
+  version: 0.0.2693
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
 servers:
-- url: https://fbn-ci.lusid.com/identity
+- url: https://fbn-prd.lusid.com/identity
 security:
 - {}
 tags:
