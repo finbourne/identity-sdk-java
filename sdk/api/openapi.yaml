@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2723
+  version: 0.0.2725
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -311,6 +311,60 @@ paths:
       tags:
       - Authentication
       x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/authentication/password-policy/{userType}:
+    get:
+      description: Get the password policy for a given user type
+      operationId: GetPasswordPolicy
+      parameters:
+      - description: The type of user (should only be personal or service)
+        explode: false
+        in: path
+        name: userType
+        required: true
+        schema:
+          maxLength: 20
+          minLength: 1
+          pattern: "^[a-zA-Z]*$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                conditions:
+                  complexity:
+                    minLength: 12
+                    excludeFirstName: true
+                    excludeLastName: true
+                  age:
+                    maxAgeDays: 90
+                    historyCount: 4
+                  lockout:
+                    maxAttempts: 10
+              schema:
+                $ref: '#/components/schemas/PasswordPolicy'
+          description: Get password policy
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user\
+        \ type"
+      tags:
+      - Authentication
+      x-fbn-apistatus: Experimental
       x-accepts: application/json
   /api/authentication/support:
     delete:
@@ -3001,6 +3055,92 @@ components:
       - id
       - issuer
       - type
+      type: object
+    PasswordPolicy:
+      additionalProperties: false
+      example:
+        conditions:
+          complexity:
+            minLength: 0
+            excludeFirstName: true
+            excludeLastName: true
+          lockout:
+            maxAttempts: 5
+          age:
+            maxAgeDays: 6
+            historyCount: 1
+      properties:
+        conditions:
+          $ref: '#/components/schemas/PasswordPolicyConditions'
+      type: object
+    PasswordPolicyAge:
+      additionalProperties: false
+      example:
+        maxAgeDays: 6
+        historyCount: 1
+      properties:
+        maxAgeDays:
+          description: The maximum age (in days) a password can be before expiring
+            and needing to be changed
+          format: int32
+          type: integer
+        historyCount:
+          description: The number of unique passwords that need to be used before
+            a previous password is permitted again
+          format: int32
+          type: integer
+      type: object
+    PasswordPolicyComplexity:
+      additionalProperties: false
+      example:
+        minLength: 0
+        excludeFirstName: true
+        excludeLastName: true
+      properties:
+        minLength:
+          description: The minimum length for a password
+          format: int32
+          type: integer
+        excludeFirstName:
+          description: Rule determining whether a user's first name should be permitted
+            in their password
+          type: boolean
+        excludeLastName:
+          description: Rule determining whether a user's last name should be permitted
+            in their password
+          type: boolean
+      type: object
+    PasswordPolicyConditions:
+      additionalProperties: false
+      description: Password policy conditions for a password policy
+      example:
+        complexity:
+          minLength: 0
+          excludeFirstName: true
+          excludeLastName: true
+        lockout:
+          maxAttempts: 5
+        age:
+          maxAgeDays: 6
+          historyCount: 1
+      properties:
+        complexity:
+          $ref: '#/components/schemas/PasswordPolicyComplexity'
+        age:
+          $ref: '#/components/schemas/PasswordPolicyAge'
+        lockout:
+          $ref: '#/components/schemas/PasswordPolicyLockout'
+      type: object
+    PasswordPolicyLockout:
+      additionalProperties: false
+      example:
+        maxAttempts: 5
+      properties:
+        maxAttempts:
+          description: The maximum number of unsuccessful attempts before the user
+            is locked out of their account
+          format: int32
+          type: integer
       type: object
     ResourceListOfAccessControlledResource:
       additionalProperties: false

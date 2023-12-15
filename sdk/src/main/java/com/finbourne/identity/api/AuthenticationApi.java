@@ -28,6 +28,7 @@ import com.finbourne.identity.model.AuthenticationInformation;
 import com.finbourne.identity.model.LusidProblemDetails;
 import com.finbourne.identity.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
+import com.finbourne.identity.model.PasswordPolicy;
 import com.finbourne.identity.model.SupportAccessRequest;
 import com.finbourne.identity.model.SupportAccessResponse;
 import com.finbourne.identity.model.SupportRolesResponse;
@@ -222,6 +223,168 @@ public class AuthenticationApi {
      */
     public APIgetAuthenticationInformationRequest getAuthenticationInformation() {
         return new APIgetAuthenticationInformationRequest();
+    }
+    private okhttp3.Call getPasswordPolicyCall(String userType, final ApiCallback _callback) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/authentication/password-policy/{userType}"
+            .replace("{" + "userType" + "}", localVarApiClient.escapeString(userType.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getPasswordPolicyValidateBeforeCall(String userType, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'userType' is set
+        if (userType == null) {
+            throw new ApiException("Missing the required parameter 'userType' when calling getPasswordPolicy(Async)");
+        }
+
+        return getPasswordPolicyCall(userType, _callback);
+
+    }
+
+
+    private ApiResponse<PasswordPolicy> getPasswordPolicyWithHttpInfo(String userType) throws ApiException {
+        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, null);
+        Type localVarReturnType = new TypeToken<PasswordPolicy>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getPasswordPolicyAsync(String userType, final ApiCallback<PasswordPolicy> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, _callback);
+        Type localVarReturnType = new TypeToken<PasswordPolicy>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIgetPasswordPolicyRequest {
+        private final String userType;
+
+        private APIgetPasswordPolicyRequest(String userType) {
+            this.userType = userType;
+        }
+
+        /**
+         * Build call for getPasswordPolicy
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getPasswordPolicyCall(userType, _callback);
+        }
+
+        /**
+         * Execute getPasswordPolicy request
+         * @return PasswordPolicy
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PasswordPolicy execute() throws ApiException {
+            ApiResponse<PasswordPolicy> localVarResp = getPasswordPolicyWithHttpInfo(userType);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getPasswordPolicy request with HTTP info returned
+         * @return ApiResponse&lt;PasswordPolicy&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PasswordPolicy> executeWithHttpInfo() throws ApiException {
+            return getPasswordPolicyWithHttpInfo(userType);
+        }
+
+        /**
+         * Execute getPasswordPolicy request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicy> _callback) throws ApiException {
+            return getPasswordPolicyAsync(userType, _callback);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user type
+     * Get the password policy for a given user type
+     * @param userType The type of user (should only be personal or service) (required)
+     * @return APIgetPasswordPolicyRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetPasswordPolicyRequest getPasswordPolicy(String userType) {
+        return new APIgetPasswordPolicyRequest(userType);
     }
     private okhttp3.Call getSupportAccessHistoryCall(OffsetDateTime start, OffsetDateTime end, final ApiCallback _callback) throws ApiException {
         String basePath = null;

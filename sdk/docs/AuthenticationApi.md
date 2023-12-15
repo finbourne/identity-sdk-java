@@ -5,6 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getAuthenticationInformation**](AuthenticationApi.md#getAuthenticationInformation) | **GET** /api/authentication/information | GetAuthenticationInformation: Gets AuthenticationInformation |
+| [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user type |
 | [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | [EARLY ACCESS] GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
 | [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | [EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
 | [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | [EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access to your account |
@@ -74,6 +75,76 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Get authentication information |  -  |
+| **0** | Error response |  -  |
+
+<a id="getPasswordPolicy"></a>
+# **getPasswordPolicy**
+> PasswordPolicy getPasswordPolicy(userType).execute();
+
+[EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user type
+
+Get the password policy for a given user type
+
+### Example
+```java
+// Import classes:
+import com.finbourne.identity.ApiClient;
+import com.finbourne.identity.ApiException;
+import com.finbourne.identity.Configuration;
+import com.finbourne.identity.auth.*;
+import com.finbourne.identity.models.*;
+import com.finbourne.identity.api.AuthenticationApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
+    
+    // Configure OAuth2 access token for authorization: oauth2
+    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
+    String userType = "userType_example"; // String | The type of user (should only be personal or service)
+    try {
+      PasswordPolicy result = apiInstance.getPasswordPolicy(userType)
+            .execute();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AuthenticationApi#getPasswordPolicy");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userType** | **String**| The type of user (should only be personal or service) | |
+
+### Return type
+
+[**PasswordPolicy**](PasswordPolicy.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Get password policy |  -  |
+| **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
 <a id="getSupportAccessHistory"></a>
