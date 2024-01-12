@@ -12,6 +12,7 @@
 |**source** | **String** | The source of the role |  |
 |**name** | **String** | The role name, which must be unique within the system. |  |
 |**description** | **String** | The description for this role |  [optional] |
+|**samlName** | **String** | The name to use on the SAML request if assigning this role via SAML Just in Time (JIT) |  [optional] |
 
 
 

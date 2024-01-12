@@ -71,6 +71,10 @@ public class RoleResponse {
   @SerializedName(SERIALIZED_NAME_DESCRIPTION)
   private String description;
 
+  public static final String SERIALIZED_NAME_SAML_NAME = "samlName";
+  @SerializedName(SERIALIZED_NAME_SAML_NAME)
+  private String samlName;
+
   public RoleResponse() {
   }
 
@@ -179,6 +183,27 @@ public class RoleResponse {
   }
 
 
+  public RoleResponse samlName(String samlName) {
+    
+    this.samlName = samlName;
+    return this;
+  }
+
+   /**
+   * The name to use on the SAML request if assigning this role via SAML Just in Time (JIT)
+   * @return samlName
+  **/
+  @jakarta.annotation.Nullable
+  public String getSamlName() {
+    return samlName;
+  }
+
+
+  public void setSamlName(String samlName) {
+    this.samlName = samlName;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -193,7 +218,8 @@ public class RoleResponse {
         Objects.equals(this.roleId, roleResponse.roleId) &&
         Objects.equals(this.source, roleResponse.source) &&
         Objects.equals(this.name, roleResponse.name) &&
-        Objects.equals(this.description, roleResponse.description);
+        Objects.equals(this.description, roleResponse.description) &&
+        Objects.equals(this.samlName, roleResponse.samlName);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -202,7 +228,7 @@ public class RoleResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, roleId, source, name, description);
+    return Objects.hash(id, roleId, source, name, description, samlName);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -221,6 +247,7 @@ public class RoleResponse {
     sb.append("    source: ").append(toIndentedString(source)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    description: ").append(toIndentedString(description)).append("\n");
+    sb.append("    samlName: ").append(toIndentedString(samlName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -248,6 +275,7 @@ public class RoleResponse {
     openapiFields.add("source");
     openapiFields.add("name");
     openapiFields.add("description");
+    openapiFields.add("samlName");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -290,6 +318,9 @@ public class RoleResponse {
       }
       if ((jsonObj.get("description") != null && !jsonObj.get("description").isJsonNull()) && !jsonObj.get("description").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `description` to be a primitive type in the JSON string but got `%s`", jsonObj.get("description").toString()));
+      }
+      if ((jsonObj.get("samlName") != null && !jsonObj.get("samlName").isJsonNull()) && !jsonObj.get("samlName").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `samlName` to be a primitive type in the JSON string but got `%s`", jsonObj.get("samlName").toString()));
       }
   }
 

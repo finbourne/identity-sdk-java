@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2725
+  version: 0.0.2747
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1067,6 +1067,7 @@ paths:
                 source: LusidUser
                 name: LUSID:FrontOfficeAdministrator
                 description: Front office administration role
+                samlName: LUSID:FrontOfficeAdministrator
               schema:
                 items:
                   $ref: '#/components/schemas/RoleResponse'
@@ -1128,6 +1129,7 @@ paths:
                 source: LusidUser
                 name: LUSID:FrontOfficeAdministrator
                 description: Front office administration role
+                samlName: LUSID:FrontOfficeAdministrator
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: Create a new role
@@ -1218,6 +1220,7 @@ paths:
                 source: LusidUser
                 name: LUSID:FrontOfficeAdministrator
                 description: Front office administration role
+                samlName: LUSID:FrontOfficeAdministrator
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: Get the specified role
@@ -1292,6 +1295,7 @@ paths:
                 source: LusidUser
                 name: LUSID:FrontOfficeAdministrator
                 description: Front office administration role
+                samlName: LUSID:FrontOfficeAdministrator
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: Update a role
@@ -1351,6 +1355,7 @@ paths:
                   source: LusidUser
                   name: Front Office Administrator
                   description: Administration role for Front Office staff
+                  samlName: customrole2
                 type: Personal
                 status: ACTIVE
                 external: false
@@ -1545,6 +1550,7 @@ paths:
                   source: LusidUser
                   name: Front Office Administrator
                   description: Administration role for Front Office staff
+                  samlName: customrole2
                 type: Personal
                 status: ACTIVE
                 external: false
@@ -1645,6 +1651,7 @@ paths:
                   source: LusidUser
                   name: Front Office Administrator
                   description: Administration role for Front Office staff
+                  samlName: customrole2
                 type: Personal
                 status: ACTIVE
                 external: false
@@ -1693,6 +1700,7 @@ paths:
                   source: LusidUser
                   name: Front Office Administrator
                   description: Administration role for Front Office staff
+                  samlName: customrole2
                 type: Personal
                 status: ACTIVE
                 external: false
@@ -1809,6 +1817,7 @@ paths:
                   source: LusidUser
                   name: Front Office Administrator
                   description: Administration role for Front Office staff
+                  samlName: customrole2
                 type: Personal
                 status: ACTIVE
                 external: false
@@ -1903,6 +1912,7 @@ paths:
                   source: LusidUser
                   name: Front Office Administrator
                   description: Administration role for Front Office staff
+                  samlName: customrole2
                 type: Personal
                 status: ACTIVE
                 external: false
@@ -3434,6 +3444,7 @@ components:
     RoleResponse:
       additionalProperties: false
       example:
+        samlName: samlName
         roleId:
           code: code
           scope: scope
@@ -3458,6 +3469,11 @@ components:
           type: string
         description:
           description: The description for this role
+          nullable: true
+          type: string
+        samlName:
+          description: The name to use on the SAML request if assigning this role
+            via SAML Just in Time (JIT)
           nullable: true
           type: string
       required:
@@ -3779,14 +3795,16 @@ components:
         external: true
         secondEmailAddress: secondEmailAddress
         roles:
-        - roleId:
+        - samlName: samlName
+          roleId:
             code: code
             scope: scope
           name: name
           description: description
           id: id
           source: source
-        - roleId:
+        - samlName: samlName
+          roleId:
             code: code
             scope: scope
           name: name
