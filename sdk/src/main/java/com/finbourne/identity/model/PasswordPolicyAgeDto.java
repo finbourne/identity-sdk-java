@@ -45,10 +45,10 @@ import java.util.Set;
 import com.finbourne.identity.JSON;
 
 /**
- * PasswordPolicyAge
+ * PasswordPolicyAgeDto
  */
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PasswordPolicyAge {
+public class PasswordPolicyAgeDto {
   public static final String SERIALIZED_NAME_MAX_AGE_DAYS = "maxAgeDays";
   @SerializedName(SERIALIZED_NAME_MAX_AGE_DAYS)
   private Integer maxAgeDays;
@@ -57,10 +57,10 @@ public class PasswordPolicyAge {
   @SerializedName(SERIALIZED_NAME_HISTORY_COUNT)
   private Integer historyCount;
 
-  public PasswordPolicyAge() {
+  public PasswordPolicyAgeDto() {
   }
 
-  public PasswordPolicyAge maxAgeDays(Integer maxAgeDays) {
+  public PasswordPolicyAgeDto maxAgeDays(Integer maxAgeDays) {
     
     this.maxAgeDays = maxAgeDays;
     return this;
@@ -70,7 +70,7 @@ public class PasswordPolicyAge {
    * The maximum age (in days) a password can be before expiring and needing to be changed
    * @return maxAgeDays
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public Integer getMaxAgeDays() {
     return maxAgeDays;
   }
@@ -81,7 +81,7 @@ public class PasswordPolicyAge {
   }
 
 
-  public PasswordPolicyAge historyCount(Integer historyCount) {
+  public PasswordPolicyAgeDto historyCount(Integer historyCount) {
     
     this.historyCount = historyCount;
     return this;
@@ -91,7 +91,7 @@ public class PasswordPolicyAge {
    * The number of unique passwords that need to be used before a previous password is permitted again
    * @return historyCount
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public Integer getHistoryCount() {
     return historyCount;
   }
@@ -111,9 +111,9 @@ public class PasswordPolicyAge {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PasswordPolicyAge passwordPolicyAge = (PasswordPolicyAge) o;
-    return Objects.equals(this.maxAgeDays, passwordPolicyAge.maxAgeDays) &&
-        Objects.equals(this.historyCount, passwordPolicyAge.historyCount);
+    PasswordPolicyAgeDto passwordPolicyAgeDto = (PasswordPolicyAgeDto) o;
+    return Objects.equals(this.maxAgeDays, passwordPolicyAgeDto.maxAgeDays) &&
+        Objects.equals(this.historyCount, passwordPolicyAgeDto.historyCount);
   }
 
   @Override
@@ -124,7 +124,7 @@ public class PasswordPolicyAge {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PasswordPolicyAge {\n");
+    sb.append("class PasswordPolicyAgeDto {\n");
     sb.append("    maxAgeDays: ").append(toIndentedString(maxAgeDays)).append("\n");
     sb.append("    historyCount: ").append(toIndentedString(historyCount)).append("\n");
     sb.append("}");
@@ -154,18 +154,27 @@ public class PasswordPolicyAge {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("maxAgeDays");
+    openapiRequiredFields.add("historyCount");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyAge
+  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyAgeDto
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PasswordPolicyAge.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyAge is not found in the empty JSON string", PasswordPolicyAge.openapiRequiredFields.toString()));
+        if (!PasswordPolicyAgeDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyAgeDto is not found in the empty JSON string", PasswordPolicyAgeDto.openapiRequiredFields.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : PasswordPolicyAgeDto.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -175,22 +184,22 @@ public class PasswordPolicyAge {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PasswordPolicyAge.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PasswordPolicyAge' and its subtypes
+       if (!PasswordPolicyAgeDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PasswordPolicyAgeDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PasswordPolicyAge> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyAge.class));
+       final TypeAdapter<PasswordPolicyAgeDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyAgeDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyAge>() {
+       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyAgeDto>() {
            @Override
-           public void write(JsonWriter out, PasswordPolicyAge value) throws IOException {
+           public void write(JsonWriter out, PasswordPolicyAgeDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PasswordPolicyAge read(JsonReader in) throws IOException {
+           public PasswordPolicyAgeDto read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -201,18 +210,18 @@ public class PasswordPolicyAge {
   }
 
  /**
-  * Create an instance of PasswordPolicyAge given an JSON string
+  * Create an instance of PasswordPolicyAgeDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PasswordPolicyAge
-  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyAge
+  * @return An instance of PasswordPolicyAgeDto
+  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyAgeDto
   */
-  public static PasswordPolicyAge fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PasswordPolicyAge.class);
+  public static PasswordPolicyAgeDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PasswordPolicyAgeDto.class);
   }
 
  /**
-  * Convert an instance of PasswordPolicyAge to an JSON string
+  * Convert an instance of PasswordPolicyAgeDto to an JSON string
   *
   * @return JSON string
   */

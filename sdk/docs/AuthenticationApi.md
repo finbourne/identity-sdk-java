@@ -5,11 +5,12 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getAuthenticationInformation**](AuthenticationApi.md#getAuthenticationInformation) | **GET** /api/authentication/information | GetAuthenticationInformation: Gets AuthenticationInformation |
-| [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user type |
+| [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type |
 | [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | [EARLY ACCESS] GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
 | [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | [EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
 | [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | [EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access to your account |
 | [**invalidateSupportAccess**](AuthenticationApi.md#invalidateSupportAccess) | **DELETE** /api/authentication/support | [EARLY ACCESS] InvalidateSupportAccess: Revoke any FINBOURNE support access to your account |
+| [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type |
 
 
 <a id="getAuthenticationInformation"></a>
@@ -79,9 +80,9 @@ This endpoint does not need any parameter.
 
 <a id="getPasswordPolicy"></a>
 # **getPasswordPolicy**
-> PasswordPolicy getPasswordPolicy(userType).execute();
+> PasswordPolicyDto getPasswordPolicy(userType).execute();
 
-[EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user type
+[EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type
 
 Get the password policy for a given user type
 
@@ -107,7 +108,7 @@ public class Example {
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     String userType = "userType_example"; // String | The type of user (should only be personal or service)
     try {
-      PasswordPolicy result = apiInstance.getPasswordPolicy(userType)
+      PasswordPolicyDto result = apiInstance.getPasswordPolicy(userType)
             .execute();
       System.out.println(result);
     } catch (ApiException e) {
@@ -129,7 +130,7 @@ public class Example {
 
 ### Return type
 
-[**PasswordPolicy**](PasswordPolicy.md)
+[**PasswordPolicyDto**](PasswordPolicyDto.md)
 
 ### Authorization
 
@@ -419,5 +420,78 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Invalidate all currently active support requests |  -  |
+| **0** | Error response |  -  |
+
+<a id="updatePasswordPolicy"></a>
+# **updatePasswordPolicy**
+> PasswordPolicyDto updatePasswordPolicy(userType).passwordPolicyDto(passwordPolicyDto).execute();
+
+[EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type
+
+Update the password policy for a given user type
+
+### Example
+```java
+// Import classes:
+import com.finbourne.identity.ApiClient;
+import com.finbourne.identity.ApiException;
+import com.finbourne.identity.Configuration;
+import com.finbourne.identity.auth.*;
+import com.finbourne.identity.models.*;
+import com.finbourne.identity.api.AuthenticationApi;
+
+public class Example {
+  public static void main(String[] args) {
+    ApiClient defaultClient = Configuration.getDefaultApiClient();
+    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
+    
+    // Configure OAuth2 access token for authorization: oauth2
+    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
+    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+
+    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
+    String userType = "userType_example"; // String | The type of user (should only be personal or service)
+    PasswordPolicyDto passwordPolicyDto = new PasswordPolicyDto(); // PasswordPolicyDto | The password policy for the given user type
+    try {
+      PasswordPolicyDto result = apiInstance.updatePasswordPolicy(userType)
+            .passwordPolicyDto(passwordPolicyDto)
+            .execute();
+      System.out.println(result);
+    } catch (ApiException e) {
+      System.err.println("Exception when calling AuthenticationApi#updatePasswordPolicy");
+      System.err.println("Status code: " + e.getCode());
+      System.err.println("Reason: " + e.getResponseBody());
+      System.err.println("Response headers: " + e.getResponseHeaders());
+      e.printStackTrace();
+    }
+  }
+}
+```
+
+### Parameters
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **userType** | **String**| The type of user (should only be personal or service) | |
+| **passwordPolicyDto** | [**PasswordPolicyDto**](PasswordPolicyDto.md)| The password policy for the given user type | [optional] |
+
+### Return type
+
+[**PasswordPolicyDto**](PasswordPolicyDto.md)
+
+### Authorization
+
+[oauth2](../README.md#oauth2)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update password policy |  -  |
+| **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

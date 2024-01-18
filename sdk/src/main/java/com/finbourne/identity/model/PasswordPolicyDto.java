@@ -11,7 +11,7 @@
 package com.finbourne.identity.model;
 
 import java.util.Objects;
-import com.finbourne.identity.model.PasswordPolicyConditions;
+import com.finbourne.identity.model.PasswordPolicyConditionsDto;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -46,18 +46,18 @@ import java.util.Set;
 import com.finbourne.identity.JSON;
 
 /**
- * PasswordPolicy
+ * PasswordPolicyDto
  */
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PasswordPolicy {
+public class PasswordPolicyDto {
   public static final String SERIALIZED_NAME_CONDITIONS = "conditions";
   @SerializedName(SERIALIZED_NAME_CONDITIONS)
-  private PasswordPolicyConditions conditions;
+  private PasswordPolicyConditionsDto conditions;
 
-  public PasswordPolicy() {
+  public PasswordPolicyDto() {
   }
 
-  public PasswordPolicy conditions(PasswordPolicyConditions conditions) {
+  public PasswordPolicyDto conditions(PasswordPolicyConditionsDto conditions) {
     
     this.conditions = conditions;
     return this;
@@ -67,13 +67,13 @@ public class PasswordPolicy {
    * Get conditions
    * @return conditions
   **/
-  @jakarta.annotation.Nullable
-  public PasswordPolicyConditions getConditions() {
+  @jakarta.annotation.Nonnull
+  public PasswordPolicyConditionsDto getConditions() {
     return conditions;
   }
 
 
-  public void setConditions(PasswordPolicyConditions conditions) {
+  public void setConditions(PasswordPolicyConditionsDto conditions) {
     this.conditions = conditions;
   }
 
@@ -87,8 +87,8 @@ public class PasswordPolicy {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PasswordPolicy passwordPolicy = (PasswordPolicy) o;
-    return Objects.equals(this.conditions, passwordPolicy.conditions);
+    PasswordPolicyDto passwordPolicyDto = (PasswordPolicyDto) o;
+    return Objects.equals(this.conditions, passwordPolicyDto.conditions);
   }
 
   @Override
@@ -99,7 +99,7 @@ public class PasswordPolicy {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PasswordPolicy {\n");
+    sb.append("class PasswordPolicyDto {\n");
     sb.append("    conditions: ").append(toIndentedString(conditions)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -127,47 +127,53 @@ public class PasswordPolicy {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("conditions");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicy
+  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyDto
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PasswordPolicy.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicy is not found in the empty JSON string", PasswordPolicy.openapiRequiredFields.toString()));
+        if (!PasswordPolicyDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyDto is not found in the empty JSON string", PasswordPolicyDto.openapiRequiredFields.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : PasswordPolicyDto.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `conditions`
-      if (jsonObj.get("conditions") != null && !jsonObj.get("conditions").isJsonNull()) {
-        PasswordPolicyConditions.validateJsonElement(jsonObj.get("conditions"));
-      }
+      // validate the required field `conditions`
+      PasswordPolicyConditionsDto.validateJsonElement(jsonObj.get("conditions"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PasswordPolicy.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PasswordPolicy' and its subtypes
+       if (!PasswordPolicyDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PasswordPolicyDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PasswordPolicy> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicy.class));
+       final TypeAdapter<PasswordPolicyDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicy>() {
+       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyDto>() {
            @Override
-           public void write(JsonWriter out, PasswordPolicy value) throws IOException {
+           public void write(JsonWriter out, PasswordPolicyDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PasswordPolicy read(JsonReader in) throws IOException {
+           public PasswordPolicyDto read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -178,18 +184,18 @@ public class PasswordPolicy {
   }
 
  /**
-  * Create an instance of PasswordPolicy given an JSON string
+  * Create an instance of PasswordPolicyDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PasswordPolicy
-  * @throws IOException if the JSON string is invalid with respect to PasswordPolicy
+  * @return An instance of PasswordPolicyDto
+  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyDto
   */
-  public static PasswordPolicy fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PasswordPolicy.class);
+  public static PasswordPolicyDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PasswordPolicyDto.class);
   }
 
  /**
-  * Convert an instance of PasswordPolicy to an JSON string
+  * Convert an instance of PasswordPolicyDto to an JSON string
   *
   * @return JSON string
   */

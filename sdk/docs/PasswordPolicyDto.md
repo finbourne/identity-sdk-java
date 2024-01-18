@@ -1,13 +1,13 @@
 
 
-# PasswordPolicy
+# PasswordPolicyDto
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**conditions** | [**PasswordPolicyConditions**](PasswordPolicyConditions.md) |  |  [optional] |
+|**conditions** | [**PasswordPolicyConditionsDto**](PasswordPolicyConditionsDto.md) |  |  |
 
 
 

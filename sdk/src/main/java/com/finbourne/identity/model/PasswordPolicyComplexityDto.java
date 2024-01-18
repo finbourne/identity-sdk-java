@@ -45,10 +45,10 @@ import java.util.Set;
 import com.finbourne.identity.JSON;
 
 /**
- * PasswordPolicyComplexity
+ * PasswordPolicyComplexityDto
  */
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PasswordPolicyComplexity {
+public class PasswordPolicyComplexityDto {
   public static final String SERIALIZED_NAME_MIN_LENGTH = "minLength";
   @SerializedName(SERIALIZED_NAME_MIN_LENGTH)
   private Integer minLength;
@@ -61,10 +61,10 @@ public class PasswordPolicyComplexity {
   @SerializedName(SERIALIZED_NAME_EXCLUDE_LAST_NAME)
   private Boolean excludeLastName;
 
-  public PasswordPolicyComplexity() {
+  public PasswordPolicyComplexityDto() {
   }
 
-  public PasswordPolicyComplexity minLength(Integer minLength) {
+  public PasswordPolicyComplexityDto minLength(Integer minLength) {
     
     this.minLength = minLength;
     return this;
@@ -74,7 +74,7 @@ public class PasswordPolicyComplexity {
    * The minimum length for a password
    * @return minLength
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public Integer getMinLength() {
     return minLength;
   }
@@ -85,7 +85,7 @@ public class PasswordPolicyComplexity {
   }
 
 
-  public PasswordPolicyComplexity excludeFirstName(Boolean excludeFirstName) {
+  public PasswordPolicyComplexityDto excludeFirstName(Boolean excludeFirstName) {
     
     this.excludeFirstName = excludeFirstName;
     return this;
@@ -95,7 +95,7 @@ public class PasswordPolicyComplexity {
    * Rule determining whether a user&#39;s first name should be permitted in their password
    * @return excludeFirstName
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public Boolean getExcludeFirstName() {
     return excludeFirstName;
   }
@@ -106,7 +106,7 @@ public class PasswordPolicyComplexity {
   }
 
 
-  public PasswordPolicyComplexity excludeLastName(Boolean excludeLastName) {
+  public PasswordPolicyComplexityDto excludeLastName(Boolean excludeLastName) {
     
     this.excludeLastName = excludeLastName;
     return this;
@@ -116,7 +116,7 @@ public class PasswordPolicyComplexity {
    * Rule determining whether a user&#39;s last name should be permitted in their password
    * @return excludeLastName
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public Boolean getExcludeLastName() {
     return excludeLastName;
   }
@@ -136,10 +136,10 @@ public class PasswordPolicyComplexity {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PasswordPolicyComplexity passwordPolicyComplexity = (PasswordPolicyComplexity) o;
-    return Objects.equals(this.minLength, passwordPolicyComplexity.minLength) &&
-        Objects.equals(this.excludeFirstName, passwordPolicyComplexity.excludeFirstName) &&
-        Objects.equals(this.excludeLastName, passwordPolicyComplexity.excludeLastName);
+    PasswordPolicyComplexityDto passwordPolicyComplexityDto = (PasswordPolicyComplexityDto) o;
+    return Objects.equals(this.minLength, passwordPolicyComplexityDto.minLength) &&
+        Objects.equals(this.excludeFirstName, passwordPolicyComplexityDto.excludeFirstName) &&
+        Objects.equals(this.excludeLastName, passwordPolicyComplexityDto.excludeLastName);
   }
 
   @Override
@@ -150,7 +150,7 @@ public class PasswordPolicyComplexity {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PasswordPolicyComplexity {\n");
+    sb.append("class PasswordPolicyComplexityDto {\n");
     sb.append("    minLength: ").append(toIndentedString(minLength)).append("\n");
     sb.append("    excludeFirstName: ").append(toIndentedString(excludeFirstName)).append("\n");
     sb.append("    excludeLastName: ").append(toIndentedString(excludeLastName)).append("\n");
@@ -182,18 +182,28 @@ public class PasswordPolicyComplexity {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("minLength");
+    openapiRequiredFields.add("excludeFirstName");
+    openapiRequiredFields.add("excludeLastName");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyComplexity
+  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyComplexityDto
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PasswordPolicyComplexity.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyComplexity is not found in the empty JSON string", PasswordPolicyComplexity.openapiRequiredFields.toString()));
+        if (!PasswordPolicyComplexityDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyComplexityDto is not found in the empty JSON string", PasswordPolicyComplexityDto.openapiRequiredFields.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : PasswordPolicyComplexityDto.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -203,22 +213,22 @@ public class PasswordPolicyComplexity {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PasswordPolicyComplexity.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PasswordPolicyComplexity' and its subtypes
+       if (!PasswordPolicyComplexityDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PasswordPolicyComplexityDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PasswordPolicyComplexity> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyComplexity.class));
+       final TypeAdapter<PasswordPolicyComplexityDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyComplexityDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyComplexity>() {
+       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyComplexityDto>() {
            @Override
-           public void write(JsonWriter out, PasswordPolicyComplexity value) throws IOException {
+           public void write(JsonWriter out, PasswordPolicyComplexityDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PasswordPolicyComplexity read(JsonReader in) throws IOException {
+           public PasswordPolicyComplexityDto read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -229,18 +239,18 @@ public class PasswordPolicyComplexity {
   }
 
  /**
-  * Create an instance of PasswordPolicyComplexity given an JSON string
+  * Create an instance of PasswordPolicyComplexityDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PasswordPolicyComplexity
-  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyComplexity
+  * @return An instance of PasswordPolicyComplexityDto
+  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyComplexityDto
   */
-  public static PasswordPolicyComplexity fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PasswordPolicyComplexity.class);
+  public static PasswordPolicyComplexityDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PasswordPolicyComplexityDto.class);
   }
 
  /**
-  * Convert an instance of PasswordPolicyComplexity to an JSON string
+  * Convert an instance of PasswordPolicyComplexityDto to an JSON string
   *
   * @return JSON string
   */

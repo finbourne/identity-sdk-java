@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2747
+  version: 0.0.2755
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -277,10 +277,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EXPERIMENTAL] RotateApplicationSecrets: Rotate Application Secrets"
+      summary: "[EARLY ACCESS] RotateApplicationSecrets: Rotate Application Secrets"
       tags:
       - Applications
-      x-fbn-apistatus: Experimental
+      x-fbn-apistatus: EarlyAccess
       x-accepts: application/json
   /api/authentication/information:
     get:
@@ -344,7 +344,7 @@ paths:
                   lockout:
                     maxAttempts: 10
               schema:
-                $ref: '#/components/schemas/PasswordPolicy'
+                $ref: '#/components/schemas/PasswordPolicyDto'
           description: Get password policy
         "400":
           content:
@@ -360,11 +360,124 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EXPERIMENTAL] GetPasswordPolicy: Gets Password Policy for a user\
+      summary: "[EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user\
         \ type"
       tags:
       - Authentication
       x-fbn-apistatus: Experimental
+      x-accepts: application/json
+    put:
+      description: Update the password policy for a given user type
+      operationId: UpdatePasswordPolicy
+      parameters:
+      - description: The type of user (should only be personal or service)
+        explode: false
+        in: path
+        name: userType
+        required: true
+        schema:
+          maxLength: 20
+          minLength: 1
+          pattern: "^[a-zA-Z]*$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              conditions:
+                complexity:
+                  minLength: 12
+                  excludeFirstName: true
+                  excludeLastName: true
+                age:
+                  maxAgeDays: 90
+                  historyCount: 4
+                lockout:
+                  maxAttempts: 10
+            schema:
+              $ref: '#/components/schemas/PasswordPolicyDto'
+          application/json:
+            example:
+              conditions:
+                complexity:
+                  minLength: 12
+                  excludeFirstName: true
+                  excludeLastName: true
+                age:
+                  maxAgeDays: 90
+                  historyCount: 4
+                lockout:
+                  maxAttempts: 10
+            schema:
+              $ref: '#/components/schemas/PasswordPolicyDto'
+          text/json:
+            example:
+              conditions:
+                complexity:
+                  minLength: 12
+                  excludeFirstName: true
+                  excludeLastName: true
+                age:
+                  maxAgeDays: 90
+                  historyCount: 4
+                lockout:
+                  maxAttempts: 10
+            schema:
+              $ref: '#/components/schemas/PasswordPolicyDto'
+          application/*+json:
+            example:
+              conditions:
+                complexity:
+                  minLength: 12
+                  excludeFirstName: true
+                  excludeLastName: true
+                age:
+                  maxAgeDays: 90
+                  historyCount: 4
+                lockout:
+                  maxAttempts: 10
+            schema:
+              $ref: '#/components/schemas/PasswordPolicyDto'
+        description: The password policy for the given user type
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                conditions:
+                  complexity:
+                    minLength: 12
+                    excludeFirstName: true
+                    excludeLastName: true
+                  age:
+                    maxAgeDays: 90
+                    historyCount: 4
+                  lockout:
+                    maxAttempts: 10
+              schema:
+                $ref: '#/components/schemas/PasswordPolicyDto'
+          description: Update password policy
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a\
+        \ user type"
+      tags:
+      - Authentication
+      x-fbn-apistatus: Experimental
+      x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/authentication/support:
     delete:
@@ -3066,24 +3179,7 @@ components:
       - issuer
       - type
       type: object
-    PasswordPolicy:
-      additionalProperties: false
-      example:
-        conditions:
-          complexity:
-            minLength: 0
-            excludeFirstName: true
-            excludeLastName: true
-          lockout:
-            maxAttempts: 5
-          age:
-            maxAgeDays: 6
-            historyCount: 1
-      properties:
-        conditions:
-          $ref: '#/components/schemas/PasswordPolicyConditions'
-      type: object
-    PasswordPolicyAge:
+    PasswordPolicyAgeDto:
       additionalProperties: false
       example:
         maxAgeDays: 6
@@ -3099,8 +3195,11 @@ components:
             a previous password is permitted again
           format: int32
           type: integer
+      required:
+      - historyCount
+      - maxAgeDays
       type: object
-    PasswordPolicyComplexity:
+    PasswordPolicyComplexityDto:
       additionalProperties: false
       example:
         minLength: 0
@@ -3119,8 +3218,12 @@ components:
           description: Rule determining whether a user's last name should be permitted
             in their password
           type: boolean
+      required:
+      - excludeFirstName
+      - excludeLastName
+      - minLength
       type: object
-    PasswordPolicyConditions:
+    PasswordPolicyConditionsDto:
       additionalProperties: false
       description: Password policy conditions for a password policy
       example:
@@ -3135,13 +3238,36 @@ components:
           historyCount: 1
       properties:
         complexity:
-          $ref: '#/components/schemas/PasswordPolicyComplexity'
+          $ref: '#/components/schemas/PasswordPolicyComplexityDto'
         age:
-          $ref: '#/components/schemas/PasswordPolicyAge'
+          $ref: '#/components/schemas/PasswordPolicyAgeDto'
         lockout:
-          $ref: '#/components/schemas/PasswordPolicyLockout'
+          $ref: '#/components/schemas/PasswordPolicyLockoutDto'
+      required:
+      - age
+      - complexity
+      - lockout
       type: object
-    PasswordPolicyLockout:
+    PasswordPolicyDto:
+      additionalProperties: false
+      example:
+        conditions:
+          complexity:
+            minLength: 0
+            excludeFirstName: true
+            excludeLastName: true
+          lockout:
+            maxAttempts: 5
+          age:
+            maxAgeDays: 6
+            historyCount: 1
+      properties:
+        conditions:
+          $ref: '#/components/schemas/PasswordPolicyConditionsDto'
+      required:
+      - conditions
+      type: object
+    PasswordPolicyLockoutDto:
       additionalProperties: false
       example:
         maxAttempts: 5
@@ -3151,6 +3277,8 @@ components:
             is locked out of their account
           format: int32
           type: integer
+      required:
+      - maxAttempts
       type: object
     ResourceListOfAccessControlledResource:
       additionalProperties: false

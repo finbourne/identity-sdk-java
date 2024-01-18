@@ -11,9 +11,9 @@
 package com.finbourne.identity.model;
 
 import java.util.Objects;
-import com.finbourne.identity.model.PasswordPolicyAge;
-import com.finbourne.identity.model.PasswordPolicyComplexity;
-import com.finbourne.identity.model.PasswordPolicyLockout;
+import com.finbourne.identity.model.PasswordPolicyAgeDto;
+import com.finbourne.identity.model.PasswordPolicyComplexityDto;
+import com.finbourne.identity.model.PasswordPolicyLockoutDto;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
@@ -51,23 +51,23 @@ import com.finbourne.identity.JSON;
  * Password policy conditions for a password policy
  */
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PasswordPolicyConditions {
+public class PasswordPolicyConditionsDto {
   public static final String SERIALIZED_NAME_COMPLEXITY = "complexity";
   @SerializedName(SERIALIZED_NAME_COMPLEXITY)
-  private PasswordPolicyComplexity complexity;
+  private PasswordPolicyComplexityDto complexity;
 
   public static final String SERIALIZED_NAME_AGE = "age";
   @SerializedName(SERIALIZED_NAME_AGE)
-  private PasswordPolicyAge age;
+  private PasswordPolicyAgeDto age;
 
   public static final String SERIALIZED_NAME_LOCKOUT = "lockout";
   @SerializedName(SERIALIZED_NAME_LOCKOUT)
-  private PasswordPolicyLockout lockout;
+  private PasswordPolicyLockoutDto lockout;
 
-  public PasswordPolicyConditions() {
+  public PasswordPolicyConditionsDto() {
   }
 
-  public PasswordPolicyConditions complexity(PasswordPolicyComplexity complexity) {
+  public PasswordPolicyConditionsDto complexity(PasswordPolicyComplexityDto complexity) {
     
     this.complexity = complexity;
     return this;
@@ -77,18 +77,18 @@ public class PasswordPolicyConditions {
    * Get complexity
    * @return complexity
   **/
-  @jakarta.annotation.Nullable
-  public PasswordPolicyComplexity getComplexity() {
+  @jakarta.annotation.Nonnull
+  public PasswordPolicyComplexityDto getComplexity() {
     return complexity;
   }
 
 
-  public void setComplexity(PasswordPolicyComplexity complexity) {
+  public void setComplexity(PasswordPolicyComplexityDto complexity) {
     this.complexity = complexity;
   }
 
 
-  public PasswordPolicyConditions age(PasswordPolicyAge age) {
+  public PasswordPolicyConditionsDto age(PasswordPolicyAgeDto age) {
     
     this.age = age;
     return this;
@@ -98,18 +98,18 @@ public class PasswordPolicyConditions {
    * Get age
    * @return age
   **/
-  @jakarta.annotation.Nullable
-  public PasswordPolicyAge getAge() {
+  @jakarta.annotation.Nonnull
+  public PasswordPolicyAgeDto getAge() {
     return age;
   }
 
 
-  public void setAge(PasswordPolicyAge age) {
+  public void setAge(PasswordPolicyAgeDto age) {
     this.age = age;
   }
 
 
-  public PasswordPolicyConditions lockout(PasswordPolicyLockout lockout) {
+  public PasswordPolicyConditionsDto lockout(PasswordPolicyLockoutDto lockout) {
     
     this.lockout = lockout;
     return this;
@@ -119,13 +119,13 @@ public class PasswordPolicyConditions {
    * Get lockout
    * @return lockout
   **/
-  @jakarta.annotation.Nullable
-  public PasswordPolicyLockout getLockout() {
+  @jakarta.annotation.Nonnull
+  public PasswordPolicyLockoutDto getLockout() {
     return lockout;
   }
 
 
-  public void setLockout(PasswordPolicyLockout lockout) {
+  public void setLockout(PasswordPolicyLockoutDto lockout) {
     this.lockout = lockout;
   }
 
@@ -139,10 +139,10 @@ public class PasswordPolicyConditions {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PasswordPolicyConditions passwordPolicyConditions = (PasswordPolicyConditions) o;
-    return Objects.equals(this.complexity, passwordPolicyConditions.complexity) &&
-        Objects.equals(this.age, passwordPolicyConditions.age) &&
-        Objects.equals(this.lockout, passwordPolicyConditions.lockout);
+    PasswordPolicyConditionsDto passwordPolicyConditionsDto = (PasswordPolicyConditionsDto) o;
+    return Objects.equals(this.complexity, passwordPolicyConditionsDto.complexity) &&
+        Objects.equals(this.age, passwordPolicyConditionsDto.age) &&
+        Objects.equals(this.lockout, passwordPolicyConditionsDto.lockout);
   }
 
   @Override
@@ -153,7 +153,7 @@ public class PasswordPolicyConditions {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PasswordPolicyConditions {\n");
+    sb.append("class PasswordPolicyConditionsDto {\n");
     sb.append("    complexity: ").append(toIndentedString(complexity)).append("\n");
     sb.append("    age: ").append(toIndentedString(age)).append("\n");
     sb.append("    lockout: ").append(toIndentedString(lockout)).append("\n");
@@ -185,55 +185,59 @@ public class PasswordPolicyConditions {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("complexity");
+    openapiRequiredFields.add("age");
+    openapiRequiredFields.add("lockout");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyConditions
+  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyConditionsDto
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PasswordPolicyConditions.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyConditions is not found in the empty JSON string", PasswordPolicyConditions.openapiRequiredFields.toString()));
+        if (!PasswordPolicyConditionsDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyConditionsDto is not found in the empty JSON string", PasswordPolicyConditionsDto.openapiRequiredFields.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : PasswordPolicyConditionsDto.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `complexity`
-      if (jsonObj.get("complexity") != null && !jsonObj.get("complexity").isJsonNull()) {
-        PasswordPolicyComplexity.validateJsonElement(jsonObj.get("complexity"));
-      }
-      // validate the optional field `age`
-      if (jsonObj.get("age") != null && !jsonObj.get("age").isJsonNull()) {
-        PasswordPolicyAge.validateJsonElement(jsonObj.get("age"));
-      }
-      // validate the optional field `lockout`
-      if (jsonObj.get("lockout") != null && !jsonObj.get("lockout").isJsonNull()) {
-        PasswordPolicyLockout.validateJsonElement(jsonObj.get("lockout"));
-      }
+      // validate the required field `complexity`
+      PasswordPolicyComplexityDto.validateJsonElement(jsonObj.get("complexity"));
+      // validate the required field `age`
+      PasswordPolicyAgeDto.validateJsonElement(jsonObj.get("age"));
+      // validate the required field `lockout`
+      PasswordPolicyLockoutDto.validateJsonElement(jsonObj.get("lockout"));
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PasswordPolicyConditions.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PasswordPolicyConditions' and its subtypes
+       if (!PasswordPolicyConditionsDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PasswordPolicyConditionsDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PasswordPolicyConditions> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyConditions.class));
+       final TypeAdapter<PasswordPolicyConditionsDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyConditionsDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyConditions>() {
+       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyConditionsDto>() {
            @Override
-           public void write(JsonWriter out, PasswordPolicyConditions value) throws IOException {
+           public void write(JsonWriter out, PasswordPolicyConditionsDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PasswordPolicyConditions read(JsonReader in) throws IOException {
+           public PasswordPolicyConditionsDto read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -244,18 +248,18 @@ public class PasswordPolicyConditions {
   }
 
  /**
-  * Create an instance of PasswordPolicyConditions given an JSON string
+  * Create an instance of PasswordPolicyConditionsDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PasswordPolicyConditions
-  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyConditions
+  * @return An instance of PasswordPolicyConditionsDto
+  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyConditionsDto
   */
-  public static PasswordPolicyConditions fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PasswordPolicyConditions.class);
+  public static PasswordPolicyConditionsDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PasswordPolicyConditionsDto.class);
   }
 
  /**
-  * Convert an instance of PasswordPolicyConditions to an JSON string
+  * Convert an instance of PasswordPolicyConditionsDto to an JSON string
   *
   * @return JSON string
   */

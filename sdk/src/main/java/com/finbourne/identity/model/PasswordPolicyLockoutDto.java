@@ -45,18 +45,18 @@ import java.util.Set;
 import com.finbourne.identity.JSON;
 
 /**
- * PasswordPolicyLockout
+ * PasswordPolicyLockoutDto
  */
 @jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class PasswordPolicyLockout {
+public class PasswordPolicyLockoutDto {
   public static final String SERIALIZED_NAME_MAX_ATTEMPTS = "maxAttempts";
   @SerializedName(SERIALIZED_NAME_MAX_ATTEMPTS)
   private Integer maxAttempts;
 
-  public PasswordPolicyLockout() {
+  public PasswordPolicyLockoutDto() {
   }
 
-  public PasswordPolicyLockout maxAttempts(Integer maxAttempts) {
+  public PasswordPolicyLockoutDto maxAttempts(Integer maxAttempts) {
     
     this.maxAttempts = maxAttempts;
     return this;
@@ -66,7 +66,7 @@ public class PasswordPolicyLockout {
    * The maximum number of unsuccessful attempts before the user is locked out of their account
    * @return maxAttempts
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public Integer getMaxAttempts() {
     return maxAttempts;
   }
@@ -86,8 +86,8 @@ public class PasswordPolicyLockout {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PasswordPolicyLockout passwordPolicyLockout = (PasswordPolicyLockout) o;
-    return Objects.equals(this.maxAttempts, passwordPolicyLockout.maxAttempts);
+    PasswordPolicyLockoutDto passwordPolicyLockoutDto = (PasswordPolicyLockoutDto) o;
+    return Objects.equals(this.maxAttempts, passwordPolicyLockoutDto.maxAttempts);
   }
 
   @Override
@@ -98,7 +98,7 @@ public class PasswordPolicyLockout {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class PasswordPolicyLockout {\n");
+    sb.append("class PasswordPolicyLockoutDto {\n");
     sb.append("    maxAttempts: ").append(toIndentedString(maxAttempts)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -126,18 +126,26 @@ public class PasswordPolicyLockout {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("maxAttempts");
   }
 
  /**
   * Validates the JSON Element and throws an exception if issues found
   *
   * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyLockout
+  * @throws IOException if the JSON Element is invalid with respect to PasswordPolicyLockoutDto
   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
-        if (!PasswordPolicyLockout.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyLockout is not found in the empty JSON string", PasswordPolicyLockout.openapiRequiredFields.toString()));
+        if (!PasswordPolicyLockoutDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
+          throw new IllegalArgumentException(String.format("The required field(s) %s in PasswordPolicyLockoutDto is not found in the empty JSON string", PasswordPolicyLockoutDto.openapiRequiredFields.toString()));
+        }
+      }
+
+      // check to make sure all required properties/fields are present in the JSON string
+      for (String requiredField : PasswordPolicyLockoutDto.openapiRequiredFields) {
+        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
+          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
@@ -147,22 +155,22 @@ public class PasswordPolicyLockout {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PasswordPolicyLockout.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PasswordPolicyLockout' and its subtypes
+       if (!PasswordPolicyLockoutDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'PasswordPolicyLockoutDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PasswordPolicyLockout> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyLockout.class));
+       final TypeAdapter<PasswordPolicyLockoutDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(PasswordPolicyLockoutDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyLockout>() {
+       return (TypeAdapter<T>) new TypeAdapter<PasswordPolicyLockoutDto>() {
            @Override
-           public void write(JsonWriter out, PasswordPolicyLockout value) throws IOException {
+           public void write(JsonWriter out, PasswordPolicyLockoutDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public PasswordPolicyLockout read(JsonReader in) throws IOException {
+           public PasswordPolicyLockoutDto read(JsonReader in) throws IOException {
              JsonElement jsonElement = elementAdapter.read(in);
              validateJsonElement(jsonElement);
              return thisAdapter.fromJsonTree(jsonElement);
@@ -173,18 +181,18 @@ public class PasswordPolicyLockout {
   }
 
  /**
-  * Create an instance of PasswordPolicyLockout given an JSON string
+  * Create an instance of PasswordPolicyLockoutDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of PasswordPolicyLockout
-  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyLockout
+  * @return An instance of PasswordPolicyLockoutDto
+  * @throws IOException if the JSON string is invalid with respect to PasswordPolicyLockoutDto
   */
-  public static PasswordPolicyLockout fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PasswordPolicyLockout.class);
+  public static PasswordPolicyLockoutDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, PasswordPolicyLockoutDto.class);
   }
 
  /**
-  * Convert an instance of PasswordPolicyLockout to an JSON string
+  * Convert an instance of PasswordPolicyLockoutDto to an JSON string
   *
   * @return JSON string
   */

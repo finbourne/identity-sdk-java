@@ -8,7 +8,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**deleteApplication**](ApplicationsApi.md#deleteApplication) | **DELETE** /api/applications/{id} | [EARLY ACCESS] DeleteApplication: Delete Application |
 | [**getApplication**](ApplicationsApi.md#getApplication) | **GET** /api/applications/{id} | [EARLY ACCESS] GetApplication: Get Application |
 | [**listApplications**](ApplicationsApi.md#listApplications) | **GET** /api/applications | [EARLY ACCESS] ListApplications: List Applications |
-| [**rotateApplicationSecrets**](ApplicationsApi.md#rotateApplicationSecrets) | **POST** /api/applications/{id}/lifecycle/$newsecret | [EXPERIMENTAL] RotateApplicationSecrets: Rotate Application Secrets |
+| [**rotateApplicationSecrets**](ApplicationsApi.md#rotateApplicationSecrets) | **POST** /api/applications/{id}/lifecycle/$newsecret | [EARLY ACCESS] RotateApplicationSecrets: Rotate Application Secrets |
 
 
 <a id="createApplication"></a>
@@ -294,7 +294,7 @@ This endpoint does not need any parameter.
 # **rotateApplicationSecrets**
 > OAuthApplication rotateApplicationSecrets(id).execute();
 
-[EXPERIMENTAL] RotateApplicationSecrets: Rotate Application Secrets
+[EARLY ACCESS] RotateApplicationSecrets: Rotate Application Secrets
 
 Rotate the secrets for the specified application
 

@@ -875,7 +875,7 @@ public class ApplicationsApi {
     }
 
     /**
-     * [EXPERIMENTAL] RotateApplicationSecrets: Rotate Application Secrets
+     * [EARLY ACCESS] RotateApplicationSecrets: Rotate Application Secrets
      * Rotate the secrets for the specified application
      * @param id The unique identifier for the application (required)
      * @return APIrotateApplicationSecretsRequest
