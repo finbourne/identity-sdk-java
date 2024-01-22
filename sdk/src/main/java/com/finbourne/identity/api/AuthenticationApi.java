@@ -28,10 +28,11 @@ import com.finbourne.identity.model.AuthenticationInformation;
 import com.finbourne.identity.model.LusidProblemDetails;
 import com.finbourne.identity.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
-import com.finbourne.identity.model.PasswordPolicyDto;
+import com.finbourne.identity.model.PasswordPolicyResponse;
 import com.finbourne.identity.model.SupportAccessRequest;
 import com.finbourne.identity.model.SupportAccessResponse;
 import com.finbourne.identity.model.SupportRolesResponse;
+import com.finbourne.identity.model.UpdatePasswordPolicyRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -281,16 +282,16 @@ public class AuthenticationApi {
     }
 
 
-    private ApiResponse<PasswordPolicyDto> getPasswordPolicyWithHttpInfo(String userType) throws ApiException {
+    private ApiResponse<PasswordPolicyResponse> getPasswordPolicyWithHttpInfo(String userType) throws ApiException {
         okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, null);
-        Type localVarReturnType = new TypeToken<PasswordPolicyDto>(){}.getType();
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call getPasswordPolicyAsync(String userType, final ApiCallback<PasswordPolicyDto> _callback) throws ApiException {
+    private okhttp3.Call getPasswordPolicyAsync(String userType, final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
 
         okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, _callback);
-        Type localVarReturnType = new TypeToken<PasswordPolicyDto>(){}.getType();
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -321,7 +322,7 @@ public class AuthenticationApi {
 
         /**
          * Execute getPasswordPolicy request
-         * @return PasswordPolicyDto
+         * @return PasswordPolicyResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -331,14 +332,14 @@ public class AuthenticationApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public PasswordPolicyDto execute() throws ApiException {
-            ApiResponse<PasswordPolicyDto> localVarResp = getPasswordPolicyWithHttpInfo(userType);
+        public PasswordPolicyResponse execute() throws ApiException {
+            ApiResponse<PasswordPolicyResponse> localVarResp = getPasswordPolicyWithHttpInfo(userType);
             return localVarResp.getData();
         }
 
         /**
          * Execute getPasswordPolicy request with HTTP info returned
-         * @return ApiResponse&lt;PasswordPolicyDto&gt;
+         * @return ApiResponse&lt;PasswordPolicyResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -348,7 +349,7 @@ public class AuthenticationApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<PasswordPolicyDto> executeWithHttpInfo() throws ApiException {
+        public ApiResponse<PasswordPolicyResponse> executeWithHttpInfo() throws ApiException {
             return getPasswordPolicyWithHttpInfo(userType);
         }
 
@@ -365,7 +366,7 @@ public class AuthenticationApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyDto> _callback) throws ApiException {
+        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
             return getPasswordPolicyAsync(userType, _callback);
         }
     }
@@ -1030,7 +1031,7 @@ public class AuthenticationApi {
     public APIinvalidateSupportAccessRequest invalidateSupportAccess() {
         return new APIinvalidateSupportAccessRequest();
     }
-    private okhttp3.Call updatePasswordPolicyCall(String userType, PasswordPolicyDto passwordPolicyDto, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updatePasswordPolicyCall(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1044,7 +1045,7 @@ public class AuthenticationApi {
             basePath = null;
         }
 
-        Object localVarPostBody = passwordPolicyDto;
+        Object localVarPostBody = updatePasswordPolicyRequest;
 
         // create path and map variables
         String localVarPath = "/api/authentication/password-policy/{userType}"
@@ -1080,46 +1081,46 @@ public class AuthenticationApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updatePasswordPolicyValidateBeforeCall(String userType, PasswordPolicyDto passwordPolicyDto, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updatePasswordPolicyValidateBeforeCall(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'userType' is set
         if (userType == null) {
             throw new ApiException("Missing the required parameter 'userType' when calling updatePasswordPolicy(Async)");
         }
 
-        return updatePasswordPolicyCall(userType, passwordPolicyDto, _callback);
+        return updatePasswordPolicyCall(userType, updatePasswordPolicyRequest, _callback);
 
     }
 
 
-    private ApiResponse<PasswordPolicyDto> updatePasswordPolicyWithHttpInfo(String userType, PasswordPolicyDto passwordPolicyDto) throws ApiException {
-        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, passwordPolicyDto, null);
-        Type localVarReturnType = new TypeToken<PasswordPolicyDto>(){}.getType();
+    private ApiResponse<PasswordPolicyResponse> updatePasswordPolicyWithHttpInfo(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest) throws ApiException {
+        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, null);
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call updatePasswordPolicyAsync(String userType, PasswordPolicyDto passwordPolicyDto, final ApiCallback<PasswordPolicyDto> _callback) throws ApiException {
+    private okhttp3.Call updatePasswordPolicyAsync(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, passwordPolicyDto, _callback);
-        Type localVarReturnType = new TypeToken<PasswordPolicyDto>(){}.getType();
+        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, _callback);
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public class APIupdatePasswordPolicyRequest {
         private final String userType;
-        private PasswordPolicyDto passwordPolicyDto;
+        private UpdatePasswordPolicyRequest updatePasswordPolicyRequest;
 
         private APIupdatePasswordPolicyRequest(String userType) {
             this.userType = userType;
         }
 
         /**
-         * Set passwordPolicyDto
-         * @param passwordPolicyDto The password policy for the given user type (optional)
+         * Set updatePasswordPolicyRequest
+         * @param updatePasswordPolicyRequest The password policy for the given user type (optional)
          * @return APIupdatePasswordPolicyRequest
          */
-        public APIupdatePasswordPolicyRequest passwordPolicyDto(PasswordPolicyDto passwordPolicyDto) {
-            this.passwordPolicyDto = passwordPolicyDto;
+        public APIupdatePasswordPolicyRequest updatePasswordPolicyRequest(UpdatePasswordPolicyRequest updatePasswordPolicyRequest) {
+            this.updatePasswordPolicyRequest = updatePasswordPolicyRequest;
             return this;
         }
 
@@ -1137,12 +1138,12 @@ public class AuthenticationApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return updatePasswordPolicyCall(userType, passwordPolicyDto, _callback);
+            return updatePasswordPolicyCall(userType, updatePasswordPolicyRequest, _callback);
         }
 
         /**
          * Execute updatePasswordPolicy request
-         * @return PasswordPolicyDto
+         * @return PasswordPolicyResponse
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1152,14 +1153,14 @@ public class AuthenticationApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public PasswordPolicyDto execute() throws ApiException {
-            ApiResponse<PasswordPolicyDto> localVarResp = updatePasswordPolicyWithHttpInfo(userType, passwordPolicyDto);
+        public PasswordPolicyResponse execute() throws ApiException {
+            ApiResponse<PasswordPolicyResponse> localVarResp = updatePasswordPolicyWithHttpInfo(userType, updatePasswordPolicyRequest);
             return localVarResp.getData();
         }
 
         /**
          * Execute updatePasswordPolicy request with HTTP info returned
-         * @return ApiResponse&lt;PasswordPolicyDto&gt;
+         * @return ApiResponse&lt;PasswordPolicyResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
          * @http.response.details
          <table summary="Response Details" border="1">
@@ -1169,8 +1170,8 @@ public class AuthenticationApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public ApiResponse<PasswordPolicyDto> executeWithHttpInfo() throws ApiException {
-            return updatePasswordPolicyWithHttpInfo(userType, passwordPolicyDto);
+        public ApiResponse<PasswordPolicyResponse> executeWithHttpInfo() throws ApiException {
+            return updatePasswordPolicyWithHttpInfo(userType, updatePasswordPolicyRequest);
         }
 
         /**
@@ -1186,8 +1187,8 @@ public class AuthenticationApi {
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
-        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyDto> _callback) throws ApiException {
-            return updatePasswordPolicyAsync(userType, passwordPolicyDto, _callback);
+        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
+            return updatePasswordPolicyAsync(userType, updatePasswordPolicyRequest, _callback);
         }
     }
 

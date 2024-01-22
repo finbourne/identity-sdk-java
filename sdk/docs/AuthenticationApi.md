@@ -80,7 +80,7 @@ This endpoint does not need any parameter.
 
 <a id="getPasswordPolicy"></a>
 # **getPasswordPolicy**
-> PasswordPolicyDto getPasswordPolicy(userType).execute();
+> PasswordPolicyResponse getPasswordPolicy(userType).execute();
 
 [EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type
 
@@ -108,7 +108,7 @@ public class Example {
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     String userType = "userType_example"; // String | The type of user (should only be personal or service)
     try {
-      PasswordPolicyDto result = apiInstance.getPasswordPolicy(userType)
+      PasswordPolicyResponse result = apiInstance.getPasswordPolicy(userType)
             .execute();
       System.out.println(result);
     } catch (ApiException e) {
@@ -130,7 +130,7 @@ public class Example {
 
 ### Return type
 
-[**PasswordPolicyDto**](PasswordPolicyDto.md)
+[**PasswordPolicyResponse**](PasswordPolicyResponse.md)
 
 ### Authorization
 
@@ -424,7 +424,7 @@ This endpoint does not need any parameter.
 
 <a id="updatePasswordPolicy"></a>
 # **updatePasswordPolicy**
-> PasswordPolicyDto updatePasswordPolicy(userType).passwordPolicyDto(passwordPolicyDto).execute();
+> PasswordPolicyResponse updatePasswordPolicy(userType).updatePasswordPolicyRequest(updatePasswordPolicyRequest).execute();
 
 [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type
 
@@ -451,10 +451,10 @@ public class Example {
 
     AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
     String userType = "userType_example"; // String | The type of user (should only be personal or service)
-    PasswordPolicyDto passwordPolicyDto = new PasswordPolicyDto(); // PasswordPolicyDto | The password policy for the given user type
+    UpdatePasswordPolicyRequest updatePasswordPolicyRequest = new UpdatePasswordPolicyRequest(); // UpdatePasswordPolicyRequest | The password policy for the given user type
     try {
-      PasswordPolicyDto result = apiInstance.updatePasswordPolicy(userType)
-            .passwordPolicyDto(passwordPolicyDto)
+      PasswordPolicyResponse result = apiInstance.updatePasswordPolicy(userType)
+            .updatePasswordPolicyRequest(updatePasswordPolicyRequest)
             .execute();
       System.out.println(result);
     } catch (ApiException e) {
@@ -473,11 +473,11 @@ public class Example {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **userType** | **String**| The type of user (should only be personal or service) | |
-| **passwordPolicyDto** | [**PasswordPolicyDto**](PasswordPolicyDto.md)| The password policy for the given user type | [optional] |
+| **updatePasswordPolicyRequest** | [**UpdatePasswordPolicyRequest**](UpdatePasswordPolicyRequest.md)| The password policy for the given user type | [optional] |
 
 ### Return type
 
-[**PasswordPolicyDto**](PasswordPolicyDto.md)
+[**PasswordPolicyResponse**](PasswordPolicyResponse.md)
 
 ### Authorization
 

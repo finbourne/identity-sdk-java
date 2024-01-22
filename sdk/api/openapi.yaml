@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2757
+  version: 0.0.2761
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -336,15 +336,15 @@ paths:
                 conditions:
                   complexity:
                     minLength: 12
-                    excludeFirstName: true
-                    excludeLastName: true
+                    excludeFirstName: false
+                    excludeLastName: false
                   age:
                     maxAgeDays: 90
                     historyCount: 4
                   lockout:
                     maxAttempts: 10
               schema:
-                $ref: '#/components/schemas/PasswordPolicyDto'
+                $ref: '#/components/schemas/PasswordPolicyResponse'
           description: Get password policy
         "400":
           content:
@@ -387,58 +387,58 @@ paths:
             example:
               conditions:
                 complexity:
-                  minLength: 12
+                  minLength: 15
                   excludeFirstName: true
                   excludeLastName: true
                 age:
-                  maxAgeDays: 90
-                  historyCount: 4
+                  maxAgeDays: 30
+                  historyCount: 10
                 lockout:
-                  maxAttempts: 10
+                  maxAttempts: 20
             schema:
-              $ref: '#/components/schemas/PasswordPolicyDto'
+              $ref: '#/components/schemas/UpdatePasswordPolicyRequest'
           application/json:
             example:
               conditions:
                 complexity:
-                  minLength: 12
+                  minLength: 15
                   excludeFirstName: true
                   excludeLastName: true
                 age:
-                  maxAgeDays: 90
-                  historyCount: 4
+                  maxAgeDays: 30
+                  historyCount: 10
                 lockout:
-                  maxAttempts: 10
+                  maxAttempts: 20
             schema:
-              $ref: '#/components/schemas/PasswordPolicyDto'
+              $ref: '#/components/schemas/UpdatePasswordPolicyRequest'
           text/json:
             example:
               conditions:
                 complexity:
-                  minLength: 12
+                  minLength: 15
                   excludeFirstName: true
                   excludeLastName: true
                 age:
-                  maxAgeDays: 90
-                  historyCount: 4
+                  maxAgeDays: 30
+                  historyCount: 10
                 lockout:
-                  maxAttempts: 10
+                  maxAttempts: 20
             schema:
-              $ref: '#/components/schemas/PasswordPolicyDto'
+              $ref: '#/components/schemas/UpdatePasswordPolicyRequest'
           application/*+json:
             example:
               conditions:
                 complexity:
-                  minLength: 12
+                  minLength: 15
                   excludeFirstName: true
                   excludeLastName: true
                 age:
-                  maxAgeDays: 90
-                  historyCount: 4
+                  maxAgeDays: 30
+                  historyCount: 10
                 lockout:
-                  maxAttempts: 10
+                  maxAttempts: 20
             schema:
-              $ref: '#/components/schemas/PasswordPolicyDto'
+              $ref: '#/components/schemas/UpdatePasswordPolicyRequest'
         description: The password policy for the given user type
       responses:
         "200":
@@ -448,15 +448,15 @@ paths:
                 conditions:
                   complexity:
                     minLength: 12
-                    excludeFirstName: true
-                    excludeLastName: true
+                    excludeFirstName: false
+                    excludeLastName: false
                   age:
                     maxAgeDays: 90
                     historyCount: 4
                   lockout:
                     maxAttempts: 10
               schema:
-                $ref: '#/components/schemas/PasswordPolicyDto'
+                $ref: '#/components/schemas/PasswordPolicyResponse'
           description: Update password policy
         "400":
           content:
@@ -3179,7 +3179,26 @@ components:
       - issuer
       - type
       type: object
-    PasswordPolicyAgeDto:
+    PasswordPolicyResponse:
+      additionalProperties: false
+      example:
+        conditions:
+          complexity:
+            minLength: 0
+            excludeFirstName: true
+            excludeLastName: true
+          lockout:
+            maxAttempts: 5
+          age:
+            maxAgeDays: 6
+            historyCount: 1
+      properties:
+        conditions:
+          $ref: '#/components/schemas/PasswordPolicyResponseConditions'
+      required:
+      - conditions
+      type: object
+    PasswordPolicyResponseAge:
       additionalProperties: false
       example:
         maxAgeDays: 6
@@ -3199,7 +3218,7 @@ components:
       - historyCount
       - maxAgeDays
       type: object
-    PasswordPolicyComplexityDto:
+    PasswordPolicyResponseComplexity:
       additionalProperties: false
       example:
         minLength: 0
@@ -3223,7 +3242,7 @@ components:
       - excludeLastName
       - minLength
       type: object
-    PasswordPolicyConditionsDto:
+    PasswordPolicyResponseConditions:
       additionalProperties: false
       description: Password policy conditions for a password policy
       example:
@@ -3238,36 +3257,17 @@ components:
           historyCount: 1
       properties:
         complexity:
-          $ref: '#/components/schemas/PasswordPolicyComplexityDto'
+          $ref: '#/components/schemas/PasswordPolicyResponseComplexity'
         age:
-          $ref: '#/components/schemas/PasswordPolicyAgeDto'
+          $ref: '#/components/schemas/PasswordPolicyResponseAge'
         lockout:
-          $ref: '#/components/schemas/PasswordPolicyLockoutDto'
+          $ref: '#/components/schemas/PasswordPolicyResponseLockout'
       required:
       - age
       - complexity
       - lockout
       type: object
-    PasswordPolicyDto:
-      additionalProperties: false
-      example:
-        conditions:
-          complexity:
-            minLength: 0
-            excludeFirstName: true
-            excludeLastName: true
-          lockout:
-            maxAttempts: 5
-          age:
-            maxAgeDays: 6
-            historyCount: 1
-      properties:
-        conditions:
-          $ref: '#/components/schemas/PasswordPolicyConditionsDto'
-      required:
-      - conditions
-      type: object
-    PasswordPolicyLockoutDto:
+    PasswordPolicyResponseLockout:
       additionalProperties: false
       example:
         maxAttempts: 5
@@ -3846,6 +3846,107 @@ components:
           type: string
       required:
       - password
+      type: object
+    UpdatePasswordPolicyRequest:
+      additionalProperties: false
+      example:
+        conditions:
+          complexity:
+            minLength: 0
+            excludeFirstName: true
+            excludeLastName: true
+          lockout:
+            maxAttempts: 5
+          age:
+            maxAgeDays: 6
+            historyCount: 1
+      properties:
+        conditions:
+          $ref: '#/components/schemas/UpdatePasswordPolicyRequestConditions'
+      required:
+      - conditions
+      type: object
+    UpdatePasswordPolicyRequestAge:
+      additionalProperties: false
+      example:
+        maxAgeDays: 6
+        historyCount: 1
+      properties:
+        maxAgeDays:
+          description: The maximum age (in days) a password can be before expiring
+            and needing to be changed
+          format: int32
+          type: integer
+        historyCount:
+          description: The number of unique passwords that need to be used before
+            a previous password is permitted again
+          format: int32
+          type: integer
+      required:
+      - historyCount
+      - maxAgeDays
+      type: object
+    UpdatePasswordPolicyRequestComplexity:
+      additionalProperties: false
+      example:
+        minLength: 0
+        excludeFirstName: true
+        excludeLastName: true
+      properties:
+        minLength:
+          description: The minimum length for a password
+          format: int32
+          type: integer
+        excludeFirstName:
+          description: Rule determining whether a user's first name should be permitted
+            in their password
+          type: boolean
+        excludeLastName:
+          description: Rule determining whether a user's last name should be permitted
+            in their password
+          type: boolean
+      required:
+      - excludeFirstName
+      - excludeLastName
+      - minLength
+      type: object
+    UpdatePasswordPolicyRequestConditions:
+      additionalProperties: false
+      description: Password policy conditions for a password policy
+      example:
+        complexity:
+          minLength: 0
+          excludeFirstName: true
+          excludeLastName: true
+        lockout:
+          maxAttempts: 5
+        age:
+          maxAgeDays: 6
+          historyCount: 1
+      properties:
+        complexity:
+          $ref: '#/components/schemas/UpdatePasswordPolicyRequestComplexity'
+        age:
+          $ref: '#/components/schemas/UpdatePasswordPolicyRequestAge'
+        lockout:
+          $ref: '#/components/schemas/UpdatePasswordPolicyRequestLockout'
+      required:
+      - age
+      - complexity
+      - lockout
+      type: object
+    UpdatePasswordPolicyRequestLockout:
+      additionalProperties: false
+      example:
+        maxAttempts: 5
+      properties:
+        maxAttempts:
+          description: The maximum number of unsuccessful attempts before the user
+            is locked out of their account
+          format: int32
+          type: integer
+      required:
+      - maxAttempts
       type: object
     UpdateRoleRequest:
       additionalProperties: false

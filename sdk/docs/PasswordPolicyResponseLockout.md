@@ -1,6 +1,6 @@
 
 
-# PasswordPolicyLockoutDto
+# PasswordPolicyResponseLockout
 
 
 ## Properties

@@ -1,6 +1,6 @@
 
 
-# PasswordPolicyAgeDto
+# UpdatePasswordPolicyRequestAge
 
 
 ## Properties
