@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2761
+  version: 0.0.2765
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -3852,14 +3852,14 @@ components:
       example:
         conditions:
           complexity:
-            minLength: 0
+            minLength: 13
             excludeFirstName: true
             excludeLastName: true
           lockout:
-            maxAttempts: 5
+            maxAttempts: 59
           age:
-            maxAgeDays: 6
-            historyCount: 1
+            maxAgeDays: 602
+            historyCount: 4
       properties:
         conditions:
           $ref: '#/components/schemas/UpdatePasswordPolicyRequestConditions'
@@ -3869,18 +3869,22 @@ components:
     UpdatePasswordPolicyRequestAge:
       additionalProperties: false
       example:
-        maxAgeDays: 6
-        historyCount: 1
+        maxAgeDays: 602
+        historyCount: 4
       properties:
         maxAgeDays:
-          description: The maximum age (in days) a password can be before expiring
-            and needing to be changed
+          description: "The maximum age (in days) a password can be before expiring\
+            \ and needing to be changed.\r\n0 indicates no limit"
           format: int32
+          maximum: 999
+          minimum: 0
           type: integer
         historyCount:
-          description: The number of unique passwords that need to be used before
-            a previous password is permitted again
+          description: "The number of unique passwords that need to be used before\
+            \ a previous password is permitted again.\r\n0 indicates none"
           format: int32
+          maximum: 30
+          minimum: 0
           type: integer
       required:
       - historyCount
@@ -3889,13 +3893,15 @@ components:
     UpdatePasswordPolicyRequestComplexity:
       additionalProperties: false
       example:
-        minLength: 0
+        minLength: 13
         excludeFirstName: true
         excludeLastName: true
       properties:
         minLength:
           description: The minimum length for a password
           format: int32
+          maximum: 30
+          minimum: 12
           type: integer
         excludeFirstName:
           description: Rule determining whether a user's first name should be permitted
@@ -3915,14 +3921,14 @@ components:
       description: Password policy conditions for a password policy
       example:
         complexity:
-          minLength: 0
+          minLength: 13
           excludeFirstName: true
           excludeLastName: true
         lockout:
-          maxAttempts: 5
+          maxAttempts: 59
         age:
-          maxAgeDays: 6
-          historyCount: 1
+          maxAgeDays: 602
+          historyCount: 4
       properties:
         complexity:
           $ref: '#/components/schemas/UpdatePasswordPolicyRequestComplexity'
@@ -3938,12 +3944,14 @@ components:
     UpdatePasswordPolicyRequestLockout:
       additionalProperties: false
       example:
-        maxAttempts: 5
+        maxAttempts: 59
       properties:
         maxAttempts:
-          description: The maximum number of unsuccessful attempts before the user
-            is locked out of their account
+          description: "The maximum number of unsuccessful attempts before the user\
+            \ is locked out of their account.\r\n0 indicates no limit"
           format: int32
+          maximum: 100
+          minimum: 0
           type: integer
       required:
       - maxAttempts

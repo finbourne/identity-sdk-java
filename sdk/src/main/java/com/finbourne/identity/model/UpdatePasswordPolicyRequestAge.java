@@ -67,7 +67,9 @@ public class UpdatePasswordPolicyRequestAge {
   }
 
    /**
-   * The maximum age (in days) a password can be before expiring and needing to be changed
+   * The maximum age (in days) a password can be before expiring and needing to be changed.  0 indicates no limit
+   * minimum: 0
+   * maximum: 999
    * @return maxAgeDays
   **/
   @jakarta.annotation.Nonnull
@@ -88,7 +90,9 @@ public class UpdatePasswordPolicyRequestAge {
   }
 
    /**
-   * The number of unique passwords that need to be used before a previous password is permitted again
+   * The number of unique passwords that need to be used before a previous password is permitted again.  0 indicates none
+   * minimum: 0
+   * maximum: 30
    * @return historyCount
   **/
   @jakarta.annotation.Nonnull

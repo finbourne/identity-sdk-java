@@ -72,6 +72,8 @@ public class UpdatePasswordPolicyRequestComplexity {
 
    /**
    * The minimum length for a password
+   * minimum: 12
+   * maximum: 30
    * @return minLength
   **/
   @jakarta.annotation.Nonnull

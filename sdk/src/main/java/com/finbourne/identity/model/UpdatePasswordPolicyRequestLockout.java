@@ -63,7 +63,9 @@ public class UpdatePasswordPolicyRequestLockout {
   }
 
    /**
-   * The maximum number of unsuccessful attempts before the user is locked out of their account
+   * The maximum number of unsuccessful attempts before the user is locked out of their account.  0 indicates no limit
+   * minimum: 0
+   * maximum: 100
    * @return maxAttempts
   **/
   @jakarta.annotation.Nonnull
