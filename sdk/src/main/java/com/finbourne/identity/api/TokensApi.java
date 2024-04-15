@@ -200,7 +200,7 @@ public class TokensApi {
     }
 
     /**
-     * [EARLY ACCESS] InvalidateToken: Invalidate current JWT token (sign out)
+     * InvalidateToken: Invalidate current JWT token (sign out)
      * Log the current user out of all Finbourne platforms by invalidating the current token
      * @return APIinvalidateTokenRequest
      * @http.response.details

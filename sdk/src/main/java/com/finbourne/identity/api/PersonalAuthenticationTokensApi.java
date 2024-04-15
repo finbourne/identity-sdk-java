@@ -223,7 +223,7 @@ public class PersonalAuthenticationTokensApi {
     }
 
     /**
-     * [EARLY ACCESS] CreateApiKey: Create a Personal Access Token
+     * CreateApiKey: Create a Personal Access Token
      * Generates a Personal Access Token and returns the new key and its associated metadata.
      * @param createApiKey The request to create a new Personal Access Token (required)
      * @return APIcreateApiKeyRequest
@@ -385,7 +385,7 @@ public class PersonalAuthenticationTokensApi {
     }
 
     /**
-     * [EARLY ACCESS] DeleteApiKey: Invalidate a Personal Access Token
+     * DeleteApiKey: Invalidate a Personal Access Token
      * Immediately invalidates the specified Personal Access Token
      * @param id The id of the Personal Access Token to delete (required)
      * @return APIdeleteApiKeyRequest
@@ -535,7 +535,7 @@ public class PersonalAuthenticationTokensApi {
     }
 
     /**
-     * [EARLY ACCESS] ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens.
+     * ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens.
      * Gets the meta data for all of the user&#39;s Personal Access Tokens that have not been deleted. They may be  invalid due to the deactivation date having passed.
      * @return APIlistOwnApiKeysRequest
      * @http.response.details

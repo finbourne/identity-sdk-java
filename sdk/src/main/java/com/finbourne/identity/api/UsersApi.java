@@ -240,7 +240,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] CreateUser: Create User
+     * CreateUser: Create User
      * Create a new User
      * @param createUserRequest Details of the User to be created (required)
      * @return APIcreateUserRequest
@@ -413,7 +413,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] DeleteUser: Delete User
+     * DeleteUser: Delete User
      * By default the user will be de-provisioned and inactive, however their record will remain in the identity  provider for audit purposes. If this is not desirable and removal of all trace of the user is required,  the purge parameter can be specified to indicate the details should be purged completely.
      * @param id The unique identifier for the user (required)
      * @return APIdeleteUserRequest
@@ -575,7 +575,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] ExpirePassword: Reset the user&#39;s password to a temporary one
+     * ExpirePassword: Reset the user&#39;s password to a temporary one
      * Resets the user&#39;s password to a temporary one which is then expired
      * @param id The unique identifier for the User having its password reset (required)
      * @return APIexpirePasswordRequest
@@ -740,7 +740,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] FindUsersById: Find users by id endpoint
+     * FindUsersById: Find users by id endpoint
      * Finds a maximum of 50 users by ID
      * @param id A list of unique identifiers for the users (required)
      * @return APIfindUsersByIdRequest
@@ -917,7 +917,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] GetUser: Get User
+     * GetUser: Get User
      * Get the specified User
      * @param id The unique identifier for the User (required)
      * @return APIgetUserRequest
@@ -1249,7 +1249,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] ListUsers: List Users
+     * ListUsers: List Users
      * List the available Users
      * @return APIlistUsersRequest
      * @http.response.details
@@ -1406,7 +1406,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] ResetFactors: Reset MFA factors
+     * ResetFactors: Reset MFA factors
      * Resets the MFA factors of the specified User
      * @param id The unique identifier for the User having their MFA factors reset (required)
      * @return APIresetFactorsRequest
@@ -1564,7 +1564,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] ResetPassword: Reset Password
+     * ResetPassword: Reset Password
      * Resets the password of the specified User
      * @param id The unique identifier for the User having their password reset (required)
      * @return APIresetPasswordRequest
@@ -1722,7 +1722,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] SendActivationEmail: Sends an activation email to the User
+     * SendActivationEmail: Sends an activation email to the User
      * Sends an activation email to the specified User
      * @param id The unique identifier for the User to be activated (required)
      * @return APIsendActivationEmailRequest
@@ -1880,7 +1880,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] UnlockUser: Unlock User
+     * UnlockUser: Unlock User
      * Unlocks the specified User
      * @param id The unique identifier for the User to be unlocked (required)
      * @return APIunlockUserRequest
@@ -2211,7 +2211,7 @@ public class UsersApi {
     }
 
     /**
-     * [EARLY ACCESS] UpdateUser: Update User
+     * UpdateUser: Update User
      * Updates the specified User
      * @param id The unique identifier for the User to be updated (required)
      * @param updateUserRequest The new definition of the User (required)

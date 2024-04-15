@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.2862
+  version: 0.0.2866
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -522,11 +522,11 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] InvalidateSupportAccess: Revoke any FINBOURNE support\
-        \ access to your account"
+      summary: "InvalidateSupportAccess: Revoke any FINBOURNE support access to your\
+        \ account"
       tags:
       - Authentication
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     get:
       description: "The active and inactive support requests will be returned, inactive\
@@ -598,11 +598,11 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GetSupportAccessHistory: Get the history of all support\
-        \ access granted and any information pertaining to their termination"
+      summary: "GetSupportAccessHistory: Get the history of all support access granted\
+        \ and any information pertaining to their termination"
       tags:
       - Authentication
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     post:
       description: "Granting support access will allow FINBOURNE employees full access\
@@ -670,11 +670,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access\
-        \ to your account"
+      summary: "GrantSupportAccess: Grants FINBOURNE support access to your account"
       tags:
       - Authentication
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/authentication/support-roles:
@@ -705,11 +704,11 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the\
-        \ internal representation to a human friendly representation"
+      summary: "GetSupportRoles: Get mapping of support roles, the internal representation\
+        \ to a human friendly representation"
       tags:
       - Authentication
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/directory:
     get:
@@ -795,10 +794,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] FindUsersById: Find users by id endpoint"
+      summary: "FindUsersById: Find users by id endpoint"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/identityprovider/scim:
     delete:
@@ -815,10 +814,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] RemoveScim: Remove SCIM"
+      summary: "RemoveScim: Remove SCIM"
       tags:
       - Identity Provider
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     put:
       description: Generates an API token to be used for SCIM
@@ -885,10 +884,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] AddScim: Add SCIM"
+      summary: "AddScim: Add SCIM"
       tags:
       - Identity Provider
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/keys:
     get:
@@ -926,11 +925,11 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ListOwnApiKeys: Gets the meta data for all of the user's\
-        \ existing Personal Access Tokens."
+      summary: "ListOwnApiKeys: Gets the meta data for all of the user's existing\
+        \ Personal Access Tokens."
       tags:
       - Personal Authentication Tokens
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     post:
       description: Generates a Personal Access Token and returns the new key and its
@@ -991,10 +990,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] CreateApiKey: Create a Personal Access Token"
+      summary: "CreateApiKey: Create a Personal Access Token"
       tags:
       - Personal Authentication Tokens
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/keys/{id}:
@@ -1039,10 +1038,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] DeleteApiKey: Invalidate a Personal Access Token"
+      summary: "DeleteApiKey: Invalidate a Personal Access Token"
       tags:
       - Personal Authentication Tokens
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/me:
     get:
@@ -1067,10 +1066,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GetUserInfo: Get User Info"
+      summary: "GetUserInfo: Get User Info"
       tags:
       - Me
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/me/password:
     put:
@@ -1158,11 +1157,11 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ListAccessControlledResources: Get resources available\
-        \ for access control"
+      summary: "ListAccessControlledResources: Get resources available for access\
+        \ control"
       tags:
       - Application Metadata
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/roles:
     get:
@@ -1194,10 +1193,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ListRoles: List Roles"
+      summary: "ListRoles: List Roles"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     post:
       description: Creates a new Role
@@ -1262,10 +1261,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] CreateRole: Create Role"
+      summary: "CreateRole: Create Role"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/roles/{id}:
@@ -1301,10 +1300,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] DeleteRole: Delete Role"
+      summary: "DeleteRole: Delete Role"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     get:
       description: Get the specified role
@@ -1353,10 +1352,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GetRole: Get Role"
+      summary: "GetRole: Get Role"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     put:
       description: Update the specified Role
@@ -1428,10 +1427,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] UpdateRole: Update Role"
+      summary: "UpdateRole: Update Role"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/roles/{id}/users:
@@ -1491,10 +1490,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ListUsersInRole: Get the users in the specified role."
+      summary: "ListUsersInRole: Get the users in the specified role."
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/roles/{id}/users/{userId}:
     delete:
@@ -1542,10 +1541,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] RemoveUserFromRole: Remove User from Role"
+      summary: "RemoveUserFromRole: Remove User from Role"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     put:
       description: Adds the User to the specified Role
@@ -1592,10 +1591,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] AddUserToRole: Add User to Role"
+      summary: "AddUserToRole: Add User to Role"
       tags:
       - Roles
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/tokens:
     delete:
@@ -1613,11 +1612,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] InvalidateToken: Invalidate current JWT token (sign\
-        \ out)"
+      summary: "InvalidateToken: Invalidate current JWT token (sign out)"
       tags:
       - Tokens
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users:
     get:
@@ -1686,10 +1684,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ListUsers: List Users"
+      summary: "ListUsers: List Users"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     post:
       description: Create a new User
@@ -1785,10 +1783,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] CreateUser: Create User"
+      summary: "CreateUser: Create User"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/users/$runnable:
@@ -1882,10 +1880,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] DeleteUser: Delete User"
+      summary: "DeleteUser: Delete User"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     get:
       description: Get the specified User
@@ -1951,10 +1949,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GetUser: Get User"
+      summary: "GetUser: Get User"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     put:
       description: Updates the specified User
@@ -2046,10 +2044,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] UpdateUser: Update User"
+      summary: "UpdateUser: Update User"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/users/{id}/lifecycle/$activate:
@@ -2085,11 +2083,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] SendActivationEmail: Sends an activation email to the\
-        \ User"
+      summary: "SendActivationEmail: Sends an activation email to the User"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users/{id}/lifecycle/$expirepassword:
     post:
@@ -2128,11 +2125,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ExpirePassword: Reset the user's password to a temporary\
-        \ one"
+      summary: "ExpirePassword: Reset the user's password to a temporary one"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users/{id}/lifecycle/$resetfactors:
     post:
@@ -2167,10 +2163,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ResetFactors: Reset MFA factors"
+      summary: "ResetFactors: Reset MFA factors"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users/{id}/lifecycle/$resetpassword:
     post:
@@ -2205,10 +2201,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ResetPassword: Reset Password"
+      summary: "ResetPassword: Reset Password"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users/{id}/lifecycle/$unlock:
     post:
@@ -2243,10 +2239,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] UnlockUser: Unlock User"
+      summary: "UnlockUser: Unlock User"
       tags:
       - Users
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users/{id}/lifecycle/$unsuspend:
     post:

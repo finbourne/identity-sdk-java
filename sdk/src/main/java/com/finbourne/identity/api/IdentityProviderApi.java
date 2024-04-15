@@ -243,7 +243,7 @@ public class IdentityProviderApi {
     }
 
     /**
-     * [EARLY ACCESS] AddScim: Add SCIM
+     * AddScim: Add SCIM
      * Generates an API token to be used for SCIM
      * @return APIaddScimRequest
      * @http.response.details
@@ -388,7 +388,7 @@ public class IdentityProviderApi {
     }
 
     /**
-     * [EARLY ACCESS] RemoveScim: Remove SCIM
+     * RemoveScim: Remove SCIM
      * Deactivates any existing SCIM API token
      * @return APIremoveScimRequest
      * @http.response.details

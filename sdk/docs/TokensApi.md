@@ -4,14 +4,14 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**invalidateToken**](TokensApi.md#invalidateToken) | **DELETE** /api/tokens | [EARLY ACCESS] InvalidateToken: Invalidate current JWT token (sign out) |
+| [**invalidateToken**](TokensApi.md#invalidateToken) | **DELETE** /api/tokens | InvalidateToken: Invalidate current JWT token (sign out) |
 
 
 <a id="invalidateToken"></a>
 # **invalidateToken**
 > invalidateToken().execute();
 
-[EARLY ACCESS] InvalidateToken: Invalidate current JWT token (sign out)
+InvalidateToken: Invalidate current JWT token (sign out)
 
 Log the current user out of all Finbourne platforms by invalidating the current token
 

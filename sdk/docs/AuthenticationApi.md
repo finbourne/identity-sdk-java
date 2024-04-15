@@ -6,10 +6,10 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 |------------- | ------------- | -------------|
 | [**getAuthenticationInformation**](AuthenticationApi.md#getAuthenticationInformation) | **GET** /api/authentication/information | GetAuthenticationInformation: Gets AuthenticationInformation |
 | [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type |
-| [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | [EARLY ACCESS] GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
-| [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | [EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
-| [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | [EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access to your account |
-| [**invalidateSupportAccess**](AuthenticationApi.md#invalidateSupportAccess) | **DELETE** /api/authentication/support | [EARLY ACCESS] InvalidateSupportAccess: Revoke any FINBOURNE support access to your account |
+| [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
+| [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
+| [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | GrantSupportAccess: Grants FINBOURNE support access to your account |
+| [**invalidateSupportAccess**](AuthenticationApi.md#invalidateSupportAccess) | **DELETE** /api/authentication/support | InvalidateSupportAccess: Revoke any FINBOURNE support access to your account |
 | [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type |
 
 
@@ -152,7 +152,7 @@ public class Example {
 # **getSupportAccessHistory**
 > List&lt;SupportAccessResponse&gt; getSupportAccessHistory().start(start).end(end).execute();
 
-[EARLY ACCESS] GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination
+GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination
 
 The active and inactive support requests will be returned, inactive support requests will have information pertaining to their termination  including obfuscated userIds of those who created and terminated the request
 
@@ -226,7 +226,7 @@ public class Example {
 # **getSupportRoles**
 > SupportRolesResponse getSupportRoles().execute();
 
-[EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation
+GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation
 
 Get mapping of support roles, the internal representation to a human friendly representation
 
@@ -291,7 +291,7 @@ This endpoint does not need any parameter.
 # **grantSupportAccess**
 > SupportAccessResponse grantSupportAccess(supportAccessRequest).execute();
 
-[EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access to your account
+GrantSupportAccess: Grants FINBOURNE support access to your account
 
 Granting support access will allow FINBOURNE employees full access to your data with the express intent to investigate support issues  You can revoke this (and all) access at any time using the InvalidateSupportAccess endpoint.
 
@@ -361,7 +361,7 @@ public class Example {
 # **invalidateSupportAccess**
 > List&lt;SupportAccessResponse&gt; invalidateSupportAccess().execute();
 
-[EARLY ACCESS] InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
+InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
 
 This will result in a loss of access to your data for all FINBOURNE support agents
 

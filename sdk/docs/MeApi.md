@@ -4,7 +4,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getUserInfo**](MeApi.md#getUserInfo) | **GET** /api/me | [EARLY ACCESS] GetUserInfo: Get User Info |
+| [**getUserInfo**](MeApi.md#getUserInfo) | **GET** /api/me | GetUserInfo: Get User Info |
 | [**setPassword**](MeApi.md#setPassword) | **PUT** /api/me/password | SetPassword: Set password of current user |
 
 
@@ -12,7 +12,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 # **getUserInfo**
 > CurrentUserResponse getUserInfo().execute();
 
-[EARLY ACCESS] GetUserInfo: Get User Info
+GetUserInfo: Get User Info
 
 Get the requesting user&#39;s basic info
 

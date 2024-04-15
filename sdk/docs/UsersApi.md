@@ -4,26 +4,26 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createUser**](UsersApi.md#createUser) | **POST** /api/users | [EARLY ACCESS] CreateUser: Create User |
-| [**deleteUser**](UsersApi.md#deleteUser) | **DELETE** /api/users/{id} | [EARLY ACCESS] DeleteUser: Delete User |
-| [**expirePassword**](UsersApi.md#expirePassword) | **POST** /api/users/{id}/lifecycle/$expirepassword | [EARLY ACCESS] ExpirePassword: Reset the user&#39;s password to a temporary one |
-| [**findUsersById**](UsersApi.md#findUsersById) | **GET** /api/directory | [EARLY ACCESS] FindUsersById: Find users by id endpoint |
-| [**getUser**](UsersApi.md#getUser) | **GET** /api/users/{id} | [EARLY ACCESS] GetUser: Get User |
+| [**createUser**](UsersApi.md#createUser) | **POST** /api/users | CreateUser: Create User |
+| [**deleteUser**](UsersApi.md#deleteUser) | **DELETE** /api/users/{id} | DeleteUser: Delete User |
+| [**expirePassword**](UsersApi.md#expirePassword) | **POST** /api/users/{id}/lifecycle/$expirepassword | ExpirePassword: Reset the user&#39;s password to a temporary one |
+| [**findUsersById**](UsersApi.md#findUsersById) | **GET** /api/directory | FindUsersById: Find users by id endpoint |
+| [**getUser**](UsersApi.md#getUser) | **GET** /api/users/{id} | GetUser: Get User |
 | [**listRunnableUsers**](UsersApi.md#listRunnableUsers) | **GET** /api/users/$runnable | [EARLY ACCESS] ListRunnableUsers: List Runable Users |
-| [**listUsers**](UsersApi.md#listUsers) | **GET** /api/users | [EARLY ACCESS] ListUsers: List Users |
-| [**resetFactors**](UsersApi.md#resetFactors) | **POST** /api/users/{id}/lifecycle/$resetfactors | [EARLY ACCESS] ResetFactors: Reset MFA factors |
-| [**resetPassword**](UsersApi.md#resetPassword) | **POST** /api/users/{id}/lifecycle/$resetpassword | [EARLY ACCESS] ResetPassword: Reset Password |
-| [**sendActivationEmail**](UsersApi.md#sendActivationEmail) | **POST** /api/users/{id}/lifecycle/$activate | [EARLY ACCESS] SendActivationEmail: Sends an activation email to the User |
-| [**unlockUser**](UsersApi.md#unlockUser) | **POST** /api/users/{id}/lifecycle/$unlock | [EARLY ACCESS] UnlockUser: Unlock User |
+| [**listUsers**](UsersApi.md#listUsers) | **GET** /api/users | ListUsers: List Users |
+| [**resetFactors**](UsersApi.md#resetFactors) | **POST** /api/users/{id}/lifecycle/$resetfactors | ResetFactors: Reset MFA factors |
+| [**resetPassword**](UsersApi.md#resetPassword) | **POST** /api/users/{id}/lifecycle/$resetpassword | ResetPassword: Reset Password |
+| [**sendActivationEmail**](UsersApi.md#sendActivationEmail) | **POST** /api/users/{id}/lifecycle/$activate | SendActivationEmail: Sends an activation email to the User |
+| [**unlockUser**](UsersApi.md#unlockUser) | **POST** /api/users/{id}/lifecycle/$unlock | UnlockUser: Unlock User |
 | [**unsuspendUser**](UsersApi.md#unsuspendUser) | **POST** /api/users/{id}/lifecycle/$unsuspend | [EXPERIMENTAL] UnsuspendUser: Unsuspend user |
-| [**updateUser**](UsersApi.md#updateUser) | **PUT** /api/users/{id} | [EARLY ACCESS] UpdateUser: Update User |
+| [**updateUser**](UsersApi.md#updateUser) | **PUT** /api/users/{id} | UpdateUser: Update User |
 
 
 <a id="createUser"></a>
 # **createUser**
 > UserResponse createUser(createUserRequest).waitForReindex(waitForReindex).execute();
 
-[EARLY ACCESS] CreateUser: Create User
+CreateUser: Create User
 
 Create a new User
 
@@ -96,7 +96,7 @@ public class Example {
 # **deleteUser**
 > deleteUser(id).purge(purge).execute();
 
-[EARLY ACCESS] DeleteUser: Delete User
+DeleteUser: Delete User
 
 By default the user will be de-provisioned and inactive, however their record will remain in the identity  provider for audit purposes. If this is not desirable and removal of all trace of the user is required,  the purge parameter can be specified to indicate the details should be purged completely.
 
@@ -168,7 +168,7 @@ null (empty response body)
 # **expirePassword**
 > TemporaryPassword expirePassword(id).execute();
 
-[EARLY ACCESS] ExpirePassword: Reset the user&#39;s password to a temporary one
+ExpirePassword: Reset the user&#39;s password to a temporary one
 
 Resets the user&#39;s password to a temporary one which is then expired
 
@@ -238,7 +238,7 @@ public class Example {
 # **findUsersById**
 > ListUsersResponse findUsersById(id).execute();
 
-[EARLY ACCESS] FindUsersById: Find users by id endpoint
+FindUsersById: Find users by id endpoint
 
 Finds a maximum of 50 users by ID
 
@@ -308,7 +308,7 @@ public class Example {
 # **getUser**
 > UserResponse getUser(id).includeRoles(includeRoles).execute();
 
-[EARLY ACCESS] GetUser: Get User
+GetUser: Get User
 
 Get the specified User
 
@@ -446,7 +446,7 @@ This endpoint does not need any parameter.
 # **listUsers**
 > List&lt;UserResponse&gt; listUsers().includeRoles(includeRoles).includeDeactivated(includeDeactivated).execute();
 
-[EARLY ACCESS] ListUsers: List Users
+ListUsers: List Users
 
 List the available Users
 
@@ -520,7 +520,7 @@ public class Example {
 # **resetFactors**
 > resetFactors(id).execute();
 
-[EARLY ACCESS] ResetFactors: Reset MFA factors
+ResetFactors: Reset MFA factors
 
 Resets the MFA factors of the specified User
 
@@ -589,7 +589,7 @@ null (empty response body)
 # **resetPassword**
 > resetPassword(id).execute();
 
-[EARLY ACCESS] ResetPassword: Reset Password
+ResetPassword: Reset Password
 
 Resets the password of the specified User
 
@@ -658,7 +658,7 @@ null (empty response body)
 # **sendActivationEmail**
 > sendActivationEmail(id).execute();
 
-[EARLY ACCESS] SendActivationEmail: Sends an activation email to the User
+SendActivationEmail: Sends an activation email to the User
 
 Sends an activation email to the specified User
 
@@ -727,7 +727,7 @@ null (empty response body)
 # **unlockUser**
 > unlockUser(id).execute();
 
-[EARLY ACCESS] UnlockUser: Unlock User
+UnlockUser: Unlock User
 
 Unlocks the specified User
 
@@ -865,7 +865,7 @@ null (empty response body)
 # **updateUser**
 > UserResponse updateUser(id, updateUserRequest).execute();
 
-[EARLY ACCESS] UpdateUser: Update User
+UpdateUser: Update User
 
 Updates the specified User
 

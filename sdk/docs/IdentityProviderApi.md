@@ -4,15 +4,15 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**addScim**](IdentityProviderApi.md#addScim) | **PUT** /api/identityprovider/scim | [EARLY ACCESS] AddScim: Add SCIM |
-| [**removeScim**](IdentityProviderApi.md#removeScim) | **DELETE** /api/identityprovider/scim | [EARLY ACCESS] RemoveScim: Remove SCIM |
+| [**addScim**](IdentityProviderApi.md#addScim) | **PUT** /api/identityprovider/scim | AddScim: Add SCIM |
+| [**removeScim**](IdentityProviderApi.md#removeScim) | **DELETE** /api/identityprovider/scim | RemoveScim: Remove SCIM |
 
 
 <a id="addScim"></a>
 # **addScim**
 > AddScimResponse addScim().apiTokenAction(apiTokenAction).oldApiTokenDeactivation(oldApiTokenDeactivation).execute();
 
-[EARLY ACCESS] AddScim: Add SCIM
+AddScim: Add SCIM
 
 Generates an API token to be used for SCIM
 
@@ -86,7 +86,7 @@ public class Example {
 # **removeScim**
 > removeScim().execute();
 
-[EARLY ACCESS] RemoveScim: Remove SCIM
+RemoveScim: Remove SCIM
 
 Deactivates any existing SCIM API token
 

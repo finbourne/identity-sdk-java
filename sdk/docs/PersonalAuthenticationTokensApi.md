@@ -4,16 +4,16 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createApiKey**](PersonalAuthenticationTokensApi.md#createApiKey) | **POST** /api/keys | [EARLY ACCESS] CreateApiKey: Create a Personal Access Token |
-| [**deleteApiKey**](PersonalAuthenticationTokensApi.md#deleteApiKey) | **DELETE** /api/keys/{id} | [EARLY ACCESS] DeleteApiKey: Invalidate a Personal Access Token |
-| [**listOwnApiKeys**](PersonalAuthenticationTokensApi.md#listOwnApiKeys) | **GET** /api/keys | [EARLY ACCESS] ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens. |
+| [**createApiKey**](PersonalAuthenticationTokensApi.md#createApiKey) | **POST** /api/keys | CreateApiKey: Create a Personal Access Token |
+| [**deleteApiKey**](PersonalAuthenticationTokensApi.md#deleteApiKey) | **DELETE** /api/keys/{id} | DeleteApiKey: Invalidate a Personal Access Token |
+| [**listOwnApiKeys**](PersonalAuthenticationTokensApi.md#listOwnApiKeys) | **GET** /api/keys | ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens. |
 
 
 <a id="createApiKey"></a>
 # **createApiKey**
 > CreatedApiKey createApiKey(createApiKey).execute();
 
-[EARLY ACCESS] CreateApiKey: Create a Personal Access Token
+CreateApiKey: Create a Personal Access Token
 
 Generates a Personal Access Token and returns the new key and its associated metadata.
 
@@ -83,7 +83,7 @@ public class Example {
 # **deleteApiKey**
 > ApiKey deleteApiKey(id).execute();
 
-[EARLY ACCESS] DeleteApiKey: Invalidate a Personal Access Token
+DeleteApiKey: Invalidate a Personal Access Token
 
 Immediately invalidates the specified Personal Access Token
 
@@ -153,7 +153,7 @@ public class Example {
 # **listOwnApiKeys**
 > List&lt;ApiKey&gt; listOwnApiKeys().execute();
 
-[EARLY ACCESS] ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens.
+ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens.
 
 Gets the meta data for all of the user&#39;s Personal Access Tokens that have not been deleted. They may be  invalid due to the deactivation date having passed.
 

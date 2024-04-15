@@ -556,7 +556,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EARLY ACCESS] GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination
+     * GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination
      * The active and inactive support requests will be returned, inactive support requests will have information pertaining to their termination  including obfuscated userIds of those who created and terminated the request
      * @return APIgetSupportAccessHistoryRequest
      * @http.response.details
@@ -705,7 +705,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EARLY ACCESS] GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation
+     * GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation
      * Get mapping of support roles, the internal representation to a human friendly representation
      * @return APIgetSupportRolesRequest
      * @http.response.details
@@ -868,7 +868,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EARLY ACCESS] GrantSupportAccess: Grants FINBOURNE support access to your account
+     * GrantSupportAccess: Grants FINBOURNE support access to your account
      * Granting support access will allow FINBOURNE employees full access to your data with the express intent to investigate support issues  You can revoke this (and all) access at any time using the InvalidateSupportAccess endpoint.
      * @param supportAccessRequest Request detailing the duration and reasons for supplying support access (required)
      * @return APIgrantSupportAccessRequest
@@ -1018,7 +1018,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EARLY ACCESS] InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
+     * InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
      * This will result in a loss of access to your data for all FINBOURNE support agents
      * @return APIinvalidateSupportAccessRequest
      * @http.response.details

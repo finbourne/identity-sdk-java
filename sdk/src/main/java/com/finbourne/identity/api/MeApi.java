@@ -208,7 +208,7 @@ public class MeApi {
     }
 
     /**
-     * [EARLY ACCESS] GetUserInfo: Get User Info
+     * GetUserInfo: Get User Info
      * Get the requesting user&#39;s basic info
      * @return APIgetUserInfoRequest
      * @http.response.details

@@ -229,7 +229,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] AddUserToRole: Add User to Role
+     * AddUserToRole: Add User to Role
      * Adds the User to the specified Role
      * @param id The unique identifier for the Role (required)
      * @param userId The unique identifier for the User (required)
@@ -400,7 +400,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] CreateRole: Create Role
+     * CreateRole: Create Role
      * Creates a new Role
      * @param createRoleRequest Details of the role to be created (required)
      * @return APIcreateRoleRequest
@@ -559,7 +559,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] DeleteRole: Delete Role
+     * DeleteRole: Delete Role
      * Delete the specified role
      * @param id The unique identifier for the role (required)
      * @return APIdeleteRoleRequest
@@ -725,7 +725,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] GetRole: Get Role
+     * GetRole: Get Role
      * Get the specified role
      * @param id The unique identifier for the role (required)
      * @return APIgetRoleRequest
@@ -876,7 +876,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] ListRoles: List Roles
+     * ListRoles: List Roles
      * List the available Roles
      * @return APIlistRolesRequest
      * @http.response.details
@@ -1036,7 +1036,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] ListUsersInRole: Get the users in the specified role.
+     * ListUsersInRole: Get the users in the specified role.
      * List all Users in the specified Role
      * @param id The unique identifier for the Role (required)
      * @return APIlistUsersInRoleRequest
@@ -1206,7 +1206,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] RemoveUserFromRole: Remove User from Role
+     * RemoveUserFromRole: Remove User from Role
      * Removes the User from the specified Role
      * @param id The unique identifier for the Role (required)
      * @param userId The unique identifier for the User (required)
@@ -1389,7 +1389,7 @@ public class RolesApi {
     }
 
     /**
-     * [EARLY ACCESS] UpdateRole: Update Role
+     * UpdateRole: Update Role
      * Update the specified Role
      * @param id The unique identifier for the role to be updated (required)
      * @return APIupdateRoleRequest

@@ -4,21 +4,21 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**addUserToRole**](RolesApi.md#addUserToRole) | **PUT** /api/roles/{id}/users/{userId} | [EARLY ACCESS] AddUserToRole: Add User to Role |
-| [**createRole**](RolesApi.md#createRole) | **POST** /api/roles | [EARLY ACCESS] CreateRole: Create Role |
-| [**deleteRole**](RolesApi.md#deleteRole) | **DELETE** /api/roles/{id} | [EARLY ACCESS] DeleteRole: Delete Role |
-| [**getRole**](RolesApi.md#getRole) | **GET** /api/roles/{id} | [EARLY ACCESS] GetRole: Get Role |
-| [**listRoles**](RolesApi.md#listRoles) | **GET** /api/roles | [EARLY ACCESS] ListRoles: List Roles |
-| [**listUsersInRole**](RolesApi.md#listUsersInRole) | **GET** /api/roles/{id}/users | [EARLY ACCESS] ListUsersInRole: Get the users in the specified role. |
-| [**removeUserFromRole**](RolesApi.md#removeUserFromRole) | **DELETE** /api/roles/{id}/users/{userId} | [EARLY ACCESS] RemoveUserFromRole: Remove User from Role |
-| [**updateRole**](RolesApi.md#updateRole) | **PUT** /api/roles/{id} | [EARLY ACCESS] UpdateRole: Update Role |
+| [**addUserToRole**](RolesApi.md#addUserToRole) | **PUT** /api/roles/{id}/users/{userId} | AddUserToRole: Add User to Role |
+| [**createRole**](RolesApi.md#createRole) | **POST** /api/roles | CreateRole: Create Role |
+| [**deleteRole**](RolesApi.md#deleteRole) | **DELETE** /api/roles/{id} | DeleteRole: Delete Role |
+| [**getRole**](RolesApi.md#getRole) | **GET** /api/roles/{id} | GetRole: Get Role |
+| [**listRoles**](RolesApi.md#listRoles) | **GET** /api/roles | ListRoles: List Roles |
+| [**listUsersInRole**](RolesApi.md#listUsersInRole) | **GET** /api/roles/{id}/users | ListUsersInRole: Get the users in the specified role. |
+| [**removeUserFromRole**](RolesApi.md#removeUserFromRole) | **DELETE** /api/roles/{id}/users/{userId} | RemoveUserFromRole: Remove User from Role |
+| [**updateRole**](RolesApi.md#updateRole) | **PUT** /api/roles/{id} | UpdateRole: Update Role |
 
 
 <a id="addUserToRole"></a>
 # **addUserToRole**
 > addUserToRole(id, userId).execute();
 
-[EARLY ACCESS] AddUserToRole: Add User to Role
+AddUserToRole: Add User to Role
 
 Adds the User to the specified Role
 
@@ -90,7 +90,7 @@ null (empty response body)
 # **createRole**
 > RoleResponse createRole(createRoleRequest).execute();
 
-[EARLY ACCESS] CreateRole: Create Role
+CreateRole: Create Role
 
 Creates a new Role
 
@@ -161,7 +161,7 @@ public class Example {
 # **deleteRole**
 > deleteRole(id).execute();
 
-[EARLY ACCESS] DeleteRole: Delete Role
+DeleteRole: Delete Role
 
 Delete the specified role
 
@@ -230,7 +230,7 @@ null (empty response body)
 # **getRole**
 > RoleResponse getRole(id).execute();
 
-[EARLY ACCESS] GetRole: Get Role
+GetRole: Get Role
 
 Get the specified role
 
@@ -301,7 +301,7 @@ public class Example {
 # **listRoles**
 > List&lt;RoleResponse&gt; listRoles().execute();
 
-[EARLY ACCESS] ListRoles: List Roles
+ListRoles: List Roles
 
 List the available Roles
 
@@ -366,7 +366,7 @@ This endpoint does not need any parameter.
 # **listUsersInRole**
 > List&lt;UserResponse&gt; listUsersInRole(id).execute();
 
-[EARLY ACCESS] ListUsersInRole: Get the users in the specified role.
+ListUsersInRole: Get the users in the specified role.
 
 List all Users in the specified Role
 
@@ -436,7 +436,7 @@ public class Example {
 # **removeUserFromRole**
 > removeUserFromRole(id, userId).execute();
 
-[EARLY ACCESS] RemoveUserFromRole: Remove User from Role
+RemoveUserFromRole: Remove User from Role
 
 Removes the User from the specified Role
 
@@ -508,7 +508,7 @@ null (empty response body)
 # **updateRole**
 > RoleResponse updateRole(id).updateRoleRequest(updateRoleRequest).execute();
 
-[EARLY ACCESS] UpdateRole: Update Role
+UpdateRole: Update Role
 
 Update the specified Role
 
