@@ -13,64 +13,72 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type |
 
 
-<a id="getAuthenticationInformation"></a>
-# **getAuthenticationInformation**
-> AuthenticationInformation getAuthenticationInformation().execute();
+
+## getAuthenticationInformation
+
+> AuthenticationInformation getAuthenticationInformation()
 
 GetAuthenticationInformation: Gets AuthenticationInformation
 
 Get the AuthenticationInformation associated with the current domain. This includes all the  necessary information to login to this domain.
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    try {
-      AuthenticationInformation result = apiInstance.getAuthenticationInformation()
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#getAuthenticationInformation");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        try {
+            AuthenticationInformation result = apiInstance.getAuthenticationInformation().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#getAuthenticationInformation");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
 [**AuthenticationInformation**](AuthenticationInformation.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -78,51 +86,64 @@ This endpoint does not need any parameter.
 | **200** | Get authentication information |  -  |
 | **0** | Error response |  -  |
 
-<a id="getPasswordPolicy"></a>
-# **getPasswordPolicy**
-> PasswordPolicyResponse getPasswordPolicy(userType).execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getPasswordPolicy
+
+> PasswordPolicyResponse getPasswordPolicy(userType)
 
 [EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type
 
 Get the password policy for a given user type
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    String userType = "userType_example"; // String | The type of user (should only be personal or service)
-    try {
-      PasswordPolicyResponse result = apiInstance.getPasswordPolicy(userType)
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#getPasswordPolicy");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        String userType = "userType_example"; // String | The type of user (should only be personal or service)
+        try {
+            PasswordPolicyResponse result = apiInstance.getPasswordPolicy(userType).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#getPasswordPolicy");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -132,14 +153,11 @@ public class Example {
 
 [**PasswordPolicyResponse**](PasswordPolicyResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -148,54 +166,65 @@ public class Example {
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
-<a id="getSupportAccessHistory"></a>
-# **getSupportAccessHistory**
-> List&lt;SupportAccessResponse&gt; getSupportAccessHistory().start(start).end(end).execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getSupportAccessHistory
+
+> List&lt;SupportAccessResponse&gt; getSupportAccessHistory(start, end)
 
 GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination
 
 The active and inactive support requests will be returned, inactive support requests will have information pertaining to their termination  including obfuscated userIds of those who created and terminated the request
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | The start expiry date to query support access requests from
-    OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | The end expiry date to query support access requests to
-    try {
-      List<SupportAccessResponse> result = apiInstance.getSupportAccessHistory()
-            .start(start)
-            .end(end)
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#getSupportAccessHistory");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | The start expiry date to query support access requests from
+        OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | The end expiry date to query support access requests to
+        try {
+            List<SupportAccessResponse> result = apiInstance.getSupportAccessHistory(start, end).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#getSupportAccessHistory");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -206,14 +235,11 @@ public class Example {
 
 [**List&lt;SupportAccessResponse&gt;**](SupportAccessResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -222,64 +248,74 @@ public class Example {
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
-<a id="getSupportRoles"></a>
-# **getSupportRoles**
-> SupportRolesResponse getSupportRoles().execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getSupportRoles
+
+> SupportRolesResponse getSupportRoles()
 
 GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation
 
 Get mapping of support roles, the internal representation to a human friendly representation
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    try {
-      SupportRolesResponse result = apiInstance.getSupportRoles()
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#getSupportRoles");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        try {
+            SupportRolesResponse result = apiInstance.getSupportRoles().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#getSupportRoles");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
 [**SupportRolesResponse**](SupportRolesResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -287,51 +323,64 @@ This endpoint does not need any parameter.
 | **200** | Get support roles |  -  |
 | **0** | Error response |  -  |
 
-<a id="grantSupportAccess"></a>
-# **grantSupportAccess**
-> SupportAccessResponse grantSupportAccess(supportAccessRequest).execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## grantSupportAccess
+
+> SupportAccessResponse grantSupportAccess(supportAccessRequest)
 
 GrantSupportAccess: Grants FINBOURNE support access to your account
 
 Granting support access will allow FINBOURNE employees full access to your data with the express intent to investigate support issues  You can revoke this (and all) access at any time using the InvalidateSupportAccess endpoint.
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    SupportAccessRequest supportAccessRequest = new SupportAccessRequest(); // SupportAccessRequest | Request detailing the duration and reasons for supplying support access
-    try {
-      SupportAccessResponse result = apiInstance.grantSupportAccess(supportAccessRequest)
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#grantSupportAccess");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        SupportAccessRequest supportAccessRequest = new SupportAccessRequest(); // SupportAccessRequest | Request detailing the duration and reasons for supplying support access
+        try {
+            SupportAccessResponse result = apiInstance.grantSupportAccess(supportAccessRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#grantSupportAccess");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -341,14 +390,11 @@ public class Example {
 
 [**SupportAccessResponse**](SupportAccessResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: application/json
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -357,64 +403,74 @@ public class Example {
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
-<a id="invalidateSupportAccess"></a>
-# **invalidateSupportAccess**
-> List&lt;SupportAccessResponse&gt; invalidateSupportAccess().execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## invalidateSupportAccess
+
+> List&lt;SupportAccessResponse&gt; invalidateSupportAccess()
 
 InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
 
 This will result in a loss of access to your data for all FINBOURNE support agents
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    try {
-      List<SupportAccessResponse> result = apiInstance.invalidateSupportAccess()
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#invalidateSupportAccess");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        try {
+            List<SupportAccessResponse> result = apiInstance.invalidateSupportAccess().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#invalidateSupportAccess");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
 [**List&lt;SupportAccessResponse&gt;**](SupportAccessResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -422,53 +478,65 @@ This endpoint does not need any parameter.
 | **200** | Invalidate all currently active support requests |  -  |
 | **0** | Error response |  -  |
 
-<a id="updatePasswordPolicy"></a>
-# **updatePasswordPolicy**
-> PasswordPolicyResponse updatePasswordPolicy(userType).updatePasswordPolicyRequest(updatePasswordPolicyRequest).execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## updatePasswordPolicy
+
+> PasswordPolicyResponse updatePasswordPolicy(userType, updatePasswordPolicyRequest)
 
 [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type
 
 Update the password policy for a given user type
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    AuthenticationApi apiInstance = new AuthenticationApi(defaultClient);
-    String userType = "userType_example"; // String | The type of user (should only be personal or service)
-    UpdatePasswordPolicyRequest updatePasswordPolicyRequest = new UpdatePasswordPolicyRequest(); // UpdatePasswordPolicyRequest | The password policy for the given user type
-    try {
-      PasswordPolicyResponse result = apiInstance.updatePasswordPolicy(userType)
-            .updatePasswordPolicyRequest(updatePasswordPolicyRequest)
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling AuthenticationApi#updatePasswordPolicy");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        String userType = "userType_example"; // String | The type of user (should only be personal or service)
+        UpdatePasswordPolicyRequest updatePasswordPolicyRequest = new UpdatePasswordPolicyRequest(); // UpdatePasswordPolicyRequest | The password policy for the given user type
+        try {
+            PasswordPolicyResponse result = apiInstance.updatePasswordPolicy(userType, updatePasswordPolicyRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#updatePasswordPolicy");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -479,14 +547,11 @@ public class Example {
 
 [**PasswordPolicyResponse**](PasswordPolicyResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: application/json
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -494,4 +559,6 @@ public class Example {
 | **200** | Update password policy |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

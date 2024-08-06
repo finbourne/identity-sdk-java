@@ -8,54 +8,63 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**removeScim**](IdentityProviderApi.md#removeScim) | **DELETE** /api/identityprovider/scim | RemoveScim: Remove SCIM |
 
 
-<a id="addScim"></a>
-# **addScim**
-> AddScimResponse addScim().apiTokenAction(apiTokenAction).oldApiTokenDeactivation(oldApiTokenDeactivation).execute();
+
+## addScim
+
+> AddScimResponse addScim(apiTokenAction, oldApiTokenDeactivation)
 
 AddScim: Add SCIM
 
 Generates an API token to be used for SCIM
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.IdentityProviderApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    IdentityProviderApi apiInstance = new IdentityProviderApi(defaultClient);
-    String apiTokenAction = "apiTokenAction_example"; // String | The action to take. For the API token. Defaults to \"ensure\"
-    OffsetDateTime oldApiTokenDeactivation = OffsetDateTime.now(); // OffsetDateTime | Optional deactivation date for the old API token. Only used if apiTokenAction is \"regenerate\"
-    try {
-      AddScimResponse result = apiInstance.addScim()
-            .apiTokenAction(apiTokenAction)
-            .oldApiTokenDeactivation(oldApiTokenDeactivation)
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling IdentityProviderApi#addScim");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class IdentityProviderApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        IdentityProviderApi apiInstance = ApiFactoryBuilder.build(fileName).build(IdentityProviderApi.class);
+        String apiTokenAction = "apiTokenAction_example"; // String | The action to take. For the API token. Defaults to \"ensure\"
+        OffsetDateTime oldApiTokenDeactivation = OffsetDateTime.now(); // OffsetDateTime | Optional deactivation date for the old API token. Only used if apiTokenAction is \"regenerate\"
+        try {
+            AddScimResponse result = apiInstance.addScim(apiTokenAction, oldApiTokenDeactivation).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling IdentityProviderApi#addScim");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -66,14 +75,11 @@ public class Example {
 
 [**AddScimResponse**](AddScimResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json, text/json
+- **Content-Type**: Not defined
+- **Accept**: text/plain, application/json, text/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -82,67 +88,79 @@ public class Example {
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 
-<a id="removeScim"></a>
-# **removeScim**
-> removeScim().execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## removeScim
+
+> removeScim()
 
 RemoveScim: Remove SCIM
 
 Deactivates any existing SCIM API token
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.IdentityProviderApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    IdentityProviderApi apiInstance = new IdentityProviderApi(defaultClient);
-    try {
-      apiInstance.removeScim()
-            .execute();
-    } catch (ApiException e) {
-      System.err.println("Exception when calling IdentityProviderApi#removeScim");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class IdentityProviderApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        IdentityProviderApi apiInstance = ApiFactoryBuilder.build(fileName).build(IdentityProviderApi.class);
+        try {
+            apiInstance.removeScim().execute();
+        } catch (ApiException e) {
+            System.err.println("Exception when calling IdentityProviderApi#removeScim");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
 null (empty response body)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **204** | No Content |  -  |
 | **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 

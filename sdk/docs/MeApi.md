@@ -8,64 +8,72 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**setPassword**](MeApi.md#setPassword) | **PUT** /api/me/password | SetPassword: Set password of current user |
 
 
-<a id="getUserInfo"></a>
-# **getUserInfo**
-> CurrentUserResponse getUserInfo().execute();
+
+## getUserInfo
+
+> CurrentUserResponse getUserInfo()
 
 GetUserInfo: Get User Info
 
 Get the requesting user&#39;s basic info
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.MeApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    MeApi apiInstance = new MeApi(defaultClient);
-    try {
-      CurrentUserResponse result = apiInstance.getUserInfo()
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling MeApi#getUserInfo");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class MeApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        MeApi apiInstance = ApiFactoryBuilder.build(fileName).build(MeApi.class);
+        try {
+            CurrentUserResponse result = apiInstance.getUserInfo().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MeApi#getUserInfo");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 This endpoint does not need any parameter.
 
 ### Return type
 
 [**CurrentUserResponse**](CurrentUserResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: Not defined
- - **Accept**: application/json
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -73,51 +81,64 @@ This endpoint does not need any parameter.
 | **200** | Get the specified user&#39;s info |  -  |
 | **0** | Error response |  -  |
 
-<a id="setPassword"></a>
-# **setPassword**
-> SetPasswordResponse setPassword(setPassword).execute();
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## setPassword
+
+> SetPasswordResponse setPassword(setPassword)
 
 SetPassword: Set password of current user
 
 Set the password of the current user to the specified value.     Note this is feature is only available to Service users authenticated using OpenID. For further information  relating to usage of this feature please consult the documentation.
 
 ### Example
+
 ```java
-// Import classes:
-import com.finbourne.identity.ApiClient;
-import com.finbourne.identity.ApiException;
-import com.finbourne.identity.Configuration;
-import com.finbourne.identity.auth.*;
-import com.finbourne.identity.models.*;
+import com.finbourne.identity.model.*;
 import com.finbourne.identity.api.MeApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
 
-public class Example {
-  public static void main(String[] args) {
-    ApiClient defaultClient = Configuration.getDefaultApiClient();
-    defaultClient.setBasePath("https://fbn-prd.lusid.com/identity");
-    
-    // Configure OAuth2 access token for authorization: oauth2
-    OAuth oauth2 = (OAuth) defaultClient.getAuthentication("oauth2");
-    oauth2.setAccessToken("YOUR ACCESS TOKEN");
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
-    MeApi apiInstance = new MeApi(defaultClient);
-    SetPassword setPassword = new SetPassword(); // SetPassword | The request containing the new password value
-    try {
-      SetPasswordResponse result = apiInstance.setPassword(setPassword)
-            .execute();
-      System.out.println(result);
-    } catch (ApiException e) {
-      System.err.println("Exception when calling MeApi#setPassword");
-      System.err.println("Status code: " + e.getCode());
-      System.err.println("Reason: " + e.getResponseBody());
-      System.err.println("Response headers: " + e.getResponseHeaders());
-      e.printStackTrace();
+public class MeApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        MeApi apiInstance = ApiFactoryBuilder.build(fileName).build(MeApi.class);
+        SetPassword setPassword = new SetPassword(); // SetPassword | The request containing the new password value
+        try {
+            SetPasswordResponse result = apiInstance.setPassword(setPassword).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling MeApi#setPassword");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
     }
-  }
 }
 ```
 
 ### Parameters
+
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
@@ -127,14 +148,11 @@ public class Example {
 
 [**SetPasswordResponse**](SetPasswordResponse.md)
 
-### Authorization
-
-[oauth2](../README.md#oauth2)
-
 ### HTTP request headers
 
- - **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
- - **Accept**: application/json
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
 
 ### HTTP response details
 | Status code | Description | Response headers |
@@ -142,4 +160,6 @@ public class Example {
 | **200** | Set the current user&#39;s password |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
 
