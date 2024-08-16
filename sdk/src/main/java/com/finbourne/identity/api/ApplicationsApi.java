@@ -564,7 +564,7 @@ public class ApplicationsApi {
     }
 
     /**
-     * [EARLY ACCESS] GetApplication: Get Application
+     * GetApplication: Get Application
      * get the specified application, and optionally the OIDC secret
      * @param id The unique identifier for the application (required)
      * @return APIgetApplicationRequest
@@ -715,7 +715,7 @@ public class ApplicationsApi {
     }
 
     /**
-     * [EARLY ACCESS] ListApplications: List Applications
+     * ListApplications: List Applications
      * List the available applications
      * @return APIlistApplicationsRequest
      * @http.response.details

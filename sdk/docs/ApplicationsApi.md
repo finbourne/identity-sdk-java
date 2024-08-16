@@ -6,8 +6,8 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 |------------- | ------------- | -------------|
 | [**createApplication**](ApplicationsApi.md#createApplication) | **POST** /api/applications | [EARLY ACCESS] CreateApplication: Create Application |
 | [**deleteApplication**](ApplicationsApi.md#deleteApplication) | **DELETE** /api/applications/{id} | [EARLY ACCESS] DeleteApplication: Delete Application |
-| [**getApplication**](ApplicationsApi.md#getApplication) | **GET** /api/applications/{id} | [EARLY ACCESS] GetApplication: Get Application |
-| [**listApplications**](ApplicationsApi.md#listApplications) | **GET** /api/applications | [EARLY ACCESS] ListApplications: List Applications |
+| [**getApplication**](ApplicationsApi.md#getApplication) | **GET** /api/applications/{id} | GetApplication: Get Application |
+| [**listApplications**](ApplicationsApi.md#listApplications) | **GET** /api/applications | ListApplications: List Applications |
 | [**rotateApplicationSecrets**](ApplicationsApi.md#rotateApplicationSecrets) | **POST** /api/applications/{id}/lifecycle/$newsecret | [EARLY ACCESS] RotateApplicationSecrets: Rotate Application Secrets |
 
 
@@ -175,7 +175,7 @@ null (empty response body)
 
 > OAuthApplication getApplication(id, includeSecret)
 
-[EARLY ACCESS] GetApplication: Get Application
+GetApplication: Get Application
 
 get the specified application, and optionally the OIDC secret
 
@@ -258,7 +258,7 @@ public class ApplicationsApiExample {
 
 > List&lt;OAuthApplication&gt; listApplications()
 
-[EARLY ACCESS] ListApplications: List Applications
+ListApplications: List Applications
 
 List the available applications
 

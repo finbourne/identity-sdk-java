@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3000
+  version: 0.0.3002
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -62,10 +62,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] ListApplications: List Applications"
+      summary: "ListApplications: List Applications"
       tags:
       - Applications
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
     post:
       description: Create a new Application
@@ -228,10 +228,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[EARLY ACCESS] GetApplication: Get Application"
+      summary: "GetApplication: Get Application"
       tags:
       - Applications
-      x-fbn-apistatus: EarlyAccess
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/applications/{id}/lifecycle/$newsecret:
     post:
