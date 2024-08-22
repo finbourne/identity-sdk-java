@@ -52,8 +52,19 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // AuthenticationInformation result = apiInstance.getAuthenticationInformation().execute(opts);
+
             AuthenticationInformation result = apiInstance.getAuthenticationInformation().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -127,9 +138,20 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         String userType = "userType_example"; // String | The type of user (should only be personal or service)
         try {
+            // uncomment the below to set overrides at the request level
+            // PasswordPolicyResponse result = apiInstance.getPasswordPolicy(userType).execute(opts);
+
             PasswordPolicyResponse result = apiInstance.getPasswordPolicy(userType).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -207,10 +229,21 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         OffsetDateTime start = OffsetDateTime.now(); // OffsetDateTime | The start expiry date to query support access requests from
         OffsetDateTime end = OffsetDateTime.now(); // OffsetDateTime | The end expiry date to query support access requests to
         try {
+            // uncomment the below to set overrides at the request level
+            // List<SupportAccessResponse> result = apiInstance.getSupportAccessHistory(start, end).execute(opts);
+
             List<SupportAccessResponse> result = apiInstance.getSupportAccessHistory(start, end).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -289,8 +322,19 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // SupportRolesResponse result = apiInstance.getSupportRoles().execute(opts);
+
             SupportRolesResponse result = apiInstance.getSupportRoles().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -364,9 +408,20 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         SupportAccessRequest supportAccessRequest = new SupportAccessRequest(); // SupportAccessRequest | Request detailing the duration and reasons for supplying support access
         try {
+            // uncomment the below to set overrides at the request level
+            // SupportAccessResponse result = apiInstance.grantSupportAccess(supportAccessRequest).execute(opts);
+
             SupportAccessResponse result = apiInstance.grantSupportAccess(supportAccessRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -444,8 +499,19 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // List<SupportAccessResponse> result = apiInstance.invalidateSupportAccess().execute(opts);
+
             List<SupportAccessResponse> result = apiInstance.invalidateSupportAccess().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -519,10 +585,21 @@ public class AuthenticationApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
         AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
         String userType = "userType_example"; // String | The type of user (should only be personal or service)
         UpdatePasswordPolicyRequest updatePasswordPolicyRequest = new UpdatePasswordPolicyRequest(); // UpdatePasswordPolicyRequest | The password policy for the given user type
         try {
+            // uncomment the below to set overrides at the request level
+            // PasswordPolicyResponse result = apiInstance.updatePasswordPolicy(userType, updatePasswordPolicyRequest).execute(opts);
+
             PasswordPolicyResponse result = apiInstance.updatePasswordPolicy(userType, updatePasswordPolicyRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {

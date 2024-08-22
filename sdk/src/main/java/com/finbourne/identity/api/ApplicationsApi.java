@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -73,6 +74,10 @@ public class ApplicationsApi {
     }
 
     private okhttp3.Call createApplicationCall(CreateApplicationRequest createApplicationRequest, final ApiCallback _callback) throws ApiException {
+        return createApplicationCall(createApplicationRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call createApplicationCall(CreateApplicationRequest createApplicationRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -117,25 +122,39 @@ public class ApplicationsApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createApplicationValidateBeforeCall(CreateApplicationRequest createApplicationRequest, final ApiCallback _callback) throws ApiException {
-        return createApplicationCall(createApplicationRequest, _callback);
+    private okhttp3.Call createApplicationValidateBeforeCall(CreateApplicationRequest createApplicationRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return createApplicationCall(createApplicationRequest, _callback, opts);
 
     }
 
 
     private ApiResponse<OAuthApplication> createApplicationWithHttpInfo(CreateApplicationRequest createApplicationRequest) throws ApiException {
-        okhttp3.Call localVarCall = createApplicationValidateBeforeCall(createApplicationRequest, null);
+        okhttp3.Call localVarCall = createApplicationValidateBeforeCall(createApplicationRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<OAuthApplication> createApplicationWithHttpInfo(CreateApplicationRequest createApplicationRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = createApplicationValidateBeforeCall(createApplicationRequest, null, opts);
         Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call createApplicationAsync(CreateApplicationRequest createApplicationRequest, final ApiCallback<OAuthApplication> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createApplicationValidateBeforeCall(createApplicationRequest, _callback);
+        okhttp3.Call localVarCall = createApplicationValidateBeforeCall(createApplicationRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call createApplicationAsync(CreateApplicationRequest createApplicationRequest, final ApiCallback<OAuthApplication> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = createApplicationValidateBeforeCall(createApplicationRequest, _callback, opts);
         Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -192,6 +211,23 @@ public class ApplicationsApi {
         }
 
         /**
+         * Execute createApplication request. Use any specified configuration options to override any other configuration for this request only.
+         * @return OAuthApplication
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Create Application </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public OAuthApplication execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<OAuthApplication> localVarResp = createApplicationWithHttpInfo(createApplicationRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute createApplication request with HTTP info returned
          * @return ApiResponse&lt;OAuthApplication&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -205,6 +241,22 @@ public class ApplicationsApi {
          */
         public ApiResponse<OAuthApplication> executeWithHttpInfo() throws ApiException {
             return createApplicationWithHttpInfo(createApplicationRequest);
+        }
+
+        /**
+         * Execute createApplication request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;OAuthApplication&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Create Application </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OAuthApplication> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return createApplicationWithHttpInfo(createApplicationRequest, opts);
         }
 
         /**
@@ -222,6 +274,23 @@ public class ApplicationsApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<OAuthApplication> _callback) throws ApiException {
             return createApplicationAsync(createApplicationRequest, _callback);
+        }
+
+        /**
+         * Execute createApplication request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Create Application </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OAuthApplication> _callback, ConfigurationOptions opts) throws ApiException {
+            return createApplicationAsync(createApplicationRequest, _callback, opts);
         }
     }
 
@@ -241,6 +310,10 @@ public class ApplicationsApi {
         return new APIcreateApplicationRequest();
     }
     private okhttp3.Call deleteApplicationCall(String id, final ApiCallback _callback) throws ApiException {
+        return deleteApplicationCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call deleteApplicationCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -282,29 +355,41 @@ public class ApplicationsApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteApplicationValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteApplicationValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteApplication(Async)");
         }
 
-        return deleteApplicationCall(id, _callback);
+        return deleteApplicationCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> deleteApplicationWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = deleteApplicationValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = deleteApplicationValidateBeforeCall(id, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> deleteApplicationWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = deleteApplicationValidateBeforeCall(id, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call deleteApplicationAsync(String id, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = deleteApplicationValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = deleteApplicationValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call deleteApplicationAsync(String id, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteApplicationValidateBeforeCall(id, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -349,6 +434,21 @@ public class ApplicationsApi {
         }
 
         /**
+         * Execute deleteApplication request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            deleteApplicationWithHttpInfo(id, opts);
+        }
+
+        /**
          * Execute deleteApplication request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -362,6 +462,22 @@ public class ApplicationsApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return deleteApplicationWithHttpInfo(id);
+        }
+
+        /**
+         * Execute deleteApplication request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteApplicationWithHttpInfo(id, opts);
         }
 
         /**
@@ -379,6 +495,23 @@ public class ApplicationsApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return deleteApplicationAsync(id, _callback);
+        }
+
+        /**
+         * Execute deleteApplication request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return deleteApplicationAsync(id, _callback, opts);
         }
     }
 
@@ -399,6 +532,10 @@ public class ApplicationsApi {
         return new APIdeleteApplicationRequest(id);
     }
     private okhttp3.Call getApplicationCall(String id, Boolean includeSecret, final ApiCallback _callback) throws ApiException {
+        return getApplicationCall(id, includeSecret,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getApplicationCall(String id, Boolean includeSecret, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -444,30 +581,44 @@ public class ApplicationsApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getApplicationValidateBeforeCall(String id, Boolean includeSecret, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getApplicationValidateBeforeCall(String id, Boolean includeSecret, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getApplication(Async)");
         }
 
-        return getApplicationCall(id, includeSecret, _callback);
+        return getApplicationCall(id, includeSecret, _callback, opts);
 
     }
 
 
     private ApiResponse<OAuthApplication> getApplicationWithHttpInfo(String id, Boolean includeSecret) throws ApiException {
-        okhttp3.Call localVarCall = getApplicationValidateBeforeCall(id, includeSecret, null);
+        okhttp3.Call localVarCall = getApplicationValidateBeforeCall(id, includeSecret, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<OAuthApplication> getApplicationWithHttpInfo(String id, Boolean includeSecret, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getApplicationValidateBeforeCall(id, includeSecret, null, opts);
         Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getApplicationAsync(String id, Boolean includeSecret, final ApiCallback<OAuthApplication> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getApplicationValidateBeforeCall(id, includeSecret, _callback);
+        okhttp3.Call localVarCall = getApplicationValidateBeforeCall(id, includeSecret, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getApplicationAsync(String id, Boolean includeSecret, final ApiCallback<OAuthApplication> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getApplicationValidateBeforeCall(id, includeSecret, _callback, opts);
         Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -528,6 +679,24 @@ public class ApplicationsApi {
         }
 
         /**
+         * Execute getApplication request. Use any specified configuration options to override any other configuration for this request only.
+         * @return OAuthApplication
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified application </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public OAuthApplication execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<OAuthApplication> localVarResp = getApplicationWithHttpInfo(id, includeSecret, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getApplication request with HTTP info returned
          * @return ApiResponse&lt;OAuthApplication&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -542,6 +711,23 @@ public class ApplicationsApi {
          */
         public ApiResponse<OAuthApplication> executeWithHttpInfo() throws ApiException {
             return getApplicationWithHttpInfo(id, includeSecret);
+        }
+
+        /**
+         * Execute getApplication request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;OAuthApplication&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified application </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OAuthApplication> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getApplicationWithHttpInfo(id, includeSecret, opts);
         }
 
         /**
@@ -560,6 +746,24 @@ public class ApplicationsApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<OAuthApplication> _callback) throws ApiException {
             return getApplicationAsync(id, includeSecret, _callback);
+        }
+
+        /**
+         * Execute getApplication request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified application </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OAuthApplication> _callback, ConfigurationOptions opts) throws ApiException {
+            return getApplicationAsync(id, includeSecret, _callback, opts);
         }
     }
 
@@ -581,6 +785,10 @@ public class ApplicationsApi {
         return new APIgetApplicationRequest(id);
     }
     private okhttp3.Call listApplicationsCall(final ApiCallback _callback) throws ApiException {
+        return listApplicationsCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call listApplicationsCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -621,25 +829,39 @@ public class ApplicationsApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listApplicationsValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return listApplicationsCall(_callback);
+    private okhttp3.Call listApplicationsValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listApplicationsCall(_callback, opts);
 
     }
 
 
     private ApiResponse<List<OAuthApplication>> listApplicationsWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = listApplicationsValidateBeforeCall(null);
+        okhttp3.Call localVarCall = listApplicationsValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<OAuthApplication>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<List<OAuthApplication>> listApplicationsWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listApplicationsValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<List<OAuthApplication>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call listApplicationsAsync(final ApiCallback<List<OAuthApplication>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listApplicationsValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = listApplicationsValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<OAuthApplication>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call listApplicationsAsync(final ApiCallback<List<OAuthApplication>> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = listApplicationsValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<List<OAuthApplication>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -683,6 +905,22 @@ public class ApplicationsApi {
         }
 
         /**
+         * Execute listApplications request. Use any specified configuration options to override any other configuration for this request only.
+         * @return List&lt;OAuthApplication&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available applications </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<OAuthApplication> execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<List<OAuthApplication>> localVarResp = listApplicationsWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute listApplications request with HTTP info returned
          * @return ApiResponse&lt;List&lt;OAuthApplication&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -695,6 +933,21 @@ public class ApplicationsApi {
          */
         public ApiResponse<List<OAuthApplication>> executeWithHttpInfo() throws ApiException {
             return listApplicationsWithHttpInfo();
+        }
+
+        /**
+         * Execute listApplications request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;List&lt;OAuthApplication&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available applications </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<OAuthApplication>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listApplicationsWithHttpInfo(opts);
         }
 
         /**
@@ -711,6 +964,22 @@ public class ApplicationsApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<OAuthApplication>> _callback) throws ApiException {
             return listApplicationsAsync(_callback);
+        }
+
+        /**
+         * Execute listApplications request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available applications </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<OAuthApplication>> _callback, ConfigurationOptions opts) throws ApiException {
+            return listApplicationsAsync(_callback, opts);
         }
     }
 
@@ -729,6 +998,10 @@ public class ApplicationsApi {
         return new APIlistApplicationsRequest();
     }
     private okhttp3.Call rotateApplicationSecretsCall(String id, final ApiCallback _callback) throws ApiException {
+        return rotateApplicationSecretsCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call rotateApplicationSecretsCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -770,30 +1043,44 @@ public class ApplicationsApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call rotateApplicationSecretsValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call rotateApplicationSecretsValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling rotateApplicationSecrets(Async)");
         }
 
-        return rotateApplicationSecretsCall(id, _callback);
+        return rotateApplicationSecretsCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<OAuthApplication> rotateApplicationSecretsWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = rotateApplicationSecretsValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = rotateApplicationSecretsValidateBeforeCall(id, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<OAuthApplication> rotateApplicationSecretsWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = rotateApplicationSecretsValidateBeforeCall(id, null, opts);
         Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call rotateApplicationSecretsAsync(String id, final ApiCallback<OAuthApplication> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = rotateApplicationSecretsValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = rotateApplicationSecretsValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call rotateApplicationSecretsAsync(String id, final ApiCallback<OAuthApplication> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = rotateApplicationSecretsValidateBeforeCall(id, _callback, opts);
         Type localVarReturnType = new TypeToken<OAuthApplication>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -841,6 +1128,23 @@ public class ApplicationsApi {
         }
 
         /**
+         * Execute rotateApplicationSecrets request. Use any specified configuration options to override any other configuration for this request only.
+         * @return OAuthApplication
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Rotate Application Secrets </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public OAuthApplication execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<OAuthApplication> localVarResp = rotateApplicationSecretsWithHttpInfo(id, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute rotateApplicationSecrets request with HTTP info returned
          * @return ApiResponse&lt;OAuthApplication&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -854,6 +1158,22 @@ public class ApplicationsApi {
          */
         public ApiResponse<OAuthApplication> executeWithHttpInfo() throws ApiException {
             return rotateApplicationSecretsWithHttpInfo(id);
+        }
+
+        /**
+         * Execute rotateApplicationSecrets request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;OAuthApplication&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Rotate Application Secrets </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<OAuthApplication> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return rotateApplicationSecretsWithHttpInfo(id, opts);
         }
 
         /**
@@ -871,6 +1191,23 @@ public class ApplicationsApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<OAuthApplication> _callback) throws ApiException {
             return rotateApplicationSecretsAsync(id, _callback);
+        }
+
+        /**
+         * Execute rotateApplicationSecrets request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Rotate Application Secrets </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<OAuthApplication> _callback, ConfigurationOptions opts) throws ApiException {
+            return rotateApplicationSecretsAsync(id, _callback, opts);
         }
     }
 

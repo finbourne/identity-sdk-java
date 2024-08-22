@@ -15,6 +15,7 @@ Lightweight view of an user details
 |**firstName** | **String** | User&#39;s first name |  [optional] |
 |**lastName** | **String** | User&#39;s last name |  [optional] |
 |**type** | **String** | User&#39;s type (Personal, Service...) |  [optional] |
+|**alternativeUserIds** | **Map&lt;String, String&gt;** | User&#39;s alternative user IDs. Only returned for the current user |  [optional] |
 |**links** | [**List&lt;Link&gt;**](Link.md) |  |  [optional] |
 
 

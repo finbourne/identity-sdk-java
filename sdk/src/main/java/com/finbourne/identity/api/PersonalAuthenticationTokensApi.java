@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -74,6 +75,10 @@ public class PersonalAuthenticationTokensApi {
     }
 
     private okhttp3.Call createApiKeyCall(CreateApiKey createApiKey, final ApiCallback _callback) throws ApiException {
+        return createApiKeyCall(createApiKey,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call createApiKeyCall(CreateApiKey createApiKey, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -118,30 +123,44 @@ public class PersonalAuthenticationTokensApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createApiKeyValidateBeforeCall(CreateApiKey createApiKey, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createApiKeyValidateBeforeCall(CreateApiKey createApiKey, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'createApiKey' is set
         if (createApiKey == null) {
             throw new ApiException("Missing the required parameter 'createApiKey' when calling createApiKey(Async)");
         }
 
-        return createApiKeyCall(createApiKey, _callback);
+        return createApiKeyCall(createApiKey, _callback, opts);
 
     }
 
 
     private ApiResponse<CreatedApiKey> createApiKeyWithHttpInfo(CreateApiKey createApiKey) throws ApiException {
-        okhttp3.Call localVarCall = createApiKeyValidateBeforeCall(createApiKey, null);
+        okhttp3.Call localVarCall = createApiKeyValidateBeforeCall(createApiKey, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CreatedApiKey>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<CreatedApiKey> createApiKeyWithHttpInfo(CreateApiKey createApiKey, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = createApiKeyValidateBeforeCall(createApiKey, null, opts);
         Type localVarReturnType = new TypeToken<CreatedApiKey>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call createApiKeyAsync(CreateApiKey createApiKey, final ApiCallback<CreatedApiKey> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createApiKeyValidateBeforeCall(createApiKey, _callback);
+        okhttp3.Call localVarCall = createApiKeyValidateBeforeCall(createApiKey, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CreatedApiKey>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call createApiKeyAsync(CreateApiKey createApiKey, final ApiCallback<CreatedApiKey> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = createApiKeyValidateBeforeCall(createApiKey, _callback, opts);
         Type localVarReturnType = new TypeToken<CreatedApiKey>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -189,6 +208,23 @@ public class PersonalAuthenticationTokensApi {
         }
 
         /**
+         * Execute createApiKey request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CreatedApiKey
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Personal Access Token and associated meta data. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CreatedApiKey execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CreatedApiKey> localVarResp = createApiKeyWithHttpInfo(createApiKey, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute createApiKey request with HTTP info returned
          * @return ApiResponse&lt;CreatedApiKey&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -202,6 +238,22 @@ public class PersonalAuthenticationTokensApi {
          */
         public ApiResponse<CreatedApiKey> executeWithHttpInfo() throws ApiException {
             return createApiKeyWithHttpInfo(createApiKey);
+        }
+
+        /**
+         * Execute createApiKey request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CreatedApiKey&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Personal Access Token and associated meta data. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CreatedApiKey> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return createApiKeyWithHttpInfo(createApiKey, opts);
         }
 
         /**
@@ -219,6 +271,23 @@ public class PersonalAuthenticationTokensApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<CreatedApiKey> _callback) throws ApiException {
             return createApiKeyAsync(createApiKey, _callback);
+        }
+
+        /**
+         * Execute createApiKey request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The Personal Access Token and associated meta data. </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CreatedApiKey> _callback, ConfigurationOptions opts) throws ApiException {
+            return createApiKeyAsync(createApiKey, _callback, opts);
         }
     }
 
@@ -239,6 +308,10 @@ public class PersonalAuthenticationTokensApi {
         return new APIcreateApiKeyRequest(createApiKey);
     }
     private okhttp3.Call deleteApiKeyCall(String id, final ApiCallback _callback) throws ApiException {
+        return deleteApiKeyCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call deleteApiKeyCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -280,30 +353,44 @@ public class PersonalAuthenticationTokensApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteApiKeyValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteApiKeyValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteApiKey(Async)");
         }
 
-        return deleteApiKeyCall(id, _callback);
+        return deleteApiKeyCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<ApiKey> deleteApiKeyWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = deleteApiKeyValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = deleteApiKeyValidateBeforeCall(id, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<ApiKey>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<ApiKey> deleteApiKeyWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = deleteApiKeyValidateBeforeCall(id, null, opts);
         Type localVarReturnType = new TypeToken<ApiKey>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call deleteApiKeyAsync(String id, final ApiCallback<ApiKey> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = deleteApiKeyValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = deleteApiKeyValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<ApiKey>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call deleteApiKeyAsync(String id, final ApiCallback<ApiKey> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteApiKeyValidateBeforeCall(id, _callback, opts);
         Type localVarReturnType = new TypeToken<ApiKey>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -351,6 +438,23 @@ public class PersonalAuthenticationTokensApi {
         }
 
         /**
+         * Execute deleteApiKey request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiKey
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Invalidates a Personal Access Token </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiKey execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ApiKey> localVarResp = deleteApiKeyWithHttpInfo(id, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute deleteApiKey request with HTTP info returned
          * @return ApiResponse&lt;ApiKey&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -364,6 +468,22 @@ public class PersonalAuthenticationTokensApi {
          */
         public ApiResponse<ApiKey> executeWithHttpInfo() throws ApiException {
             return deleteApiKeyWithHttpInfo(id);
+        }
+
+        /**
+         * Execute deleteApiKey request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ApiKey&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Invalidates a Personal Access Token </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ApiKey> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteApiKeyWithHttpInfo(id, opts);
         }
 
         /**
@@ -381,6 +501,23 @@ public class PersonalAuthenticationTokensApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<ApiKey> _callback) throws ApiException {
             return deleteApiKeyAsync(id, _callback);
+        }
+
+        /**
+         * Execute deleteApiKey request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Invalidates a Personal Access Token </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ApiKey> _callback, ConfigurationOptions opts) throws ApiException {
+            return deleteApiKeyAsync(id, _callback, opts);
         }
     }
 
@@ -401,6 +538,10 @@ public class PersonalAuthenticationTokensApi {
         return new APIdeleteApiKeyRequest(id);
     }
     private okhttp3.Call listOwnApiKeysCall(final ApiCallback _callback) throws ApiException {
+        return listOwnApiKeysCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call listOwnApiKeysCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -441,25 +582,39 @@ public class PersonalAuthenticationTokensApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listOwnApiKeysValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return listOwnApiKeysCall(_callback);
+    private okhttp3.Call listOwnApiKeysValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listOwnApiKeysCall(_callback, opts);
 
     }
 
 
     private ApiResponse<List<ApiKey>> listOwnApiKeysWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = listOwnApiKeysValidateBeforeCall(null);
+        okhttp3.Call localVarCall = listOwnApiKeysValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<ApiKey>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<List<ApiKey>> listOwnApiKeysWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listOwnApiKeysValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<List<ApiKey>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call listOwnApiKeysAsync(final ApiCallback<List<ApiKey>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listOwnApiKeysValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = listOwnApiKeysValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<ApiKey>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call listOwnApiKeysAsync(final ApiCallback<List<ApiKey>> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = listOwnApiKeysValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<List<ApiKey>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -503,6 +658,22 @@ public class PersonalAuthenticationTokensApi {
         }
 
         /**
+         * Execute listOwnApiKeys request. Use any specified configuration options to override any other configuration for this request only.
+         * @return List&lt;ApiKey&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of user&#39;s existing Personal Access Tokens </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<ApiKey> execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<List<ApiKey>> localVarResp = listOwnApiKeysWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute listOwnApiKeys request with HTTP info returned
          * @return ApiResponse&lt;List&lt;ApiKey&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -515,6 +686,21 @@ public class PersonalAuthenticationTokensApi {
          */
         public ApiResponse<List<ApiKey>> executeWithHttpInfo() throws ApiException {
             return listOwnApiKeysWithHttpInfo();
+        }
+
+        /**
+         * Execute listOwnApiKeys request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;List&lt;ApiKey&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of user&#39;s existing Personal Access Tokens </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<ApiKey>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listOwnApiKeysWithHttpInfo(opts);
         }
 
         /**
@@ -531,6 +717,22 @@ public class PersonalAuthenticationTokensApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<ApiKey>> _callback) throws ApiException {
             return listOwnApiKeysAsync(_callback);
+        }
+
+        /**
+         * Execute listOwnApiKeys request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List of user&#39;s existing Personal Access Tokens </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<ApiKey>> _callback, ConfigurationOptions opts) throws ApiException {
+            return listOwnApiKeysAsync(_callback, opts);
         }
     }
 

@@ -53,10 +53,21 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         String id = "id_example"; // String | The unique identifier for the Role
         String userId = "userId_example"; // String | The unique identifier for the User
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.addUserToRole(id, userId).execute(opts);
+
             apiInstance.addUserToRole(id, userId).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling RolesApi#addUserToRole");
@@ -135,9 +146,20 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         CreateRoleRequest createRoleRequest = new CreateRoleRequest(); // CreateRoleRequest | Details of the role to be created
         try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.createRole(createRoleRequest).execute(opts);
+
             RoleResponse result = apiInstance.createRole(createRoleRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -216,9 +238,20 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         String id = "id_example"; // String | The unique identifier for the role
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.deleteRole(id).execute(opts);
+
             apiInstance.deleteRole(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling RolesApi#deleteRole");
@@ -295,9 +328,20 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         String id = "id_example"; // String | The unique identifier for the role
         try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.getRole(id).execute(opts);
+
             RoleResponse result = apiInstance.getRole(id).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -376,8 +420,19 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // List<RoleResponse> result = apiInstance.listRoles().execute(opts);
+
             List<RoleResponse> result = apiInstance.listRoles().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -451,9 +506,20 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         String id = "id_example"; // String | The unique identifier for the Role
         try {
+            // uncomment the below to set overrides at the request level
+            // List<UserResponse> result = apiInstance.listUsersInRole(id).execute(opts);
+
             List<UserResponse> result = apiInstance.listUsersInRole(id).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -531,10 +597,21 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         String id = "id_example"; // String | The unique identifier for the Role
         String userId = "userId_example"; // String | The unique identifier for the User
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.removeUserFromRole(id, userId).execute(opts);
+
             apiInstance.removeUserFromRole(id, userId).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling RolesApi#removeUserFromRole");
@@ -613,10 +690,21 @@ public class RolesApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
         RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
         String id = "id_example"; // String | The unique identifier for the role to be updated
         UpdateRoleRequest updateRoleRequest = new UpdateRoleRequest(); // UpdateRoleRequest | The new definition of the role
         try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.updateRole(id, updateRoleRequest).execute(opts);
+
             RoleResponse result = apiInstance.updateRole(id, updateRoleRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {

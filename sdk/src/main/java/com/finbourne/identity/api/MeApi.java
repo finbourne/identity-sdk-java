@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -74,6 +75,10 @@ public class MeApi {
     }
 
     private okhttp3.Call getUserInfoCall(final ApiCallback _callback) throws ApiException {
+        return getUserInfoCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getUserInfoCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -114,25 +119,39 @@ public class MeApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getUserInfoValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return getUserInfoCall(_callback);
+    private okhttp3.Call getUserInfoValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getUserInfoCall(_callback, opts);
 
     }
 
 
     private ApiResponse<CurrentUserResponse> getUserInfoWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = getUserInfoValidateBeforeCall(null);
+        okhttp3.Call localVarCall = getUserInfoValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CurrentUserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<CurrentUserResponse> getUserInfoWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getUserInfoValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<CurrentUserResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getUserInfoAsync(final ApiCallback<CurrentUserResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getUserInfoValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = getUserInfoValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CurrentUserResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getUserInfoAsync(final ApiCallback<CurrentUserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserInfoValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<CurrentUserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -176,6 +195,22 @@ public class MeApi {
         }
 
         /**
+         * Execute getUserInfo request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CurrentUserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user&#39;s info </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CurrentUserResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CurrentUserResponse> localVarResp = getUserInfoWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getUserInfo request with HTTP info returned
          * @return ApiResponse&lt;CurrentUserResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -188,6 +223,21 @@ public class MeApi {
          */
         public ApiResponse<CurrentUserResponse> executeWithHttpInfo() throws ApiException {
             return getUserInfoWithHttpInfo();
+        }
+
+        /**
+         * Execute getUserInfo request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CurrentUserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user&#39;s info </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CurrentUserResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getUserInfoWithHttpInfo(opts);
         }
 
         /**
@@ -204,6 +254,22 @@ public class MeApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<CurrentUserResponse> _callback) throws ApiException {
             return getUserInfoAsync(_callback);
+        }
+
+        /**
+         * Execute getUserInfo request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user&#39;s info </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CurrentUserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getUserInfoAsync(_callback, opts);
         }
     }
 
@@ -222,6 +288,10 @@ public class MeApi {
         return new APIgetUserInfoRequest();
     }
     private okhttp3.Call setPasswordCall(SetPassword setPassword, final ApiCallback _callback) throws ApiException {
+        return setPasswordCall(setPassword,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call setPasswordCall(SetPassword setPassword, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -266,30 +336,44 @@ public class MeApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call setPasswordValidateBeforeCall(SetPassword setPassword, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call setPasswordValidateBeforeCall(SetPassword setPassword, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'setPassword' is set
         if (setPassword == null) {
             throw new ApiException("Missing the required parameter 'setPassword' when calling setPassword(Async)");
         }
 
-        return setPasswordCall(setPassword, _callback);
+        return setPasswordCall(setPassword, _callback, opts);
 
     }
 
 
     private ApiResponse<SetPasswordResponse> setPasswordWithHttpInfo(SetPassword setPassword) throws ApiException {
-        okhttp3.Call localVarCall = setPasswordValidateBeforeCall(setPassword, null);
+        okhttp3.Call localVarCall = setPasswordValidateBeforeCall(setPassword, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SetPasswordResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<SetPasswordResponse> setPasswordWithHttpInfo(SetPassword setPassword, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = setPasswordValidateBeforeCall(setPassword, null, opts);
         Type localVarReturnType = new TypeToken<SetPasswordResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call setPasswordAsync(SetPassword setPassword, final ApiCallback<SetPasswordResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = setPasswordValidateBeforeCall(setPassword, _callback);
+        okhttp3.Call localVarCall = setPasswordValidateBeforeCall(setPassword, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SetPasswordResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call setPasswordAsync(SetPassword setPassword, final ApiCallback<SetPasswordResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = setPasswordValidateBeforeCall(setPassword, _callback, opts);
         Type localVarReturnType = new TypeToken<SetPasswordResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -337,6 +421,23 @@ public class MeApi {
         }
 
         /**
+         * Execute setPassword request. Use any specified configuration options to override any other configuration for this request only.
+         * @return SetPasswordResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Set the current user&#39;s password </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SetPasswordResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<SetPasswordResponse> localVarResp = setPasswordWithHttpInfo(setPassword, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute setPassword request with HTTP info returned
          * @return ApiResponse&lt;SetPasswordResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -350,6 +451,22 @@ public class MeApi {
          */
         public ApiResponse<SetPasswordResponse> executeWithHttpInfo() throws ApiException {
             return setPasswordWithHttpInfo(setPassword);
+        }
+
+        /**
+         * Execute setPassword request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;SetPasswordResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Set the current user&#39;s password </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SetPasswordResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return setPasswordWithHttpInfo(setPassword, opts);
         }
 
         /**
@@ -367,6 +484,23 @@ public class MeApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<SetPasswordResponse> _callback) throws ApiException {
             return setPasswordAsync(setPassword, _callback);
+        }
+
+        /**
+         * Execute setPassword request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Set the current user&#39;s password </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SetPasswordResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return setPasswordAsync(setPassword, _callback, opts);
         }
     }
 

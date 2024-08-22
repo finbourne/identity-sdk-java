@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -78,6 +79,10 @@ public class AuthenticationApi {
     }
 
     private okhttp3.Call getAuthenticationInformationCall(final ApiCallback _callback) throws ApiException {
+        return getAuthenticationInformationCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getAuthenticationInformationCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -118,25 +123,39 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getAuthenticationInformationValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return getAuthenticationInformationCall(_callback);
+    private okhttp3.Call getAuthenticationInformationValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getAuthenticationInformationCall(_callback, opts);
 
     }
 
 
     private ApiResponse<AuthenticationInformation> getAuthenticationInformationWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = getAuthenticationInformationValidateBeforeCall(null);
+        okhttp3.Call localVarCall = getAuthenticationInformationValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<AuthenticationInformation>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<AuthenticationInformation> getAuthenticationInformationWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getAuthenticationInformationValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<AuthenticationInformation>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getAuthenticationInformationAsync(final ApiCallback<AuthenticationInformation> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getAuthenticationInformationValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = getAuthenticationInformationValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<AuthenticationInformation>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getAuthenticationInformationAsync(final ApiCallback<AuthenticationInformation> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getAuthenticationInformationValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<AuthenticationInformation>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -180,6 +199,22 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute getAuthenticationInformation request. Use any specified configuration options to override any other configuration for this request only.
+         * @return AuthenticationInformation
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get authentication information </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public AuthenticationInformation execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<AuthenticationInformation> localVarResp = getAuthenticationInformationWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getAuthenticationInformation request with HTTP info returned
          * @return ApiResponse&lt;AuthenticationInformation&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -192,6 +227,21 @@ public class AuthenticationApi {
          */
         public ApiResponse<AuthenticationInformation> executeWithHttpInfo() throws ApiException {
             return getAuthenticationInformationWithHttpInfo();
+        }
+
+        /**
+         * Execute getAuthenticationInformation request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;AuthenticationInformation&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get authentication information </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AuthenticationInformation> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getAuthenticationInformationWithHttpInfo(opts);
         }
 
         /**
@@ -208,6 +258,22 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<AuthenticationInformation> _callback) throws ApiException {
             return getAuthenticationInformationAsync(_callback);
+        }
+
+        /**
+         * Execute getAuthenticationInformation request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get authentication information </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AuthenticationInformation> _callback, ConfigurationOptions opts) throws ApiException {
+            return getAuthenticationInformationAsync(_callback, opts);
         }
     }
 
@@ -226,6 +292,10 @@ public class AuthenticationApi {
         return new APIgetAuthenticationInformationRequest();
     }
     private okhttp3.Call getPasswordPolicyCall(String userType, final ApiCallback _callback) throws ApiException {
+        return getPasswordPolicyCall(userType,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getPasswordPolicyCall(String userType, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -267,30 +337,44 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getPasswordPolicyValidateBeforeCall(String userType, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getPasswordPolicyValidateBeforeCall(String userType, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'userType' is set
         if (userType == null) {
             throw new ApiException("Missing the required parameter 'userType' when calling getPasswordPolicy(Async)");
         }
 
-        return getPasswordPolicyCall(userType, _callback);
+        return getPasswordPolicyCall(userType, _callback, opts);
 
     }
 
 
     private ApiResponse<PasswordPolicyResponse> getPasswordPolicyWithHttpInfo(String userType) throws ApiException {
-        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, null);
+        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<PasswordPolicyResponse> getPasswordPolicyWithHttpInfo(String userType, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, null, opts);
         Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getPasswordPolicyAsync(String userType, final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, _callback);
+        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getPasswordPolicyAsync(String userType, final ApiCallback<PasswordPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getPasswordPolicyValidateBeforeCall(userType, _callback, opts);
         Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -338,6 +422,23 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute getPasswordPolicy request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PasswordPolicyResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PasswordPolicyResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PasswordPolicyResponse> localVarResp = getPasswordPolicyWithHttpInfo(userType, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getPasswordPolicy request with HTTP info returned
          * @return ApiResponse&lt;PasswordPolicyResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -351,6 +452,22 @@ public class AuthenticationApi {
          */
         public ApiResponse<PasswordPolicyResponse> executeWithHttpInfo() throws ApiException {
             return getPasswordPolicyWithHttpInfo(userType);
+        }
+
+        /**
+         * Execute getPasswordPolicy request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PasswordPolicyResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PasswordPolicyResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getPasswordPolicyWithHttpInfo(userType, opts);
         }
 
         /**
@@ -368,6 +485,23 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
             return getPasswordPolicyAsync(userType, _callback);
+        }
+
+        /**
+         * Execute getPasswordPolicy request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getPasswordPolicyAsync(userType, _callback, opts);
         }
     }
 
@@ -388,6 +522,10 @@ public class AuthenticationApi {
         return new APIgetPasswordPolicyRequest(userType);
     }
     private okhttp3.Call getSupportAccessHistoryCall(OffsetDateTime start, OffsetDateTime end, final ApiCallback _callback) throws ApiException {
+        return getSupportAccessHistoryCall(start, end,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getSupportAccessHistoryCall(OffsetDateTime start, OffsetDateTime end, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -436,25 +574,39 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getSupportAccessHistoryValidateBeforeCall(OffsetDateTime start, OffsetDateTime end, final ApiCallback _callback) throws ApiException {
-        return getSupportAccessHistoryCall(start, end, _callback);
+    private okhttp3.Call getSupportAccessHistoryValidateBeforeCall(OffsetDateTime start, OffsetDateTime end, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getSupportAccessHistoryCall(start, end, _callback, opts);
 
     }
 
 
     private ApiResponse<List<SupportAccessResponse>> getSupportAccessHistoryWithHttpInfo(OffsetDateTime start, OffsetDateTime end) throws ApiException {
-        okhttp3.Call localVarCall = getSupportAccessHistoryValidateBeforeCall(start, end, null);
+        okhttp3.Call localVarCall = getSupportAccessHistoryValidateBeforeCall(start, end, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<List<SupportAccessResponse>> getSupportAccessHistoryWithHttpInfo(OffsetDateTime start, OffsetDateTime end, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getSupportAccessHistoryValidateBeforeCall(start, end, null, opts);
         Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getSupportAccessHistoryAsync(OffsetDateTime start, OffsetDateTime end, final ApiCallback<List<SupportAccessResponse>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getSupportAccessHistoryValidateBeforeCall(start, end, _callback);
+        okhttp3.Call localVarCall = getSupportAccessHistoryValidateBeforeCall(start, end, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getSupportAccessHistoryAsync(OffsetDateTime start, OffsetDateTime end, final ApiCallback<List<SupportAccessResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getSupportAccessHistoryValidateBeforeCall(start, end, _callback, opts);
         Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -522,6 +674,23 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute getSupportAccessHistory request. Use any specified configuration options to override any other configuration for this request only.
+         * @return List&lt;SupportAccessResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get support access history </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<SupportAccessResponse> execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<List<SupportAccessResponse>> localVarResp = getSupportAccessHistoryWithHttpInfo(start, end, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getSupportAccessHistory request with HTTP info returned
          * @return ApiResponse&lt;List&lt;SupportAccessResponse&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -535,6 +704,22 @@ public class AuthenticationApi {
          */
         public ApiResponse<List<SupportAccessResponse>> executeWithHttpInfo() throws ApiException {
             return getSupportAccessHistoryWithHttpInfo(start, end);
+        }
+
+        /**
+         * Execute getSupportAccessHistory request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;List&lt;SupportAccessResponse&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get support access history </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<SupportAccessResponse>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getSupportAccessHistoryWithHttpInfo(start, end, opts);
         }
 
         /**
@@ -552,6 +737,23 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<SupportAccessResponse>> _callback) throws ApiException {
             return getSupportAccessHistoryAsync(start, end, _callback);
+        }
+
+        /**
+         * Execute getSupportAccessHistory request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get support access history </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<SupportAccessResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+            return getSupportAccessHistoryAsync(start, end, _callback, opts);
         }
     }
 
@@ -571,6 +773,10 @@ public class AuthenticationApi {
         return new APIgetSupportAccessHistoryRequest();
     }
     private okhttp3.Call getSupportRolesCall(final ApiCallback _callback) throws ApiException {
+        return getSupportRolesCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getSupportRolesCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -611,25 +817,39 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getSupportRolesValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return getSupportRolesCall(_callback);
+    private okhttp3.Call getSupportRolesValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getSupportRolesCall(_callback, opts);
 
     }
 
 
     private ApiResponse<SupportRolesResponse> getSupportRolesWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = getSupportRolesValidateBeforeCall(null);
+        okhttp3.Call localVarCall = getSupportRolesValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SupportRolesResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<SupportRolesResponse> getSupportRolesWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getSupportRolesValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<SupportRolesResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getSupportRolesAsync(final ApiCallback<SupportRolesResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getSupportRolesValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = getSupportRolesValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SupportRolesResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getSupportRolesAsync(final ApiCallback<SupportRolesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getSupportRolesValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<SupportRolesResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -673,6 +893,22 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute getSupportRoles request. Use any specified configuration options to override any other configuration for this request only.
+         * @return SupportRolesResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get support roles </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SupportRolesResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<SupportRolesResponse> localVarResp = getSupportRolesWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getSupportRoles request with HTTP info returned
          * @return ApiResponse&lt;SupportRolesResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -685,6 +921,21 @@ public class AuthenticationApi {
          */
         public ApiResponse<SupportRolesResponse> executeWithHttpInfo() throws ApiException {
             return getSupportRolesWithHttpInfo();
+        }
+
+        /**
+         * Execute getSupportRoles request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;SupportRolesResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get support roles </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SupportRolesResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getSupportRolesWithHttpInfo(opts);
         }
 
         /**
@@ -701,6 +952,22 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<SupportRolesResponse> _callback) throws ApiException {
             return getSupportRolesAsync(_callback);
+        }
+
+        /**
+         * Execute getSupportRoles request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get support roles </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SupportRolesResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getSupportRolesAsync(_callback, opts);
         }
     }
 
@@ -719,6 +986,10 @@ public class AuthenticationApi {
         return new APIgetSupportRolesRequest();
     }
     private okhttp3.Call grantSupportAccessCall(SupportAccessRequest supportAccessRequest, final ApiCallback _callback) throws ApiException {
+        return grantSupportAccessCall(supportAccessRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call grantSupportAccessCall(SupportAccessRequest supportAccessRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -763,30 +1034,44 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call grantSupportAccessValidateBeforeCall(SupportAccessRequest supportAccessRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call grantSupportAccessValidateBeforeCall(SupportAccessRequest supportAccessRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'supportAccessRequest' is set
         if (supportAccessRequest == null) {
             throw new ApiException("Missing the required parameter 'supportAccessRequest' when calling grantSupportAccess(Async)");
         }
 
-        return grantSupportAccessCall(supportAccessRequest, _callback);
+        return grantSupportAccessCall(supportAccessRequest, _callback, opts);
 
     }
 
 
     private ApiResponse<SupportAccessResponse> grantSupportAccessWithHttpInfo(SupportAccessRequest supportAccessRequest) throws ApiException {
-        okhttp3.Call localVarCall = grantSupportAccessValidateBeforeCall(supportAccessRequest, null);
+        okhttp3.Call localVarCall = grantSupportAccessValidateBeforeCall(supportAccessRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SupportAccessResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<SupportAccessResponse> grantSupportAccessWithHttpInfo(SupportAccessRequest supportAccessRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = grantSupportAccessValidateBeforeCall(supportAccessRequest, null, opts);
         Type localVarReturnType = new TypeToken<SupportAccessResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call grantSupportAccessAsync(SupportAccessRequest supportAccessRequest, final ApiCallback<SupportAccessResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = grantSupportAccessValidateBeforeCall(supportAccessRequest, _callback);
+        okhttp3.Call localVarCall = grantSupportAccessValidateBeforeCall(supportAccessRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SupportAccessResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call grantSupportAccessAsync(SupportAccessRequest supportAccessRequest, final ApiCallback<SupportAccessResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = grantSupportAccessValidateBeforeCall(supportAccessRequest, _callback, opts);
         Type localVarReturnType = new TypeToken<SupportAccessResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -834,6 +1119,23 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute grantSupportAccess request. Use any specified configuration options to override any other configuration for this request only.
+         * @return SupportAccessResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> Grant Support Access </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SupportAccessResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<SupportAccessResponse> localVarResp = grantSupportAccessWithHttpInfo(supportAccessRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute grantSupportAccess request with HTTP info returned
          * @return ApiResponse&lt;SupportAccessResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -847,6 +1149,22 @@ public class AuthenticationApi {
          */
         public ApiResponse<SupportAccessResponse> executeWithHttpInfo() throws ApiException {
             return grantSupportAccessWithHttpInfo(supportAccessRequest);
+        }
+
+        /**
+         * Execute grantSupportAccess request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;SupportAccessResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> Grant Support Access </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SupportAccessResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return grantSupportAccessWithHttpInfo(supportAccessRequest, opts);
         }
 
         /**
@@ -864,6 +1182,23 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<SupportAccessResponse> _callback) throws ApiException {
             return grantSupportAccessAsync(supportAccessRequest, _callback);
+        }
+
+        /**
+         * Execute grantSupportAccess request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> Grant Support Access </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SupportAccessResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return grantSupportAccessAsync(supportAccessRequest, _callback, opts);
         }
     }
 
@@ -884,6 +1219,10 @@ public class AuthenticationApi {
         return new APIgrantSupportAccessRequest(supportAccessRequest);
     }
     private okhttp3.Call invalidateSupportAccessCall(final ApiCallback _callback) throws ApiException {
+        return invalidateSupportAccessCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call invalidateSupportAccessCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -924,25 +1263,39 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call invalidateSupportAccessValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return invalidateSupportAccessCall(_callback);
+    private okhttp3.Call invalidateSupportAccessValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return invalidateSupportAccessCall(_callback, opts);
 
     }
 
 
     private ApiResponse<List<SupportAccessResponse>> invalidateSupportAccessWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = invalidateSupportAccessValidateBeforeCall(null);
+        okhttp3.Call localVarCall = invalidateSupportAccessValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<List<SupportAccessResponse>> invalidateSupportAccessWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = invalidateSupportAccessValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call invalidateSupportAccessAsync(final ApiCallback<List<SupportAccessResponse>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = invalidateSupportAccessValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = invalidateSupportAccessValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call invalidateSupportAccessAsync(final ApiCallback<List<SupportAccessResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = invalidateSupportAccessValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<List<SupportAccessResponse>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -986,6 +1339,22 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute invalidateSupportAccess request. Use any specified configuration options to override any other configuration for this request only.
+         * @return List&lt;SupportAccessResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Invalidate all currently active support requests </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<SupportAccessResponse> execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<List<SupportAccessResponse>> localVarResp = invalidateSupportAccessWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute invalidateSupportAccess request with HTTP info returned
          * @return ApiResponse&lt;List&lt;SupportAccessResponse&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -998,6 +1367,21 @@ public class AuthenticationApi {
          */
         public ApiResponse<List<SupportAccessResponse>> executeWithHttpInfo() throws ApiException {
             return invalidateSupportAccessWithHttpInfo();
+        }
+
+        /**
+         * Execute invalidateSupportAccess request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;List&lt;SupportAccessResponse&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Invalidate all currently active support requests </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<SupportAccessResponse>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return invalidateSupportAccessWithHttpInfo(opts);
         }
 
         /**
@@ -1014,6 +1398,22 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<SupportAccessResponse>> _callback) throws ApiException {
             return invalidateSupportAccessAsync(_callback);
+        }
+
+        /**
+         * Execute invalidateSupportAccess request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Invalidate all currently active support requests </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<SupportAccessResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+            return invalidateSupportAccessAsync(_callback, opts);
         }
     }
 
@@ -1032,6 +1432,10 @@ public class AuthenticationApi {
         return new APIinvalidateSupportAccessRequest();
     }
     private okhttp3.Call updatePasswordPolicyCall(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback _callback) throws ApiException {
+        return updatePasswordPolicyCall(userType, updatePasswordPolicyRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call updatePasswordPolicyCall(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1077,30 +1481,44 @@ public class AuthenticationApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updatePasswordPolicyValidateBeforeCall(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updatePasswordPolicyValidateBeforeCall(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'userType' is set
         if (userType == null) {
             throw new ApiException("Missing the required parameter 'userType' when calling updatePasswordPolicy(Async)");
         }
 
-        return updatePasswordPolicyCall(userType, updatePasswordPolicyRequest, _callback);
+        return updatePasswordPolicyCall(userType, updatePasswordPolicyRequest, _callback, opts);
 
     }
 
 
     private ApiResponse<PasswordPolicyResponse> updatePasswordPolicyWithHttpInfo(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest) throws ApiException {
-        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, null);
+        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<PasswordPolicyResponse> updatePasswordPolicyWithHttpInfo(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, null, opts);
         Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call updatePasswordPolicyAsync(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, _callback);
+        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call updatePasswordPolicyAsync(String userType, UpdatePasswordPolicyRequest updatePasswordPolicyRequest, final ApiCallback<PasswordPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = updatePasswordPolicyValidateBeforeCall(userType, updatePasswordPolicyRequest, _callback, opts);
         Type localVarReturnType = new TypeToken<PasswordPolicyResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1159,6 +1577,23 @@ public class AuthenticationApi {
         }
 
         /**
+         * Execute updatePasswordPolicy request. Use any specified configuration options to override any other configuration for this request only.
+         * @return PasswordPolicyResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public PasswordPolicyResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<PasswordPolicyResponse> localVarResp = updatePasswordPolicyWithHttpInfo(userType, updatePasswordPolicyRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute updatePasswordPolicy request with HTTP info returned
          * @return ApiResponse&lt;PasswordPolicyResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1172,6 +1607,22 @@ public class AuthenticationApi {
          */
         public ApiResponse<PasswordPolicyResponse> executeWithHttpInfo() throws ApiException {
             return updatePasswordPolicyWithHttpInfo(userType, updatePasswordPolicyRequest);
+        }
+
+        /**
+         * Execute updatePasswordPolicy request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;PasswordPolicyResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<PasswordPolicyResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return updatePasswordPolicyWithHttpInfo(userType, updatePasswordPolicyRequest, opts);
         }
 
         /**
@@ -1189,6 +1640,23 @@ public class AuthenticationApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyResponse> _callback) throws ApiException {
             return updatePasswordPolicyAsync(userType, updatePasswordPolicyRequest, _callback);
+        }
+
+        /**
+         * Execute updatePasswordPolicy request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update password policy </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<PasswordPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return updatePasswordPolicyAsync(userType, updatePasswordPolicyRequest, _callback, opts);
         }
     }
 

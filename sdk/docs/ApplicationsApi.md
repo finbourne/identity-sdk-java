@@ -50,9 +50,20 @@ public class ApplicationsApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // ApplicationsApi apiInstance = apiFactory.build(ApplicationsApi.class);
+
         ApplicationsApi apiInstance = ApiFactoryBuilder.build(fileName).build(ApplicationsApi.class);
         CreateApplicationRequest createApplicationRequest = new CreateApplicationRequest(); // CreateApplicationRequest | Details of the application to be created
         try {
+            // uncomment the below to set overrides at the request level
+            // OAuthApplication result = apiInstance.createApplication(createApplicationRequest).execute(opts);
+
             OAuthApplication result = apiInstance.createApplication(createApplicationRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -130,9 +141,20 @@ public class ApplicationsApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // ApplicationsApi apiInstance = apiFactory.build(ApplicationsApi.class);
+
         ApplicationsApi apiInstance = ApiFactoryBuilder.build(fileName).build(ApplicationsApi.class);
         String id = "id_example"; // String | The unique identifier for the application
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.deleteApplication(id).execute(opts);
+
             apiInstance.deleteApplication(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling ApplicationsApi#deleteApplication");
@@ -209,10 +231,21 @@ public class ApplicationsApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // ApplicationsApi apiInstance = apiFactory.build(ApplicationsApi.class);
+
         ApplicationsApi apiInstance = ApiFactoryBuilder.build(fileName).build(ApplicationsApi.class);
         String id = "id_example"; // String | The unique identifier for the application
         Boolean includeSecret = true; // Boolean | Optional. If set to true, the application secrets will be returned in plain text
         try {
+            // uncomment the below to set overrides at the request level
+            // OAuthApplication result = apiInstance.getApplication(id, includeSecret).execute(opts);
+
             OAuthApplication result = apiInstance.getApplication(id, includeSecret).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -292,8 +325,19 @@ public class ApplicationsApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // ApplicationsApi apiInstance = apiFactory.build(ApplicationsApi.class);
+
         ApplicationsApi apiInstance = ApiFactoryBuilder.build(fileName).build(ApplicationsApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // List<OAuthApplication> result = apiInstance.listApplications().execute(opts);
+
             List<OAuthApplication> result = apiInstance.listApplications().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -367,9 +411,20 @@ public class ApplicationsApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // ApplicationsApi apiInstance = apiFactory.build(ApplicationsApi.class);
+
         ApplicationsApi apiInstance = ApiFactoryBuilder.build(fileName).build(ApplicationsApi.class);
         String id = "id_example"; // String | The unique identifier for the application
         try {
+            // uncomment the below to set overrides at the request level
+            // OAuthApplication result = apiInstance.rotateApplicationSecrets(id).execute(opts);
+
             OAuthApplication result = apiInstance.rotateApplicationSecrets(id).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {

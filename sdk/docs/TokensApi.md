@@ -46,8 +46,19 @@ public class TokensApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // TokensApi apiInstance = apiFactory.build(TokensApi.class);
+
         TokensApi apiInstance = ApiFactoryBuilder.build(fileName).build(TokensApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.invalidateToken().execute(opts);
+
             apiInstance.invalidateToken().execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling TokensApi#invalidateToken");

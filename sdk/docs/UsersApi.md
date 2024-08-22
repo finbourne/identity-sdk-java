@@ -58,10 +58,21 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         CreateUserRequest createUserRequest = new CreateUserRequest(); // CreateUserRequest | Details of the User to be created
         Boolean waitForReindex = false; // Boolean | Should the request wait until the newly created User is indexed (available in List) before returning
         try {
+            // uncomment the below to set overrides at the request level
+            // UserResponse result = apiInstance.createUser(createUserRequest, waitForReindex).execute(opts);
+
             UserResponse result = apiInstance.createUser(createUserRequest, waitForReindex).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -140,10 +151,21 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the user
         Boolean purge = true; // Boolean | Whether to purge any trace of the user from the identity provider (will affect audit)
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.deleteUser(id, purge).execute(opts);
+
             apiInstance.deleteUser(id, purge).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#deleteUser");
@@ -221,9 +243,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User having its password reset
         try {
+            // uncomment the below to set overrides at the request level
+            // TemporaryPassword result = apiInstance.expirePassword(id).execute(opts);
+
             TemporaryPassword result = apiInstance.expirePassword(id).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -301,9 +334,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         List<String> id = Arrays.asList(); // List<String> | A list of unique identifiers for the users
         try {
+            // uncomment the below to set overrides at the request level
+            // ListUsersResponse result = apiInstance.findUsersById(id).execute(opts);
+
             ListUsersResponse result = apiInstance.findUsersById(id).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -381,10 +425,21 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User
         Boolean includeRoles = true; // Boolean | Flag indicating that the users roles should be included in the response
         try {
+            // uncomment the below to set overrides at the request level
+            // UserResponse result = apiInstance.getUser(id, includeRoles).execute(opts);
+
             UserResponse result = apiInstance.getUser(id, includeRoles).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -463,8 +518,19 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // List<UserResponse> result = apiInstance.listRunnableUsers().execute(opts);
+
             List<UserResponse> result = apiInstance.listRunnableUsers().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -538,10 +604,21 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         Boolean includeRoles = false; // Boolean | Flag indicating that the users roles should be included in the response
         Boolean includeDeactivated = false; // Boolean | Include previously deleted (not purged) users
         try {
+            // uncomment the below to set overrides at the request level
+            // List<UserResponse> result = apiInstance.listUsers(includeRoles, includeDeactivated).execute(opts);
+
             List<UserResponse> result = apiInstance.listUsers(includeRoles, includeDeactivated).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -620,9 +697,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User having their MFA factors reset
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.resetFactors(id).execute(opts);
+
             apiInstance.resetFactors(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#resetFactors");
@@ -699,9 +787,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User having their password reset
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.resetPassword(id).execute(opts);
+
             apiInstance.resetPassword(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#resetPassword");
@@ -778,9 +877,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User to be activated
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.sendActivationEmail(id).execute(opts);
+
             apiInstance.sendActivationEmail(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#sendActivationEmail");
@@ -857,9 +967,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User to be unlocked
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.unlockUser(id).execute(opts);
+
             apiInstance.unlockUser(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#unlockUser");
@@ -936,9 +1057,20 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User to Unsuspend
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.unsuspendUser(id).execute(opts);
+
             apiInstance.unsuspendUser(id).execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#unsuspendUser");
@@ -1015,10 +1147,21 @@ public class UsersApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
         String id = "id_example"; // String | The unique identifier for the User to be updated
         UpdateUserRequest updateUserRequest = new UpdateUserRequest(); // UpdateUserRequest | The new definition of the User
         try {
+            // uncomment the below to set overrides at the request level
+            // UserResponse result = apiInstance.updateUser(id, updateUserRequest).execute(opts);
+
             UserResponse result = apiInstance.updateUser(id, updateUserRequest).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {

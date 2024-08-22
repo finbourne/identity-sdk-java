@@ -47,10 +47,21 @@ public class IdentityProviderApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // IdentityProviderApi apiInstance = apiFactory.build(IdentityProviderApi.class);
+
         IdentityProviderApi apiInstance = ApiFactoryBuilder.build(fileName).build(IdentityProviderApi.class);
         String apiTokenAction = "apiTokenAction_example"; // String | The action to take. For the API token. Defaults to \"ensure\"
         OffsetDateTime oldApiTokenDeactivation = OffsetDateTime.now(); // OffsetDateTime | Optional deactivation date for the old API token. Only used if apiTokenAction is \"regenerate\"
         try {
+            // uncomment the below to set overrides at the request level
+            // AddScimResponse result = apiInstance.addScim(apiTokenAction, oldApiTokenDeactivation).execute(opts);
+
             AddScimResponse result = apiInstance.addScim(apiTokenAction, oldApiTokenDeactivation).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -129,8 +140,19 @@ public class IdentityProviderApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // IdentityProviderApi apiInstance = apiFactory.build(IdentityProviderApi.class);
+
         IdentityProviderApi apiInstance = ApiFactoryBuilder.build(fileName).build(IdentityProviderApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // apiInstance.removeScim().execute(opts);
+
             apiInstance.removeScim().execute();
         } catch (ApiException e) {
             System.err.println("Exception when calling IdentityProviderApi#removeScim");

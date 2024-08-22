@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -76,6 +77,10 @@ public class UsersApi {
     }
 
     private okhttp3.Call createUserCall(CreateUserRequest createUserRequest, Boolean waitForReindex, final ApiCallback _callback) throws ApiException {
+        return createUserCall(createUserRequest, waitForReindex,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call createUserCall(CreateUserRequest createUserRequest, Boolean waitForReindex, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -124,30 +129,44 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call createUserValidateBeforeCall(CreateUserRequest createUserRequest, Boolean waitForReindex, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call createUserValidateBeforeCall(CreateUserRequest createUserRequest, Boolean waitForReindex, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'createUserRequest' is set
         if (createUserRequest == null) {
             throw new ApiException("Missing the required parameter 'createUserRequest' when calling createUser(Async)");
         }
 
-        return createUserCall(createUserRequest, waitForReindex, _callback);
+        return createUserCall(createUserRequest, waitForReindex, _callback, opts);
 
     }
 
 
     private ApiResponse<UserResponse> createUserWithHttpInfo(CreateUserRequest createUserRequest, Boolean waitForReindex) throws ApiException {
-        okhttp3.Call localVarCall = createUserValidateBeforeCall(createUserRequest, waitForReindex, null);
+        okhttp3.Call localVarCall = createUserValidateBeforeCall(createUserRequest, waitForReindex, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<UserResponse> createUserWithHttpInfo(CreateUserRequest createUserRequest, Boolean waitForReindex, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = createUserValidateBeforeCall(createUserRequest, waitForReindex, null, opts);
         Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call createUserAsync(CreateUserRequest createUserRequest, Boolean waitForReindex, final ApiCallback<UserResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = createUserValidateBeforeCall(createUserRequest, waitForReindex, _callback);
+        okhttp3.Call localVarCall = createUserValidateBeforeCall(createUserRequest, waitForReindex, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call createUserAsync(CreateUserRequest createUserRequest, Boolean waitForReindex, final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = createUserValidateBeforeCall(createUserRequest, waitForReindex, _callback, opts);
         Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -206,6 +225,23 @@ public class UsersApi {
         }
 
         /**
+         * Execute createUser request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> Create a new user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UserResponse> localVarResp = createUserWithHttpInfo(createUserRequest, waitForReindex, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute createUser request with HTTP info returned
          * @return ApiResponse&lt;UserResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -219,6 +255,22 @@ public class UsersApi {
          */
         public ApiResponse<UserResponse> executeWithHttpInfo() throws ApiException {
             return createUserWithHttpInfo(createUserRequest, waitForReindex);
+        }
+
+        /**
+         * Execute createUser request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> Create a new user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return createUserWithHttpInfo(createUserRequest, waitForReindex, opts);
         }
 
         /**
@@ -236,6 +288,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback) throws ApiException {
             return createUserAsync(createUserRequest, waitForReindex, _callback);
+        }
+
+        /**
+         * Execute createUser request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 201 </td><td> Create a new user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return createUserAsync(createUserRequest, waitForReindex, _callback, opts);
         }
     }
 
@@ -256,6 +325,10 @@ public class UsersApi {
         return new APIcreateUserRequest(createUserRequest);
     }
     private okhttp3.Call deleteUserCall(String id, Boolean purge, final ApiCallback _callback) throws ApiException {
+        return deleteUserCall(id, purge,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call deleteUserCall(String id, Boolean purge, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -301,29 +374,41 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call deleteUserValidateBeforeCall(String id, Boolean purge, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call deleteUserValidateBeforeCall(String id, Boolean purge, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling deleteUser(Async)");
         }
 
-        return deleteUserCall(id, purge, _callback);
+        return deleteUserCall(id, purge, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> deleteUserWithHttpInfo(String id, Boolean purge) throws ApiException {
-        okhttp3.Call localVarCall = deleteUserValidateBeforeCall(id, purge, null);
+        okhttp3.Call localVarCall = deleteUserValidateBeforeCall(id, purge, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> deleteUserWithHttpInfo(String id, Boolean purge, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = deleteUserValidateBeforeCall(id, purge, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call deleteUserAsync(String id, Boolean purge, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = deleteUserValidateBeforeCall(id, purge, _callback);
+        okhttp3.Call localVarCall = deleteUserValidateBeforeCall(id, purge, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call deleteUserAsync(String id, Boolean purge, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = deleteUserValidateBeforeCall(id, purge, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -379,6 +464,21 @@ public class UsersApi {
         }
 
         /**
+         * Execute deleteUser request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            deleteUserWithHttpInfo(id, purge, opts);
+        }
+
+        /**
          * Execute deleteUser request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -392,6 +492,22 @@ public class UsersApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return deleteUserWithHttpInfo(id, purge);
+        }
+
+        /**
+         * Execute deleteUser request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return deleteUserWithHttpInfo(id, purge, opts);
         }
 
         /**
@@ -409,6 +525,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return deleteUserAsync(id, purge, _callback);
+        }
+
+        /**
+         * Execute deleteUser request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return deleteUserAsync(id, purge, _callback, opts);
         }
     }
 
@@ -429,6 +562,10 @@ public class UsersApi {
         return new APIdeleteUserRequest(id);
     }
     private okhttp3.Call expirePasswordCall(String id, final ApiCallback _callback) throws ApiException {
+        return expirePasswordCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call expirePasswordCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -470,30 +607,44 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call expirePasswordValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call expirePasswordValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling expirePassword(Async)");
         }
 
-        return expirePasswordCall(id, _callback);
+        return expirePasswordCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<TemporaryPassword> expirePasswordWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = expirePasswordValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = expirePasswordValidateBeforeCall(id, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<TemporaryPassword>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<TemporaryPassword> expirePasswordWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = expirePasswordValidateBeforeCall(id, null, opts);
         Type localVarReturnType = new TypeToken<TemporaryPassword>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call expirePasswordAsync(String id, final ApiCallback<TemporaryPassword> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = expirePasswordValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = expirePasswordValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<TemporaryPassword>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call expirePasswordAsync(String id, final ApiCallback<TemporaryPassword> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = expirePasswordValidateBeforeCall(id, _callback, opts);
         Type localVarReturnType = new TypeToken<TemporaryPassword>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -541,6 +692,23 @@ public class UsersApi {
         }
 
         /**
+         * Execute expirePassword request. Use any specified configuration options to override any other configuration for this request only.
+         * @return TemporaryPassword
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Reset the user&#39;s password </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public TemporaryPassword execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<TemporaryPassword> localVarResp = expirePasswordWithHttpInfo(id, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute expirePassword request with HTTP info returned
          * @return ApiResponse&lt;TemporaryPassword&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -554,6 +722,22 @@ public class UsersApi {
          */
         public ApiResponse<TemporaryPassword> executeWithHttpInfo() throws ApiException {
             return expirePasswordWithHttpInfo(id);
+        }
+
+        /**
+         * Execute expirePassword request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;TemporaryPassword&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Reset the user&#39;s password </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<TemporaryPassword> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return expirePasswordWithHttpInfo(id, opts);
         }
 
         /**
@@ -571,6 +755,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<TemporaryPassword> _callback) throws ApiException {
             return expirePasswordAsync(id, _callback);
+        }
+
+        /**
+         * Execute expirePassword request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Reset the user&#39;s password </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<TemporaryPassword> _callback, ConfigurationOptions opts) throws ApiException {
+            return expirePasswordAsync(id, _callback, opts);
         }
     }
 
@@ -591,6 +792,10 @@ public class UsersApi {
         return new APIexpirePasswordRequest(id);
     }
     private okhttp3.Call findUsersByIdCall(List<String> id, final ApiCallback _callback) throws ApiException {
+        return findUsersByIdCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call findUsersByIdCall(List<String> id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -635,30 +840,44 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call findUsersByIdValidateBeforeCall(List<String> id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call findUsersByIdValidateBeforeCall(List<String> id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling findUsersById(Async)");
         }
 
-        return findUsersByIdCall(id, _callback);
+        return findUsersByIdCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<ListUsersResponse> findUsersByIdWithHttpInfo(List<String> id) throws ApiException {
-        okhttp3.Call localVarCall = findUsersByIdValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = findUsersByIdValidateBeforeCall(id, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<ListUsersResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<ListUsersResponse> findUsersByIdWithHttpInfo(List<String> id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = findUsersByIdValidateBeforeCall(id, null, opts);
         Type localVarReturnType = new TypeToken<ListUsersResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call findUsersByIdAsync(List<String> id, final ApiCallback<ListUsersResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = findUsersByIdValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = findUsersByIdValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<ListUsersResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call findUsersByIdAsync(List<String> id, final ApiCallback<ListUsersResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = findUsersByIdValidateBeforeCall(id, _callback, opts);
         Type localVarReturnType = new TypeToken<ListUsersResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -706,6 +925,23 @@ public class UsersApi {
         }
 
         /**
+         * Execute findUsersById request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ListUsersResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ListUsersResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ListUsersResponse> localVarResp = findUsersByIdWithHttpInfo(id, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute findUsersById request with HTTP info returned
          * @return ApiResponse&lt;ListUsersResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -719,6 +955,22 @@ public class UsersApi {
          */
         public ApiResponse<ListUsersResponse> executeWithHttpInfo() throws ApiException {
             return findUsersByIdWithHttpInfo(id);
+        }
+
+        /**
+         * Execute findUsersById request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ListUsersResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ListUsersResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return findUsersByIdWithHttpInfo(id, opts);
         }
 
         /**
@@ -736,6 +988,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<ListUsersResponse> _callback) throws ApiException {
             return findUsersByIdAsync(id, _callback);
+        }
+
+        /**
+         * Execute findUsersById request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ListUsersResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return findUsersByIdAsync(id, _callback, opts);
         }
     }
 
@@ -756,6 +1025,10 @@ public class UsersApi {
         return new APIfindUsersByIdRequest(id);
     }
     private okhttp3.Call getUserCall(String id, Boolean includeRoles, final ApiCallback _callback) throws ApiException {
+        return getUserCall(id, includeRoles,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getUserCall(String id, Boolean includeRoles, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -801,30 +1074,44 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getUserValidateBeforeCall(String id, Boolean includeRoles, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call getUserValidateBeforeCall(String id, Boolean includeRoles, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling getUser(Async)");
         }
 
-        return getUserCall(id, includeRoles, _callback);
+        return getUserCall(id, includeRoles, _callback, opts);
 
     }
 
 
     private ApiResponse<UserResponse> getUserWithHttpInfo(String id, Boolean includeRoles) throws ApiException {
-        okhttp3.Call localVarCall = getUserValidateBeforeCall(id, includeRoles, null);
+        okhttp3.Call localVarCall = getUserValidateBeforeCall(id, includeRoles, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<UserResponse> getUserWithHttpInfo(String id, Boolean includeRoles, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getUserValidateBeforeCall(id, includeRoles, null, opts);
         Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call getUserAsync(String id, Boolean includeRoles, final ApiCallback<UserResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getUserValidateBeforeCall(id, includeRoles, _callback);
+        okhttp3.Call localVarCall = getUserValidateBeforeCall(id, includeRoles, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getUserAsync(String id, Boolean includeRoles, final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserValidateBeforeCall(id, includeRoles, _callback, opts);
         Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -883,6 +1170,23 @@ public class UsersApi {
         }
 
         /**
+         * Execute getUser request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UserResponse> localVarResp = getUserWithHttpInfo(id, includeRoles, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute getUser request with HTTP info returned
          * @return ApiResponse&lt;UserResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -896,6 +1200,22 @@ public class UsersApi {
          */
         public ApiResponse<UserResponse> executeWithHttpInfo() throws ApiException {
             return getUserWithHttpInfo(id, includeRoles);
+        }
+
+        /**
+         * Execute getUser request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getUserWithHttpInfo(id, includeRoles, opts);
         }
 
         /**
@@ -913,6 +1233,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback) throws ApiException {
             return getUserAsync(id, includeRoles, _callback);
+        }
+
+        /**
+         * Execute getUser request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getUserAsync(id, includeRoles, _callback, opts);
         }
     }
 
@@ -933,6 +1270,10 @@ public class UsersApi {
         return new APIgetUserRequest(id);
     }
     private okhttp3.Call listRunnableUsersCall(final ApiCallback _callback) throws ApiException {
+        return listRunnableUsersCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call listRunnableUsersCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -973,25 +1314,39 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listRunnableUsersValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return listRunnableUsersCall(_callback);
+    private okhttp3.Call listRunnableUsersValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listRunnableUsersCall(_callback, opts);
 
     }
 
 
     private ApiResponse<List<UserResponse>> listRunnableUsersWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = listRunnableUsersValidateBeforeCall(null);
+        okhttp3.Call localVarCall = listRunnableUsersValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<List<UserResponse>> listRunnableUsersWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listRunnableUsersValidateBeforeCall(null, opts);
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call listRunnableUsersAsync(final ApiCallback<List<UserResponse>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listRunnableUsersValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = listRunnableUsersValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call listRunnableUsersAsync(final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = listRunnableUsersValidateBeforeCall(_callback, opts);
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1035,6 +1390,22 @@ public class UsersApi {
         }
 
         /**
+         * Execute listRunnableUsers request. Use any specified configuration options to override any other configuration for this request only.
+         * @return List&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available runnable users </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UserResponse> execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<List<UserResponse>> localVarResp = listRunnableUsersWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute listRunnableUsers request with HTTP info returned
          * @return ApiResponse&lt;List&lt;UserResponse&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1047,6 +1418,21 @@ public class UsersApi {
          */
         public ApiResponse<List<UserResponse>> executeWithHttpInfo() throws ApiException {
             return listRunnableUsersWithHttpInfo();
+        }
+
+        /**
+         * Execute listRunnableUsers request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;List&lt;UserResponse&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available runnable users </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UserResponse>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listRunnableUsersWithHttpInfo(opts);
         }
 
         /**
@@ -1063,6 +1449,22 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UserResponse>> _callback) throws ApiException {
             return listRunnableUsersAsync(_callback);
+        }
+
+        /**
+         * Execute listRunnableUsers request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available runnable users </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+            return listRunnableUsersAsync(_callback, opts);
         }
     }
 
@@ -1081,6 +1483,10 @@ public class UsersApi {
         return new APIlistRunnableUsersRequest();
     }
     private okhttp3.Call listUsersCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback) throws ApiException {
+        return listUsersCall(includeRoles, includeDeactivated,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call listUsersCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1129,25 +1535,39 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listUsersValidateBeforeCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback) throws ApiException {
-        return listUsersCall(includeRoles, includeDeactivated, _callback);
+    private okhttp3.Call listUsersValidateBeforeCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listUsersCall(includeRoles, includeDeactivated, _callback, opts);
 
     }
 
 
     private ApiResponse<List<UserResponse>> listUsersWithHttpInfo(Boolean includeRoles, Boolean includeDeactivated) throws ApiException {
-        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, null);
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<List<UserResponse>> listUsersWithHttpInfo(Boolean includeRoles, Boolean includeDeactivated, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, null, opts);
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call listUsersAsync(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback<List<UserResponse>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, _callback);
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call listUsersAsync(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, _callback, opts);
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -1215,6 +1635,23 @@ public class UsersApi {
         }
 
         /**
+         * Execute listUsers request. Use any specified configuration options to override any other configuration for this request only.
+         * @return List&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available users </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public List<UserResponse> execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<List<UserResponse>> localVarResp = listUsersWithHttpInfo(includeRoles, includeDeactivated, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute listUsers request with HTTP info returned
          * @return ApiResponse&lt;List&lt;UserResponse&gt;&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1228,6 +1665,22 @@ public class UsersApi {
          */
         public ApiResponse<List<UserResponse>> executeWithHttpInfo() throws ApiException {
             return listUsersWithHttpInfo(includeRoles, includeDeactivated);
+        }
+
+        /**
+         * Execute listUsers request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;List&lt;UserResponse&gt;&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available users </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<List<UserResponse>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listUsersWithHttpInfo(includeRoles, includeDeactivated, opts);
         }
 
         /**
@@ -1245,6 +1698,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UserResponse>> _callback) throws ApiException {
             return listUsersAsync(includeRoles, includeDeactivated, _callback);
+        }
+
+        /**
+         * Execute listUsers request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List the available users </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+            return listUsersAsync(includeRoles, includeDeactivated, _callback, opts);
         }
     }
 
@@ -1264,6 +1734,10 @@ public class UsersApi {
         return new APIlistUsersRequest();
     }
     private okhttp3.Call resetFactorsCall(String id, final ApiCallback _callback) throws ApiException {
+        return resetFactorsCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call resetFactorsCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1305,29 +1779,41 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call resetFactorsValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call resetFactorsValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling resetFactors(Async)");
         }
 
-        return resetFactorsCall(id, _callback);
+        return resetFactorsCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> resetFactorsWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = resetFactorsValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = resetFactorsValidateBeforeCall(id, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> resetFactorsWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = resetFactorsValidateBeforeCall(id, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call resetFactorsAsync(String id, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = resetFactorsValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = resetFactorsValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call resetFactorsAsync(String id, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = resetFactorsValidateBeforeCall(id, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1372,6 +1858,21 @@ public class UsersApi {
         }
 
         /**
+         * Execute resetFactors request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            resetFactorsWithHttpInfo(id, opts);
+        }
+
+        /**
          * Execute resetFactors request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1385,6 +1886,22 @@ public class UsersApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return resetFactorsWithHttpInfo(id);
+        }
+
+        /**
+         * Execute resetFactors request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return resetFactorsWithHttpInfo(id, opts);
         }
 
         /**
@@ -1402,6 +1919,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return resetFactorsAsync(id, _callback);
+        }
+
+        /**
+         * Execute resetFactors request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return resetFactorsAsync(id, _callback, opts);
         }
     }
 
@@ -1422,6 +1956,10 @@ public class UsersApi {
         return new APIresetFactorsRequest(id);
     }
     private okhttp3.Call resetPasswordCall(String id, final ApiCallback _callback) throws ApiException {
+        return resetPasswordCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call resetPasswordCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1463,29 +2001,41 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call resetPasswordValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call resetPasswordValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling resetPassword(Async)");
         }
 
-        return resetPasswordCall(id, _callback);
+        return resetPasswordCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> resetPasswordWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(id, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> resetPasswordWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(id, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call resetPasswordAsync(String id, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call resetPasswordAsync(String id, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = resetPasswordValidateBeforeCall(id, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1530,6 +2080,21 @@ public class UsersApi {
         }
 
         /**
+         * Execute resetPassword request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            resetPasswordWithHttpInfo(id, opts);
+        }
+
+        /**
          * Execute resetPassword request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1543,6 +2108,22 @@ public class UsersApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return resetPasswordWithHttpInfo(id);
+        }
+
+        /**
+         * Execute resetPassword request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return resetPasswordWithHttpInfo(id, opts);
         }
 
         /**
@@ -1560,6 +2141,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return resetPasswordAsync(id, _callback);
+        }
+
+        /**
+         * Execute resetPassword request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return resetPasswordAsync(id, _callback, opts);
         }
     }
 
@@ -1580,6 +2178,10 @@ public class UsersApi {
         return new APIresetPasswordRequest(id);
     }
     private okhttp3.Call sendActivationEmailCall(String id, final ApiCallback _callback) throws ApiException {
+        return sendActivationEmailCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call sendActivationEmailCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1621,29 +2223,41 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call sendActivationEmailValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call sendActivationEmailValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling sendActivationEmail(Async)");
         }
 
-        return sendActivationEmailCall(id, _callback);
+        return sendActivationEmailCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> sendActivationEmailWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = sendActivationEmailValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = sendActivationEmailValidateBeforeCall(id, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> sendActivationEmailWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = sendActivationEmailValidateBeforeCall(id, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call sendActivationEmailAsync(String id, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = sendActivationEmailValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = sendActivationEmailValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call sendActivationEmailAsync(String id, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = sendActivationEmailValidateBeforeCall(id, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1688,6 +2302,21 @@ public class UsersApi {
         }
 
         /**
+         * Execute sendActivationEmail request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            sendActivationEmailWithHttpInfo(id, opts);
+        }
+
+        /**
          * Execute sendActivationEmail request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1701,6 +2330,22 @@ public class UsersApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return sendActivationEmailWithHttpInfo(id);
+        }
+
+        /**
+         * Execute sendActivationEmail request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return sendActivationEmailWithHttpInfo(id, opts);
         }
 
         /**
@@ -1718,6 +2363,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return sendActivationEmailAsync(id, _callback);
+        }
+
+        /**
+         * Execute sendActivationEmail request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return sendActivationEmailAsync(id, _callback, opts);
         }
     }
 
@@ -1738,6 +2400,10 @@ public class UsersApi {
         return new APIsendActivationEmailRequest(id);
     }
     private okhttp3.Call unlockUserCall(String id, final ApiCallback _callback) throws ApiException {
+        return unlockUserCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call unlockUserCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1779,29 +2445,41 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call unlockUserValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call unlockUserValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling unlockUser(Async)");
         }
 
-        return unlockUserCall(id, _callback);
+        return unlockUserCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> unlockUserWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = unlockUserValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = unlockUserValidateBeforeCall(id, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> unlockUserWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = unlockUserValidateBeforeCall(id, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call unlockUserAsync(String id, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = unlockUserValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = unlockUserValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call unlockUserAsync(String id, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = unlockUserValidateBeforeCall(id, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -1846,6 +2524,21 @@ public class UsersApi {
         }
 
         /**
+         * Execute unlockUser request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            unlockUserWithHttpInfo(id, opts);
+        }
+
+        /**
          * Execute unlockUser request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -1859,6 +2552,22 @@ public class UsersApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return unlockUserWithHttpInfo(id);
+        }
+
+        /**
+         * Execute unlockUser request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return unlockUserWithHttpInfo(id, opts);
         }
 
         /**
@@ -1876,6 +2585,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return unlockUserAsync(id, _callback);
+        }
+
+        /**
+         * Execute unlockUser request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return unlockUserAsync(id, _callback, opts);
         }
     }
 
@@ -1896,6 +2622,10 @@ public class UsersApi {
         return new APIunlockUserRequest(id);
     }
     private okhttp3.Call unsuspendUserCall(String id, final ApiCallback _callback) throws ApiException {
+        return unsuspendUserCall(id,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call unsuspendUserCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1937,29 +2667,41 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call unsuspendUserValidateBeforeCall(String id, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call unsuspendUserValidateBeforeCall(String id, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling unsuspendUser(Async)");
         }
 
-        return unsuspendUserCall(id, _callback);
+        return unsuspendUserCall(id, _callback, opts);
 
     }
 
 
     private ApiResponse<Void> unsuspendUserWithHttpInfo(String id) throws ApiException {
-        okhttp3.Call localVarCall = unsuspendUserValidateBeforeCall(id, null);
+        okhttp3.Call localVarCall = unsuspendUserValidateBeforeCall(id, null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> unsuspendUserWithHttpInfo(String id, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = unsuspendUserValidateBeforeCall(id, null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call unsuspendUserAsync(String id, final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = unsuspendUserValidateBeforeCall(id, _callback);
+        okhttp3.Call localVarCall = unsuspendUserValidateBeforeCall(id, _callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call unsuspendUserAsync(String id, final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = unsuspendUserValidateBeforeCall(id, _callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -2004,6 +2746,21 @@ public class UsersApi {
         }
 
         /**
+         * Execute unsuspendUser request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            unsuspendUserWithHttpInfo(id, opts);
+        }
+
+        /**
          * Execute unsuspendUser request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2017,6 +2774,22 @@ public class UsersApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return unsuspendUserWithHttpInfo(id);
+        }
+
+        /**
+         * Execute unsuspendUser request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return unsuspendUserWithHttpInfo(id, opts);
         }
 
         /**
@@ -2034,6 +2807,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return unsuspendUserAsync(id, _callback);
+        }
+
+        /**
+         * Execute unsuspendUser request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return unsuspendUserAsync(id, _callback, opts);
         }
     }
 
@@ -2054,6 +2844,10 @@ public class UsersApi {
         return new APIunsuspendUserRequest(id);
     }
     private okhttp3.Call updateUserCall(String id, UpdateUserRequest updateUserRequest, final ApiCallback _callback) throws ApiException {
+        return updateUserCall(id, updateUserRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call updateUserCall(String id, UpdateUserRequest updateUserRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -2099,11 +2893,11 @@ public class UsersApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call updateUserValidateBeforeCall(String id, UpdateUserRequest updateUserRequest, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call updateUserValidateBeforeCall(String id, UpdateUserRequest updateUserRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         // verify the required parameter 'id' is set
         if (id == null) {
             throw new ApiException("Missing the required parameter 'id' when calling updateUser(Async)");
@@ -2114,20 +2908,34 @@ public class UsersApi {
             throw new ApiException("Missing the required parameter 'updateUserRequest' when calling updateUser(Async)");
         }
 
-        return updateUserCall(id, updateUserRequest, _callback);
+        return updateUserCall(id, updateUserRequest, _callback, opts);
 
     }
 
 
     private ApiResponse<UserResponse> updateUserWithHttpInfo(String id, UpdateUserRequest updateUserRequest) throws ApiException {
-        okhttp3.Call localVarCall = updateUserValidateBeforeCall(id, updateUserRequest, null);
+        okhttp3.Call localVarCall = updateUserValidateBeforeCall(id, updateUserRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<UserResponse> updateUserWithHttpInfo(String id, UpdateUserRequest updateUserRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = updateUserValidateBeforeCall(id, updateUserRequest, null, opts);
         Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call updateUserAsync(String id, UpdateUserRequest updateUserRequest, final ApiCallback<UserResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = updateUserValidateBeforeCall(id, updateUserRequest, _callback);
+        okhttp3.Call localVarCall = updateUserValidateBeforeCall(id, updateUserRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call updateUserAsync(String id, UpdateUserRequest updateUserRequest, final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = updateUserValidateBeforeCall(id, updateUserRequest, _callback, opts);
         Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -2177,6 +2985,23 @@ public class UsersApi {
         }
 
         /**
+         * Execute updateUser request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update a user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UserResponse> localVarResp = updateUserWithHttpInfo(id, updateUserRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute updateUser request with HTTP info returned
          * @return ApiResponse&lt;UserResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -2190,6 +3015,22 @@ public class UsersApi {
          */
         public ApiResponse<UserResponse> executeWithHttpInfo() throws ApiException {
             return updateUserWithHttpInfo(id, updateUserRequest);
+        }
+
+        /**
+         * Execute updateUser request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update a user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return updateUserWithHttpInfo(id, updateUserRequest, opts);
         }
 
         /**
@@ -2207,6 +3048,23 @@ public class UsersApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback) throws ApiException {
             return updateUserAsync(id, updateUserRequest, _callback);
+        }
+
+        /**
+         * Execute updateUser request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update a user </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return updateUserAsync(id, updateUserRequest, _callback, opts);
         }
     }
 

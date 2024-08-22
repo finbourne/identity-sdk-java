@@ -47,8 +47,19 @@ public class MeApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // MeApi apiInstance = apiFactory.build(MeApi.class);
+
         MeApi apiInstance = ApiFactoryBuilder.build(fileName).build(MeApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // CurrentUserResponse result = apiInstance.getUserInfo().execute(opts);
+
             CurrentUserResponse result = apiInstance.getUserInfo().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -122,9 +133,20 @@ public class MeApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // MeApi apiInstance = apiFactory.build(MeApi.class);
+
         MeApi apiInstance = ApiFactoryBuilder.build(fileName).build(MeApi.class);
         SetPassword setPassword = new SetPassword(); // SetPassword | The request containing the new password value
         try {
+            // uncomment the below to set overrides at the request level
+            // SetPasswordResponse result = apiInstance.setPassword(setPassword).execute(opts);
+
             SetPasswordResponse result = apiInstance.setPassword(setPassword).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {

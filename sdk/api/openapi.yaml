@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3008
+  version: 0.0.3012
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -3020,6 +3020,8 @@ components:
             login: login
             type: type
             email: email
+            alternativeUserIds:
+              key: alternativeUserIds
         links:
         - method: method
           description: description
@@ -4135,6 +4137,8 @@ components:
         login: login
         type: type
         email: email
+        alternativeUserIds:
+          key: alternativeUserIds
       properties:
         id:
           description: The user id
@@ -4163,6 +4167,14 @@ components:
           description: "User's type (Personal, Service...)"
           nullable: true
           type: string
+        alternativeUserIds:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: User's alternative user IDs. Only returned for the current
+            user
+          nullable: true
+          type: object
         links:
           items:
             $ref: '#/components/schemas/Link'

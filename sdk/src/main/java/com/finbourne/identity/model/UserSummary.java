@@ -20,7 +20,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -80,6 +82,10 @@ public class UserSummary {
   public static final String SERIALIZED_NAME_TYPE = "type";
   @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
+
+  public static final String SERIALIZED_NAME_ALTERNATIVE_USER_IDS = "alternativeUserIds";
+  @SerializedName(SERIALIZED_NAME_ALTERNATIVE_USER_IDS)
+  private Map<String, String> alternativeUserIds;
 
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
@@ -235,6 +241,35 @@ public class UserSummary {
   }
 
 
+  public UserSummary alternativeUserIds(Map<String, String> alternativeUserIds) {
+    
+    this.alternativeUserIds = alternativeUserIds;
+    return this;
+  }
+
+  public UserSummary putAlternativeUserIdsItem(String key, String alternativeUserIdsItem) {
+    if (this.alternativeUserIds == null) {
+      this.alternativeUserIds = new HashMap<>();
+    }
+    this.alternativeUserIds.put(key, alternativeUserIdsItem);
+    return this;
+  }
+
+   /**
+   * User&#39;s alternative user IDs. Only returned for the current user
+   * @return alternativeUserIds
+  **/
+  @jakarta.annotation.Nullable
+  public Map<String, String> getAlternativeUserIds() {
+    return alternativeUserIds;
+  }
+
+
+  public void setAlternativeUserIds(Map<String, String> alternativeUserIds) {
+    this.alternativeUserIds = alternativeUserIds;
+  }
+
+
   public UserSummary links(List<Link> links) {
     
     this.links = links;
@@ -281,6 +316,7 @@ public class UserSummary {
         Objects.equals(this.firstName, userSummary.firstName) &&
         Objects.equals(this.lastName, userSummary.lastName) &&
         Objects.equals(this.type, userSummary.type) &&
+        Objects.equals(this.alternativeUserIds, userSummary.alternativeUserIds) &&
         Objects.equals(this.links, userSummary.links);
   }
 
@@ -290,7 +326,7 @@ public class UserSummary {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, login, email, secondEmail, firstName, lastName, type, links);
+    return Objects.hash(id, login, email, secondEmail, firstName, lastName, type, alternativeUserIds, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -311,6 +347,7 @@ public class UserSummary {
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    alternativeUserIds: ").append(toIndentedString(alternativeUserIds)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -341,6 +378,7 @@ public class UserSummary {
     openapiFields.add("firstName");
     openapiFields.add("lastName");
     openapiFields.add("type");
+    openapiFields.add("alternativeUserIds");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)

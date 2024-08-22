@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -70,6 +71,10 @@ public class TokensApi {
     }
 
     private okhttp3.Call invalidateTokenCall(final ApiCallback _callback) throws ApiException {
+        return invalidateTokenCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call invalidateTokenCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -110,24 +115,36 @@ public class TokensApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call invalidateTokenValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return invalidateTokenCall(_callback);
+    private okhttp3.Call invalidateTokenValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return invalidateTokenCall(_callback, opts);
 
     }
 
 
     private ApiResponse<Void> invalidateTokenWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = invalidateTokenValidateBeforeCall(null);
+        okhttp3.Call localVarCall = invalidateTokenValidateBeforeCall(null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> invalidateTokenWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = invalidateTokenValidateBeforeCall(null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call invalidateTokenAsync(final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = invalidateTokenValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = invalidateTokenValidateBeforeCall(_callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call invalidateTokenAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = invalidateTokenValidateBeforeCall(_callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -168,6 +185,20 @@ public class TokensApi {
         }
 
         /**
+         * Execute invalidateToken request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            invalidateTokenWithHttpInfo(opts);
+        }
+
+        /**
          * Execute invalidateToken request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -180,6 +211,21 @@ public class TokensApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return invalidateTokenWithHttpInfo();
+        }
+
+        /**
+         * Execute invalidateToken request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return invalidateTokenWithHttpInfo(opts);
         }
 
         /**
@@ -196,6 +242,22 @@ public class TokensApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return invalidateTokenAsync(_callback);
+        }
+
+        /**
+         * Execute invalidateToken request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return invalidateTokenAsync(_callback, opts);
         }
     }
 

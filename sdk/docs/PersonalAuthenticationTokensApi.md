@@ -48,9 +48,20 @@ public class PersonalAuthenticationTokensApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // PersonalAuthenticationTokensApi apiInstance = apiFactory.build(PersonalAuthenticationTokensApi.class);
+
         PersonalAuthenticationTokensApi apiInstance = ApiFactoryBuilder.build(fileName).build(PersonalAuthenticationTokensApi.class);
         CreateApiKey createApiKey = new CreateApiKey(); // CreateApiKey | The request to create a new Personal Access Token
         try {
+            // uncomment the below to set overrides at the request level
+            // CreatedApiKey result = apiInstance.createApiKey(createApiKey).execute(opts);
+
             CreatedApiKey result = apiInstance.createApiKey(createApiKey).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -128,9 +139,20 @@ public class PersonalAuthenticationTokensApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // PersonalAuthenticationTokensApi apiInstance = apiFactory.build(PersonalAuthenticationTokensApi.class);
+
         PersonalAuthenticationTokensApi apiInstance = ApiFactoryBuilder.build(fileName).build(PersonalAuthenticationTokensApi.class);
         String id = "id_example"; // String | The id of the Personal Access Token to delete
         try {
+            // uncomment the below to set overrides at the request level
+            // ApiKey result = apiInstance.deleteApiKey(id).execute(opts);
+
             ApiKey result = apiInstance.deleteApiKey(id).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
@@ -208,8 +230,19 @@ public class PersonalAuthenticationTokensApiExample {
             "}");
         }
 
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // PersonalAuthenticationTokensApi apiInstance = apiFactory.build(PersonalAuthenticationTokensApi.class);
+
         PersonalAuthenticationTokensApi apiInstance = ApiFactoryBuilder.build(fileName).build(PersonalAuthenticationTokensApi.class);
         try {
+            // uncomment the below to set overrides at the request level
+            // List<ApiKey> result = apiInstance.listOwnApiKeys().execute(opts);
+
             List<ApiKey> result = apiInstance.listOwnApiKeys().execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {

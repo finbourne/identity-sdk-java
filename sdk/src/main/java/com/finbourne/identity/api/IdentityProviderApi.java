@@ -18,6 +18,7 @@ import com.finbourne.identity.Configuration;
 import com.finbourne.identity.Pair;
 import com.finbourne.identity.ProgressRequestBody;
 import com.finbourne.identity.ProgressResponseBody;
+import com.finbourne.identity.extensions.ConfigurationOptions;
 
 import com.google.gson.reflect.TypeToken;
 
@@ -73,6 +74,10 @@ public class IdentityProviderApi {
     }
 
     private okhttp3.Call addScimCall(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, final ApiCallback _callback) throws ApiException {
+        return addScimCall(apiTokenAction, oldApiTokenDeactivation,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call addScimCall(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -123,25 +128,39 @@ public class IdentityProviderApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call addScimValidateBeforeCall(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, final ApiCallback _callback) throws ApiException {
-        return addScimCall(apiTokenAction, oldApiTokenDeactivation, _callback);
+    private okhttp3.Call addScimValidateBeforeCall(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return addScimCall(apiTokenAction, oldApiTokenDeactivation, _callback, opts);
 
     }
 
 
     private ApiResponse<AddScimResponse> addScimWithHttpInfo(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation) throws ApiException {
-        okhttp3.Call localVarCall = addScimValidateBeforeCall(apiTokenAction, oldApiTokenDeactivation, null);
+        okhttp3.Call localVarCall = addScimValidateBeforeCall(apiTokenAction, oldApiTokenDeactivation, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<AddScimResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<AddScimResponse> addScimWithHttpInfo(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = addScimValidateBeforeCall(apiTokenAction, oldApiTokenDeactivation, null, opts);
         Type localVarReturnType = new TypeToken<AddScimResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     private okhttp3.Call addScimAsync(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, final ApiCallback<AddScimResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = addScimValidateBeforeCall(apiTokenAction, oldApiTokenDeactivation, _callback);
+        okhttp3.Call localVarCall = addScimValidateBeforeCall(apiTokenAction, oldApiTokenDeactivation, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<AddScimResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call addScimAsync(String apiTokenAction, OffsetDateTime oldApiTokenDeactivation, final ApiCallback<AddScimResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = addScimValidateBeforeCall(apiTokenAction, oldApiTokenDeactivation, _callback, opts);
         Type localVarReturnType = new TypeToken<AddScimResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
@@ -209,6 +228,23 @@ public class IdentityProviderApi {
         }
 
         /**
+         * Execute addScim request. Use any specified configuration options to override any other configuration for this request only.
+         * @return AddScimResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The base URL and API token to be used </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public AddScimResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<AddScimResponse> localVarResp = addScimWithHttpInfo(apiTokenAction, oldApiTokenDeactivation, opts);
+            return localVarResp.getData();
+        }
+
+        /**
          * Execute addScim request with HTTP info returned
          * @return ApiResponse&lt;AddScimResponse&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -222,6 +258,22 @@ public class IdentityProviderApi {
          */
         public ApiResponse<AddScimResponse> executeWithHttpInfo() throws ApiException {
             return addScimWithHttpInfo(apiTokenAction, oldApiTokenDeactivation);
+        }
+
+        /**
+         * Execute addScim request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;AddScimResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The base URL and API token to be used </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<AddScimResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return addScimWithHttpInfo(apiTokenAction, oldApiTokenDeactivation, opts);
         }
 
         /**
@@ -239,6 +291,23 @@ public class IdentityProviderApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<AddScimResponse> _callback) throws ApiException {
             return addScimAsync(apiTokenAction, oldApiTokenDeactivation, _callback);
+        }
+
+        /**
+         * Execute addScim request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The base URL and API token to be used </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<AddScimResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return addScimAsync(apiTokenAction, oldApiTokenDeactivation, _callback, opts);
         }
     }
 
@@ -258,6 +327,10 @@ public class IdentityProviderApi {
         return new APIaddScimRequest();
     }
     private okhttp3.Call removeScimCall(final ApiCallback _callback) throws ApiException {
+        return removeScimCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call removeScimCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -298,24 +371,36 @@ public class IdentityProviderApi {
         }
 
         String[] localVarAuthNames = new String[] { "oauth2" };
-        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
+        return localVarApiClient.buildCall(basePath, localVarPath, "DELETE", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call removeScimValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return removeScimCall(_callback);
+    private okhttp3.Call removeScimValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return removeScimCall(_callback, opts);
 
     }
 
 
     private ApiResponse<Void> removeScimWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = removeScimValidateBeforeCall(null);
+        okhttp3.Call localVarCall = removeScimValidateBeforeCall(null, new ConfigurationOptions());
+        return localVarApiClient.execute(localVarCall);
+    }
+
+    private ApiResponse<Void> removeScimWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = removeScimValidateBeforeCall(null, opts);
         return localVarApiClient.execute(localVarCall);
     }
 
     private okhttp3.Call removeScimAsync(final ApiCallback<Void> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = removeScimValidateBeforeCall(_callback);
+        okhttp3.Call localVarCall = removeScimValidateBeforeCall(_callback, new ConfigurationOptions());
+        localVarApiClient.executeAsync(localVarCall, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call removeScimAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = removeScimValidateBeforeCall(_callback, opts);
         localVarApiClient.executeAsync(localVarCall, _callback);
         return localVarCall;
     }
@@ -356,6 +441,20 @@ public class IdentityProviderApi {
         }
 
         /**
+         * Execute removeScim request
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public void execute(ConfigurationOptions opts) throws ApiException {
+            removeScimWithHttpInfo(opts);
+        }
+
+        /**
          * Execute removeScim request with HTTP info returned
          * @return ApiResponse&lt;Void&gt;
          * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
@@ -368,6 +467,21 @@ public class IdentityProviderApi {
          */
         public ApiResponse<Void> executeWithHttpInfo() throws ApiException {
             return removeScimWithHttpInfo();
+        }
+
+        /**
+         * Execute removeScim request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;Void&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<Void> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return removeScimWithHttpInfo(opts);
         }
 
         /**
@@ -384,6 +498,22 @@ public class IdentityProviderApi {
          */
         public okhttp3.Call executeAsync(final ApiCallback<Void> _callback) throws ApiException {
             return removeScimAsync(_callback);
+        }
+
+        /**
+         * Execute removeScim request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 204 </td><td> No Content </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<Void> _callback, ConfigurationOptions opts) throws ApiException {
+            return removeScimAsync(_callback, opts);
         }
     }
 
