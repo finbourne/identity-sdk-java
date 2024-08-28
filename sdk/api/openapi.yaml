@@ -6,7 +6,7 @@ info:
     url: https://www.finbourne.com
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3018
+  version: 0.0.3020
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1977,6 +1977,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
           application/json:
@@ -1985,6 +1986,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
           text/json:
@@ -1993,6 +1995,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
           application/*+json:
@@ -2001,6 +2004,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
         description: The new definition of the User
@@ -3980,6 +3984,8 @@ components:
         - code: code
           scope: scope
         login: login
+        alternativeUserIds:
+          key: alternativeUserIds
       properties:
         firstName:
           maxLength: 50
@@ -4008,6 +4014,12 @@ components:
           minLength: 5
           pattern: "^[\\s\\S]*$"
           type: string
+        alternativeUserIds:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
         roles:
           description: Deprecated. To update a user's roles use the AddUserToRole
             and RemoveUserFromRole endpoints
@@ -4058,12 +4070,20 @@ components:
         id: id
         login: login
         type: type
+        alternativeUserIds:
+          key: alternativeUserIds
         status: status
       properties:
         id:
           description: The user's system supplied unique identifier
           minLength: 1
           type: string
+        alternativeUserIds:
+          additionalProperties:
+            type: string
+          description: The user's alternative IDs
+          nullable: true
+          type: object
         emailAddress:
           description: "The user's emailAddress address, which must be unique within\
             \ the system"

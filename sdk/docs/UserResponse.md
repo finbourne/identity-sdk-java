@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**id** | **String** | The user&#39;s system supplied unique identifier |  |
+|**alternativeUserIds** | **Map&lt;String, String&gt;** | The user&#39;s alternative IDs |  [optional] |
 |**emailAddress** | **String** | The user&#39;s emailAddress address, which must be unique within the system |  |
 |**secondEmailAddress** | **String** | The user&#39;s second email address. Only allowed for service users. |  [optional] |
 |**login** | **String** |  |  |

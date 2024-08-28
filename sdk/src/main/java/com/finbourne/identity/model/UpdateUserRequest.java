@@ -20,7 +20,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -72,6 +74,10 @@ public class UpdateUserRequest {
   public static final String SERIALIZED_NAME_LOGIN = "login";
   @SerializedName(SERIALIZED_NAME_LOGIN)
   private String login;
+
+  public static final String SERIALIZED_NAME_ALTERNATIVE_USER_IDS = "alternativeUserIds";
+  @SerializedName(SERIALIZED_NAME_ALTERNATIVE_USER_IDS)
+  private Map<String, String> alternativeUserIds;
 
   public static final String SERIALIZED_NAME_ROLES = "roles";
   @SerializedName(SERIALIZED_NAME_ROLES)
@@ -185,6 +191,35 @@ public class UpdateUserRequest {
   }
 
 
+  public UpdateUserRequest alternativeUserIds(Map<String, String> alternativeUserIds) {
+    
+    this.alternativeUserIds = alternativeUserIds;
+    return this;
+  }
+
+  public UpdateUserRequest putAlternativeUserIdsItem(String key, String alternativeUserIdsItem) {
+    if (this.alternativeUserIds == null) {
+      this.alternativeUserIds = new HashMap<>();
+    }
+    this.alternativeUserIds.put(key, alternativeUserIdsItem);
+    return this;
+  }
+
+   /**
+   * Get alternativeUserIds
+   * @return alternativeUserIds
+  **/
+  @jakarta.annotation.Nullable
+  public Map<String, String> getAlternativeUserIds() {
+    return alternativeUserIds;
+  }
+
+
+  public void setAlternativeUserIds(Map<String, String> alternativeUserIds) {
+    this.alternativeUserIds = alternativeUserIds;
+  }
+
+
   public UpdateUserRequest roles(List<RoleId> roles) {
     
     this.roles = roles;
@@ -229,6 +264,7 @@ public class UpdateUserRequest {
         Objects.equals(this.emailAddress, updateUserRequest.emailAddress) &&
         Objects.equals(this.secondEmailAddress, updateUserRequest.secondEmailAddress) &&
         Objects.equals(this.login, updateUserRequest.login) &&
+        Objects.equals(this.alternativeUserIds, updateUserRequest.alternativeUserIds) &&
         Objects.equals(this.roles, updateUserRequest.roles);
   }
 
@@ -238,7 +274,7 @@ public class UpdateUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, roles);
+    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, alternativeUserIds, roles);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -257,6 +293,7 @@ public class UpdateUserRequest {
     sb.append("    emailAddress: ").append(toIndentedString(emailAddress)).append("\n");
     sb.append("    secondEmailAddress: ").append(toIndentedString(secondEmailAddress)).append("\n");
     sb.append("    login: ").append(toIndentedString(login)).append("\n");
+    sb.append("    alternativeUserIds: ").append(toIndentedString(alternativeUserIds)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -285,6 +322,7 @@ public class UpdateUserRequest {
     openapiFields.add("emailAddress");
     openapiFields.add("secondEmailAddress");
     openapiFields.add("login");
+    openapiFields.add("alternativeUserIds");
     openapiFields.add("roles");
 
     // a set of required properties/fields (JSON key names)

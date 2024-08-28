@@ -21,7 +21,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -57,6 +59,10 @@ public class UserResponse {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   private String id;
+
+  public static final String SERIALIZED_NAME_ALTERNATIVE_USER_IDS = "alternativeUserIds";
+  @SerializedName(SERIALIZED_NAME_ALTERNATIVE_USER_IDS)
+  private Map<String, String> alternativeUserIds;
 
   public static final String SERIALIZED_NAME_EMAIL_ADDRESS = "emailAddress";
   @SerializedName(SERIALIZED_NAME_EMAIL_ADDRESS)
@@ -119,6 +125,35 @@ public class UserResponse {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+
+  public UserResponse alternativeUserIds(Map<String, String> alternativeUserIds) {
+    
+    this.alternativeUserIds = alternativeUserIds;
+    return this;
+  }
+
+  public UserResponse putAlternativeUserIdsItem(String key, String alternativeUserIdsItem) {
+    if (this.alternativeUserIds == null) {
+      this.alternativeUserIds = new HashMap<>();
+    }
+    this.alternativeUserIds.put(key, alternativeUserIdsItem);
+    return this;
+  }
+
+   /**
+   * The user&#39;s alternative IDs
+   * @return alternativeUserIds
+  **/
+  @jakarta.annotation.Nullable
+  public Map<String, String> getAlternativeUserIds() {
+    return alternativeUserIds;
+  }
+
+
+  public void setAlternativeUserIds(Map<String, String> alternativeUserIds) {
+    this.alternativeUserIds = alternativeUserIds;
   }
 
 
@@ -359,6 +394,7 @@ public class UserResponse {
     }
     UserResponse userResponse = (UserResponse) o;
     return Objects.equals(this.id, userResponse.id) &&
+        Objects.equals(this.alternativeUserIds, userResponse.alternativeUserIds) &&
         Objects.equals(this.emailAddress, userResponse.emailAddress) &&
         Objects.equals(this.secondEmailAddress, userResponse.secondEmailAddress) &&
         Objects.equals(this.login, userResponse.login) &&
@@ -377,7 +413,7 @@ public class UserResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, emailAddress, secondEmailAddress, login, firstName, lastName, roles, type, status, external, links);
+    return Objects.hash(id, alternativeUserIds, emailAddress, secondEmailAddress, login, firstName, lastName, roles, type, status, external, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -392,6 +428,7 @@ public class UserResponse {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserResponse {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    alternativeUserIds: ").append(toIndentedString(alternativeUserIds)).append("\n");
     sb.append("    emailAddress: ").append(toIndentedString(emailAddress)).append("\n");
     sb.append("    secondEmailAddress: ").append(toIndentedString(secondEmailAddress)).append("\n");
     sb.append("    login: ").append(toIndentedString(login)).append("\n");
@@ -425,6 +462,7 @@ public class UserResponse {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
+    openapiFields.add("alternativeUserIds");
     openapiFields.add("emailAddress");
     openapiFields.add("secondEmailAddress");
     openapiFields.add("login");
