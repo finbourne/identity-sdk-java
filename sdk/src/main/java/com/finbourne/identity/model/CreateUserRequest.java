@@ -20,7 +20,9 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.openapitools.jackson.nullable.JsonNullable;
 
 import com.google.gson.Gson;
@@ -72,6 +74,10 @@ public class CreateUserRequest {
   public static final String SERIALIZED_NAME_LOGIN = "login";
   @SerializedName(SERIALIZED_NAME_LOGIN)
   private String login;
+
+  public static final String SERIALIZED_NAME_ALTERNATIVE_USER_IDS = "alternativeUserIds";
+  @SerializedName(SERIALIZED_NAME_ALTERNATIVE_USER_IDS)
+  private Map<String, String> alternativeUserIds;
 
   public static final String SERIALIZED_NAME_ROLES = "roles";
   @SerializedName(SERIALIZED_NAME_ROLES)
@@ -189,6 +195,35 @@ public class CreateUserRequest {
   }
 
 
+  public CreateUserRequest alternativeUserIds(Map<String, String> alternativeUserIds) {
+    
+    this.alternativeUserIds = alternativeUserIds;
+    return this;
+  }
+
+  public CreateUserRequest putAlternativeUserIdsItem(String key, String alternativeUserIdsItem) {
+    if (this.alternativeUserIds == null) {
+      this.alternativeUserIds = new HashMap<>();
+    }
+    this.alternativeUserIds.put(key, alternativeUserIdsItem);
+    return this;
+  }
+
+   /**
+   * Get alternativeUserIds
+   * @return alternativeUserIds
+  **/
+  @jakarta.annotation.Nullable
+  public Map<String, String> getAlternativeUserIds() {
+    return alternativeUserIds;
+  }
+
+
+  public void setAlternativeUserIds(Map<String, String> alternativeUserIds) {
+    this.alternativeUserIds = alternativeUserIds;
+  }
+
+
   public CreateUserRequest roles(List<RoleId> roles) {
     
     this.roles = roles;
@@ -254,6 +289,7 @@ public class CreateUserRequest {
         Objects.equals(this.emailAddress, createUserRequest.emailAddress) &&
         Objects.equals(this.secondEmailAddress, createUserRequest.secondEmailAddress) &&
         Objects.equals(this.login, createUserRequest.login) &&
+        Objects.equals(this.alternativeUserIds, createUserRequest.alternativeUserIds) &&
         Objects.equals(this.roles, createUserRequest.roles) &&
         Objects.equals(this.type, createUserRequest.type);
   }
@@ -264,7 +300,7 @@ public class CreateUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, roles, type);
+    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, alternativeUserIds, roles, type);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -283,6 +319,7 @@ public class CreateUserRequest {
     sb.append("    emailAddress: ").append(toIndentedString(emailAddress)).append("\n");
     sb.append("    secondEmailAddress: ").append(toIndentedString(secondEmailAddress)).append("\n");
     sb.append("    login: ").append(toIndentedString(login)).append("\n");
+    sb.append("    alternativeUserIds: ").append(toIndentedString(alternativeUserIds)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("}");
@@ -312,6 +349,7 @@ public class CreateUserRequest {
     openapiFields.add("emailAddress");
     openapiFields.add("secondEmailAddress");
     openapiFields.add("login");
+    openapiFields.add("alternativeUserIds");
     openapiFields.add("roles");
     openapiFields.add("type");
 

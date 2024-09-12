@@ -9,6 +9,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**expirePassword**](UsersApi.md#expirePassword) | **POST** /api/users/{id}/lifecycle/$expirepassword | ExpirePassword: Reset the user&#39;s password to a temporary one |
 | [**findUsersById**](UsersApi.md#findUsersById) | **GET** /api/directory | FindUsersById: Find users by id endpoint |
 | [**getUser**](UsersApi.md#getUser) | **GET** /api/users/{id} | GetUser: Get User |
+| [**getUserSchema**](UsersApi.md#getUserSchema) | **GET** /api/users/schema | [EXPERIMENTAL] GetUserSchema: Get User Schema |
 | [**listRunnableUsers**](UsersApi.md#listRunnableUsers) | **GET** /api/users/$runnable | [EARLY ACCESS] ListRunnableUsers: List Runable Users |
 | [**listUsers**](UsersApi.md#listUsers) | **GET** /api/users | ListUsers: List Users |
 | [**resetFactors**](UsersApi.md#resetFactors) | **POST** /api/users/{id}/lifecycle/$resetfactors | ResetFactors: Reset MFA factors |
@@ -17,6 +18,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**unlockUser**](UsersApi.md#unlockUser) | **POST** /api/users/{id}/lifecycle/$unlock | UnlockUser: Unlock User |
 | [**unsuspendUser**](UsersApi.md#unsuspendUser) | **POST** /api/users/{id}/lifecycle/$unsuspend | [EXPERIMENTAL] UnsuspendUser: Unsuspend user |
 | [**updateUser**](UsersApi.md#updateUser) | **PUT** /api/users/{id} | UpdateUser: Update User |
+| [**updateUserSchema**](UsersApi.md#updateUserSchema) | **PUT** /api/users/schema | [EXPERIMENTAL] UpdateUserSchema: Update User Schema |
 
 
 
@@ -475,6 +477,92 @@ public class UsersApiExample {
 |-------------|-------------|------------------|
 | **200** | Get the specified user |  -  |
 | **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getUserSchema
+
+> UserSchemaResponse getUserSchema()
+
+[EXPERIMENTAL] GetUserSchema: Get User Schema
+
+Get the User Schema
+
+### Example
+
+```java
+import com.finbourne.identity.model.*;
+import com.finbourne.identity.api.UsersApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class UsersApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
+        UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
+        try {
+            // uncomment the below to set overrides at the request level
+            // UserSchemaResponse result = apiInstance.getUserSchema().execute(opts);
+
+            UserSchemaResponse result = apiInstance.getUserSchema().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsersApi#getUserSchema");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**UserSchemaResponse**](UserSchemaResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update the User Schema |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
@@ -1196,6 +1284,97 @@ public class UsersApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Update a user |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## updateUserSchema
+
+> UserSchemaResponse updateUserSchema(updateUserSchemaRequest)
+
+[EXPERIMENTAL] UpdateUserSchema: Update User Schema
+
+Update the User Schema
+
+### Example
+
+```java
+import com.finbourne.identity.model.*;
+import com.finbourne.identity.api.UsersApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class UsersApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
+        UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
+        UpdateUserSchemaRequest updateUserSchemaRequest = new UpdateUserSchemaRequest(); // UpdateUserSchemaRequest | The new User Schema
+        try {
+            // uncomment the below to set overrides at the request level
+            // UserSchemaResponse result = apiInstance.updateUserSchema(updateUserSchemaRequest).execute(opts);
+
+            UserSchemaResponse result = apiInstance.updateUserSchema(updateUserSchemaRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsersApi#updateUserSchema");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **updateUserSchemaRequest** | [**UpdateUserSchemaRequest**](UpdateUserSchemaRequest.md)| The new User Schema | |
+
+### Return type
+
+[**UserSchemaResponse**](UserSchemaResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Update the User Schema |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

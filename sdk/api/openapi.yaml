@@ -43,7 +43,7 @@ info:
     \ Domain Job Error| |\n"
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3026
+  version: 0.0.3032
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1749,6 +1749,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
               type: Personal
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
@@ -1758,6 +1759,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
               type: Personal
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
@@ -1767,6 +1769,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
               type: Personal
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
@@ -1776,6 +1779,7 @@ paths:
               lastName: Bloggs
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
+              alternativeUserIds: {}
               type: Personal
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
@@ -1869,6 +1873,100 @@ paths:
       tags:
       - Users
       x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/schema:
+    get:
+      description: Get the User Schema
+      operationId: GetUserSchema
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                alternativeUserIds:
+                - name: Alternative_User_Id
+                  description: Description of Alternative User ID
+              schema:
+                $ref: '#/components/schemas/UserSchemaResponse'
+          description: Update the User Schema
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] GetUserSchema: Get User Schema"
+      tags:
+      - Users
+      x-fbn-apistatus: Experimental
+      x-accepts: application/json
+    put:
+      description: Update the User Schema
+      operationId: UpdateUserSchema
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              alternativeUserIds:
+              - name: Alternative_User_Id
+                description: Description of Alternative User ID
+            schema:
+              $ref: '#/components/schemas/UpdateUserSchemaRequest'
+          application/json:
+            example:
+              alternativeUserIds:
+              - name: Alternative_User_Id
+                description: Description of Alternative User ID
+            schema:
+              $ref: '#/components/schemas/UpdateUserSchemaRequest'
+          text/json:
+            example:
+              alternativeUserIds:
+              - name: Alternative_User_Id
+                description: Description of Alternative User ID
+            schema:
+              $ref: '#/components/schemas/UpdateUserSchemaRequest'
+          application/*+json:
+            example:
+              alternativeUserIds:
+              - name: Alternative_User_Id
+                description: Description of Alternative User ID
+            schema:
+              $ref: '#/components/schemas/UpdateUserSchemaRequest'
+        description: The new User Schema
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                alternativeUserIds:
+                - name: Alternative_User_Id
+                  description: Description of Alternative User ID
+              schema:
+                $ref: '#/components/schemas/UserSchemaResponse'
+          description: Update the User Schema
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] UpdateUserSchema: Update User Schema"
+      tags:
+      - Users
+      x-fbn-apistatus: Experimental
+      x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/users/{id}:
     delete:
@@ -2548,7 +2646,7 @@ components:
           minLength: 3
           type: string
         entity:
-          maxLength: 25
+          maxLength: 40
           minLength: 3
           type: string
       required:
@@ -2815,6 +2913,8 @@ components:
           scope: scope
         login: login
         type: type
+        alternativeUserIds:
+          key: alternativeUserIds
       properties:
         firstName:
           description: The first name of the user
@@ -2848,6 +2948,12 @@ components:
           maxLength: 80
           minLength: 5
           type: string
+        alternativeUserIds:
+          additionalProperties:
+            nullable: true
+            type: string
+          nullable: true
+          type: object
         roles:
           description: Optional. Any known roles the user should be created with.
           items:
@@ -4070,6 +4176,29 @@ components:
       - lastName
       - login
       type: object
+    UpdateUserSchemaRequest:
+      additionalProperties: false
+      example:
+        alternativeUserIds:
+        - name: name
+          description: description
+        - name: name
+          description: description
+        - name: name
+          description: description
+        - name: name
+          description: description
+        - name: name
+          description: description
+      properties:
+        alternativeUserIds:
+          items:
+            $ref: '#/components/schemas/UserSchemaProperty'
+          maxItems: 10
+          type: array
+      required:
+      - alternativeUserIds
+      type: object
     UserResponse:
       additionalProperties: false
       example:
@@ -4173,6 +4302,40 @@ components:
       - login
       - status
       - type
+      type: object
+    UserSchemaProperty:
+      additionalProperties: false
+      example:
+        name: name
+        description: description
+      properties:
+        name:
+          maxLength: 50
+          minLength: 1
+          pattern: "^[a-zA-Z0-9_]+$"
+          type: string
+        description:
+          maxLength: 80
+          minLength: 0
+          type: string
+      required:
+      - description
+      - name
+      type: object
+    UserSchemaResponse:
+      additionalProperties: false
+      example:
+        alternativeUserIds:
+        - name: name
+          description: description
+        - name: name
+          description: description
+      properties:
+        alternativeUserIds:
+          items:
+            $ref: '#/components/schemas/UserSchemaProperty'
+          nullable: true
+          type: array
       type: object
     UserSummary:
       additionalProperties: false

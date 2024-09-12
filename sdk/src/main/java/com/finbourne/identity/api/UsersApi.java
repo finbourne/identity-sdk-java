@@ -31,7 +31,9 @@ import com.finbourne.identity.model.LusidProblemDetails;
 import com.finbourne.identity.model.LusidValidationProblemDetails;
 import com.finbourne.identity.model.TemporaryPassword;
 import com.finbourne.identity.model.UpdateUserRequest;
+import com.finbourne.identity.model.UpdateUserSchemaRequest;
 import com.finbourne.identity.model.UserResponse;
+import com.finbourne.identity.model.UserSchemaResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -1268,6 +1270,219 @@ public class UsersApi {
      */
     public APIgetUserRequest getUser(String id) {
         return new APIgetUserRequest(id);
+    }
+    private okhttp3.Call getUserSchemaCall(final ApiCallback _callback) throws ApiException {
+        return getUserSchemaCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getUserSchemaCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/users/schema";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUserSchemaValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getUserSchemaCall(_callback, opts);
+
+    }
+
+
+    private ApiResponse<UserSchemaResponse> getUserSchemaWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = getUserSchemaValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<UserSchemaResponse> getUserSchemaWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getUserSchemaValidateBeforeCall(null, opts);
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getUserSchemaAsync(final ApiCallback<UserSchemaResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserSchemaValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getUserSchemaAsync(final ApiCallback<UserSchemaResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserSchemaValidateBeforeCall(_callback, opts);
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIgetUserSchemaRequest {
+
+        private APIgetUserSchemaRequest() {
+        }
+
+        /**
+         * Build call for getUserSchema
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserSchemaCall(_callback);
+        }
+
+        /**
+         * Execute getUserSchema request
+         * @return UserSchemaResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserSchemaResponse execute() throws ApiException {
+            ApiResponse<UserSchemaResponse> localVarResp = getUserSchemaWithHttpInfo();
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getUserSchema request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UserSchemaResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserSchemaResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UserSchemaResponse> localVarResp = getUserSchemaWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getUserSchema request with HTTP info returned
+         * @return ApiResponse&lt;UserSchemaResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserSchemaResponse> executeWithHttpInfo() throws ApiException {
+            return getUserSchemaWithHttpInfo();
+        }
+
+        /**
+         * Execute getUserSchema request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UserSchemaResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserSchemaResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getUserSchemaWithHttpInfo(opts);
+        }
+
+        /**
+         * Execute getUserSchema request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserSchemaResponse> _callback) throws ApiException {
+            return getUserSchemaAsync(_callback);
+        }
+
+        /**
+         * Execute getUserSchema request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserSchemaResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getUserSchemaAsync(_callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetUserSchema: Get User Schema
+     * Get the User Schema
+     * @return APIgetUserSchemaRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetUserSchemaRequest getUserSchema() {
+        return new APIgetUserSchemaRequest();
     }
     private okhttp3.Call listRunnableUsersCall(final ApiCallback _callback) throws ApiException {
         return listRunnableUsersCall( _callback, new ConfigurationOptions());
@@ -3084,5 +3299,238 @@ public class UsersApi {
      */
     public APIupdateUserRequest updateUser(String id, UpdateUserRequest updateUserRequest) {
         return new APIupdateUserRequest(id, updateUserRequest);
+    }
+    private okhttp3.Call updateUserSchemaCall(UpdateUserSchemaRequest updateUserSchemaRequest, final ApiCallback _callback) throws ApiException {
+        return updateUserSchemaCall(updateUserSchemaRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call updateUserSchemaCall(UpdateUserSchemaRequest updateUserSchemaRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateUserSchemaRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/users/schema";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateUserSchemaValidateBeforeCall(UpdateUserSchemaRequest updateUserSchemaRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'updateUserSchemaRequest' is set
+        if (updateUserSchemaRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateUserSchemaRequest' when calling updateUserSchema(Async)");
+        }
+
+        return updateUserSchemaCall(updateUserSchemaRequest, _callback, opts);
+
+    }
+
+
+    private ApiResponse<UserSchemaResponse> updateUserSchemaWithHttpInfo(UpdateUserSchemaRequest updateUserSchemaRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateUserSchemaValidateBeforeCall(updateUserSchemaRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<UserSchemaResponse> updateUserSchemaWithHttpInfo(UpdateUserSchemaRequest updateUserSchemaRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = updateUserSchemaValidateBeforeCall(updateUserSchemaRequest, null, opts);
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call updateUserSchemaAsync(UpdateUserSchemaRequest updateUserSchemaRequest, final ApiCallback<UserSchemaResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateUserSchemaValidateBeforeCall(updateUserSchemaRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call updateUserSchemaAsync(UpdateUserSchemaRequest updateUserSchemaRequest, final ApiCallback<UserSchemaResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = updateUserSchemaValidateBeforeCall(updateUserSchemaRequest, _callback, opts);
+        Type localVarReturnType = new TypeToken<UserSchemaResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIupdateUserSchemaRequest {
+        private final UpdateUserSchemaRequest updateUserSchemaRequest;
+
+        private APIupdateUserSchemaRequest(UpdateUserSchemaRequest updateUserSchemaRequest) {
+            this.updateUserSchemaRequest = updateUserSchemaRequest;
+        }
+
+        /**
+         * Build call for updateUserSchema
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return updateUserSchemaCall(updateUserSchemaRequest, _callback);
+        }
+
+        /**
+         * Execute updateUserSchema request
+         * @return UserSchemaResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserSchemaResponse execute() throws ApiException {
+            ApiResponse<UserSchemaResponse> localVarResp = updateUserSchemaWithHttpInfo(updateUserSchemaRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateUserSchema request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UserSchemaResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserSchemaResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UserSchemaResponse> localVarResp = updateUserSchemaWithHttpInfo(updateUserSchemaRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateUserSchema request with HTTP info returned
+         * @return ApiResponse&lt;UserSchemaResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserSchemaResponse> executeWithHttpInfo() throws ApiException {
+            return updateUserSchemaWithHttpInfo(updateUserSchemaRequest);
+        }
+
+        /**
+         * Execute updateUserSchema request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UserSchemaResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserSchemaResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return updateUserSchemaWithHttpInfo(updateUserSchemaRequest, opts);
+        }
+
+        /**
+         * Execute updateUserSchema request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserSchemaResponse> _callback) throws ApiException {
+            return updateUserSchemaAsync(updateUserSchemaRequest, _callback);
+        }
+
+        /**
+         * Execute updateUserSchema request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserSchemaResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return updateUserSchemaAsync(updateUserSchemaRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateUserSchema: Update User Schema
+     * Update the User Schema
+     * @param updateUserSchemaRequest The new User Schema (required)
+     * @return APIupdateUserSchemaRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Update the User Schema </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupdateUserSchemaRequest updateUserSchema(UpdateUserSchemaRequest updateUserSchemaRequest) {
+        return new APIupdateUserSchemaRequest(updateUserSchemaRequest);
     }
 }

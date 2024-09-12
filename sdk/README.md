@@ -39,6 +39,7 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**expirePassword**](docs/UsersApi.md#expirepassword) | **POST** /api/users/{id}/lifecycle/$expirepassword | ExpirePassword: Reset the user's password to a temporary one
 *UsersApi* | [**findUsersById**](docs/UsersApi.md#findusersbyid) | **GET** /api/directory | FindUsersById: Find users by id endpoint
 *UsersApi* | [**getUser**](docs/UsersApi.md#getuser) | **GET** /api/users/{id} | GetUser: Get User
+*UsersApi* | [**getUserSchema**](docs/UsersApi.md#getuserschema) | **GET** /api/users/schema | [EXPERIMENTAL] GetUserSchema: Get User Schema
 *UsersApi* | [**listRunnableUsers**](docs/UsersApi.md#listrunnableusers) | **GET** /api/users/$runnable | [EARLY ACCESS] ListRunnableUsers: List Runable Users
 *UsersApi* | [**listUsers**](docs/UsersApi.md#listusers) | **GET** /api/users | ListUsers: List Users
 *UsersApi* | [**resetFactors**](docs/UsersApi.md#resetfactors) | **POST** /api/users/{id}/lifecycle/$resetfactors | ResetFactors: Reset MFA factors
@@ -47,6 +48,7 @@ Class | Method | HTTP request | Description
 *UsersApi* | [**unlockUser**](docs/UsersApi.md#unlockuser) | **POST** /api/users/{id}/lifecycle/$unlock | UnlockUser: Unlock User
 *UsersApi* | [**unsuspendUser**](docs/UsersApi.md#unsuspenduser) | **POST** /api/users/{id}/lifecycle/$unsuspend | [EXPERIMENTAL] UnsuspendUser: Unsuspend user
 *UsersApi* | [**updateUser**](docs/UsersApi.md#updateuser) | **PUT** /api/users/{id} | UpdateUser: Update User
+*UsersApi* | [**updateUserSchema**](docs/UsersApi.md#updateuserschema) | **PUT** /api/users/schema | [EXPERIMENTAL] UpdateUserSchema: Update User Schema
 
 
 <a id="documentation-for-models"></a>
@@ -96,6 +98,9 @@ Class | Method | HTTP request | Description
  - [UpdatePasswordPolicyRequestLockout](docs/UpdatePasswordPolicyRequestLockout.md)
  - [UpdateRoleRequest](docs/UpdateRoleRequest.md)
  - [UpdateUserRequest](docs/UpdateUserRequest.md)
+ - [UpdateUserSchemaRequest](docs/UpdateUserSchemaRequest.md)
  - [UserResponse](docs/UserResponse.md)
+ - [UserSchemaProperty](docs/UserSchemaProperty.md)
+ - [UserSchemaResponse](docs/UserSchemaResponse.md)
  - [UserSummary](docs/UserSummary.md)
 
