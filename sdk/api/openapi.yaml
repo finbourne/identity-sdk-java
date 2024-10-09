@@ -43,7 +43,7 @@ info:
     \ Domain Job Error| |\n"
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3048
+  version: 0.0.3052
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -2979,6 +2979,7 @@ components:
       example:
         emailAddress: emailAddress
         domainType: domainType
+        userExpiry: 2000-01-23T04:56:07.000+00:00
         links:
         - method: method
           description: description
@@ -3008,6 +3009,10 @@ components:
           description: The type of domain in which the user exists
           nullable: true
           type: string
+        userExpiry:
+          description: The user's user expiry datetime
+          format: date-time
+          type: string
         links:
           items:
             $ref: '#/components/schemas/Link'
@@ -3017,6 +3022,7 @@ components:
       - emailAddress
       - id
       - type
+      - userExpiry
       type: object
     ErrorDetail:
       additionalProperties: false

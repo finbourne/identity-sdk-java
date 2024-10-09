@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,6 +69,10 @@ public class CurrentUserResponse {
   public static final String SERIALIZED_NAME_DOMAIN_TYPE = "domainType";
   @SerializedName(SERIALIZED_NAME_DOMAIN_TYPE)
   private String domainType;
+
+  public static final String SERIALIZED_NAME_USER_EXPIRY = "userExpiry";
+  @SerializedName(SERIALIZED_NAME_USER_EXPIRY)
+  private OffsetDateTime userExpiry;
 
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
@@ -160,6 +165,27 @@ public class CurrentUserResponse {
   }
 
 
+  public CurrentUserResponse userExpiry(OffsetDateTime userExpiry) {
+    
+    this.userExpiry = userExpiry;
+    return this;
+  }
+
+   /**
+   * The user&#39;s user expiry datetime
+   * @return userExpiry
+  **/
+  @jakarta.annotation.Nonnull
+  public OffsetDateTime getUserExpiry() {
+    return userExpiry;
+  }
+
+
+  public void setUserExpiry(OffsetDateTime userExpiry) {
+    this.userExpiry = userExpiry;
+  }
+
+
   public CurrentUserResponse links(List<Link> links) {
     
     this.links = links;
@@ -203,6 +229,7 @@ public class CurrentUserResponse {
         Objects.equals(this.emailAddress, currentUserResponse.emailAddress) &&
         Objects.equals(this.type, currentUserResponse.type) &&
         Objects.equals(this.domainType, currentUserResponse.domainType) &&
+        Objects.equals(this.userExpiry, currentUserResponse.userExpiry) &&
         Objects.equals(this.links, currentUserResponse.links);
   }
 
@@ -212,7 +239,7 @@ public class CurrentUserResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, emailAddress, type, domainType, links);
+    return Objects.hash(id, emailAddress, type, domainType, userExpiry, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -230,6 +257,7 @@ public class CurrentUserResponse {
     sb.append("    emailAddress: ").append(toIndentedString(emailAddress)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    domainType: ").append(toIndentedString(domainType)).append("\n");
+    sb.append("    userExpiry: ").append(toIndentedString(userExpiry)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -257,6 +285,7 @@ public class CurrentUserResponse {
     openapiFields.add("emailAddress");
     openapiFields.add("type");
     openapiFields.add("domainType");
+    openapiFields.add("userExpiry");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)
@@ -264,6 +293,7 @@ public class CurrentUserResponse {
     openapiRequiredFields.add("id");
     openapiRequiredFields.add("emailAddress");
     openapiRequiredFields.add("type");
+    openapiRequiredFields.add("userExpiry");
   }
 
  /**

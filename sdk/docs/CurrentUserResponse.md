@@ -11,6 +11,7 @@
 |**emailAddress** | **String** | The user&#39;s email address which may be null depending on the authentication method |  |
 |**type** | **String** | The type of user (e.g. Personal or Service) |  |
 |**domainType** | **String** | The type of domain in which the user exists |  [optional] |
+|**userExpiry** | **OffsetDateTime** | The user&#39;s user expiry datetime |  |
 |**links** | [**List&lt;Link&gt;**](Link.md) |  |  [optional] |
 
 
