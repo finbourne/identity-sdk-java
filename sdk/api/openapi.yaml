@@ -47,7 +47,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3070
+  version: 0.0.3072
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -3103,6 +3103,7 @@ components:
         userExpiry:
           description: The user's user expiry datetime
           format: date-time
+          nullable: true
           type: string
         links:
           items:
@@ -3113,7 +3114,6 @@ components:
       - emailAddress
       - id
       - type
-      - userExpiry
       type: object
     ErrorDetail:
       additionalProperties: false

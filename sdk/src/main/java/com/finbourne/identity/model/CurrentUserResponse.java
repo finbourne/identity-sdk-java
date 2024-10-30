@@ -175,7 +175,7 @@ public class CurrentUserResponse {
    * The user&#39;s user expiry datetime
    * @return userExpiry
   **/
-  @jakarta.annotation.Nonnull
+  @jakarta.annotation.Nullable
   public OffsetDateTime getUserExpiry() {
     return userExpiry;
   }
@@ -293,7 +293,6 @@ public class CurrentUserResponse {
     openapiRequiredFields.add("id");
     openapiRequiredFields.add("emailAddress");
     openapiRequiredFields.add("type");
-    openapiRequiredFields.add("userExpiry");
   }
 
  /**
