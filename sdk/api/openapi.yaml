@@ -47,7 +47,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3088
+  version: 0.0.3094
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -153,6 +153,8 @@ tags:
   name: Identity Provider
 - description: Endpoints for getting more information about the current User
   name: Me
+- description: Endpoints for administering Network Zones
+  name: Network Zones
 - description: Endpoints for administering one's own Personal Access Tokens
   name: Personal Authentication Tokens
 - description: Endpoints for administering Roles
@@ -1290,6 +1292,548 @@ paths:
       tags:
       - Application Metadata
       x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/networkzones:
+    get:
+      description: Lists all network zones for a domain
+      operationId: ListNetworkZones
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - code: UK-Office-Network
+                hierarchy: 0
+                description: Network Zone definition allowing access to request from
+                  the specified Addresses for users in the selected groups OR with
+                  specific kinds of session types
+                createdAt: 0001-01-01T00:00:00.0000000+00:00
+                updatedAt: 0001-01-01T00:00:00.0000000+00:00
+                networkZoneIPs:
+                - type: CIDR
+                  description: UK Office
+                  value: 77.77.77.0/24
+                - type: IP
+                  description: Corporate VPN
+                  value: 212.10.12.14
+                action: Allow
+                applyRules:
+                  sessionType:
+                  - AllUsers
+                  - AllServiceUsers
+                  - AllPersonalUsers
+                  - AllPATAccess
+                  - AllJWTAccess
+                  - AllAccessTokens
+                  - AllSSOUsers
+                  - AllNonSSOUsers
+                  userRoles:
+                  - A-User-Defined-Role
+                  - Lusid-administrators
+                createdBy: UserId
+                updatedBy: UserId
+              schema:
+                items:
+                  $ref: '#/components/schemas/NetworkZoneDefinitionResponse'
+                type: array
+          description: List Network Zones
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] ListNetworkZones: Lists all network zones for a domain"
+      tags:
+      - Network Zones
+      x-fbn-apistatus: Beta
+      x-accepts: application/json
+    post:
+      description: "By default, the network zone will have its hierarchy set to last\
+        \ on creation."
+      operationId: CreateNetworkZone
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              code: UK-Office-Network
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+            schema:
+              $ref: '#/components/schemas/CreateNetworkZoneRequest'
+          application/json:
+            example:
+              code: UK-Office-Network
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+            schema:
+              $ref: '#/components/schemas/CreateNetworkZoneRequest'
+          text/json:
+            example:
+              code: UK-Office-Network
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+            schema:
+              $ref: '#/components/schemas/CreateNetworkZoneRequest'
+          application/*+json:
+            example:
+              code: UK-Office-Network
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+            schema:
+              $ref: '#/components/schemas/CreateNetworkZoneRequest'
+        description: The details of the network zone to define
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                code: UK-Office-Network
+                hierarchy: 0
+                description: Network Zone definition allowing access to request from
+                  the specified Addresses for users in the selected groups OR with
+                  specific kinds of session types
+                createdAt: 0001-01-01T00:00:00.0000000+00:00
+                updatedAt: 0001-01-01T00:00:00.0000000+00:00
+                networkZoneIPs:
+                - type: CIDR
+                  description: UK Office
+                  value: 77.77.77.0/24
+                - type: IP
+                  description: Corporate VPN
+                  value: 212.10.12.14
+                action: Allow
+                applyRules:
+                  sessionType:
+                  - AllUsers
+                  - AllServiceUsers
+                  - AllPersonalUsers
+                  - AllPATAccess
+                  - AllJWTAccess
+                  - AllAccessTokens
+                  - AllSSOUsers
+                  - AllNonSSOUsers
+                  userRoles:
+                  - A-User-Defined-Role
+                  - Lusid-administrators
+                createdBy: UserId
+                updatedBy: UserId
+              schema:
+                $ref: '#/components/schemas/NetworkZoneDefinitionResponse'
+          description: Create Network Zone
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] CreateNetworkZone: Creates a network zone"
+      tags:
+      - Network Zones
+      x-fbn-apistatus: Beta
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/networkzones/{code}:
+    delete:
+      description: Will return a success if network zone already deleted
+      operationId: DeleteNetworkZone
+      parameters:
+      - description: The unique identifier of the network zone to delete
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] DeleteNetworkZone: Deletes a network zone"
+      tags:
+      - Network Zones
+      x-fbn-apistatus: Beta
+      x-accepts: application/json
+    get:
+      description: Retrieves a Network Zone
+      operationId: GetNetworkZone
+      parameters:
+      - description: The unique identifier of the network zone
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                code: UK-Office-Network
+                hierarchy: 0
+                description: Network Zone definition allowing access to request from
+                  the specified Addresses for users in the selected groups OR with
+                  specific kinds of session types
+                createdAt: 0001-01-01T00:00:00.0000000+00:00
+                updatedAt: 0001-01-01T00:00:00.0000000+00:00
+                networkZoneIPs:
+                - type: CIDR
+                  description: UK Office
+                  value: 77.77.77.0/24
+                - type: IP
+                  description: Corporate VPN
+                  value: 212.10.12.14
+                action: Allow
+                applyRules:
+                  sessionType:
+                  - AllUsers
+                  - AllServiceUsers
+                  - AllPersonalUsers
+                  - AllPATAccess
+                  - AllJWTAccess
+                  - AllAccessTokens
+                  - AllSSOUsers
+                  - AllNonSSOUsers
+                  userRoles:
+                  - A-User-Defined-Role
+                  - Lusid-administrators
+                createdBy: UserId
+                updatedBy: UserId
+              schema:
+                $ref: '#/components/schemas/NetworkZoneDefinitionResponse'
+          description: Get Network Zone
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] GetNetworkZone: Retrieve a Network Zone"
+      tags:
+      - Network Zones
+      x-fbn-apistatus: Beta
+      x-accepts: application/json
+    put:
+      description: Updates an existing network zone
+      operationId: UpdateNetworkZone
+      parameters:
+      - description: The unique identifier of the network zone
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+              hierarchy: 0
+            schema:
+              $ref: '#/components/schemas/UpdateNetworkZoneRequest'
+          application/json:
+            example:
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+              hierarchy: 0
+            schema:
+              $ref: '#/components/schemas/UpdateNetworkZoneRequest'
+          text/json:
+            example:
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+              hierarchy: 0
+            schema:
+              $ref: '#/components/schemas/UpdateNetworkZoneRequest'
+          application/*+json:
+            example:
+              description: Network Zone definition allowing access to request from
+                the specified Addresses for users in the selected groups OR with specific
+                kinds of session types
+              networkZoneIPs:
+              - type: CIDR
+                description: UK Office
+                value: 77.77.77.0/24
+              - type: IP
+                description: Corporate VPN
+                value: 212.10.12.14
+              action: Allow
+              applyRules:
+                sessionType:
+                - AllUsers
+                - AllServiceUsers
+                - AllPersonalUsers
+                - AllPATAccess
+                - AllJWTAccess
+                - AllAccessTokens
+                - AllSSOUsers
+                - AllNonSSOUsers
+                userRoles:
+                - A-User-Defined-Role
+                - Lusid-administrators
+              hierarchy: 0
+            schema:
+              $ref: '#/components/schemas/UpdateNetworkZoneRequest'
+        description: The updated definition of the network zone
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                code: UK-Office-Network
+                hierarchy: 0
+                description: Network Zone definition allowing access to request from
+                  the specified Addresses for users in the selected groups OR with
+                  specific kinds of session types
+                createdAt: 0001-01-01T00:00:00.0000000+00:00
+                updatedAt: 0001-01-01T00:00:00.0000000+00:00
+                networkZoneIPs:
+                - type: CIDR
+                  description: UK Office
+                  value: 77.77.77.0/24
+                - type: IP
+                  description: Corporate VPN
+                  value: 212.10.12.14
+                action: Allow
+                applyRules:
+                  sessionType:
+                  - AllUsers
+                  - AllServiceUsers
+                  - AllPersonalUsers
+                  - AllPATAccess
+                  - AllJWTAccess
+                  - AllAccessTokens
+                  - AllSSOUsers
+                  - AllNonSSOUsers
+                  userRoles:
+                  - A-User-Defined-Role
+                  - Lusid-administrators
+                createdBy: UserId
+                updatedBy: UserId
+              schema:
+                $ref: '#/components/schemas/NetworkZoneDefinitionResponse'
+          description: Update Network Zone
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] UpdateNetworkZone: Updates an existing network zone"
+      tags:
+      - Network Zones
+      x-fbn-apistatus: Beta
+      x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/roles:
     get:
@@ -2960,6 +3504,50 @@ components:
       - id
       - key
       type: object
+    CreateNetworkZoneRequest:
+      additionalProperties: false
+      description: The Create Network Zone Request information
+      example:
+        networkZoneIPs:
+        - description: description
+          type: type
+          value: value
+        - description: description
+          type: type
+          value: value
+        code: code
+        applyRules:
+          userRoles:
+          - userRoles
+          - userRoles
+          sessionType:
+          - sessionType
+          - sessionType
+        description: description
+        action: action
+      properties:
+        code:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        description:
+          nullable: true
+          type: string
+        networkZoneIPs:
+          items:
+            $ref: '#/components/schemas/IpAddressDefinition'
+          type: array
+        action:
+          nullable: true
+          type: string
+        applyRules:
+          $ref: '#/components/schemas/NetworkZonesApplyRules'
+      required:
+      - applyRules
+      - code
+      - networkZoneIPs
+      type: object
     CreateRoleRequest:
       additionalProperties: false
       description: Specifies the information required to create a new role.
@@ -3219,6 +3807,25 @@ components:
       - actions
       - identifier
       type: object
+    IpAddressDefinition:
+      additionalProperties: false
+      example:
+        description: description
+        type: type
+        value: value
+      properties:
+        type:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        value:
+          minLength: 1
+          type: string
+      required:
+      - value
+      type: object
     Link:
       additionalProperties: false
       example:
@@ -3383,6 +3990,97 @@ components:
       required:
       - code
       - name
+      type: object
+    NetworkZoneDefinitionResponse:
+      additionalProperties: false
+      description: The Client facing representation of a NetworkZone
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        networkZoneIPs:
+        - description: description
+          type: type
+          value: value
+        - description: description
+          type: type
+          value: value
+        code: code
+        updatedBy: updatedBy
+        applyRules:
+          userRoles:
+          - userRoles
+          - userRoles
+          sessionType:
+          - sessionType
+          - sessionType
+        createdBy: createdBy
+        hierarchy: 0
+        description: description
+        action: action
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        code:
+          description: The Network Zone Code
+          nullable: true
+          type: string
+        hierarchy:
+          description: Hierarchy of the Network Zone
+          format: int32
+          type: integer
+        description:
+          description: The Description of the Network Zone
+          nullable: true
+          type: string
+        createdAt:
+          description: Network Zone Creation timestamp
+          format: date-time
+          type: string
+        updatedAt:
+          description: Timestamp of the last update
+          format: date-time
+          type: string
+        networkZoneIPs:
+          description: Network zone IP information (IPs and CIDR ranges)
+          items:
+            $ref: '#/components/schemas/IpAddressDefinition'
+          nullable: true
+          type: array
+        action:
+          description: Kind of action to apply when a request matches this Network
+            Zone (Block/Allow/NoOp)
+          nullable: true
+          type: string
+        applyRules:
+          $ref: '#/components/schemas/NetworkZonesApplyRules'
+        createdBy:
+          description: User Id that created the Network Zone
+          nullable: true
+          type: string
+        updatedBy:
+          description: User Id of the last update on the Network Zone
+          nullable: true
+          type: string
+      type: object
+    NetworkZonesApplyRules:
+      additionalProperties: false
+      example:
+        userRoles:
+        - userRoles
+        - userRoles
+        sessionType:
+        - sessionType
+        - sessionType
+      properties:
+        sessionType:
+          items:
+            type: string
+          type: array
+        userRoles:
+          items:
+            type: string
+          type: array
+      required:
+      - sessionType
+      - userRoles
       type: object
     OAuthApplication:
       additionalProperties: false
@@ -4089,6 +4787,47 @@ components:
       required:
       - password
       type: object
+    UpdateNetworkZoneRequest:
+      additionalProperties: false
+      example:
+        networkZoneIPs:
+        - description: description
+          type: type
+          value: value
+        - description: description
+          type: type
+          value: value
+        applyRules:
+          userRoles:
+          - userRoles
+          - userRoles
+          sessionType:
+          - sessionType
+          - sessionType
+        hierarchy: 0
+        description: description
+        action: action
+      properties:
+        description:
+          nullable: true
+          type: string
+        networkZoneIPs:
+          items:
+            $ref: '#/components/schemas/IpAddressDefinition'
+          type: array
+        action:
+          nullable: true
+          type: string
+        applyRules:
+          $ref: '#/components/schemas/NetworkZonesApplyRules'
+        hierarchy:
+          format: int32
+          type: integer
+      required:
+      - applyRules
+      - hierarchy
+      - networkZoneIPs
+      type: object
     UpdatePasswordPolicyRequest:
       additionalProperties: false
       example:
@@ -4514,6 +5253,7 @@ x-tagGroups:
   - Authentication
   - Identity Provider
   - Me
+  - Network Zones
   - Personal Authentication Tokens
   - Roles
   - Tokens

@@ -22,6 +22,11 @@ Class | Method | HTTP request | Description
 *IdentityProviderApi* | [**removeScim**](docs/IdentityProviderApi.md#removescim) | **DELETE** /api/identityprovider/scim | RemoveScim: Remove SCIM
 *MeApi* | [**getUserInfo**](docs/MeApi.md#getuserinfo) | **GET** /api/me | GetUserInfo: Get User Info
 *MeApi* | [**setPassword**](docs/MeApi.md#setpassword) | **PUT** /api/me/password | SetPassword: Set password of current user
+*NetworkZonesApi* | [**createNetworkZone**](docs/NetworkZonesApi.md#createnetworkzone) | **POST** /api/networkzones | [BETA] CreateNetworkZone: Creates a network zone
+*NetworkZonesApi* | [**deleteNetworkZone**](docs/NetworkZonesApi.md#deletenetworkzone) | **DELETE** /api/networkzones/{code} | [BETA] DeleteNetworkZone: Deletes a network zone
+*NetworkZonesApi* | [**getNetworkZone**](docs/NetworkZonesApi.md#getnetworkzone) | **GET** /api/networkzones/{code} | [BETA] GetNetworkZone: Retrieve a Network Zone
+*NetworkZonesApi* | [**listNetworkZones**](docs/NetworkZonesApi.md#listnetworkzones) | **GET** /api/networkzones | [BETA] ListNetworkZones: Lists all network zones for a domain
+*NetworkZonesApi* | [**updateNetworkZone**](docs/NetworkZonesApi.md#updatenetworkzone) | **PUT** /api/networkzones/{code} | [BETA] UpdateNetworkZone: Updates an existing network zone
 *PersonalAuthenticationTokensApi* | [**createApiKey**](docs/PersonalAuthenticationTokensApi.md#createapikey) | **POST** /api/keys | CreateApiKey: Create a Personal Access Token
 *PersonalAuthenticationTokensApi* | [**deleteApiKey**](docs/PersonalAuthenticationTokensApi.md#deleteapikey) | **DELETE** /api/keys/{id} | DeleteApiKey: Invalidate a Personal Access Token
 *PersonalAuthenticationTokensApi* | [**listOwnApiKeys**](docs/PersonalAuthenticationTokensApi.md#listownapikeys) | **GET** /api/keys | ListOwnApiKeys: Gets the meta data for all of the user's existing Personal Access Tokens.
@@ -62,6 +67,7 @@ Class | Method | HTTP request | Description
  - [AuthenticationInformation](docs/AuthenticationInformation.md)
  - [CreateApiKey](docs/CreateApiKey.md)
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
+ - [CreateNetworkZoneRequest](docs/CreateNetworkZoneRequest.md)
  - [CreateRoleRequest](docs/CreateRoleRequest.md)
  - [CreateUserRequest](docs/CreateUserRequest.md)
  - [CreatedApiKey](docs/CreatedApiKey.md)
@@ -69,10 +75,13 @@ Class | Method | HTTP request | Description
  - [ErrorDetail](docs/ErrorDetail.md)
  - [IdSelectorDefinition](docs/IdSelectorDefinition.md)
  - [IdentifierPartSchema](docs/IdentifierPartSchema.md)
+ - [IpAddressDefinition](docs/IpAddressDefinition.md)
  - [Link](docs/Link.md)
  - [ListUsersResponse](docs/ListUsersResponse.md)
  - [LusidProblemDetails](docs/LusidProblemDetails.md)
  - [LusidValidationProblemDetails](docs/LusidValidationProblemDetails.md)
+ - [NetworkZoneDefinitionResponse](docs/NetworkZoneDefinitionResponse.md)
+ - [NetworkZonesApplyRules](docs/NetworkZonesApplyRules.md)
  - [OAuthApplication](docs/OAuthApplication.md)
  - [PasswordPolicyResponse](docs/PasswordPolicyResponse.md)
  - [PasswordPolicyResponseAge](docs/PasswordPolicyResponseAge.md)
@@ -91,6 +100,7 @@ Class | Method | HTTP request | Description
  - [SupportRole](docs/SupportRole.md)
  - [SupportRolesResponse](docs/SupportRolesResponse.md)
  - [TemporaryPassword](docs/TemporaryPassword.md)
+ - [UpdateNetworkZoneRequest](docs/UpdateNetworkZoneRequest.md)
  - [UpdatePasswordPolicyRequest](docs/UpdatePasswordPolicyRequest.md)
  - [UpdatePasswordPolicyRequestAge](docs/UpdatePasswordPolicyRequestAge.md)
  - [UpdatePasswordPolicyRequestComplexity](docs/UpdatePasswordPolicyRequestComplexity.md)
