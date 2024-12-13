@@ -656,7 +656,7 @@ This endpoint does not need any parameter.
 
 ## listUsers
 
-> List&lt;UserResponse&gt; listUsers(includeRoles, includeDeactivated)
+> List&lt;UserResponse&gt; listUsers(includeDeactivated)
 
 ListUsers: List Users
 
@@ -701,13 +701,12 @@ public class UsersApiExample {
         // UsersApi apiInstance = apiFactory.build(UsersApi.class);
 
         UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
-        Boolean includeRoles = false; // Boolean | Flag indicating that the users roles should be included in the response
         Boolean includeDeactivated = false; // Boolean | Include previously deleted (not purged) users
         try {
             // uncomment the below to set overrides at the request level
-            // List<UserResponse> result = apiInstance.listUsers(includeRoles, includeDeactivated).execute(opts);
+            // List<UserResponse> result = apiInstance.listUsers(includeDeactivated).execute(opts);
 
-            List<UserResponse> result = apiInstance.listUsers(includeRoles, includeDeactivated).execute();
+            List<UserResponse> result = apiInstance.listUsers(includeDeactivated).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
             System.err.println("Exception when calling UsersApi#listUsers");
@@ -724,7 +723,6 @@ public class UsersApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **includeRoles** | **Boolean**| Flag indicating that the users roles should be included in the response | [optional] [default to false] |
 | **includeDeactivated** | **Boolean**| Include previously deleted (not purged) users | [optional] [default to false] |
 
 ### Return type

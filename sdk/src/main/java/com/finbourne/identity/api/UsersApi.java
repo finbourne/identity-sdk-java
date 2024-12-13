@@ -1697,11 +1697,11 @@ public class UsersApi {
     public APIlistRunnableUsersRequest listRunnableUsers() {
         return new APIlistRunnableUsersRequest();
     }
-    private okhttp3.Call listUsersCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback) throws ApiException {
-        return listUsersCall(includeRoles, includeDeactivated,  _callback, new ConfigurationOptions());
+    private okhttp3.Call listUsersCall(Boolean includeDeactivated, final ApiCallback _callback) throws ApiException {
+        return listUsersCall(includeDeactivated,  _callback, new ConfigurationOptions());
     }
 
-    private okhttp3.Call listUsersCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private okhttp3.Call listUsersCall(Boolean includeDeactivated, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -1725,10 +1725,6 @@ public class UsersApi {
         Map<String, String> localVarHeaderParams = new HashMap<String, String>();
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-
-        if (includeRoles != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeRoles", includeRoles));
-        }
 
         if (includeDeactivated != null) {
             localVarQueryParams.addAll(localVarApiClient.parameterToPair("includeDeactivated", includeDeactivated));
@@ -1754,55 +1750,44 @@ public class UsersApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listUsersValidateBeforeCall(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listUsersCall(includeRoles, includeDeactivated, _callback, opts);
+    private okhttp3.Call listUsersValidateBeforeCall(Boolean includeDeactivated, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listUsersCall(includeDeactivated, _callback, opts);
 
     }
 
 
-    private ApiResponse<List<UserResponse>> listUsersWithHttpInfo(Boolean includeRoles, Boolean includeDeactivated) throws ApiException {
-        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, null, new ConfigurationOptions());
+    private ApiResponse<List<UserResponse>> listUsersWithHttpInfo(Boolean includeDeactivated) throws ApiException {
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeDeactivated, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private ApiResponse<List<UserResponse>> listUsersWithHttpInfo(Boolean includeRoles, Boolean includeDeactivated, ConfigurationOptions opts) throws ApiException {
-        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, null, opts);
+    private ApiResponse<List<UserResponse>> listUsersWithHttpInfo(Boolean includeDeactivated, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeDeactivated, null, opts);
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listUsersAsync(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback<List<UserResponse>> _callback) throws ApiException {
+    private okhttp3.Call listUsersAsync(Boolean includeDeactivated, final ApiCallback<List<UserResponse>> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, _callback, new ConfigurationOptions());
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeDeactivated, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
-    private okhttp3.Call listUsersAsync(Boolean includeRoles, Boolean includeDeactivated, final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
+    private okhttp3.Call listUsersAsync(Boolean includeDeactivated, final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
 
-        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeRoles, includeDeactivated, _callback, opts);
+        okhttp3.Call localVarCall = listUsersValidateBeforeCall(includeDeactivated, _callback, opts);
         Type localVarReturnType = new TypeToken<List<UserResponse>>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public class APIlistUsersRequest {
-        private Boolean includeRoles;
         private Boolean includeDeactivated;
 
         private APIlistUsersRequest() {
-        }
-
-        /**
-         * Set includeRoles
-         * @param includeRoles Flag indicating that the users roles should be included in the response (optional, default to false)
-         * @return APIlistUsersRequest
-         */
-        public APIlistUsersRequest includeRoles(Boolean includeRoles) {
-            this.includeRoles = includeRoles;
-            return this;
         }
 
         /**
@@ -1829,7 +1814,7 @@ public class UsersApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return listUsersCall(includeRoles, includeDeactivated, _callback);
+            return listUsersCall(includeDeactivated, _callback);
         }
 
         /**
@@ -1845,7 +1830,7 @@ public class UsersApi {
          </table>
          */
         public List<UserResponse> execute() throws ApiException {
-            ApiResponse<List<UserResponse>> localVarResp = listUsersWithHttpInfo(includeRoles, includeDeactivated);
+            ApiResponse<List<UserResponse>> localVarResp = listUsersWithHttpInfo(includeDeactivated);
             return localVarResp.getData();
         }
 
@@ -1862,7 +1847,7 @@ public class UsersApi {
          </table>
          */
         public List<UserResponse> execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<List<UserResponse>> localVarResp = listUsersWithHttpInfo(includeRoles, includeDeactivated, opts);
+            ApiResponse<List<UserResponse>> localVarResp = listUsersWithHttpInfo(includeDeactivated, opts);
             return localVarResp.getData();
         }
 
@@ -1879,7 +1864,7 @@ public class UsersApi {
          </table>
          */
         public ApiResponse<List<UserResponse>> executeWithHttpInfo() throws ApiException {
-            return listUsersWithHttpInfo(includeRoles, includeDeactivated);
+            return listUsersWithHttpInfo(includeDeactivated);
         }
 
         /**
@@ -1895,7 +1880,7 @@ public class UsersApi {
          </table>
          */
         public ApiResponse<List<UserResponse>> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listUsersWithHttpInfo(includeRoles, includeDeactivated, opts);
+            return listUsersWithHttpInfo(includeDeactivated, opts);
         }
 
         /**
@@ -1912,7 +1897,7 @@ public class UsersApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UserResponse>> _callback) throws ApiException {
-            return listUsersAsync(includeRoles, includeDeactivated, _callback);
+            return listUsersAsync(includeDeactivated, _callback);
         }
 
         /**
@@ -1929,7 +1914,7 @@ public class UsersApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<List<UserResponse>> _callback, ConfigurationOptions opts) throws ApiException {
-            return listUsersAsync(includeRoles, includeDeactivated, _callback, opts);
+            return listUsersAsync(includeDeactivated, _callback, opts);
         }
     }
 

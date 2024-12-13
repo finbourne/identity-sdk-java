@@ -47,7 +47,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3098
+  version: 0.0.3100
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -2294,17 +2294,6 @@ paths:
       description: List the available Users
       operationId: ListUsers
       parameters:
-      - description: Flag indicating that the users roles should be included in the
-          response
-        explode: true
-        in: query
-        name: includeRoles
-        required: false
-        schema:
-          default: false
-          type: boolean
-        style: form
-        x-nullable: true
       - description: Include previously deleted (not purged) users
         explode: true
         in: query
