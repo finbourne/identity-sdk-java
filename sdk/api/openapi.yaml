@@ -42,12 +42,13 @@ info:
     | <a name="786">786</a>|Action not valid for user of this type| |
     | <a name="787">787</a>|Password validation failure| |
     | <a name="871">871</a>|The specified impersonated user does not exist| |
+    | <a name="939">939</a>|Blocked by a Network Zone| |
     | <a name="2153">2153</a>|Invalid Authentication Token| |
     | <a name="2154">2154</a>|Invalid Identity Provider Access Token| |
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3100
+  version: 0.0.3190
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -128,6 +129,8 @@ info:
       title: Password validation failure
     "871":
       title: The specified impersonated user does not exist
+    "939":
+      title: Blocked by a Network Zone
     "2153":
       title: Invalid Authentication Token
     "2154":
@@ -909,7 +912,7 @@ paths:
                   method: GET
               schema:
                 $ref: '#/components/schemas/ListUsersResponse'
-          description: Success
+          description: OK
         "400":
           content:
             application/json:
@@ -1212,22 +1215,22 @@ paths:
         content:
           application/json-patch+json:
             example:
-              value: ""
+              value: SomeSecretPassword
             schema:
               $ref: '#/components/schemas/SetPassword'
           application/json:
             example:
-              value: ""
+              value: SomeSecretPassword
             schema:
               $ref: '#/components/schemas/SetPassword'
           text/json:
             example:
-              value: ""
+              value: SomeSecretPassword
             schema:
               $ref: '#/components/schemas/SetPassword'
           application/*+json:
             example:
-              value: ""
+              value: SomeSecretPassword
             schema:
               $ref: '#/components/schemas/SetPassword'
         description: The request containing the new password value
@@ -1278,7 +1281,7 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ResourceListOfAccessControlledResource'
-          description: Success
+          description: OK
         default:
           content:
             application/json:
@@ -1849,9 +1852,9 @@ paths:
                   scope: LUSID
                   code: FrontOfficeAdministrator
                 source: LusidUser
-                name: LUSID:FrontOfficeAdministrator
+                name: LUSID-FrontOfficeAdministrator
                 description: Front office administration role
-                samlName: LUSID:FrontOfficeAdministrator
+                samlName: LUSID-FrontOfficeAdministrator
               schema:
                 items:
                   $ref: '#/components/schemas/RoleResponse'
@@ -1877,25 +1880,25 @@ paths:
         content:
           application/json-patch+json:
             example:
-              name: LUSID:FrontOfficeAdministrator
+              name: LUSID-FrontOfficeAdministrator
               description: Front office administration role
             schema:
               $ref: '#/components/schemas/CreateRoleRequest'
           application/json:
             example:
-              name: LUSID:FrontOfficeAdministrator
+              name: LUSID-FrontOfficeAdministrator
               description: Front office administration role
             schema:
               $ref: '#/components/schemas/CreateRoleRequest'
           text/json:
             example:
-              name: LUSID:FrontOfficeAdministrator
+              name: LUSID-FrontOfficeAdministrator
               description: Front office administration role
             schema:
               $ref: '#/components/schemas/CreateRoleRequest'
           application/*+json:
             example:
-              name: LUSID:FrontOfficeAdministrator
+              name: LUSID-FrontOfficeAdministrator
               description: Front office administration role
             schema:
               $ref: '#/components/schemas/CreateRoleRequest'
@@ -1911,9 +1914,9 @@ paths:
                   scope: LUSID
                   code: FrontOfficeAdministrator
                 source: LusidUser
-                name: LUSID:FrontOfficeAdministrator
+                name: LUSID-FrontOfficeAdministrator
                 description: Front office administration role
-                samlName: LUSID:FrontOfficeAdministrator
+                samlName: LUSID-FrontOfficeAdministrator
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: Create a new role
@@ -2002,9 +2005,9 @@ paths:
                   scope: LUSID
                   code: FrontOfficeAdministrator
                 source: LusidUser
-                name: LUSID:FrontOfficeAdministrator
+                name: LUSID-FrontOfficeAdministrator
                 description: Front office administration role
-                samlName: LUSID:FrontOfficeAdministrator
+                samlName: LUSID-FrontOfficeAdministrator
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: Get the specified role
@@ -2077,9 +2080,9 @@ paths:
                   scope: LUSID
                   code: FrontOfficeAdministrator
                 source: LusidUser
-                name: LUSID:FrontOfficeAdministrator
+                name: LUSID-FrontOfficeAdministrator
                 description: Front office administration role
-                samlName: LUSID:FrontOfficeAdministrator
+                samlName: LUSID-FrontOfficeAdministrator
               schema:
                 $ref: '#/components/schemas/RoleResponse'
           description: Update a role
@@ -3774,6 +3777,7 @@ components:
       properties:
         identifier:
           additionalProperties:
+            nullable: true
             type: string
           minLength: 1
           type: object
@@ -5071,6 +5075,7 @@ components:
           type: string
         alternativeUserIds:
           additionalProperties:
+            nullable: true
             type: string
           description: The user's alternative IDs
           nullable: true
