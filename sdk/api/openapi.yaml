@@ -43,12 +43,13 @@ info:
     | <a name="787">787</a>|Password validation failure| |
     | <a name="871">871</a>|The specified impersonated user does not exist| |
     | <a name="939">939</a>|Blocked by a Network Zone| |
+    | <a name="943">943</a>|Failure when querying Okta System Logs| |
     | <a name="2153">2153</a>|Invalid Authentication Token| |
     | <a name="2154">2154</a>|Invalid Identity Provider Access Token| |
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3200
+  version: 0.0.3202
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -131,6 +132,8 @@ info:
       title: The specified impersonated user does not exist
     "939":
       title: Blocked by a Network Zone
+    "943":
+      title: Failure when querying Okta System Logs
     "2153":
       title: Invalid Authentication Token
     "2154":
@@ -1348,10 +1351,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[BETA] ListNetworkZones: Lists all network zones for a domain"
+      summary: "[EARLY ACCESS] ListNetworkZones: Lists all network zones for a domain"
       tags:
       - Network Zones
-      x-fbn-apistatus: Beta
+      x-fbn-apistatus: EarlyAccess
       x-accepts: application/json
     post:
       description: "By default, the network zone will have its hierarchy set to last\
@@ -1529,10 +1532,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[BETA] CreateNetworkZone: Creates a network zone"
+      summary: "[EARLY ACCESS] CreateNetworkZone: Creates a network zone"
       tags:
       - Network Zones
-      x-fbn-apistatus: Beta
+      x-fbn-apistatus: EarlyAccess
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/networkzones/{code}:
@@ -1568,10 +1571,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[BETA] DeleteNetworkZone: Deletes a network zone"
+      summary: "[EARLY ACCESS] DeleteNetworkZone: Deletes a network zone"
       tags:
       - Network Zones
-      x-fbn-apistatus: Beta
+      x-fbn-apistatus: EarlyAccess
       x-accepts: application/json
     get:
       description: Retrieves a Network Zone
@@ -1640,10 +1643,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[BETA] GetNetworkZone: Retrieve a Network Zone"
+      summary: "[EARLY ACCESS] GetNetworkZone: Retrieve a Network Zone"
       tags:
       - Network Zones
-      x-fbn-apistatus: Beta
+      x-fbn-apistatus: EarlyAccess
       x-accepts: application/json
     put:
       description: Updates an existing network zone
@@ -1832,10 +1835,10 @@ paths:
           description: Error response
       security:
       - oauth2: []
-      summary: "[BETA] UpdateNetworkZone: Updates an existing network zone"
+      summary: "[EARLY ACCESS] UpdateNetworkZone: Updates an existing network zone"
       tags:
       - Network Zones
-      x-fbn-apistatus: Beta
+      x-fbn-apistatus: EarlyAccess
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/roles:

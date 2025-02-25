@@ -4,11 +4,11 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createNetworkZone**](NetworkZonesApi.md#createNetworkZone) | **POST** /api/networkzones | [BETA] CreateNetworkZone: Creates a network zone |
-| [**deleteNetworkZone**](NetworkZonesApi.md#deleteNetworkZone) | **DELETE** /api/networkzones/{code} | [BETA] DeleteNetworkZone: Deletes a network zone |
-| [**getNetworkZone**](NetworkZonesApi.md#getNetworkZone) | **GET** /api/networkzones/{code} | [BETA] GetNetworkZone: Retrieve a Network Zone |
-| [**listNetworkZones**](NetworkZonesApi.md#listNetworkZones) | **GET** /api/networkzones | [BETA] ListNetworkZones: Lists all network zones for a domain |
-| [**updateNetworkZone**](NetworkZonesApi.md#updateNetworkZone) | **PUT** /api/networkzones/{code} | [BETA] UpdateNetworkZone: Updates an existing network zone |
+| [**createNetworkZone**](NetworkZonesApi.md#createNetworkZone) | **POST** /api/networkzones | [EARLY ACCESS] CreateNetworkZone: Creates a network zone |
+| [**deleteNetworkZone**](NetworkZonesApi.md#deleteNetworkZone) | **DELETE** /api/networkzones/{code} | [EARLY ACCESS] DeleteNetworkZone: Deletes a network zone |
+| [**getNetworkZone**](NetworkZonesApi.md#getNetworkZone) | **GET** /api/networkzones/{code} | [EARLY ACCESS] GetNetworkZone: Retrieve a Network Zone |
+| [**listNetworkZones**](NetworkZonesApi.md#listNetworkZones) | **GET** /api/networkzones | [EARLY ACCESS] ListNetworkZones: Lists all network zones for a domain |
+| [**updateNetworkZone**](NetworkZonesApi.md#updateNetworkZone) | **PUT** /api/networkzones/{code} | [EARLY ACCESS] UpdateNetworkZone: Updates an existing network zone |
 
 
 
@@ -16,7 +16,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 > NetworkZoneDefinitionResponse createNetworkZone(createNetworkZoneRequest)
 
-[BETA] CreateNetworkZone: Creates a network zone
+[EARLY ACCESS] CreateNetworkZone: Creates a network zone
 
 By default, the network zone will have its hierarchy set to last on creation.
 
@@ -107,7 +107,7 @@ public class NetworkZonesApiExample {
 
 > deleteNetworkZone(code)
 
-[BETA] DeleteNetworkZone: Deletes a network zone
+[EARLY ACCESS] DeleteNetworkZone: Deletes a network zone
 
 Will return a success if network zone already deleted
 
@@ -197,7 +197,7 @@ null (empty response body)
 
 > NetworkZoneDefinitionResponse getNetworkZone(code)
 
-[BETA] GetNetworkZone: Retrieve a Network Zone
+[EARLY ACCESS] GetNetworkZone: Retrieve a Network Zone
 
 Retrieves a Network Zone
 
@@ -288,7 +288,7 @@ public class NetworkZonesApiExample {
 
 > List&lt;NetworkZoneDefinitionResponse&gt; listNetworkZones()
 
-[BETA] ListNetworkZones: Lists all network zones for a domain
+[EARLY ACCESS] ListNetworkZones: Lists all network zones for a domain
 
 Lists all network zones for a domain
 
@@ -374,7 +374,7 @@ This endpoint does not need any parameter.
 
 > NetworkZoneDefinitionResponse updateNetworkZone(code, updateNetworkZoneRequest)
 
-[BETA] UpdateNetworkZone: Updates an existing network zone
+[EARLY ACCESS] UpdateNetworkZone: Updates an existing network zone
 
 Updates an existing network zone
 

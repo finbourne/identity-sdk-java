@@ -292,7 +292,7 @@ public class NetworkZonesApi {
     }
 
     /**
-     * [BETA] CreateNetworkZone: Creates a network zone
+     * [EARLY ACCESS] CreateNetworkZone: Creates a network zone
      * By default, the network zone will have its hierarchy set to last on creation.
      * @param createNetworkZoneRequest The details of the network zone to define (required)
      * @return APIcreateNetworkZoneRequest
@@ -514,7 +514,7 @@ public class NetworkZonesApi {
     }
 
     /**
-     * [BETA] DeleteNetworkZone: Deletes a network zone
+     * [EARLY ACCESS] DeleteNetworkZone: Deletes a network zone
      * Will return a success if network zone already deleted
      * @param code The unique identifier of the network zone to delete (required)
      * @return APIdeleteNetworkZoneRequest
@@ -744,7 +744,7 @@ public class NetworkZonesApi {
     }
 
     /**
-     * [BETA] GetNetworkZone: Retrieve a Network Zone
+     * [EARLY ACCESS] GetNetworkZone: Retrieve a Network Zone
      * Retrieves a Network Zone
      * @param code The unique identifier of the network zone (required)
      * @return APIgetNetworkZoneRequest
@@ -959,7 +959,7 @@ public class NetworkZonesApi {
     }
 
     /**
-     * [BETA] ListNetworkZones: Lists all network zones for a domain
+     * [EARLY ACCESS] ListNetworkZones: Lists all network zones for a domain
      * Lists all network zones for a domain
      * @return APIlistNetworkZonesRequest
      * @http.response.details
@@ -1198,7 +1198,7 @@ public class NetworkZonesApi {
     }
 
     /**
-     * [BETA] UpdateNetworkZone: Updates an existing network zone
+     * [EARLY ACCESS] UpdateNetworkZone: Updates an existing network zone
      * Updates an existing network zone
      * @param code The unique identifier of the network zone (required)
      * @param updateNetworkZoneRequest The updated definition of the network zone (required)
