@@ -38,6 +38,7 @@ Class | Method | HTTP request | Description
 *RolesApi* | [**listUsersInRole**](docs/RolesApi.md#listusersinrole) | **GET** /api/roles/{id}/users | ListUsersInRole: Get the users in the specified role.
 *RolesApi* | [**removeUserFromRole**](docs/RolesApi.md#removeuserfromrole) | **DELETE** /api/roles/{id}/users/{userId} | RemoveUserFromRole: Remove User from Role
 *RolesApi* | [**updateRole**](docs/RolesApi.md#updaterole) | **PUT** /api/roles/{id} | UpdateRole: Update Role
+*SystemLogsApi* | [**listLogs**](docs/SystemLogsApi.md#listlogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain
 *TokensApi* | [**invalidateToken**](docs/TokensApi.md#invalidatetoken) | **DELETE** /api/tokens | InvalidateToken: Invalidate current JWT token (sign out)
 *UsersApi* | [**createUser**](docs/UsersApi.md#createuser) | **POST** /api/users | CreateUser: Create User
 *UsersApi* | [**deleteUser**](docs/UsersApi.md#deleteuser) | **DELETE** /api/users/{id} | DeleteUser: Delete User
@@ -78,6 +79,24 @@ Class | Method | HTTP request | Description
  - [IpAddressDefinition](docs/IpAddressDefinition.md)
  - [Link](docs/Link.md)
  - [ListUsersResponse](docs/ListUsersResponse.md)
+ - [LogActor](docs/LogActor.md)
+ - [LogAuthenticationContext](docs/LogAuthenticationContext.md)
+ - [LogAuthenticationProvider](docs/LogAuthenticationProvider.md)
+ - [LogClientInfo](docs/LogClientInfo.md)
+ - [LogCredentialProvider](docs/LogCredentialProvider.md)
+ - [LogCredentialType](docs/LogCredentialType.md)
+ - [LogDebugContext](docs/LogDebugContext.md)
+ - [LogGeographicalContext](docs/LogGeographicalContext.md)
+ - [LogGeolocation](docs/LogGeolocation.md)
+ - [LogIpChainEntry](docs/LogIpChainEntry.md)
+ - [LogIssuer](docs/LogIssuer.md)
+ - [LogOutcome](docs/LogOutcome.md)
+ - [LogRequest](docs/LogRequest.md)
+ - [LogSecurityContext](docs/LogSecurityContext.md)
+ - [LogSeverity](docs/LogSeverity.md)
+ - [LogTarget](docs/LogTarget.md)
+ - [LogTransaction](docs/LogTransaction.md)
+ - [LogUserAgent](docs/LogUserAgent.md)
  - [LusidProblemDetails](docs/LusidProblemDetails.md)
  - [LusidValidationProblemDetails](docs/LusidValidationProblemDetails.md)
  - [NetworkZoneDefinitionResponse](docs/NetworkZoneDefinitionResponse.md)
@@ -89,6 +108,7 @@ Class | Method | HTTP request | Description
  - [PasswordPolicyResponseConditions](docs/PasswordPolicyResponseConditions.md)
  - [PasswordPolicyResponseLockout](docs/PasswordPolicyResponseLockout.md)
  - [ResourceListOfAccessControlledResource](docs/ResourceListOfAccessControlledResource.md)
+ - [ResourceListOfSystemLog](docs/ResourceListOfSystemLog.md)
  - [RoleId](docs/RoleId.md)
  - [RoleResponse](docs/RoleResponse.md)
  - [SetPassword](docs/SetPassword.md)
@@ -99,6 +119,7 @@ Class | Method | HTTP request | Description
  - [SupportAccessResponse](docs/SupportAccessResponse.md)
  - [SupportRole](docs/SupportRole.md)
  - [SupportRolesResponse](docs/SupportRolesResponse.md)
+ - [SystemLog](docs/SystemLog.md)
  - [TemporaryPassword](docs/TemporaryPassword.md)
  - [UpdateNetworkZoneRequest](docs/UpdateNetworkZoneRequest.md)
  - [UpdatePasswordPolicyRequest](docs/UpdatePasswordPolicyRequest.md)

@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3204
+  version: 0.0.3206
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -165,6 +165,8 @@ tags:
   name: Personal Authentication Tokens
 - description: Endpoints for administering Roles
   name: Roles
+- description: Endpoints for querying Okta system logs
+  name: System Logs
 - description: Endpoints for administering Users
   name: Tokens
 - description: Endpoints for querying the users directory
@@ -1178,6 +1180,107 @@ paths:
       tags:
       - Personal Authentication Tokens
       x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/logs:
+    get:
+      description: Lists system logs for a domain
+      operationId: ListLogs
+      parameters:
+      - description: Lower bound of log events published property
+        explode: true
+        in: query
+        name: Since
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      - description: Upper bound of log events published property
+        explode: true
+        in: query
+        name: Until
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      - description: Page token
+        explode: true
+        in: query
+        name: After
+        required: false
+        schema:
+          maxLength: 50
+          minLength: 0
+          type: string
+        style: form
+      - description: Okta filter expression
+        explode: true
+        in: query
+        name: Filter
+        required: false
+        schema:
+          maxLength: 500
+          minLength: 0
+          type: string
+        style: form
+      - description: Filters log events results by one or more case insensitive keywords
+        explode: true
+        in: query
+        name: Query
+        required: false
+        schema:
+          maxLength: 500
+          minLength: 0
+          type: string
+        style: form
+      - description: Max number of results returned
+        explode: true
+        in: query
+        name: Limit
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+        x-nullable: true
+      - description: Order of events by published property. Either ASCENDING or DESCENDING
+        explode: true
+        in: query
+        name: SortOrder
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListOfSystemLog'
+          description: List Logs
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] ListLogs: Lists system logs for a domain"
+      tags:
+      - System Logs
+      x-fbn-apistatus: Beta
       x-accepts: application/json
   /api/me:
     get:
@@ -3908,6 +4011,394 @@ components:
           nullable: true
           type: array
       type: object
+    LogActor:
+      additionalProperties: false
+      description: Represents a LogActor resource in the Okta API
+      example:
+        alternateId: alternateId
+        displayName: displayName
+        id: id
+        type: type
+        detailEntry:
+          key: ""
+      properties:
+        id:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        alternateId:
+          nullable: true
+          type: string
+        displayName:
+          nullable: true
+          type: string
+        detailEntry:
+          additionalProperties:
+            nullable: true
+          nullable: true
+          type: object
+      type: object
+    LogAuthenticationContext:
+      additionalProperties: false
+      description: Represents a LogAuthenticationContext resource in the Okta API
+      example:
+        credentialType:
+        - value: value
+        - value: value
+        authenticationProvider:
+          value: value
+        credentialProvider:
+        - value: value
+        - value: value
+        externalSessionId: externalSessionId
+        interface: interface
+        authenticationStep: 0
+        issuer:
+          id: id
+          type: type
+      properties:
+        authenticationProvider:
+          $ref: '#/components/schemas/LogAuthenticationProvider'
+        credentialProvider:
+          items:
+            $ref: '#/components/schemas/LogCredentialProvider'
+          nullable: true
+          type: array
+        credentialType:
+          items:
+            $ref: '#/components/schemas/LogCredentialType'
+          nullable: true
+          type: array
+        issuer:
+          $ref: '#/components/schemas/LogIssuer'
+        interface:
+          nullable: true
+          type: string
+        authenticationStep:
+          format: int32
+          nullable: true
+          type: integer
+        externalSessionId:
+          nullable: true
+          type: string
+      type: object
+    LogAuthenticationProvider:
+      additionalProperties: false
+      example:
+        value: value
+      properties:
+        value:
+          nullable: true
+          type: string
+      type: object
+    LogClientInfo:
+      additionalProperties: false
+      description: Represents a LogClientInfo resource in the Okta API
+      example:
+        zone: zone
+        ipAddress: ipAddress
+        userAgent:
+          browser: browser
+          rawUserAgent: rawUserAgent
+          operatingSystem: operatingSystem
+        id: id
+        device: device
+        geographicalContext:
+          country: country
+          city: city
+          postalCode: postalCode
+          state: state
+          geolocation:
+            latitude: 6.027456183070403
+            longitude: 1.4658129805029452
+      properties:
+        userAgent:
+          $ref: '#/components/schemas/LogUserAgent'
+        zone:
+          nullable: true
+          type: string
+        device:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        ipAddress:
+          nullable: true
+          type: string
+        geographicalContext:
+          $ref: '#/components/schemas/LogGeographicalContext'
+      type: object
+    LogCredentialProvider:
+      additionalProperties: false
+      example:
+        value: value
+      properties:
+        value:
+          nullable: true
+          type: string
+      type: object
+    LogCredentialType:
+      additionalProperties: false
+      example:
+        value: value
+      properties:
+        value:
+          nullable: true
+          type: string
+      type: object
+    LogDebugContext:
+      additionalProperties: false
+      description: Represents a LogDebugContext resource in the Okta API
+      example:
+        debugData:
+          key: ""
+      properties:
+        debugData:
+          additionalProperties:
+            nullable: true
+          nullable: true
+          type: object
+      type: object
+    LogGeographicalContext:
+      additionalProperties: false
+      description: Represents a LogGeographicalContext resource in the Okta API
+      example:
+        country: country
+        city: city
+        postalCode: postalCode
+        state: state
+        geolocation:
+          latitude: 6.027456183070403
+          longitude: 1.4658129805029452
+      properties:
+        city:
+          nullable: true
+          type: string
+        state:
+          nullable: true
+          type: string
+        country:
+          nullable: true
+          type: string
+        postalCode:
+          nullable: true
+          type: string
+        geolocation:
+          $ref: '#/components/schemas/LogGeolocation'
+      type: object
+    LogGeolocation:
+      additionalProperties: false
+      description: Represents a LogGeolocation resource in the Okta API
+      example:
+        latitude: 6.027456183070403
+        longitude: 1.4658129805029452
+      properties:
+        latitude:
+          format: double
+          nullable: true
+          type: number
+        longitude:
+          format: double
+          nullable: true
+          type: number
+      type: object
+    LogIpChainEntry:
+      additionalProperties: false
+      description: Represents a LogIpChainEntry resource in the Okta API
+      example:
+        ip: ip
+        source: source
+        geographicalContext:
+          country: country
+          city: city
+          postalCode: postalCode
+          state: state
+          geolocation:
+            latitude: 6.027456183070403
+            longitude: 1.4658129805029452
+        version: version
+      properties:
+        ip:
+          nullable: true
+          type: string
+        geographicalContext:
+          $ref: '#/components/schemas/LogGeographicalContext'
+        version:
+          nullable: true
+          type: string
+        source:
+          nullable: true
+          type: string
+      type: object
+    LogIssuer:
+      additionalProperties: false
+      description: Represents a LogIssuer resource in the Okta API
+      example:
+        id: id
+        type: type
+      properties:
+        id:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+      type: object
+    LogOutcome:
+      additionalProperties: false
+      description: Represents a LogOutcome resource in the Okta API
+      example:
+        result: result
+        reason: reason
+      properties:
+        result:
+          nullable: true
+          type: string
+        reason:
+          nullable: true
+          type: string
+      type: object
+    LogRequest:
+      additionalProperties: false
+      description: Represents a LogRequest resource in the Okta API
+      example:
+        ipChain:
+        - ip: ip
+          source: source
+          geographicalContext:
+            country: country
+            city: city
+            postalCode: postalCode
+            state: state
+            geolocation:
+              latitude: 6.027456183070403
+              longitude: 1.4658129805029452
+          version: version
+        - ip: ip
+          source: source
+          geographicalContext:
+            country: country
+            city: city
+            postalCode: postalCode
+            state: state
+            geolocation:
+              latitude: 6.027456183070403
+              longitude: 1.4658129805029452
+          version: version
+      properties:
+        ipChain:
+          items:
+            $ref: '#/components/schemas/LogIpChainEntry'
+          nullable: true
+          type: array
+      type: object
+    LogSecurityContext:
+      additionalProperties: false
+      description: Represents a LogSecurityContext resource in the Okta API
+      example:
+        asNumber: 5
+        isp: isp
+        domain: domain
+        isProxy: true
+        asOrg: asOrg
+      properties:
+        asNumber:
+          format: int32
+          nullable: true
+          type: integer
+        asOrg:
+          nullable: true
+          type: string
+        isp:
+          nullable: true
+          type: string
+        domain:
+          nullable: true
+          type: string
+        isProxy:
+          nullable: true
+          type: boolean
+      type: object
+    LogSeverity:
+      additionalProperties: false
+      example:
+        value: value
+      properties:
+        value:
+          nullable: true
+          type: string
+      type: object
+    LogTarget:
+      additionalProperties: false
+      description: Represents a LogTarget resource in the Okta API
+      example:
+        alternateId: alternateId
+        displayName: displayName
+        id: id
+        type: type
+        detailEntry:
+          key: ""
+      properties:
+        id:
+          nullable: true
+          type: string
+        type:
+          nullable: true
+          type: string
+        alternateId:
+          nullable: true
+          type: string
+        displayName:
+          nullable: true
+          type: string
+        detailEntry:
+          additionalProperties:
+            nullable: true
+          nullable: true
+          type: object
+      type: object
+    LogTransaction:
+      additionalProperties: false
+      description: Represents a LogTransaction resource in the Okta API
+      example:
+        id: id
+        detail:
+          key: ""
+        type: type
+      properties:
+        type:
+          nullable: true
+          type: string
+        id:
+          nullable: true
+          type: string
+        detail:
+          additionalProperties:
+            nullable: true
+          nullable: true
+          type: object
+      type: object
+    LogUserAgent:
+      additionalProperties: false
+      description: Represents a LogUserAgent resource in the Okta API
+      example:
+        browser: browser
+        rawUserAgent: rawUserAgent
+        operatingSystem: operatingSystem
+      properties:
+        rawUserAgent:
+          nullable: true
+          type: string
+        operatingSystem:
+          nullable: true
+          type: string
+        browser:
+          nullable: true
+          type: string
+      type: object
     LusidProblemDetails:
       additionalProperties: false
       properties:
@@ -4487,6 +4978,247 @@ components:
       required:
       - values
       type: object
+    ResourceListOfSystemLog:
+      additionalProperties: false
+      example:
+        previousPage: previousPage
+        nextPage: nextPage
+        values:
+        - severity:
+            value: value
+          request:
+            ipChain:
+            - ip: ip
+              source: source
+              geographicalContext:
+                country: country
+                city: city
+                postalCode: postalCode
+                state: state
+                geolocation:
+                  latitude: 6.027456183070403
+                  longitude: 1.4658129805029452
+              version: version
+            - ip: ip
+              source: source
+              geographicalContext:
+                country: country
+                city: city
+                postalCode: postalCode
+                state: state
+                geolocation:
+                  latitude: 6.027456183070403
+                  longitude: 1.4658129805029452
+              version: version
+          authenticationContext:
+            credentialType:
+            - value: value
+            - value: value
+            authenticationProvider:
+              value: value
+            credentialProvider:
+            - value: value
+            - value: value
+            externalSessionId: externalSessionId
+            interface: interface
+            authenticationStep: 0
+            issuer:
+              id: id
+              type: type
+          clientInfo:
+            zone: zone
+            ipAddress: ipAddress
+            userAgent:
+              browser: browser
+              rawUserAgent: rawUserAgent
+              operatingSystem: operatingSystem
+            id: id
+            device: device
+            geographicalContext:
+              country: country
+              city: city
+              postalCode: postalCode
+              state: state
+              geolocation:
+                latitude: 6.027456183070403
+                longitude: 1.4658129805029452
+          eventType: eventType
+          published: 2000-01-23T04:56:07.000+00:00
+          securityContext:
+            asNumber: 5
+            isp: isp
+            domain: domain
+            isProxy: true
+            asOrg: asOrg
+          uuid: uuid
+          version: version
+          target:
+          - alternateId: alternateId
+            displayName: displayName
+            id: id
+            type: type
+            detailEntry:
+              key: ""
+          - alternateId: alternateId
+            displayName: displayName
+            id: id
+            type: type
+            detailEntry:
+              key: ""
+          actor:
+            alternateId: alternateId
+            displayName: displayName
+            id: id
+            type: type
+            detailEntry:
+              key: ""
+          debugContext:
+            debugData:
+              key: ""
+          displayMessage: displayMessage
+          legacyEventType: legacyEventType
+          outcome:
+            result: result
+            reason: reason
+          transaction:
+            id: id
+            detail:
+              key: ""
+            type: type
+        - severity:
+            value: value
+          request:
+            ipChain:
+            - ip: ip
+              source: source
+              geographicalContext:
+                country: country
+                city: city
+                postalCode: postalCode
+                state: state
+                geolocation:
+                  latitude: 6.027456183070403
+                  longitude: 1.4658129805029452
+              version: version
+            - ip: ip
+              source: source
+              geographicalContext:
+                country: country
+                city: city
+                postalCode: postalCode
+                state: state
+                geolocation:
+                  latitude: 6.027456183070403
+                  longitude: 1.4658129805029452
+              version: version
+          authenticationContext:
+            credentialType:
+            - value: value
+            - value: value
+            authenticationProvider:
+              value: value
+            credentialProvider:
+            - value: value
+            - value: value
+            externalSessionId: externalSessionId
+            interface: interface
+            authenticationStep: 0
+            issuer:
+              id: id
+              type: type
+          clientInfo:
+            zone: zone
+            ipAddress: ipAddress
+            userAgent:
+              browser: browser
+              rawUserAgent: rawUserAgent
+              operatingSystem: operatingSystem
+            id: id
+            device: device
+            geographicalContext:
+              country: country
+              city: city
+              postalCode: postalCode
+              state: state
+              geolocation:
+                latitude: 6.027456183070403
+                longitude: 1.4658129805029452
+          eventType: eventType
+          published: 2000-01-23T04:56:07.000+00:00
+          securityContext:
+            asNumber: 5
+            isp: isp
+            domain: domain
+            isProxy: true
+            asOrg: asOrg
+          uuid: uuid
+          version: version
+          target:
+          - alternateId: alternateId
+            displayName: displayName
+            id: id
+            type: type
+            detailEntry:
+              key: ""
+          - alternateId: alternateId
+            displayName: displayName
+            id: id
+            type: type
+            detailEntry:
+              key: ""
+          actor:
+            alternateId: alternateId
+            displayName: displayName
+            id: id
+            type: type
+            detailEntry:
+              key: ""
+          debugContext:
+            debugData:
+              key: ""
+          displayMessage: displayMessage
+          legacyEventType: legacyEventType
+          outcome:
+            result: result
+            reason: reason
+          transaction:
+            id: id
+            detail:
+              key: ""
+            type: type
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        href: https://openapi-generator.tech
+      properties:
+        values:
+          items:
+            $ref: '#/components/schemas/SystemLog'
+          type: array
+        href:
+          format: uri
+          nullable: true
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+        nextPage:
+          nullable: true
+          type: string
+        previousPage:
+          nullable: true
+          type: string
+      required:
+      - values
+      type: object
     RoleId:
       additionalProperties: false
       example:
@@ -4770,6 +5502,162 @@ components:
             $ref: '#/components/schemas/SupportRole'
           nullable: true
           type: array
+      type: object
+    SystemLog:
+      additionalProperties: false
+      description: A system log event
+      example:
+        severity:
+          value: value
+        request:
+          ipChain:
+          - ip: ip
+            source: source
+            geographicalContext:
+              country: country
+              city: city
+              postalCode: postalCode
+              state: state
+              geolocation:
+                latitude: 6.027456183070403
+                longitude: 1.4658129805029452
+            version: version
+          - ip: ip
+            source: source
+            geographicalContext:
+              country: country
+              city: city
+              postalCode: postalCode
+              state: state
+              geolocation:
+                latitude: 6.027456183070403
+                longitude: 1.4658129805029452
+            version: version
+        authenticationContext:
+          credentialType:
+          - value: value
+          - value: value
+          authenticationProvider:
+            value: value
+          credentialProvider:
+          - value: value
+          - value: value
+          externalSessionId: externalSessionId
+          interface: interface
+          authenticationStep: 0
+          issuer:
+            id: id
+            type: type
+        clientInfo:
+          zone: zone
+          ipAddress: ipAddress
+          userAgent:
+            browser: browser
+            rawUserAgent: rawUserAgent
+            operatingSystem: operatingSystem
+          id: id
+          device: device
+          geographicalContext:
+            country: country
+            city: city
+            postalCode: postalCode
+            state: state
+            geolocation:
+              latitude: 6.027456183070403
+              longitude: 1.4658129805029452
+        eventType: eventType
+        published: 2000-01-23T04:56:07.000+00:00
+        securityContext:
+          asNumber: 5
+          isp: isp
+          domain: domain
+          isProxy: true
+          asOrg: asOrg
+        uuid: uuid
+        version: version
+        target:
+        - alternateId: alternateId
+          displayName: displayName
+          id: id
+          type: type
+          detailEntry:
+            key: ""
+        - alternateId: alternateId
+          displayName: displayName
+          id: id
+          type: type
+          detailEntry:
+            key: ""
+        actor:
+          alternateId: alternateId
+          displayName: displayName
+          id: id
+          type: type
+          detailEntry:
+            key: ""
+        debugContext:
+          debugData:
+            key: ""
+        displayMessage: displayMessage
+        legacyEventType: legacyEventType
+        outcome:
+          result: result
+          reason: reason
+        transaction:
+          id: id
+          detail:
+            key: ""
+          type: type
+      properties:
+        actor:
+          $ref: '#/components/schemas/LogActor'
+        authenticationContext:
+          $ref: '#/components/schemas/LogAuthenticationContext'
+        clientInfo:
+          $ref: '#/components/schemas/LogClientInfo'
+        debugContext:
+          $ref: '#/components/schemas/LogDebugContext'
+        displayMessage:
+          description: Represents a DisplayMessage resource in the Okta API
+          nullable: true
+          type: string
+        eventType:
+          description: Represents a EventType resource in the Okta API
+          nullable: true
+          type: string
+        legacyEventType:
+          description: Represents a LegacyEventType resource in the Okta API
+          nullable: true
+          type: string
+        outcome:
+          $ref: '#/components/schemas/LogOutcome'
+        published:
+          description: Represents when Published in the Okta API
+          format: date-time
+          nullable: true
+          type: string
+        request:
+          $ref: '#/components/schemas/LogRequest'
+        securityContext:
+          $ref: '#/components/schemas/LogSecurityContext'
+        severity:
+          $ref: '#/components/schemas/LogSeverity'
+        target:
+          description: Represents a LogTarget resource in the Okta API
+          items:
+            $ref: '#/components/schemas/LogTarget'
+          nullable: true
+          type: array
+        transaction:
+          $ref: '#/components/schemas/LogTransaction'
+        uuid:
+          description: Represents Uuid in the Okta API
+          nullable: true
+          type: string
+        version:
+          description: Represents a Version in the Okta API
+          nullable: true
+          type: string
       type: object
     TemporaryPassword:
       additionalProperties: false
@@ -5253,6 +6141,7 @@ x-tagGroups:
   - Network Zones
   - Personal Authentication Tokens
   - Roles
+  - System Logs
   - Tokens
   - Users
 x-group-parameters: true
