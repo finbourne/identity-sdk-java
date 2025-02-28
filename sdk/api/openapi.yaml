@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3206
+  version: 0.0.3208
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -4045,13 +4045,12 @@ components:
       description: Represents a LogAuthenticationContext resource in the Okta API
       example:
         credentialType:
-        - value: value
-        - value: value
-        authenticationProvider:
-          value: value
+        - credentialType
+        - credentialType
+        authenticationProvider: authenticationProvider
         credentialProvider:
-        - value: value
-        - value: value
+        - credentialProvider
+        - credentialProvider
         externalSessionId: externalSessionId
         interface: interface
         authenticationStep: 0
@@ -4060,15 +4059,16 @@ components:
           type: type
       properties:
         authenticationProvider:
-          $ref: '#/components/schemas/LogAuthenticationProvider'
+          nullable: true
+          type: string
         credentialProvider:
           items:
-            $ref: '#/components/schemas/LogCredentialProvider'
+            type: string
           nullable: true
           type: array
         credentialType:
           items:
-            $ref: '#/components/schemas/LogCredentialType'
+            type: string
           nullable: true
           type: array
         issuer:
@@ -4081,15 +4081,6 @@ components:
           nullable: true
           type: integer
         externalSessionId:
-          nullable: true
-          type: string
-      type: object
-    LogAuthenticationProvider:
-      additionalProperties: false
-      example:
-        value: value
-      properties:
-        value:
           nullable: true
           type: string
       type: object
@@ -4130,24 +4121,6 @@ components:
           type: string
         geographicalContext:
           $ref: '#/components/schemas/LogGeographicalContext'
-      type: object
-    LogCredentialProvider:
-      additionalProperties: false
-      example:
-        value: value
-      properties:
-        value:
-          nullable: true
-          type: string
-      type: object
-    LogCredentialType:
-      additionalProperties: false
-      example:
-        value: value
-      properties:
-        value:
-          nullable: true
-          type: string
       type: object
     LogDebugContext:
       additionalProperties: false
@@ -5012,13 +4985,12 @@ components:
               version: version
           authenticationContext:
             credentialType:
-            - value: value
-            - value: value
-            authenticationProvider:
-              value: value
+            - credentialType
+            - credentialType
+            authenticationProvider: authenticationProvider
             credentialProvider:
-            - value: value
-            - value: value
+            - credentialProvider
+            - credentialProvider
             externalSessionId: externalSessionId
             interface: interface
             authenticationStep: 0
@@ -5113,13 +5085,12 @@ components:
               version: version
           authenticationContext:
             credentialType:
-            - value: value
-            - value: value
-            authenticationProvider:
-              value: value
+            - credentialType
+            - credentialType
+            authenticationProvider: authenticationProvider
             credentialProvider:
-            - value: value
-            - value: value
+            - credentialProvider
+            - credentialProvider
             externalSessionId: externalSessionId
             interface: interface
             authenticationStep: 0
@@ -5535,13 +5506,12 @@ components:
             version: version
         authenticationContext:
           credentialType:
-          - value: value
-          - value: value
-          authenticationProvider:
-            value: value
+          - credentialType
+          - credentialType
+          authenticationProvider: authenticationProvider
           credentialProvider:
-          - value: value
-          - value: value
+          - credentialProvider
+          - credentialProvider
           externalSessionId: externalSessionId
           interface: interface
           authenticationStep: 0

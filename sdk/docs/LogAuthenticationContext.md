@@ -8,9 +8,9 @@ Represents a LogAuthenticationContext resource in the Okta API
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**authenticationProvider** | [**LogAuthenticationProvider**](LogAuthenticationProvider.md) |  |  [optional] |
-|**credentialProvider** | [**List&lt;LogCredentialProvider&gt;**](LogCredentialProvider.md) |  |  [optional] |
-|**credentialType** | [**List&lt;LogCredentialType&gt;**](LogCredentialType.md) |  |  [optional] |
+|**authenticationProvider** | **String** |  |  [optional] |
+|**credentialProvider** | **List&lt;String&gt;** |  |  [optional] |
+|**credentialType** | **List&lt;String&gt;** |  |  [optional] |
 |**issuer** | [**LogIssuer**](LogIssuer.md) |  |  [optional] |
 |**_interface** | **String** |  |  [optional] |
 |**authenticationStep** | **Integer** |  |  [optional] |

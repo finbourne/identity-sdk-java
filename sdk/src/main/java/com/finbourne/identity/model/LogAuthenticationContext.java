@@ -11,9 +11,6 @@
 package com.finbourne.identity.model;
 
 import java.util.Objects;
-import com.finbourne.identity.model.LogAuthenticationProvider;
-import com.finbourne.identity.model.LogCredentialProvider;
-import com.finbourne.identity.model.LogCredentialType;
 import com.finbourne.identity.model.LogIssuer;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.JsonAdapter;
@@ -58,15 +55,15 @@ import com.finbourne.identity.JSON;
 public class LogAuthenticationContext {
   public static final String SERIALIZED_NAME_AUTHENTICATION_PROVIDER = "authenticationProvider";
   @SerializedName(SERIALIZED_NAME_AUTHENTICATION_PROVIDER)
-  private LogAuthenticationProvider authenticationProvider;
+  private String authenticationProvider;
 
   public static final String SERIALIZED_NAME_CREDENTIAL_PROVIDER = "credentialProvider";
   @SerializedName(SERIALIZED_NAME_CREDENTIAL_PROVIDER)
-  private List<LogCredentialProvider> credentialProvider;
+  private List<String> credentialProvider;
 
   public static final String SERIALIZED_NAME_CREDENTIAL_TYPE = "credentialType";
   @SerializedName(SERIALIZED_NAME_CREDENTIAL_TYPE)
-  private List<LogCredentialType> credentialType;
+  private List<String> credentialType;
 
   public static final String SERIALIZED_NAME_ISSUER = "issuer";
   @SerializedName(SERIALIZED_NAME_ISSUER)
@@ -87,7 +84,7 @@ public class LogAuthenticationContext {
   public LogAuthenticationContext() {
   }
 
-  public LogAuthenticationContext authenticationProvider(LogAuthenticationProvider authenticationProvider) {
+  public LogAuthenticationContext authenticationProvider(String authenticationProvider) {
     
     this.authenticationProvider = authenticationProvider;
     return this;
@@ -98,23 +95,23 @@ public class LogAuthenticationContext {
    * @return authenticationProvider
   **/
   @jakarta.annotation.Nullable
-  public LogAuthenticationProvider getAuthenticationProvider() {
+  public String getAuthenticationProvider() {
     return authenticationProvider;
   }
 
 
-  public void setAuthenticationProvider(LogAuthenticationProvider authenticationProvider) {
+  public void setAuthenticationProvider(String authenticationProvider) {
     this.authenticationProvider = authenticationProvider;
   }
 
 
-  public LogAuthenticationContext credentialProvider(List<LogCredentialProvider> credentialProvider) {
+  public LogAuthenticationContext credentialProvider(List<String> credentialProvider) {
     
     this.credentialProvider = credentialProvider;
     return this;
   }
 
-  public LogAuthenticationContext addCredentialProviderItem(LogCredentialProvider credentialProviderItem) {
+  public LogAuthenticationContext addCredentialProviderItem(String credentialProviderItem) {
     if (this.credentialProvider == null) {
       this.credentialProvider = new ArrayList<>();
     }
@@ -127,23 +124,23 @@ public class LogAuthenticationContext {
    * @return credentialProvider
   **/
   @jakarta.annotation.Nullable
-  public List<LogCredentialProvider> getCredentialProvider() {
+  public List<String> getCredentialProvider() {
     return credentialProvider;
   }
 
 
-  public void setCredentialProvider(List<LogCredentialProvider> credentialProvider) {
+  public void setCredentialProvider(List<String> credentialProvider) {
     this.credentialProvider = credentialProvider;
   }
 
 
-  public LogAuthenticationContext credentialType(List<LogCredentialType> credentialType) {
+  public LogAuthenticationContext credentialType(List<String> credentialType) {
     
     this.credentialType = credentialType;
     return this;
   }
 
-  public LogAuthenticationContext addCredentialTypeItem(LogCredentialType credentialTypeItem) {
+  public LogAuthenticationContext addCredentialTypeItem(String credentialTypeItem) {
     if (this.credentialType == null) {
       this.credentialType = new ArrayList<>();
     }
@@ -156,12 +153,12 @@ public class LogAuthenticationContext {
    * @return credentialType
   **/
   @jakarta.annotation.Nullable
-  public List<LogCredentialType> getCredentialType() {
+  public List<String> getCredentialType() {
     return credentialType;
   }
 
 
-  public void setCredentialType(List<LogCredentialType> credentialType) {
+  public void setCredentialType(List<String> credentialType) {
     this.credentialType = credentialType;
   }
 
@@ -343,37 +340,16 @@ public class LogAuthenticationContext {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      // validate the optional field `authenticationProvider`
-      if (jsonObj.get("authenticationProvider") != null && !jsonObj.get("authenticationProvider").isJsonNull()) {
-        LogAuthenticationProvider.validateJsonElement(jsonObj.get("authenticationProvider"));
+      if ((jsonObj.get("authenticationProvider") != null && !jsonObj.get("authenticationProvider").isJsonNull()) && !jsonObj.get("authenticationProvider").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `authenticationProvider` to be a primitive type in the JSON string but got `%s`", jsonObj.get("authenticationProvider").toString()));
       }
-      if (jsonObj.get("credentialProvider") != null && !jsonObj.get("credentialProvider").isJsonNull()) {
-        JsonArray jsonArraycredentialProvider = jsonObj.getAsJsonArray("credentialProvider");
-        if (jsonArraycredentialProvider != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("credentialProvider").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `credentialProvider` to be an array in the JSON string but got `%s`", jsonObj.get("credentialProvider").toString()));
-          }
-
-          // validate the optional field `credentialProvider` (array)
-          for (int i = 0; i < jsonArraycredentialProvider.size(); i++) {
-            LogCredentialProvider.validateJsonElement(jsonArraycredentialProvider.get(i));
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("credentialProvider") != null && !jsonObj.get("credentialProvider").isJsonNull() && !jsonObj.get("credentialProvider").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `credentialProvider` to be an array in the JSON string but got `%s`", jsonObj.get("credentialProvider").toString()));
       }
-      if (jsonObj.get("credentialType") != null && !jsonObj.get("credentialType").isJsonNull()) {
-        JsonArray jsonArraycredentialType = jsonObj.getAsJsonArray("credentialType");
-        if (jsonArraycredentialType != null) {
-          // ensure the json data is an array
-          if (!jsonObj.get("credentialType").isJsonArray()) {
-            throw new IllegalArgumentException(String.format("Expected the field `credentialType` to be an array in the JSON string but got `%s`", jsonObj.get("credentialType").toString()));
-          }
-
-          // validate the optional field `credentialType` (array)
-          for (int i = 0; i < jsonArraycredentialType.size(); i++) {
-            LogCredentialType.validateJsonElement(jsonArraycredentialType.get(i));
-          };
-        }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("credentialType") != null && !jsonObj.get("credentialType").isJsonNull() && !jsonObj.get("credentialType").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `credentialType` to be an array in the JSON string but got `%s`", jsonObj.get("credentialType").toString()));
       }
       // validate the optional field `issuer`
       if (jsonObj.get("issuer") != null && !jsonObj.get("issuer").isJsonNull()) {
