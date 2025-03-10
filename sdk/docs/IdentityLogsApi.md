@@ -1,16 +1,16 @@
-# SystemLogsApi
+# IdentityLogsApi
 
 All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**listLogs**](SystemLogsApi.md#listLogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain |
+| [**listLogs**](IdentityLogsApi.md#listLogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain |
 
 
 
 ## listLogs
 
-> ResourceListOfSystemLog listLogs(since, until, after, filter, query, limit, sortOrder)
+> ResourceListOfSystemLog listLogs(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter)
 
 [BETA] ListLogs: Lists system logs for a domain
 
@@ -20,7 +20,7 @@ Lists system logs for a domain
 
 ```java
 import com.finbourne.identity.model.*;
-import com.finbourne.identity.api.SystemLogsApi;
+import com.finbourne.identity.api.IdentityLogsApi;
 import com.finbourne.identity.extensions.ApiConfigurationException;
 import com.finbourne.identity.extensions.ApiFactoryBuilder;
 import com.finbourne.identity.extensions.auth.FinbourneTokenException;
@@ -29,7 +29,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
-public class SystemLogsApiExample {
+public class IdentityLogsApiExample {
 
     public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
         String fileName = "secrets.json";
@@ -52,24 +52,24 @@ public class SystemLogsApiExample {
         
         // uncomment the below to use an api factory with overrides
         // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
-        // SystemLogsApi apiInstance = apiFactory.build(SystemLogsApi.class);
+        // IdentityLogsApi apiInstance = apiFactory.build(IdentityLogsApi.class);
 
-        SystemLogsApi apiInstance = ApiFactoryBuilder.build(fileName).build(SystemLogsApi.class);
-        OffsetDateTime since = OffsetDateTime.now(); // OffsetDateTime | Lower bound of log events published property
-        OffsetDateTime until = OffsetDateTime.now(); // OffsetDateTime | Upper bound of log events published property
-        String after = "after_example"; // String | Page token
-        String filter = "filter_example"; // String | Okta filter expression
-        String query = "query_example"; // String | Filters log events results by one or more case insensitive keywords
-        Integer limit = 56; // Integer | Max number of results returned
-        String sortOrder = "sortOrder_example"; // String | Order of events by published property. Either ASCENDING or DESCENDING
+        IdentityLogsApi apiInstance = ApiFactoryBuilder.build(fileName).build(IdentityLogsApi.class);
+        OffsetDateTime oktaSince = OffsetDateTime.now(); // OffsetDateTime | Lower bound of log events published property
+        OffsetDateTime oktaUntil = OffsetDateTime.now(); // OffsetDateTime | Upper bound of log events published property
+        String oktaFilter = "oktaFilter_example"; // String | Okta Page token
+        String oktaQuery = "oktaQuery_example"; // String | Okta filter expression
+        Integer oktaLimit = 56; // Integer | Filters log events results by one or more case insensitive keywords
+        String oktaSortOrder = "oktaSortOrder_example"; // String | Max number of results returned
+        String oktaAfter = "oktaAfter_example"; // String | Order of events by published property. Either ASCENDING or DESCENDING
         try {
             // uncomment the below to set overrides at the request level
-            // ResourceListOfSystemLog result = apiInstance.listLogs(since, until, after, filter, query, limit, sortOrder).execute(opts);
+            // ResourceListOfSystemLog result = apiInstance.listLogs(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter).execute(opts);
 
-            ResourceListOfSystemLog result = apiInstance.listLogs(since, until, after, filter, query, limit, sortOrder).execute();
+            ResourceListOfSystemLog result = apiInstance.listLogs(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter).execute();
             System.out.println(result.toJson());
         } catch (ApiException e) {
-            System.err.println("Exception when calling SystemLogsApi#listLogs");
+            System.err.println("Exception when calling IdentityLogsApi#listLogs");
             System.err.println("Status code: " + e.getCode());
             System.err.println("Reason: " + e.getResponseBody());
             e.printStackTrace();
@@ -83,13 +83,13 @@ public class SystemLogsApiExample {
 
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **since** | **OffsetDateTime**| Lower bound of log events published property | [optional] |
-| **until** | **OffsetDateTime**| Upper bound of log events published property | [optional] |
-| **after** | **String**| Page token | [optional] |
-| **filter** | **String**| Okta filter expression | [optional] |
-| **query** | **String**| Filters log events results by one or more case insensitive keywords | [optional] |
-| **limit** | **Integer**| Max number of results returned | [optional] |
-| **sortOrder** | **String**| Order of events by published property. Either ASCENDING or DESCENDING | [optional] |
+| **oktaSince** | **OffsetDateTime**| Lower bound of log events published property | [optional] |
+| **oktaUntil** | **OffsetDateTime**| Upper bound of log events published property | [optional] |
+| **oktaFilter** | **String**| Okta Page token | [optional] |
+| **oktaQuery** | **String**| Okta filter expression | [optional] |
+| **oktaLimit** | **Integer**| Filters log events results by one or more case insensitive keywords | [optional] |
+| **oktaSortOrder** | **String**| Max number of results returned | [optional] |
+| **oktaAfter** | **String**| Order of events by published property. Either ASCENDING or DESCENDING | [optional] |
 
 ### Return type
 

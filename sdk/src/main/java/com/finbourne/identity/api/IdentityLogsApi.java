@@ -36,16 +36,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SystemLogsApi {
+public class IdentityLogsApi {
     private ApiClient localVarApiClient;
     private int localHostIndex;
     private String localCustomBaseUrl;
 
-    public SystemLogsApi() {
+    public IdentityLogsApi() {
         this(Configuration.getDefaultApiClient());
     }
 
-    public SystemLogsApi(ApiClient apiClient) {
+    public IdentityLogsApi(ApiClient apiClient) {
         this.localVarApiClient = apiClient;
     }
 
@@ -73,11 +73,11 @@ public class SystemLogsApi {
         this.localCustomBaseUrl = customBaseUrl;
     }
 
-    private okhttp3.Call listLogsCall(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder, final ApiCallback _callback) throws ApiException {
-        return listLogsCall(since, until, after, filter, query, limit, sortOrder,  _callback, new ConfigurationOptions());
+    private okhttp3.Call listLogsCall(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback _callback) throws ApiException {
+        return listLogsCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter,  _callback, new ConfigurationOptions());
     }
 
-    private okhttp3.Call listLogsCall(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+    private okhttp3.Call listLogsCall(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -102,32 +102,32 @@ public class SystemLogsApi {
         Map<String, String> localVarCookieParams = new HashMap<String, String>();
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
-        if (since != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Since", since));
+        if (oktaSince != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaSince", oktaSince));
         }
 
-        if (until != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Until", until));
+        if (oktaUntil != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaUntil", oktaUntil));
         }
 
-        if (after != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("After", after));
+        if (oktaFilter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaFilter", oktaFilter));
         }
 
-        if (filter != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Filter", filter));
+        if (oktaQuery != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaQuery", oktaQuery));
         }
 
-        if (query != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Query", query));
+        if (oktaLimit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaLimit", oktaLimit));
         }
 
-        if (limit != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("Limit", limit));
+        if (oktaSortOrder != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaSortOrder", oktaSortOrder));
         }
 
-        if (sortOrder != null) {
-            localVarQueryParams.addAll(localVarApiClient.parameterToPair("SortOrder", sortOrder));
+        if (oktaAfter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaAfter", oktaAfter));
         }
 
         final String[] localVarAccepts = {
@@ -150,119 +150,119 @@ public class SystemLogsApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call listLogsValidateBeforeCall(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
-        return listLogsCall(since, until, after, filter, query, limit, sortOrder, _callback, opts);
+    private okhttp3.Call listLogsValidateBeforeCall(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listLogsCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, _callback, opts);
 
     }
 
 
-    private ApiResponse<ResourceListOfSystemLog> listLogsWithHttpInfo(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder) throws ApiException {
-        okhttp3.Call localVarCall = listLogsValidateBeforeCall(since, until, after, filter, query, limit, sortOrder, null, new ConfigurationOptions());
+    private ApiResponse<ResourceListOfSystemLog> listLogsWithHttpInfo(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter) throws ApiException {
+        okhttp3.Call localVarCall = listLogsValidateBeforeCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, null, new ConfigurationOptions());
         Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private ApiResponse<ResourceListOfSystemLog> listLogsWithHttpInfo(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder, ConfigurationOptions opts) throws ApiException {
-        okhttp3.Call localVarCall = listLogsValidateBeforeCall(since, until, after, filter, query, limit, sortOrder, null, opts);
+    private ApiResponse<ResourceListOfSystemLog> listLogsWithHttpInfo(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listLogsValidateBeforeCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, null, opts);
         Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
-    private okhttp3.Call listLogsAsync(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder, final ApiCallback<ResourceListOfSystemLog> _callback) throws ApiException {
+    private okhttp3.Call listLogsAsync(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback<ResourceListOfSystemLog> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = listLogsValidateBeforeCall(since, until, after, filter, query, limit, sortOrder, _callback, new ConfigurationOptions());
+        okhttp3.Call localVarCall = listLogsValidateBeforeCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, _callback, new ConfigurationOptions());
         Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
-    private okhttp3.Call listLogsAsync(OffsetDateTime since, OffsetDateTime until, String after, String filter, String query, Integer limit, String sortOrder, final ApiCallback<ResourceListOfSystemLog> _callback, ConfigurationOptions opts) throws ApiException {
+    private okhttp3.Call listLogsAsync(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, String oktaFilter, String oktaQuery, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback<ResourceListOfSystemLog> _callback, ConfigurationOptions opts) throws ApiException {
 
-        okhttp3.Call localVarCall = listLogsValidateBeforeCall(since, until, after, filter, query, limit, sortOrder, _callback, opts);
+        okhttp3.Call localVarCall = listLogsValidateBeforeCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, _callback, opts);
         Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
 
     public class APIlistLogsRequest {
-        private OffsetDateTime since;
-        private OffsetDateTime until;
-        private String after;
-        private String filter;
-        private String query;
-        private Integer limit;
-        private String sortOrder;
+        private OffsetDateTime oktaSince;
+        private OffsetDateTime oktaUntil;
+        private String oktaFilter;
+        private String oktaQuery;
+        private Integer oktaLimit;
+        private String oktaSortOrder;
+        private String oktaAfter;
 
         private APIlistLogsRequest() {
         }
 
         /**
-         * Set since
-         * @param since Lower bound of log events published property (optional)
+         * Set oktaSince
+         * @param oktaSince Lower bound of log events published property (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest since(OffsetDateTime since) {
-            this.since = since;
+        public APIlistLogsRequest oktaSince(OffsetDateTime oktaSince) {
+            this.oktaSince = oktaSince;
             return this;
         }
 
         /**
-         * Set until
-         * @param until Upper bound of log events published property (optional)
+         * Set oktaUntil
+         * @param oktaUntil Upper bound of log events published property (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest until(OffsetDateTime until) {
-            this.until = until;
+        public APIlistLogsRequest oktaUntil(OffsetDateTime oktaUntil) {
+            this.oktaUntil = oktaUntil;
             return this;
         }
 
         /**
-         * Set after
-         * @param after Page token (optional)
+         * Set oktaFilter
+         * @param oktaFilter Okta Page token (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest after(String after) {
-            this.after = after;
+        public APIlistLogsRequest oktaFilter(String oktaFilter) {
+            this.oktaFilter = oktaFilter;
             return this;
         }
 
         /**
-         * Set filter
-         * @param filter Okta filter expression (optional)
+         * Set oktaQuery
+         * @param oktaQuery Okta filter expression (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest filter(String filter) {
-            this.filter = filter;
+        public APIlistLogsRequest oktaQuery(String oktaQuery) {
+            this.oktaQuery = oktaQuery;
             return this;
         }
 
         /**
-         * Set query
-         * @param query Filters log events results by one or more case insensitive keywords (optional)
+         * Set oktaLimit
+         * @param oktaLimit Filters log events results by one or more case insensitive keywords (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest query(String query) {
-            this.query = query;
+        public APIlistLogsRequest oktaLimit(Integer oktaLimit) {
+            this.oktaLimit = oktaLimit;
             return this;
         }
 
         /**
-         * Set limit
-         * @param limit Max number of results returned (optional)
+         * Set oktaSortOrder
+         * @param oktaSortOrder Max number of results returned (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest limit(Integer limit) {
-            this.limit = limit;
+        public APIlistLogsRequest oktaSortOrder(String oktaSortOrder) {
+            this.oktaSortOrder = oktaSortOrder;
             return this;
         }
 
         /**
-         * Set sortOrder
-         * @param sortOrder Order of events by published property. Either ASCENDING or DESCENDING (optional)
+         * Set oktaAfter
+         * @param oktaAfter Order of events by published property. Either ASCENDING or DESCENDING (optional)
          * @return APIlistLogsRequest
          */
-        public APIlistLogsRequest sortOrder(String sortOrder) {
-            this.sortOrder = sortOrder;
+        public APIlistLogsRequest oktaAfter(String oktaAfter) {
+            this.oktaAfter = oktaAfter;
             return this;
         }
 
@@ -280,7 +280,7 @@ public class SystemLogsApi {
          </table>
          */
         public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
-            return listLogsCall(since, until, after, filter, query, limit, sortOrder, _callback);
+            return listLogsCall(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, _callback);
         }
 
         /**
@@ -296,7 +296,7 @@ public class SystemLogsApi {
          </table>
          */
         public ResourceListOfSystemLog execute() throws ApiException {
-            ApiResponse<ResourceListOfSystemLog> localVarResp = listLogsWithHttpInfo(since, until, after, filter, query, limit, sortOrder);
+            ApiResponse<ResourceListOfSystemLog> localVarResp = listLogsWithHttpInfo(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter);
             return localVarResp.getData();
         }
 
@@ -313,7 +313,7 @@ public class SystemLogsApi {
          </table>
          */
         public ResourceListOfSystemLog execute(ConfigurationOptions opts) throws ApiException {
-            ApiResponse<ResourceListOfSystemLog> localVarResp = listLogsWithHttpInfo(since, until, after, filter, query, limit, sortOrder, opts);
+            ApiResponse<ResourceListOfSystemLog> localVarResp = listLogsWithHttpInfo(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, opts);
             return localVarResp.getData();
         }
 
@@ -330,7 +330,7 @@ public class SystemLogsApi {
          </table>
          */
         public ApiResponse<ResourceListOfSystemLog> executeWithHttpInfo() throws ApiException {
-            return listLogsWithHttpInfo(since, until, after, filter, query, limit, sortOrder);
+            return listLogsWithHttpInfo(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter);
         }
 
         /**
@@ -346,7 +346,7 @@ public class SystemLogsApi {
          </table>
          */
         public ApiResponse<ResourceListOfSystemLog> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
-            return listLogsWithHttpInfo(since, until, after, filter, query, limit, sortOrder, opts);
+            return listLogsWithHttpInfo(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, opts);
         }
 
         /**
@@ -363,7 +363,7 @@ public class SystemLogsApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<ResourceListOfSystemLog> _callback) throws ApiException {
-            return listLogsAsync(since, until, after, filter, query, limit, sortOrder, _callback);
+            return listLogsAsync(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, _callback);
         }
 
         /**
@@ -380,7 +380,7 @@ public class SystemLogsApi {
          </table>
          */
         public okhttp3.Call executeAsync(final ApiCallback<ResourceListOfSystemLog> _callback, ConfigurationOptions opts) throws ApiException {
-            return listLogsAsync(since, until, after, filter, query, limit, sortOrder, _callback, opts);
+            return listLogsAsync(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter, _callback, opts);
         }
     }
 

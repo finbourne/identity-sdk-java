@@ -18,6 +18,7 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**grantSupportAccess**](docs/AuthenticationApi.md#grantsupportaccess) | **POST** /api/authentication/support | GrantSupportAccess: Grants FINBOURNE support access to your account
 *AuthenticationApi* | [**invalidateSupportAccess**](docs/AuthenticationApi.md#invalidatesupportaccess) | **DELETE** /api/authentication/support | InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
 *AuthenticationApi* | [**updatePasswordPolicy**](docs/AuthenticationApi.md#updatepasswordpolicy) | **PUT** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type
+*IdentityLogsApi* | [**listLogs**](docs/IdentityLogsApi.md#listlogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain
 *IdentityProviderApi* | [**addScim**](docs/IdentityProviderApi.md#addscim) | **PUT** /api/identityprovider/scim | AddScim: Add SCIM
 *IdentityProviderApi* | [**removeScim**](docs/IdentityProviderApi.md#removescim) | **DELETE** /api/identityprovider/scim | RemoveScim: Remove SCIM
 *MeApi* | [**getUserInfo**](docs/MeApi.md#getuserinfo) | **GET** /api/me | GetUserInfo: Get User Info
@@ -38,7 +39,6 @@ Class | Method | HTTP request | Description
 *RolesApi* | [**listUsersInRole**](docs/RolesApi.md#listusersinrole) | **GET** /api/roles/{id}/users | ListUsersInRole: Get the users in the specified role.
 *RolesApi* | [**removeUserFromRole**](docs/RolesApi.md#removeuserfromrole) | **DELETE** /api/roles/{id}/users/{userId} | RemoveUserFromRole: Remove User from Role
 *RolesApi* | [**updateRole**](docs/RolesApi.md#updaterole) | **PUT** /api/roles/{id} | UpdateRole: Update Role
-*SystemLogsApi* | [**listLogs**](docs/SystemLogsApi.md#listlogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain
 *TokensApi* | [**invalidateToken**](docs/TokensApi.md#invalidatetoken) | **DELETE** /api/tokens | InvalidateToken: Invalidate current JWT token (sign out)
 *UsersApi* | [**createUser**](docs/UsersApi.md#createuser) | **POST** /api/users | CreateUser: Create User
 *UsersApi* | [**deleteUser**](docs/UsersApi.md#deleteuser) | **DELETE** /api/users/{id} | DeleteUser: Delete User

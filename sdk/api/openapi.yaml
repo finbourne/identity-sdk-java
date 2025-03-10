@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3208
+  version: 0.0.3212
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -155,6 +155,8 @@ tags:
   name: Applications
 - description: Endpoints for getting authentication details for the domain
   name: Authentication
+- description: Endpoints for accessing and querying identity logging
+  name: Identity Logs
 - description: Endpoints for administering Identity Provider integration
   name: Identity Provider
 - description: Endpoints for getting more information about the current User
@@ -165,8 +167,6 @@ tags:
   name: Personal Authentication Tokens
 - description: Endpoints for administering Roles
   name: Roles
-- description: Endpoints for querying Okta system logs
-  name: System Logs
 - description: Endpoints for administering Users
   name: Tokens
 - description: Endpoints for querying the users directory
@@ -1189,7 +1189,7 @@ paths:
       - description: Lower bound of log events published property
         explode: true
         in: query
-        name: Since
+        name: oktaSince
         required: false
         schema:
           format: date-time
@@ -1199,27 +1199,27 @@ paths:
       - description: Upper bound of log events published property
         explode: true
         in: query
-        name: Until
+        name: oktaUntil
         required: false
         schema:
           format: date-time
           type: string
         style: form
         x-nullable: true
-      - description: Page token
+      - description: Okta Page token
         explode: true
         in: query
-        name: After
+        name: oktaFilter
         required: false
         schema:
-          maxLength: 50
+          maxLength: 500
           minLength: 0
           type: string
         style: form
       - description: Okta filter expression
         explode: true
         in: query
-        name: Filter
+        name: oktaQuery
         required: false
         schema:
           maxLength: 500
@@ -1229,17 +1229,7 @@ paths:
       - description: Filters log events results by one or more case insensitive keywords
         explode: true
         in: query
-        name: Query
-        required: false
-        schema:
-          maxLength: 500
-          minLength: 0
-          type: string
-        style: form
-      - description: Max number of results returned
-        explode: true
-        in: query
-        name: Limit
+        name: oktaLimit
         required: false
         schema:
           format: int32
@@ -1248,12 +1238,22 @@ paths:
           type: integer
         style: form
         x-nullable: true
+      - description: Max number of results returned
+        explode: true
+        in: query
+        name: oktaSortOrder
+        required: false
+        schema:
+          type: string
+        style: form
       - description: Order of events by published property. Either ASCENDING or DESCENDING
         explode: true
         in: query
-        name: SortOrder
+        name: oktaAfter
         required: false
         schema:
+          maxLength: 50
+          minLength: 0
           type: string
         style: form
       responses:
@@ -1279,7 +1279,7 @@ paths:
       - oauth2: []
       summary: "[BETA] ListLogs: Lists system logs for a domain"
       tags:
-      - System Logs
+      - Identity Logs
       x-fbn-apistatus: Beta
       x-accepts: application/json
   /api/me:
@@ -6106,12 +6106,12 @@ x-tagGroups:
   - Application Metadata
   - Applications
   - Authentication
+  - Identity Logs
   - Identity Provider
   - Me
   - Network Zones
   - Personal Authentication Tokens
   - Roles
-  - System Logs
   - Tokens
   - Users
 x-group-parameters: true
