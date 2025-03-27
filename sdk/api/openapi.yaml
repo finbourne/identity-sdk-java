@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3224
+  version: 0.0.3228
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1206,7 +1206,7 @@ paths:
           type: string
         style: form
         x-nullable: true
-      - description: Okta Page token
+      - description: Okta filter expression
         explode: true
         in: query
         name: oktaFilter
@@ -1216,7 +1216,7 @@ paths:
           minLength: 0
           type: string
         style: form
-      - description: Okta filter expression
+      - description: Filters log events results by one or more case insensitive keywords
         explode: true
         in: query
         name: oktaQuery
@@ -1226,7 +1226,7 @@ paths:
           minLength: 0
           type: string
         style: form
-      - description: Filters log events results by one or more case insensitive keywords
+      - description: Max number of results returned
         explode: true
         in: query
         name: oktaLimit
@@ -1238,7 +1238,7 @@ paths:
           type: integer
         style: form
         x-nullable: true
-      - description: Max number of results returned
+      - description: Order of events by published property. Either ASCENDING or DESCENDING
         explode: true
         in: query
         name: oktaSortOrder
@@ -1246,7 +1246,7 @@ paths:
         schema:
           type: string
         style: form
-      - description: Order of events by published property. Either ASCENDING or DESCENDING
+      - description: Okta Page token
         explode: true
         in: query
         name: oktaAfter
@@ -1278,6 +1278,87 @@ paths:
       security:
       - oauth2: []
       summary: "[BETA] ListLogs: Lists system logs for a domain"
+      tags:
+      - Identity Logs
+      x-fbn-apistatus: Beta
+      x-accepts: application/json
+  /api/logs/me:
+    get:
+      description: Lists account related system logs for the calling user
+      operationId: ListUserLogs
+      parameters:
+      - description: Lower bound of log events published property
+        explode: true
+        in: query
+        name: oktaSince
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      - description: Upper bound of log events published property
+        explode: true
+        in: query
+        name: oktaUntil
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+        x-nullable: true
+      - description: Max number of results returned
+        explode: true
+        in: query
+        name: oktaLimit
+        required: false
+        schema:
+          format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        style: form
+        x-nullable: true
+      - description: Order of events by published property. Either ASCENDING or DESCENDING
+        explode: true
+        in: query
+        name: oktaSortOrder
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Okta Page token
+        explode: true
+        in: query
+        name: oktaAfter
+        required: false
+        schema:
+          maxLength: 50
+          minLength: 0
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResourceListOfSystemLog'
+          description: List User Logs
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[BETA] ListUserLogs: Lists user logs"
       tags:
       - Identity Logs
       x-fbn-apistatus: Beta

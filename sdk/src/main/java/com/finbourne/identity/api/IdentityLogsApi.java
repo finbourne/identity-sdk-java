@@ -218,7 +218,7 @@ public class IdentityLogsApi {
 
         /**
          * Set oktaFilter
-         * @param oktaFilter Okta Page token (optional)
+         * @param oktaFilter Okta filter expression (optional)
          * @return APIlistLogsRequest
          */
         public APIlistLogsRequest oktaFilter(String oktaFilter) {
@@ -228,7 +228,7 @@ public class IdentityLogsApi {
 
         /**
          * Set oktaQuery
-         * @param oktaQuery Okta filter expression (optional)
+         * @param oktaQuery Filters log events results by one or more case insensitive keywords (optional)
          * @return APIlistLogsRequest
          */
         public APIlistLogsRequest oktaQuery(String oktaQuery) {
@@ -238,7 +238,7 @@ public class IdentityLogsApi {
 
         /**
          * Set oktaLimit
-         * @param oktaLimit Filters log events results by one or more case insensitive keywords (optional)
+         * @param oktaLimit Max number of results returned (optional)
          * @return APIlistLogsRequest
          */
         public APIlistLogsRequest oktaLimit(Integer oktaLimit) {
@@ -248,7 +248,7 @@ public class IdentityLogsApi {
 
         /**
          * Set oktaSortOrder
-         * @param oktaSortOrder Max number of results returned (optional)
+         * @param oktaSortOrder Order of events by published property. Either ASCENDING or DESCENDING (optional)
          * @return APIlistLogsRequest
          */
         public APIlistLogsRequest oktaSortOrder(String oktaSortOrder) {
@@ -258,7 +258,7 @@ public class IdentityLogsApi {
 
         /**
          * Set oktaAfter
-         * @param oktaAfter Order of events by published property. Either ASCENDING or DESCENDING (optional)
+         * @param oktaAfter Okta Page token (optional)
          * @return APIlistLogsRequest
          */
         public APIlistLogsRequest oktaAfter(String oktaAfter) {
@@ -398,5 +398,301 @@ public class IdentityLogsApi {
      */
     public APIlistLogsRequest listLogs() {
         return new APIlistLogsRequest();
+    }
+    private okhttp3.Call listUserLogsCall(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback _callback) throws ApiException {
+        return listUserLogsCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call listUserLogsCall(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/logs/me";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (oktaSince != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaSince", oktaSince));
+        }
+
+        if (oktaUntil != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaUntil", oktaUntil));
+        }
+
+        if (oktaLimit != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaLimit", oktaLimit));
+        }
+
+        if (oktaSortOrder != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaSortOrder", oktaSortOrder));
+        }
+
+        if (oktaAfter != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("oktaAfter", oktaAfter));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call listUserLogsValidateBeforeCall(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return listUserLogsCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, _callback, opts);
+
+    }
+
+
+    private ApiResponse<ResourceListOfSystemLog> listUserLogsWithHttpInfo(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter) throws ApiException {
+        okhttp3.Call localVarCall = listUserLogsValidateBeforeCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<ResourceListOfSystemLog> listUserLogsWithHttpInfo(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = listUserLogsValidateBeforeCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, null, opts);
+        Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call listUserLogsAsync(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback<ResourceListOfSystemLog> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = listUserLogsValidateBeforeCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call listUserLogsAsync(OffsetDateTime oktaSince, OffsetDateTime oktaUntil, Integer oktaLimit, String oktaSortOrder, String oktaAfter, final ApiCallback<ResourceListOfSystemLog> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = listUserLogsValidateBeforeCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, _callback, opts);
+        Type localVarReturnType = new TypeToken<ResourceListOfSystemLog>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIlistUserLogsRequest {
+        private OffsetDateTime oktaSince;
+        private OffsetDateTime oktaUntil;
+        private Integer oktaLimit;
+        private String oktaSortOrder;
+        private String oktaAfter;
+
+        private APIlistUserLogsRequest() {
+        }
+
+        /**
+         * Set oktaSince
+         * @param oktaSince Lower bound of log events published property (optional)
+         * @return APIlistUserLogsRequest
+         */
+        public APIlistUserLogsRequest oktaSince(OffsetDateTime oktaSince) {
+            this.oktaSince = oktaSince;
+            return this;
+        }
+
+        /**
+         * Set oktaUntil
+         * @param oktaUntil Upper bound of log events published property (optional)
+         * @return APIlistUserLogsRequest
+         */
+        public APIlistUserLogsRequest oktaUntil(OffsetDateTime oktaUntil) {
+            this.oktaUntil = oktaUntil;
+            return this;
+        }
+
+        /**
+         * Set oktaLimit
+         * @param oktaLimit Max number of results returned (optional)
+         * @return APIlistUserLogsRequest
+         */
+        public APIlistUserLogsRequest oktaLimit(Integer oktaLimit) {
+            this.oktaLimit = oktaLimit;
+            return this;
+        }
+
+        /**
+         * Set oktaSortOrder
+         * @param oktaSortOrder Order of events by published property. Either ASCENDING or DESCENDING (optional)
+         * @return APIlistUserLogsRequest
+         */
+        public APIlistUserLogsRequest oktaSortOrder(String oktaSortOrder) {
+            this.oktaSortOrder = oktaSortOrder;
+            return this;
+        }
+
+        /**
+         * Set oktaAfter
+         * @param oktaAfter Okta Page token (optional)
+         * @return APIlistUserLogsRequest
+         */
+        public APIlistUserLogsRequest oktaAfter(String oktaAfter) {
+            this.oktaAfter = oktaAfter;
+            return this;
+        }
+
+        /**
+         * Build call for listUserLogs
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return listUserLogsCall(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, _callback);
+        }
+
+        /**
+         * Execute listUserLogs request
+         * @return ResourceListOfSystemLog
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfSystemLog execute() throws ApiException {
+            ApiResponse<ResourceListOfSystemLog> localVarResp = listUserLogsWithHttpInfo(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listUserLogs request. Use any specified configuration options to override any other configuration for this request only.
+         * @return ResourceListOfSystemLog
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ResourceListOfSystemLog execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<ResourceListOfSystemLog> localVarResp = listUserLogsWithHttpInfo(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute listUserLogs request with HTTP info returned
+         * @return ApiResponse&lt;ResourceListOfSystemLog&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfSystemLog> executeWithHttpInfo() throws ApiException {
+            return listUserLogsWithHttpInfo(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter);
+        }
+
+        /**
+         * Execute listUserLogs request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;ResourceListOfSystemLog&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<ResourceListOfSystemLog> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return listUserLogsWithHttpInfo(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, opts);
+        }
+
+        /**
+         * Execute listUserLogs request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ResourceListOfSystemLog> _callback) throws ApiException {
+            return listUserLogsAsync(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, _callback);
+        }
+
+        /**
+         * Execute listUserLogs request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<ResourceListOfSystemLog> _callback, ConfigurationOptions opts) throws ApiException {
+            return listUserLogsAsync(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter, _callback, opts);
+        }
+    }
+
+    /**
+     * [BETA] ListUserLogs: Lists user logs
+     * Lists account related system logs for the calling user
+     * @return APIlistUserLogsRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> List User Logs </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIlistUserLogsRequest listUserLogs() {
+        return new APIlistUserLogsRequest();
     }
 }
