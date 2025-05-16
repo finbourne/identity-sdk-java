@@ -74,6 +74,10 @@ public class CurrentUserResponse {
   @SerializedName(SERIALIZED_NAME_USER_EXPIRY)
   private OffsetDateTime userExpiry;
 
+  public static final String SERIALIZED_NAME_GROUPS = "groups";
+  @SerializedName(SERIALIZED_NAME_GROUPS)
+  private List<String> groups;
+
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
   private List<Link> links;
@@ -186,6 +190,35 @@ public class CurrentUserResponse {
   }
 
 
+  public CurrentUserResponse groups(List<String> groups) {
+    
+    this.groups = groups;
+    return this;
+  }
+
+  public CurrentUserResponse addGroupsItem(String groupsItem) {
+    if (this.groups == null) {
+      this.groups = new ArrayList<>();
+    }
+    this.groups.add(groupsItem);
+    return this;
+  }
+
+   /**
+   * The groups this user belongs to
+   * @return groups
+  **/
+  @jakarta.annotation.Nullable
+  public List<String> getGroups() {
+    return groups;
+  }
+
+
+  public void setGroups(List<String> groups) {
+    this.groups = groups;
+  }
+
+
   public CurrentUserResponse links(List<Link> links) {
     
     this.links = links;
@@ -230,6 +263,7 @@ public class CurrentUserResponse {
         Objects.equals(this.type, currentUserResponse.type) &&
         Objects.equals(this.domainType, currentUserResponse.domainType) &&
         Objects.equals(this.userExpiry, currentUserResponse.userExpiry) &&
+        Objects.equals(this.groups, currentUserResponse.groups) &&
         Objects.equals(this.links, currentUserResponse.links);
   }
 
@@ -239,7 +273,7 @@ public class CurrentUserResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, emailAddress, type, domainType, userExpiry, links);
+    return Objects.hash(id, emailAddress, type, domainType, userExpiry, groups, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -258,6 +292,7 @@ public class CurrentUserResponse {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    domainType: ").append(toIndentedString(domainType)).append("\n");
     sb.append("    userExpiry: ").append(toIndentedString(userExpiry)).append("\n");
+    sb.append("    groups: ").append(toIndentedString(groups)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -286,6 +321,7 @@ public class CurrentUserResponse {
     openapiFields.add("type");
     openapiFields.add("domainType");
     openapiFields.add("userExpiry");
+    openapiFields.add("groups");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)
@@ -326,6 +362,10 @@ public class CurrentUserResponse {
       }
       if ((jsonObj.get("domainType") != null && !jsonObj.get("domainType").isJsonNull()) && !jsonObj.get("domainType").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `domainType` to be a primitive type in the JSON string but got `%s`", jsonObj.get("domainType").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("groups") != null && !jsonObj.get("groups").isJsonNull() && !jsonObj.get("groups").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `groups` to be an array in the JSON string but got `%s`", jsonObj.get("groups").toString()));
       }
       if (jsonObj.get("links") != null && !jsonObj.get("links").isJsonNull()) {
         JsonArray jsonArraylinks = jsonObj.getAsJsonArray("links");

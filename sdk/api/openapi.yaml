@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3240
+  version: 0.0.3246
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1375,6 +1375,9 @@ paths:
                 id: asybvrs5
                 emailAddress: joe.bloggs@myco.com
                 type: Personal
+                groups:
+                - lusid-administrator
+                - drive-read-only-usr
               schema:
                 $ref: '#/components/schemas/CurrentUserResponse'
           description: Get the specified user's info
@@ -3838,6 +3841,9 @@ components:
         emailAddress: emailAddress
         domainType: domainType
         userExpiry: 2000-01-23T04:56:07.000+00:00
+        groups:
+        - groups
+        - groups
         links:
         - method: method
           description: description
@@ -3872,6 +3878,12 @@ components:
           format: date-time
           nullable: true
           type: string
+        groups:
+          description: The groups this user belongs to
+          items:
+            type: string
+          nullable: true
+          type: array
         links:
           items:
             $ref: '#/components/schemas/Link'
