@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3258
+  version: 0.0.3260
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -155,6 +155,8 @@ tags:
   name: Applications
 - description: Endpoints for getting authentication details for the domain
   name: Authentication
+- description: Endpoints for administering External Token Issuers
+  name: External Token Issuers
 - description: Endpoints for accessing and querying identity logging
   name: Identity Logs
 - description: Endpoints for administering Identity Provider integration
@@ -936,6 +938,384 @@ paths:
       tags:
       - Users
       x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/externaltokenissuers:
+    get:
+      description: Lists all External Token Issuers
+      operationId: ListExternalTokenIssuers
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - code: Generic-Example-External-Token-Issuer
+                issuer: https://auth.genericexample.com
+                audience: api.generic-example-app.com
+                description: External Token Issuer definition to allow matching external
+                  authentication tokens to FINBOURNE internal authentication tokens
+                claimMappings:
+                  userId: sub
+                  email: email
+                  firstName: firstname
+                  lastName: surname
+                  userType: '"Personal"'
+                  groups: roles
+                logoutUrl: https://logout.url
+              schema:
+                items:
+                  $ref: '#/components/schemas/ExternalTokenIssuerResponse'
+                type: array
+          description: List External Token Issuers
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListExternalTokenIssuers: Lists all External Token\
+        \ Issuers for a domain"
+      tags:
+      - External Token Issuers
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: Creates an External Token Issuer
+      operationId: CreateExternalTokenIssuer
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              code: Generic-Example-External-Token-Issuer
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/CreateExternalTokenIssuerRequest'
+          application/json:
+            example:
+              code: Generic-Example-External-Token-Issuer
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/CreateExternalTokenIssuerRequest'
+          text/json:
+            example:
+              code: Generic-Example-External-Token-Issuer
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/CreateExternalTokenIssuerRequest'
+          application/*+json:
+            example:
+              code: Generic-Example-External-Token-Issuer
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/CreateExternalTokenIssuerRequest'
+        description: ""
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                code: Generic-Example-External-Token-Issuer
+                issuer: https://auth.genericexample.com
+                audience: api.generic-example-app.com
+                description: External Token Issuer definition to allow matching external
+                  authentication tokens to FINBOURNE internal authentication tokens
+                claimMappings:
+                  userId: sub
+                  email: email
+                  firstName: firstname
+                  lastName: surname
+                  userType: '"Personal"'
+                  groups: roles
+                logoutUrl: https://logout.url
+              schema:
+                $ref: '#/components/schemas/ExternalTokenIssuerResponse'
+          description: Create External Token Issuer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] CreateExternalTokenIssuer: Create an External Token\
+        \ Issuer"
+      tags:
+      - External Token Issuers
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/externaltokenissuers/{code}:
+    delete:
+      description: Deletes an External Token Issuer
+      operationId: DeleteExternalTokenIssuer
+      parameters:
+      - description: Identifier of the External Token Issuer to delete
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DeleteExternalTokenIssuer: Deletes an External Token\
+        \ Issuer by code"
+      tags:
+      - External Token Issuers
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    get:
+      description: Gets an External Token Issuer
+      operationId: GetExternalTokenIssuer
+      parameters:
+      - description: Identifier of the External Token Issuer
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                code: Generic-Example-External-Token-Issuer
+                issuer: https://auth.genericexample.com
+                audience: api.generic-example-app.com
+                description: External Token Issuer definition to allow matching external
+                  authentication tokens to FINBOURNE internal authentication tokens
+                claimMappings:
+                  userId: sub
+                  email: email
+                  firstName: firstname
+                  lastName: surname
+                  userType: '"Personal"'
+                  groups: roles
+                logoutUrl: https://logout.url
+              schema:
+                $ref: '#/components/schemas/ExternalTokenIssuerResponse'
+          description: Get External Token Issuer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetExternalTokenIssuer: Gets an External Token Issuer\
+        \ with code"
+      tags:
+      - External Token Issuers
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: Updates an External Token Issuer
+      operationId: UpdateExternalTokenIssuer
+      parameters:
+      - description: Identifier of the External Token Issuer to update
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/UpdateExternalTokenIssuerRequest'
+          application/json:
+            example:
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/UpdateExternalTokenIssuerRequest'
+          text/json:
+            example:
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/UpdateExternalTokenIssuerRequest'
+          application/*+json:
+            example:
+              issuer: https://auth.genericexample.com
+              audience: api.generic-example-app.com
+              description: External Token Issuer definition to allow matching external
+                authentication tokens to FINBOURNE internal authentication tokens
+              claimMappings:
+                userId: sub
+                email: email
+                firstName: firstname
+                lastName: surname
+                userType: '"Personal"'
+                groups: roles
+              logoutUrl: https://logout.url
+            schema:
+              $ref: '#/components/schemas/UpdateExternalTokenIssuerRequest'
+        description: ""
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                code: Generic-Example-External-Token-Issuer
+                issuer: https://auth.genericexample.com
+                audience: api.generic-example-app.com
+                description: External Token Issuer definition to allow matching external
+                  authentication tokens to FINBOURNE internal authentication tokens
+                claimMappings:
+                  userId: sub
+                  email: email
+                  firstName: firstname
+                  lastName: surname
+                  userType: '"Personal"'
+                  groups: roles
+                logoutUrl: https://logout.url
+              schema:
+                $ref: '#/components/schemas/ExternalTokenIssuerResponse'
+          description: Update External Token Issuer
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] UpdateExternalTokenIssuer: Updates an existing External\
+        \ Token Issuer"
+      tags:
+      - External Token Issuers
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/identityprovider/scim:
     delete:
@@ -3571,6 +3951,41 @@ components:
       required:
       - issuerUrl
       type: object
+    ClaimMappings:
+      additionalProperties: false
+      example:
+        firstName: firstName
+        lastName: lastName
+        groups: groups
+        userType: userType
+        userId: userId
+        email: email
+      properties:
+        userId:
+          minLength: 1
+          type: string
+        email:
+          minLength: 1
+          type: string
+        firstName:
+          minLength: 1
+          type: string
+        lastName:
+          minLength: 1
+          type: string
+        userType:
+          minLength: 1
+          type: string
+        groups:
+          nullable: true
+          type: string
+      required:
+      - email
+      - firstName
+      - lastName
+      - userId
+      - userType
+      type: object
     CreateApiKey:
       additionalProperties: false
       description: Create an API key
@@ -3685,6 +4100,52 @@ components:
       - displayName
       - id
       - key
+      type: object
+    CreateExternalTokenIssuerRequest:
+      additionalProperties: false
+      description: Client input for creating an external token issuer.
+      example:
+        audience: audience
+        code: code
+        logoutUrl: https://openapi-generator.tech
+        claimMappings:
+          firstName: firstName
+          lastName: lastName
+          groups: groups
+          userType: userType
+          userId: userId
+          email: email
+        description: description
+        issuer: issuer
+      properties:
+        code:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        issuer:
+          maxLength: 500
+          minLength: 0
+          type: string
+        audience:
+          maxLength: 500
+          minLength: 0
+          type: string
+        description:
+          nullable: true
+          type: string
+        claimMappings:
+          $ref: '#/components/schemas/ClaimMappings'
+        logoutUrl:
+          format: uri
+          maxLength: 16384
+          minLength: 1
+          type: string
+      required:
+      - audience
+      - code
+      - issuer
+      - logoutUrl
       type: object
     CreateNetworkZoneRequest:
       additionalProperties: false
@@ -3912,6 +4373,46 @@ components:
           type: string
         detail:
           description: Human readable description of the error
+          nullable: true
+          type: string
+      type: object
+    ExternalTokenIssuerResponse:
+      additionalProperties: false
+      description: Response DTO exposed to client for an external token issuer.
+      example:
+        audience: audience
+        code: code
+        logoutUrl: logoutUrl
+        claimMappings:
+          firstName: firstName
+          lastName: lastName
+          groups: groups
+          userType: userType
+          userId: userId
+          email: email
+        description: description
+        issuer: issuer
+      properties:
+        code:
+          description: The External Token Issuer Code
+          nullable: true
+          type: string
+        issuer:
+          description: Issuer of the External Token Issuer
+          nullable: true
+          type: string
+        audience:
+          description: Audience of the External Token Issuer
+          nullable: true
+          type: string
+        description:
+          description: The Description of the External Token Issuer
+          nullable: true
+          type: string
+        claimMappings:
+          $ref: '#/components/schemas/ClaimMappings'
+        logoutUrl:
+          description: The LogoutUrl of the External Token Issuer
           nullable: true
           type: string
       type: object
@@ -5734,6 +6235,43 @@ components:
       required:
       - password
       type: object
+    UpdateExternalTokenIssuerRequest:
+      additionalProperties: false
+      example:
+        audience: audience
+        logoutUrl: https://openapi-generator.tech
+        claimMappings:
+          firstName: firstName
+          lastName: lastName
+          groups: groups
+          userType: userType
+          userId: userId
+          email: email
+        description: description
+        issuer: issuer
+      properties:
+        issuer:
+          maxLength: 500
+          minLength: 0
+          nullable: true
+          type: string
+        audience:
+          maxLength: 500
+          minLength: 0
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+        claimMappings:
+          $ref: '#/components/schemas/ClaimMappings'
+        logoutUrl:
+          format: uri
+          maxLength: 16384
+          minLength: 1
+          nullable: true
+          type: string
+      type: object
     UpdateNetworkZoneRequest:
       additionalProperties: false
       example:
@@ -6199,6 +6737,7 @@ x-tagGroups:
   - Application Metadata
   - Applications
   - Authentication
+  - External Token Issuers
   - Identity Logs
   - Identity Provider
   - Me
