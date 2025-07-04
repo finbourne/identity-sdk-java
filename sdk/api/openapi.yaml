@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3260
+  version: 0.0.3266
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -955,6 +955,7 @@ paths:
                   authentication tokens to FINBOURNE internal authentication tokens
                 claimMappings:
                   userId: sub
+                  login: username
                   email: email
                   firstName: firstname
                   lastName: surname
@@ -994,6 +995,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: username
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1011,6 +1013,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: username
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1028,6 +1031,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: username
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1045,6 +1049,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: username
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1067,6 +1072,7 @@ paths:
                   authentication tokens to FINBOURNE internal authentication tokens
                 claimMappings:
                   userId: sub
+                  login: username
                   email: email
                   firstName: firstname
                   lastName: surname
@@ -1163,6 +1169,7 @@ paths:
                   authentication tokens to FINBOURNE internal authentication tokens
                 claimMappings:
                   userId: sub
+                  login: username
                   email: email
                   firstName: firstname
                   lastName: surname
@@ -1217,6 +1224,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: userName
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1233,6 +1241,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: userName
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1249,6 +1258,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: userName
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1265,6 +1275,7 @@ paths:
                 authentication tokens to FINBOURNE internal authentication tokens
               claimMappings:
                 userId: sub
+                login: userName
                 email: email
                 firstName: firstname
                 lastName: surname
@@ -1287,6 +1298,7 @@ paths:
                   authentication tokens to FINBOURNE internal authentication tokens
                 claimMappings:
                   userId: sub
+                  login: username
                   email: email
                   firstName: firstname
                   lastName: surname
@@ -3958,11 +3970,15 @@ components:
         lastName: lastName
         groups: groups
         userType: userType
+        login: login
         userId: userId
         email: email
       properties:
         userId:
-          minLength: 1
+          nullable: true
+          type: string
+        login:
+          nullable: true
           type: string
         email:
           minLength: 1
@@ -3983,7 +3999,6 @@ components:
       - email
       - firstName
       - lastName
-      - userId
       - userType
       type: object
     CreateApiKey:
@@ -4113,6 +4128,7 @@ components:
           lastName: lastName
           groups: groups
           userType: userType
+          login: login
           userId: userId
           email: email
         description: description
@@ -4388,6 +4404,7 @@ components:
           lastName: lastName
           groups: groups
           userType: userType
+          login: login
           userId: userId
           email: email
         description: description
@@ -6245,6 +6262,7 @@ components:
           lastName: lastName
           groups: groups
           userType: userType
+          login: login
           userId: userId
           email: email
         description: description

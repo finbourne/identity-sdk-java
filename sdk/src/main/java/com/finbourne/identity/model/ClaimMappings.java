@@ -54,6 +54,10 @@ public class ClaimMappings {
   @SerializedName(SERIALIZED_NAME_USER_ID)
   private String userId;
 
+  public static final String SERIALIZED_NAME_LOGIN = "login";
+  @SerializedName(SERIALIZED_NAME_LOGIN)
+  private String login;
+
   public static final String SERIALIZED_NAME_EMAIL = "email";
   @SerializedName(SERIALIZED_NAME_EMAIL)
   private String email;
@@ -87,7 +91,7 @@ public class ClaimMappings {
    * Get userId
    * @return userId
   **/
-  @jakarta.annotation.Nonnull
+  @jakarta.annotation.Nullable
   public String getUserId() {
     return userId;
   }
@@ -95,6 +99,27 @@ public class ClaimMappings {
 
   public void setUserId(String userId) {
     this.userId = userId;
+  }
+
+
+  public ClaimMappings login(String login) {
+    
+    this.login = login;
+    return this;
+  }
+
+   /**
+   * Get login
+   * @return login
+  **/
+  @jakarta.annotation.Nullable
+  public String getLogin() {
+    return login;
+  }
+
+
+  public void setLogin(String login) {
+    this.login = login;
   }
 
 
@@ -214,6 +239,7 @@ public class ClaimMappings {
     }
     ClaimMappings claimMappings = (ClaimMappings) o;
     return Objects.equals(this.userId, claimMappings.userId) &&
+        Objects.equals(this.login, claimMappings.login) &&
         Objects.equals(this.email, claimMappings.email) &&
         Objects.equals(this.firstName, claimMappings.firstName) &&
         Objects.equals(this.lastName, claimMappings.lastName) &&
@@ -227,7 +253,7 @@ public class ClaimMappings {
 
   @Override
   public int hashCode() {
-    return Objects.hash(userId, email, firstName, lastName, userType, groups);
+    return Objects.hash(userId, login, email, firstName, lastName, userType, groups);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -242,6 +268,7 @@ public class ClaimMappings {
     StringBuilder sb = new StringBuilder();
     sb.append("class ClaimMappings {\n");
     sb.append("    userId: ").append(toIndentedString(userId)).append("\n");
+    sb.append("    login: ").append(toIndentedString(login)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
@@ -270,6 +297,7 @@ public class ClaimMappings {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("userId");
+    openapiFields.add("login");
     openapiFields.add("email");
     openapiFields.add("firstName");
     openapiFields.add("lastName");
@@ -278,7 +306,6 @@ public class ClaimMappings {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("userId");
     openapiRequiredFields.add("email");
     openapiRequiredFields.add("firstName");
     openapiRequiredFields.add("lastName");
@@ -305,8 +332,11 @@ public class ClaimMappings {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("userId").isJsonPrimitive()) {
+      if ((jsonObj.get("userId") != null && !jsonObj.get("userId").isJsonNull()) && !jsonObj.get("userId").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `userId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("userId").toString()));
+      }
+      if ((jsonObj.get("login") != null && !jsonObj.get("login").isJsonNull()) && !jsonObj.get("login").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `login` to be a primitive type in the JSON string but got `%s`", jsonObj.get("login").toString()));
       }
       if (!jsonObj.get("email").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `email` to be a primitive type in the JSON string but got `%s`", jsonObj.get("email").toString()));

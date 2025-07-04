@@ -7,7 +7,8 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-|**userId** | **String** |  |  |
+|**userId** | **String** |  |  [optional] |
+|**login** | **String** |  |  [optional] |
 |**email** | **String** |  |  |
 |**firstName** | **String** |  |  |
 |**lastName** | **String** |  |  |
