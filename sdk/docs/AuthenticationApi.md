@@ -5,12 +5,12 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getAuthenticationInformation**](AuthenticationApi.md#getAuthenticationInformation) | **GET** /api/authentication/information | GetAuthenticationInformation: Gets AuthenticationInformation |
-| [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type |
+| [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | GetPasswordPolicy: Gets password policy for a user type |
 | [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
 | [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
 | [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | GrantSupportAccess: Grants FINBOURNE support access to your account |
 | [**invalidateSupportAccess**](AuthenticationApi.md#invalidateSupportAccess) | **DELETE** /api/authentication/support | InvalidateSupportAccess: Revoke any FINBOURNE support access to your account |
-| [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type |
+| [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | UpdatePasswordPolicy: Updates password policy for a user type |
 
 
 
@@ -104,7 +104,7 @@ This endpoint does not need any parameter.
 
 > PasswordPolicyResponse getPasswordPolicy(userType)
 
-[EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type
+GetPasswordPolicy: Gets password policy for a user type
 
 Get the password policy for a given user type
 
@@ -551,7 +551,7 @@ This endpoint does not need any parameter.
 
 > PasswordPolicyResponse updatePasswordPolicy(userType, updatePasswordPolicyRequest)
 
-[EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type
+UpdatePasswordPolicy: Updates password policy for a user type
 
 Update the password policy for a given user type
 

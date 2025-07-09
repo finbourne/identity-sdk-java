@@ -506,7 +506,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetPasswordPolicy: Gets password policy for a user type
+     * GetPasswordPolicy: Gets password policy for a user type
      * Get the password policy for a given user type
      * @param userType The type of user (should only be personal or service) (required)
      * @return APIgetPasswordPolicyRequest
@@ -1661,7 +1661,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdatePasswordPolicy: Updates password policy for a user type
+     * UpdatePasswordPolicy: Updates password policy for a user type
      * Update the password policy for a given user type
      * @param userType The type of user (should only be personal or service) (required)
      * @return APIupdatePasswordPolicyRequest
