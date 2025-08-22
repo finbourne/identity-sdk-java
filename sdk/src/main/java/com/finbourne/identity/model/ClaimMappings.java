@@ -91,7 +91,7 @@ public class ClaimMappings {
    * Get userId
    * @return userId
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public String getUserId() {
     return userId;
   }
@@ -112,7 +112,7 @@ public class ClaimMappings {
    * Get login
    * @return login
   **/
-  @jakarta.annotation.Nullable
+  @jakarta.annotation.Nonnull
   public String getLogin() {
     return login;
   }
@@ -306,6 +306,8 @@ public class ClaimMappings {
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("userId");
+    openapiRequiredFields.add("login");
     openapiRequiredFields.add("email");
     openapiRequiredFields.add("firstName");
     openapiRequiredFields.add("lastName");
@@ -332,10 +334,10 @@ public class ClaimMappings {
         }
       }
         JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("userId") != null && !jsonObj.get("userId").isJsonNull()) && !jsonObj.get("userId").isJsonPrimitive()) {
+      if (!jsonObj.get("userId").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `userId` to be a primitive type in the JSON string but got `%s`", jsonObj.get("userId").toString()));
       }
-      if ((jsonObj.get("login") != null && !jsonObj.get("login").isJsonNull()) && !jsonObj.get("login").isJsonPrimitive()) {
+      if (!jsonObj.get("login").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `login` to be a primitive type in the JSON string but got `%s`", jsonObj.get("login").toString()));
       }
       if (!jsonObj.get("email").isJsonPrimitive()) {
