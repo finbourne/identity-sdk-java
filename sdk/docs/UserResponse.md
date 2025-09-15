@@ -18,6 +18,10 @@
 |**type** | **String** | The type of user (e.g. Personal or Service) |  |
 |**status** | **String** | The status of the user |  |
 |**external** | **Boolean** | Whether or not the user originates from an external identity system |  |
+|**lastLogin** | **OffsetDateTime** | Last time the user logged in |  |
+|**lastUpdated** | **OffsetDateTime** | Last time the user was updated |  |
+|**created** | **OffsetDateTime** | Date the user was created |  |
+|**passwordChanged** | **OffsetDateTime** | Last time the password was changed for this user |  |
 |**links** | [**List&lt;Link&gt;**](Link.md) |  |  [optional] |
 
 

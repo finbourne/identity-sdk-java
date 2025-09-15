@@ -681,7 +681,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListUserLogs: Lists user logs
+     * ListUserLogs: Lists user logs
      * Lists account related system logs for the calling user
      * @return APIlistUserLogsRequest
      * @http.response.details

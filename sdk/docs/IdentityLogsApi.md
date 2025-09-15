@@ -5,7 +5,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**listLogs**](IdentityLogsApi.md#listLogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain |
-| [**listUserLogs**](IdentityLogsApi.md#listUserLogs) | **GET** /api/logs/me | [BETA] ListUserLogs: Lists user logs |
+| [**listUserLogs**](IdentityLogsApi.md#listUserLogs) | **GET** /api/logs/me | ListUserLogs: Lists user logs |
 
 
 
@@ -116,7 +116,7 @@ public class IdentityLogsApiExample {
 
 > ResourceListOfSystemLog listUserLogs(oktaSince, oktaUntil, oktaLimit, oktaSortOrder, oktaAfter)
 
-[BETA] ListUserLogs: Lists user logs
+ListUserLogs: Lists user logs
 
 Lists account related system logs for the calling user
 

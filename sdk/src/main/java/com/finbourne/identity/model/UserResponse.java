@@ -19,6 +19,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -99,6 +100,22 @@ public class UserResponse {
   public static final String SERIALIZED_NAME_EXTERNAL = "external";
   @SerializedName(SERIALIZED_NAME_EXTERNAL)
   private Boolean external;
+
+  public static final String SERIALIZED_NAME_LAST_LOGIN = "lastLogin";
+  @SerializedName(SERIALIZED_NAME_LAST_LOGIN)
+  private OffsetDateTime lastLogin;
+
+  public static final String SERIALIZED_NAME_LAST_UPDATED = "lastUpdated";
+  @SerializedName(SERIALIZED_NAME_LAST_UPDATED)
+  private OffsetDateTime lastUpdated;
+
+  public static final String SERIALIZED_NAME_CREATED = "created";
+  @SerializedName(SERIALIZED_NAME_CREATED)
+  private OffsetDateTime created;
+
+  public static final String SERIALIZED_NAME_PASSWORD_CHANGED = "passwordChanged";
+  @SerializedName(SERIALIZED_NAME_PASSWORD_CHANGED)
+  private OffsetDateTime passwordChanged;
 
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
@@ -354,6 +371,90 @@ public class UserResponse {
   }
 
 
+  public UserResponse lastLogin(OffsetDateTime lastLogin) {
+    
+    this.lastLogin = lastLogin;
+    return this;
+  }
+
+   /**
+   * Last time the user logged in
+   * @return lastLogin
+  **/
+  @jakarta.annotation.Nonnull
+  public OffsetDateTime getLastLogin() {
+    return lastLogin;
+  }
+
+
+  public void setLastLogin(OffsetDateTime lastLogin) {
+    this.lastLogin = lastLogin;
+  }
+
+
+  public UserResponse lastUpdated(OffsetDateTime lastUpdated) {
+    
+    this.lastUpdated = lastUpdated;
+    return this;
+  }
+
+   /**
+   * Last time the user was updated
+   * @return lastUpdated
+  **/
+  @jakarta.annotation.Nonnull
+  public OffsetDateTime getLastUpdated() {
+    return lastUpdated;
+  }
+
+
+  public void setLastUpdated(OffsetDateTime lastUpdated) {
+    this.lastUpdated = lastUpdated;
+  }
+
+
+  public UserResponse created(OffsetDateTime created) {
+    
+    this.created = created;
+    return this;
+  }
+
+   /**
+   * Date the user was created
+   * @return created
+  **/
+  @jakarta.annotation.Nonnull
+  public OffsetDateTime getCreated() {
+    return created;
+  }
+
+
+  public void setCreated(OffsetDateTime created) {
+    this.created = created;
+  }
+
+
+  public UserResponse passwordChanged(OffsetDateTime passwordChanged) {
+    
+    this.passwordChanged = passwordChanged;
+    return this;
+  }
+
+   /**
+   * Last time the password was changed for this user
+   * @return passwordChanged
+  **/
+  @jakarta.annotation.Nonnull
+  public OffsetDateTime getPasswordChanged() {
+    return passwordChanged;
+  }
+
+
+  public void setPasswordChanged(OffsetDateTime passwordChanged) {
+    this.passwordChanged = passwordChanged;
+  }
+
+
   public UserResponse links(List<Link> links) {
     
     this.links = links;
@@ -404,6 +505,10 @@ public class UserResponse {
         Objects.equals(this.type, userResponse.type) &&
         Objects.equals(this.status, userResponse.status) &&
         Objects.equals(this.external, userResponse.external) &&
+        Objects.equals(this.lastLogin, userResponse.lastLogin) &&
+        Objects.equals(this.lastUpdated, userResponse.lastUpdated) &&
+        Objects.equals(this.created, userResponse.created) &&
+        Objects.equals(this.passwordChanged, userResponse.passwordChanged) &&
         Objects.equals(this.links, userResponse.links);
   }
 
@@ -413,7 +518,7 @@ public class UserResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, alternativeUserIds, emailAddress, secondEmailAddress, login, firstName, lastName, roles, type, status, external, links);
+    return Objects.hash(id, alternativeUserIds, emailAddress, secondEmailAddress, login, firstName, lastName, roles, type, status, external, lastLogin, lastUpdated, created, passwordChanged, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -438,6 +543,10 @@ public class UserResponse {
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    external: ").append(toIndentedString(external)).append("\n");
+    sb.append("    lastLogin: ").append(toIndentedString(lastLogin)).append("\n");
+    sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
+    sb.append("    created: ").append(toIndentedString(created)).append("\n");
+    sb.append("    passwordChanged: ").append(toIndentedString(passwordChanged)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -472,6 +581,10 @@ public class UserResponse {
     openapiFields.add("type");
     openapiFields.add("status");
     openapiFields.add("external");
+    openapiFields.add("lastLogin");
+    openapiFields.add("lastUpdated");
+    openapiFields.add("created");
+    openapiFields.add("passwordChanged");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)
@@ -484,6 +597,10 @@ public class UserResponse {
     openapiRequiredFields.add("type");
     openapiRequiredFields.add("status");
     openapiRequiredFields.add("external");
+    openapiRequiredFields.add("lastLogin");
+    openapiRequiredFields.add("lastUpdated");
+    openapiRequiredFields.add("created");
+    openapiRequiredFields.add("passwordChanged");
   }
 
  /**
