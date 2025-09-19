@@ -9,7 +9,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**expirePassword**](UsersApi.md#expirePassword) | **POST** /api/users/{id}/lifecycle/$expirepassword | ExpirePassword: Reset the user&#39;s password to a temporary one |
 | [**findUsersById**](UsersApi.md#findUsersById) | **GET** /api/directory | FindUsersById: Find users by id endpoint |
 | [**getUser**](UsersApi.md#getUser) | **GET** /api/users/{id} | GetUser: Get User |
-| [**getUserSchema**](UsersApi.md#getUserSchema) | **GET** /api/users/schema | [EXPERIMENTAL] GetUserSchema: Get User Schema |
+| [**getUserSchema**](UsersApi.md#getUserSchema) | **GET** /api/users/schema | [EARLY ACCESS] GetUserSchema: Get User Schema |
 | [**listRunnableUsers**](UsersApi.md#listRunnableUsers) | **GET** /api/users/$runnable | [EARLY ACCESS] ListRunnableUsers: List Runable Users |
 | [**listUsers**](UsersApi.md#listUsers) | **GET** /api/users | ListUsers: List Users |
 | [**resetFactors**](UsersApi.md#resetFactors) | **POST** /api/users/{id}/lifecycle/$resetfactors | ResetFactors: Reset MFA factors |
@@ -18,7 +18,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**unlockUser**](UsersApi.md#unlockUser) | **POST** /api/users/{id}/lifecycle/$unlock | UnlockUser: Unlock User |
 | [**unsuspendUser**](UsersApi.md#unsuspendUser) | **POST** /api/users/{id}/lifecycle/$unsuspend | [EXPERIMENTAL] UnsuspendUser: Unsuspend user |
 | [**updateUser**](UsersApi.md#updateUser) | **PUT** /api/users/{id} | UpdateUser: Update User |
-| [**updateUserSchema**](UsersApi.md#updateUserSchema) | **PUT** /api/users/schema | [EXPERIMENTAL] UpdateUserSchema: Update User Schema |
+| [**updateUserSchema**](UsersApi.md#updateUserSchema) | **PUT** /api/users/schema | [EARLY ACCESS] UpdateUserSchema: Update User Schema |
 
 
 
@@ -486,7 +486,7 @@ public class UsersApiExample {
 
 > UserSchemaResponse getUserSchema()
 
-[EXPERIMENTAL] GetUserSchema: Get User Schema
+[EARLY ACCESS] GetUserSchema: Get User Schema
 
 Get the User Schema
 
@@ -1292,7 +1292,7 @@ public class UsersApiExample {
 
 > UserSchemaResponse updateUserSchema(updateUserSchemaRequest)
 
-[EXPERIMENTAL] UpdateUserSchema: Update User Schema
+[EARLY ACCESS] UpdateUserSchema: Update User Schema
 
 Update the User Schema
 

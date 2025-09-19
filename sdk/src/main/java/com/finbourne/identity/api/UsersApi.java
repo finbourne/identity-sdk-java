@@ -1471,7 +1471,7 @@ public class UsersApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetUserSchema: Get User Schema
+     * [EARLY ACCESS] GetUserSchema: Get User Schema
      * Get the User Schema
      * @return APIgetUserSchemaRequest
      * @http.response.details
@@ -3503,7 +3503,7 @@ public class UsersApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateUserSchema: Update User Schema
+     * [EARLY ACCESS] UpdateUserSchema: Update User Schema
      * Update the User Schema
      * @param updateUserSchemaRequest The new User Schema (required)
      * @return APIupdateUserSchemaRequest
