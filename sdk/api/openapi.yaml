@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3310
+  version: 0.0.3314
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -6635,18 +6635,22 @@ components:
         lastLogin:
           description: Last time the user logged in
           format: date-time
+          nullable: true
           type: string
         lastUpdated:
           description: Last time the user was updated
           format: date-time
+          nullable: true
           type: string
         created:
           description: Date the user was created
           format: date-time
+          nullable: true
           type: string
         passwordChanged:
           description: Last time the password was changed for this user
           format: date-time
+          nullable: true
           type: string
         links:
           items:
@@ -6654,16 +6658,12 @@ components:
           nullable: true
           type: array
       required:
-      - created
       - emailAddress
       - external
       - firstName
       - id
-      - lastLogin
       - lastName
-      - lastUpdated
       - login
-      - passwordChanged
       - status
       - type
       type: object

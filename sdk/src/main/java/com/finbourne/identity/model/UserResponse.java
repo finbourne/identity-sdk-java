@@ -381,7 +381,7 @@ public class UserResponse {
    * Last time the user logged in
    * @return lastLogin
   **/
-  @jakarta.annotation.Nonnull
+  @jakarta.annotation.Nullable
   public OffsetDateTime getLastLogin() {
     return lastLogin;
   }
@@ -402,7 +402,7 @@ public class UserResponse {
    * Last time the user was updated
    * @return lastUpdated
   **/
-  @jakarta.annotation.Nonnull
+  @jakarta.annotation.Nullable
   public OffsetDateTime getLastUpdated() {
     return lastUpdated;
   }
@@ -423,7 +423,7 @@ public class UserResponse {
    * Date the user was created
    * @return created
   **/
-  @jakarta.annotation.Nonnull
+  @jakarta.annotation.Nullable
   public OffsetDateTime getCreated() {
     return created;
   }
@@ -444,7 +444,7 @@ public class UserResponse {
    * Last time the password was changed for this user
    * @return passwordChanged
   **/
-  @jakarta.annotation.Nonnull
+  @jakarta.annotation.Nullable
   public OffsetDateTime getPasswordChanged() {
     return passwordChanged;
   }
@@ -597,10 +597,6 @@ public class UserResponse {
     openapiRequiredFields.add("type");
     openapiRequiredFields.add("status");
     openapiRequiredFields.add("external");
-    openapiRequiredFields.add("lastLogin");
-    openapiRequiredFields.add("lastUpdated");
-    openapiRequiredFields.add("created");
-    openapiRequiredFields.add("passwordChanged");
   }
 
  /**
