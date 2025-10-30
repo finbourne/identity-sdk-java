@@ -89,7 +89,7 @@ public class SupportAccessExpiryWithRole {
   }
 
    /**
-   * Unique identifier for permitted role.   Use GET /identity/api/authentication/support-roles to lookup role label/code from identifier.
+   * Unique identifier for permitted role.  Use GET /identity/api/authentication/support-roles to lookup role label/code from identifier.
    * @return permittedRole
   **/
   @jakarta.annotation.Nonnull

@@ -8,9 +8,10 @@ Name | Type | Description | Notes
 **lastName** | **String** |  | [default to String]
 **emailAddress** | **String** |  | [default to String]
 **secondEmailAddress** | **String** |  | [optional] [default to String]
-**login** | **String** | The user&#39;s login username, in the form of an email address, which must be unique within the system.  For user accounts this should exactly match the user&#39;s email address. | [default to String]
+**login** | **String** | The user&#39;s login username, in the form of an email address, which must be unique within the system. For user accounts this should exactly match the user&#39;s email address. | [default to String]
 **alternativeUserIds** | **Map&lt;String, String&gt;** |  | [optional] [default to Map<String, String>]
 **roles** | [**List&lt;RoleId&gt;**](RoleId.md) | Deprecated. To update a user&#39;s roles use the AddUserToRole and RemoveUserFromRole endpoints | [optional] [default to List<RoleId>]
+**userExpiry** | [**OffsetDateTime**](OffsetDateTime.md) | The user&#39;s expiry unix datetime | [optional] [default to OffsetDateTime]
 
 ```java
 import com.finbourne.identity.model.UpdateUserRequest;
@@ -25,6 +26,7 @@ String EmailAddress = "example EmailAddress";
 String Login = "example Login";
 @jakarta.annotation.Nullable Map<String, String> AlternativeUserIds = new Map<String, String>();
 @jakarta.annotation.Nullable List<RoleId> Roles = new List<RoleId>();
+@jakarta.annotation.Nullable OffsetDateTime UserExpiry = OffsetDateTime.now();
 
 
 UpdateUserRequest updateUserRequestInstance = new UpdateUserRequest()
@@ -34,7 +36,8 @@ UpdateUserRequest updateUserRequestInstance = new UpdateUserRequest()
     .SecondEmailAddress(SecondEmailAddress)
     .Login(Login)
     .AlternativeUserIds(AlternativeUserIds)
-    .Roles(Roles);
+    .Roles(Roles)
+    .UserExpiry(UserExpiry);
 ```
 
 

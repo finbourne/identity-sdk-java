@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.0.4
 info:
   contact:
     email: info@finbourne.com
@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3318
+  version: 0.0.3336
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -424,9 +424,9 @@ paths:
       x-accepts: application/json
   /api/authentication/information:
     get:
-      description: "Get the AuthenticationInformation associated with the current\
-        \ domain. This includes all the\r\nnecessary information to login to this\
-        \ domain."
+      description: |-
+        Get the AuthenticationInformation associated with the current domain. This includes all the
+        necessary information to login to this domain.
       operationId: GetAuthenticationInformation
       responses:
         "200":
@@ -667,9 +667,9 @@ paths:
       x-fbn-apistatus: Stable
       x-accepts: application/json
     get:
-      description: "The active and inactive support requests will be returned, inactive\
-        \ support requests will have information pertaining to their termination\r\
-        \nincluding obfuscated userIds of those who created and terminated the request"
+      description: |-
+        The active and inactive support requests will be returned, inactive support requests will have information pertaining to their termination
+        including obfuscated userIds of those who created and terminated the request
       operationId: GetSupportAccessHistory
       parameters:
       - description: The start expiry date to query support access requests from
@@ -743,10 +743,9 @@ paths:
       x-fbn-apistatus: Stable
       x-accepts: application/json
     post:
-      description: "Granting support access will allow FINBOURNE employees full access\
-        \ to your data with the express intent to investigate support issues\r\nYou\
-        \ can revoke this (and all) access at any time using the InvalidateSupportAccess\
-        \ endpoint."
+      description: |-
+        Granting support access will allow FINBOURNE employees full access to your data with the express intent to investigate support issues
+        You can revoke this (and all) access at any time using the InvalidateSupportAccess endpoint.
       operationId: GrantSupportAccess
       requestBody:
         content:
@@ -1419,9 +1418,9 @@ paths:
       x-accepts: application/json
   /api/keys:
     get:
-      description: "Gets the meta data for all of the user's Personal Access Tokens\
-        \ that have not been deleted. They may be\r\ninvalid due to the deactivation\
-        \ date having passed."
+      description: |-
+        Gets the meta data for all of the user's Personal Access Tokens that have not been deleted. They may be
+        invalid due to the deactivation date having passed.
       operationId: ListOwnApiKeys
       responses:
         "200":
@@ -1786,9 +1785,9 @@ paths:
       x-accepts: application/json
   /api/me/password:
     put:
-      description: "Set the password of the current user to the specified value.\r\
-        \n \r\nNote this is feature is only available to Service users authenticated\
-        \ using OpenID. For further information\r\nrelating to usage of this feature\
+      description: "Set the password of the current user to the specified value.\n\
+        \ \nNote this is feature is only available to Service users authenticated\
+        \ using OpenID. For further information\nrelating to usage of this feature\
         \ please consult the documentation."
       operationId: SetPassword
       requestBody:
@@ -2726,6 +2725,7 @@ paths:
                 type: Personal
                 status: ACTIVE
                 external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
               schema:
                 items:
                   $ref: '#/components/schemas/UserResponse'
@@ -2909,6 +2909,7 @@ paths:
                 type: Personal
                 status: ACTIVE
                 external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
               schema:
                 items:
                   $ref: '#/components/schemas/UserResponse'
@@ -2958,6 +2959,7 @@ paths:
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
               type: Personal
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
           application/json:
@@ -2968,6 +2970,7 @@ paths:
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
               type: Personal
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
           text/json:
@@ -2978,6 +2981,7 @@ paths:
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
               type: Personal
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
           application/*+json:
@@ -2988,6 +2992,7 @@ paths:
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
               type: Personal
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/CreateUserRequest'
         description: Details of the User to be created
@@ -3014,6 +3019,7 @@ paths:
                 type: Personal
                 status: ACTIVE
                 external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: Create a new user
@@ -3063,6 +3069,7 @@ paths:
                 type: Personal
                 status: ACTIVE
                 external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
               schema:
                 items:
                   $ref: '#/components/schemas/UserResponse'
@@ -3177,11 +3184,10 @@ paths:
       x-accepts: application/json
   /api/users/{id}:
     delete:
-      description: "By default the user will be de-provisioned and inactive, however\
-        \ their record will remain in the identity\r\nprovider for audit purposes.\
-        \ If this is not desirable and removal of all trace of the user is required,\r\
-        \nthe purge parameter can be specified to indicate the details should be purged\
-        \ completely."
+      description: |-
+        By default the user will be de-provisioned and inactive, however their record will remain in the identity
+        provider for audit purposes. If this is not desirable and removal of all trace of the user is required,
+        the purge parameter can be specified to indicate the details should be purged completely.
       operationId: DeleteUser
       parameters:
       - description: The unique identifier for the user
@@ -3274,6 +3280,7 @@ paths:
                 type: Personal
                 status: ACTIVE
                 external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: Get the specified user
@@ -3320,6 +3327,7 @@ paths:
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
           application/json:
@@ -3329,6 +3337,7 @@ paths:
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
           text/json:
@@ -3338,6 +3347,7 @@ paths:
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
           application/*+json:
@@ -3347,6 +3357,7 @@ paths:
               emailAddress: joe.bloggs@myco.com
               login: joe.bloggs@myco.com
               alternativeUserIds: {}
+              userExpiry: 2029-02-12T12:00:00.0000000+00:00
             schema:
               $ref: '#/components/schemas/UpdateUserRequest'
         description: The new definition of the User
@@ -3373,6 +3384,7 @@ paths:
                 type: Personal
                 status: ACTIVE
                 external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
               schema:
                 $ref: '#/components/schemas/UserResponse'
           description: Update a user
@@ -4249,6 +4261,7 @@ components:
           scope: scope
         - code: code
           scope: scope
+        userExpiry: 2000-01-23T04:56:07.000+00:00
         login: login
         type: type
         alternativeUserIds:
@@ -4267,9 +4280,9 @@ components:
           pattern: "^[\\s\\S]*$"
           type: string
         emailAddress:
-          description: "The user's email address - to which the account validation\
-            \ email will be sent. For user accounts\r\nthis should exactly match the\
-            \ Login."
+          description: |-
+            The user's email address - to which the account validation email will be sent. For user accounts
+            this should exactly match the Login.
           maxLength: 80
           minLength: 5
           type: string
@@ -4280,9 +4293,9 @@ components:
           nullable: true
           type: string
         login:
-          description: "The user's login username, in the form of an email address,\
-            \ which must be unique within the system.\r\nFor user accounts this should\
-            \ exactly match the user's email address."
+          description: |-
+            The user's login username, in the form of an email address, which must be unique within the system.
+            For user accounts this should exactly match the user's email address.
           maxLength: 80
           minLength: 5
           type: string
@@ -4304,6 +4317,11 @@ components:
           maxLength: 20
           minLength: 1
           pattern: "^[a-zA-Z]*$"
+          type: string
+        userExpiry:
+          description: The user's expiry unix datetime
+          format: date-time
+          nullable: true
           type: string
       required:
       - emailAddress
@@ -5926,7 +5944,7 @@ components:
           format: date-time
           type: string
         permittedRole:
-          description: "Unique identifier for permitted role. \r\nUse GET /identity/api/authentication/support-roles\
+          description: "Unique identifier for permitted role. \nUse GET /identity/api/authentication/support-roles\
             \ to lookup role label/code from identifier."
           minLength: 1
           type: string
@@ -6357,15 +6375,17 @@ components:
         historyCount: 4
       properties:
         maxAgeDays:
-          description: "The maximum age (in days) a password can be before expiring\
-            \ and needing to be changed.\r\n0 indicates no limit"
+          description: |-
+            The maximum age (in days) a password can be before expiring and needing to be changed.
+            0 indicates no limit
           format: int32
           maximum: 999
           minimum: 0
           type: integer
         historyCount:
-          description: "The number of unique passwords that need to be used before\
-            \ a previous password is permitted again.\r\n0 indicates none"
+          description: |-
+            The number of unique passwords that need to be used before a previous password is permitted again.
+            0 indicates none
           format: int32
           maximum: 30
           minimum: 0
@@ -6431,8 +6451,9 @@ components:
         maxAttempts: 59
       properties:
         maxAttempts:
-          description: "The maximum number of unsuccessful attempts before the user\
-            \ is locked out of their account.\r\n0 indicates no limit"
+          description: |-
+            The maximum number of unsuccessful attempts before the user is locked out of their account.
+            0 indicates no limit
           format: int32
           maximum: 100
           minimum: 0
@@ -6465,6 +6486,7 @@ components:
           scope: scope
         - code: code
           scope: scope
+        userExpiry: 2000-01-23T04:56:07.000+00:00
         login: login
         alternativeUserIds:
           key: alternativeUserIds
@@ -6489,9 +6511,9 @@ components:
           nullable: true
           type: string
         login:
-          description: "The user's login username, in the form of an email address,\
-            \ which must be unique within the system.\r\nFor user accounts this should\
-            \ exactly match the user's email address."
+          description: |-
+            The user's login username, in the form of an email address, which must be unique within the system.
+            For user accounts this should exactly match the user's email address.
           maxLength: 80
           minLength: 5
           pattern: "^[\\s\\S]*$"
@@ -6509,6 +6531,11 @@ components:
             $ref: '#/components/schemas/RoleId'
           nullable: true
           type: array
+        userExpiry:
+          description: The user's expiry unix datetime
+          format: date-time
+          nullable: true
+          type: string
       required:
       - emailAddress
       - firstName
@@ -6562,6 +6589,7 @@ components:
           description: description
           id: id
           source: source
+        userExpiry: 2000-01-23T04:56:07.000+00:00
         login: login
         type: type
         alternativeUserIds:
@@ -6649,6 +6677,11 @@ components:
           type: string
         passwordChanged:
           description: Last time the password was changed for this user
+          format: date-time
+          nullable: true
+          type: string
+        userExpiry:
+          description: The user's expiry unix datetime
           format: date-time
           nullable: true
           type: string

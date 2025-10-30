@@ -279,7 +279,7 @@ public class AuthenticationApi {
 
     /**
      * GetAuthenticationInformation: Gets AuthenticationInformation
-     * Get the AuthenticationInformation associated with the current domain. This includes all the  necessary information to login to this domain.
+     * Get the AuthenticationInformation associated with the current domain. This includes all the necessary information to login to this domain.
      * @return APIgetAuthenticationInformationRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -759,7 +759,7 @@ public class AuthenticationApi {
 
     /**
      * GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination
-     * The active and inactive support requests will be returned, inactive support requests will have information pertaining to their termination  including obfuscated userIds of those who created and terminated the request
+     * The active and inactive support requests will be returned, inactive support requests will have information pertaining to their termination including obfuscated userIds of those who created and terminated the request
      * @return APIgetSupportAccessHistoryRequest
      * @http.response.details
      <table summary="Response Details" border="1">
@@ -1204,7 +1204,7 @@ public class AuthenticationApi {
 
     /**
      * GrantSupportAccess: Grants FINBOURNE support access to your account
-     * Granting support access will allow FINBOURNE employees full access to your data with the express intent to investigate support issues  You can revoke this (and all) access at any time using the InvalidateSupportAccess endpoint.
+     * Granting support access will allow FINBOURNE employees full access to your data with the express intent to investigate support issues You can revoke this (and all) access at any time using the InvalidateSupportAccess endpoint.
      * @param supportAccessRequest Request detailing the duration and reasons for supplying support access (required)
      * @return APIgrantSupportAccessRequest
      * @http.response.details

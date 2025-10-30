@@ -506,7 +506,7 @@ public class MeApi {
 
     /**
      * SetPassword: Set password of current user
-     * Set the password of the current user to the specified value.     Note this is feature is only available to Service users authenticated using OpenID. For further information  relating to usage of this feature please consult the documentation.
+     * Set the password of the current user to the specified value.   Note this is feature is only available to Service users authenticated using OpenID. For further information relating to usage of this feature please consult the documentation.
      * @param setPassword The request containing the new password value (required)
      * @return APIsetPasswordRequest
      * @http.response.details

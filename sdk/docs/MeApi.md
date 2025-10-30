@@ -101,7 +101,7 @@ This endpoint does not need any parameter.
 
 SetPassword: Set password of current user
 
-Set the password of the current user to the specified value.     Note this is feature is only available to Service users authenticated using OpenID. For further information  relating to usage of this feature please consult the documentation.
+Set the password of the current user to the specified value.   Note this is feature is only available to Service users authenticated using OpenID. For further information relating to usage of this feature please consult the documentation.
 
 ### Example
 

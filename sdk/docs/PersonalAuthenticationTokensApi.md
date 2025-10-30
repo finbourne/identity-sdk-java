@@ -198,7 +198,7 @@ public class PersonalAuthenticationTokensApiExample {
 
 ListOwnApiKeys: Gets the meta data for all of the user&#39;s existing Personal Access Tokens.
 
-Gets the meta data for all of the user&#39;s Personal Access Tokens that have not been deleted. They may be  invalid due to the deactivation date having passed.
+Gets the meta data for all of the user&#39;s Personal Access Tokens that have not been deleted. They may be invalid due to the deactivation date having passed.
 
 ### Example
 

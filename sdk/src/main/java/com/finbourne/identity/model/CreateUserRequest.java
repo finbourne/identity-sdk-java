@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -87,6 +88,10 @@ public class CreateUserRequest {
   @SerializedName(SERIALIZED_NAME_TYPE)
   private String type;
 
+  public static final String SERIALIZED_NAME_USER_EXPIRY = "userExpiry";
+  @SerializedName(SERIALIZED_NAME_USER_EXPIRY)
+  private OffsetDateTime userExpiry;
+
   public CreateUserRequest() {
   }
 
@@ -139,7 +144,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * The user&#39;s email address - to which the account validation email will be sent. For user accounts  this should exactly match the Login.
+   * The user&#39;s email address - to which the account validation email will be sent. For user accounts this should exactly match the Login.
    * @return emailAddress
   **/
   @jakarta.annotation.Nonnull
@@ -181,7 +186,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * The user&#39;s login username, in the form of an email address, which must be unique within the system.  For user accounts this should exactly match the user&#39;s email address.
+   * The user&#39;s login username, in the form of an email address, which must be unique within the system. For user accounts this should exactly match the user&#39;s email address.
    * @return login
   **/
   @jakarta.annotation.Nonnull
@@ -274,6 +279,27 @@ public class CreateUserRequest {
   }
 
 
+  public CreateUserRequest userExpiry(OffsetDateTime userExpiry) {
+    
+    this.userExpiry = userExpiry;
+    return this;
+  }
+
+   /**
+   * The user&#39;s expiry unix datetime
+   * @return userExpiry
+  **/
+  @jakarta.annotation.Nullable
+  public OffsetDateTime getUserExpiry() {
+    return userExpiry;
+  }
+
+
+  public void setUserExpiry(OffsetDateTime userExpiry) {
+    this.userExpiry = userExpiry;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -291,7 +317,8 @@ public class CreateUserRequest {
         Objects.equals(this.login, createUserRequest.login) &&
         Objects.equals(this.alternativeUserIds, createUserRequest.alternativeUserIds) &&
         Objects.equals(this.roles, createUserRequest.roles) &&
-        Objects.equals(this.type, createUserRequest.type);
+        Objects.equals(this.type, createUserRequest.type) &&
+        Objects.equals(this.userExpiry, createUserRequest.userExpiry);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -300,7 +327,7 @@ public class CreateUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, alternativeUserIds, roles, type);
+    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, alternativeUserIds, roles, type, userExpiry);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -322,6 +349,7 @@ public class CreateUserRequest {
     sb.append("    alternativeUserIds: ").append(toIndentedString(alternativeUserIds)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
     sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    userExpiry: ").append(toIndentedString(userExpiry)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -352,6 +380,7 @@ public class CreateUserRequest {
     openapiFields.add("alternativeUserIds");
     openapiFields.add("roles");
     openapiFields.add("type");
+    openapiFields.add("userExpiry");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

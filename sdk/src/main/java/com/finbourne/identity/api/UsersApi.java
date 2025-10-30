@@ -549,7 +549,7 @@ public class UsersApi {
 
     /**
      * DeleteUser: Delete User
-     * By default the user will be de-provisioned and inactive, however their record will remain in the identity  provider for audit purposes. If this is not desirable and removal of all trace of the user is required,  the purge parameter can be specified to indicate the details should be purged completely.
+     * By default the user will be de-provisioned and inactive, however their record will remain in the identity provider for audit purposes. If this is not desirable and removal of all trace of the user is required, the purge parameter can be specified to indicate the details should be purged completely.
      * @param id The unique identifier for the user (required)
      * @return APIdeleteUserRequest
      * @http.response.details

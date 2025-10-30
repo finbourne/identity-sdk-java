@@ -18,6 +18,7 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -82,6 +83,10 @@ public class UpdateUserRequest {
   public static final String SERIALIZED_NAME_ROLES = "roles";
   @SerializedName(SERIALIZED_NAME_ROLES)
   private List<RoleId> roles;
+
+  public static final String SERIALIZED_NAME_USER_EXPIRY = "userExpiry";
+  @SerializedName(SERIALIZED_NAME_USER_EXPIRY)
+  private OffsetDateTime userExpiry;
 
   public UpdateUserRequest() {
   }
@@ -177,7 +182,7 @@ public class UpdateUserRequest {
   }
 
    /**
-   * The user&#39;s login username, in the form of an email address, which must be unique within the system.  For user accounts this should exactly match the user&#39;s email address.
+   * The user&#39;s login username, in the form of an email address, which must be unique within the system. For user accounts this should exactly match the user&#39;s email address.
    * @return login
   **/
   @jakarta.annotation.Nonnull
@@ -249,6 +254,27 @@ public class UpdateUserRequest {
   }
 
 
+  public UpdateUserRequest userExpiry(OffsetDateTime userExpiry) {
+    
+    this.userExpiry = userExpiry;
+    return this;
+  }
+
+   /**
+   * The user&#39;s expiry unix datetime
+   * @return userExpiry
+  **/
+  @jakarta.annotation.Nullable
+  public OffsetDateTime getUserExpiry() {
+    return userExpiry;
+  }
+
+
+  public void setUserExpiry(OffsetDateTime userExpiry) {
+    this.userExpiry = userExpiry;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -265,7 +291,8 @@ public class UpdateUserRequest {
         Objects.equals(this.secondEmailAddress, updateUserRequest.secondEmailAddress) &&
         Objects.equals(this.login, updateUserRequest.login) &&
         Objects.equals(this.alternativeUserIds, updateUserRequest.alternativeUserIds) &&
-        Objects.equals(this.roles, updateUserRequest.roles);
+        Objects.equals(this.roles, updateUserRequest.roles) &&
+        Objects.equals(this.userExpiry, updateUserRequest.userExpiry);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -274,7 +301,7 @@ public class UpdateUserRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, alternativeUserIds, roles);
+    return Objects.hash(firstName, lastName, emailAddress, secondEmailAddress, login, alternativeUserIds, roles, userExpiry);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -295,6 +322,7 @@ public class UpdateUserRequest {
     sb.append("    login: ").append(toIndentedString(login)).append("\n");
     sb.append("    alternativeUserIds: ").append(toIndentedString(alternativeUserIds)).append("\n");
     sb.append("    roles: ").append(toIndentedString(roles)).append("\n");
+    sb.append("    userExpiry: ").append(toIndentedString(userExpiry)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -324,6 +352,7 @@ public class UpdateUserRequest {
     openapiFields.add("login");
     openapiFields.add("alternativeUserIds");
     openapiFields.add("roles");
+    openapiFields.add("userExpiry");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();

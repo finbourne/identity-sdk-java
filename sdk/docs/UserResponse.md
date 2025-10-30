@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **lastUpdated** | [**OffsetDateTime**](OffsetDateTime.md) | Last time the user was updated | [optional] [default to OffsetDateTime]
 **created** | [**OffsetDateTime**](OffsetDateTime.md) | Date the user was created | [optional] [default to OffsetDateTime]
 **passwordChanged** | [**OffsetDateTime**](OffsetDateTime.md) | Last time the password was changed for this user | [optional] [default to OffsetDateTime]
+**userExpiry** | [**OffsetDateTime**](OffsetDateTime.md) | The user&#39;s expiry unix datetime | [optional] [default to OffsetDateTime]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -42,6 +43,7 @@ Boolean External = true;
 @jakarta.annotation.Nullable OffsetDateTime LastUpdated = OffsetDateTime.now();
 @jakarta.annotation.Nullable OffsetDateTime Created = OffsetDateTime.now();
 @jakarta.annotation.Nullable OffsetDateTime PasswordChanged = OffsetDateTime.now();
+@jakarta.annotation.Nullable OffsetDateTime UserExpiry = OffsetDateTime.now();
 @jakarta.annotation.Nullable List<Link> Links = new List<Link>();
 
 
@@ -61,6 +63,7 @@ UserResponse userResponseInstance = new UserResponse()
     .LastUpdated(LastUpdated)
     .Created(Created)
     .PasswordChanged(PasswordChanged)
+    .UserExpiry(UserExpiry)
     .Links(Links);
 ```
 

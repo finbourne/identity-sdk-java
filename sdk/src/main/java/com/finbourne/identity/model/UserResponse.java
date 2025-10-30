@@ -117,6 +117,10 @@ public class UserResponse {
   @SerializedName(SERIALIZED_NAME_PASSWORD_CHANGED)
   private OffsetDateTime passwordChanged;
 
+  public static final String SERIALIZED_NAME_USER_EXPIRY = "userExpiry";
+  @SerializedName(SERIALIZED_NAME_USER_EXPIRY)
+  private OffsetDateTime userExpiry;
+
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
   private List<Link> links;
@@ -455,6 +459,27 @@ public class UserResponse {
   }
 
 
+  public UserResponse userExpiry(OffsetDateTime userExpiry) {
+    
+    this.userExpiry = userExpiry;
+    return this;
+  }
+
+   /**
+   * The user&#39;s expiry unix datetime
+   * @return userExpiry
+  **/
+  @jakarta.annotation.Nullable
+  public OffsetDateTime getUserExpiry() {
+    return userExpiry;
+  }
+
+
+  public void setUserExpiry(OffsetDateTime userExpiry) {
+    this.userExpiry = userExpiry;
+  }
+
+
   public UserResponse links(List<Link> links) {
     
     this.links = links;
@@ -509,6 +534,7 @@ public class UserResponse {
         Objects.equals(this.lastUpdated, userResponse.lastUpdated) &&
         Objects.equals(this.created, userResponse.created) &&
         Objects.equals(this.passwordChanged, userResponse.passwordChanged) &&
+        Objects.equals(this.userExpiry, userResponse.userExpiry) &&
         Objects.equals(this.links, userResponse.links);
   }
 
@@ -518,7 +544,7 @@ public class UserResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, alternativeUserIds, emailAddress, secondEmailAddress, login, firstName, lastName, roles, type, status, external, lastLogin, lastUpdated, created, passwordChanged, links);
+    return Objects.hash(id, alternativeUserIds, emailAddress, secondEmailAddress, login, firstName, lastName, roles, type, status, external, lastLogin, lastUpdated, created, passwordChanged, userExpiry, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -547,6 +573,7 @@ public class UserResponse {
     sb.append("    lastUpdated: ").append(toIndentedString(lastUpdated)).append("\n");
     sb.append("    created: ").append(toIndentedString(created)).append("\n");
     sb.append("    passwordChanged: ").append(toIndentedString(passwordChanged)).append("\n");
+    sb.append("    userExpiry: ").append(toIndentedString(userExpiry)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -585,6 +612,7 @@ public class UserResponse {
     openapiFields.add("lastUpdated");
     openapiFields.add("created");
     openapiFields.add("passwordChanged");
+    openapiFields.add("userExpiry");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)
