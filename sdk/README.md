@@ -27,6 +27,11 @@ Class | Method | HTTP request | Description
 *IdentityLogsApi* | [**listUserLogs**](docs/IdentityLogsApi.md#listuserlogs) | **GET** /api/logs/me | ListUserLogs: Lists user logs
 *IdentityProviderApi* | [**addScim**](docs/IdentityProviderApi.md#addscim) | **PUT** /api/identityprovider/scim | AddScim: Add SCIM
 *IdentityProviderApi* | [**removeScim**](docs/IdentityProviderApi.md#removescim) | **DELETE** /api/identityprovider/scim | RemoveScim: Remove SCIM
+*McpToolsApi* | [**createMcpTool**](docs/McpToolsApi.md#createmcptool) | **POST** /api/mcptools/{scope}/{code} | [EARLY ACCESS] CreateMcpTool: Create an MCP Tool
+*McpToolsApi* | [**deleteMcpTool**](docs/McpToolsApi.md#deletemcptool) | **DELETE** /api/mcptools/{scope}/{code} | [EARLY ACCESS] DeleteMcpTool: Delete an MCP Tool
+*McpToolsApi* | [**getMcpTool**](docs/McpToolsApi.md#getmcptool) | **GET** /api/mcptools/{scope}/{code} | [EARLY ACCESS] GetMcpTool: Get an MCP Tool
+*McpToolsApi* | [**listMcpTools**](docs/McpToolsApi.md#listmcptools) | **GET** /api/mcptools | [EARLY ACCESS] ListMcpTools: List all MCP Tools
+*McpToolsApi* | [**updateMcpTool**](docs/McpToolsApi.md#updatemcptool) | **PUT** /api/mcptools/{scope}/{code} | [EARLY ACCESS] UpdateMcpTool: Update an MCP Tool
 *MeApi* | [**getUserInfo**](docs/MeApi.md#getuserinfo) | **GET** /api/me | GetUserInfo: Get User Info
 *MeApi* | [**setPassword**](docs/MeApi.md#setpassword) | **PUT** /api/me/password | SetPassword: Set password of current user
 *NetworkZonesApi* | [**createNetworkZone**](docs/NetworkZonesApi.md#createnetworkzone) | **POST** /api/networkzones | [EARLY ACCESS] CreateNetworkZone: Creates a network zone
@@ -105,6 +110,11 @@ Class | Method | HTTP request | Description
  - [LogUserAgent](docs/LogUserAgent.md)
  - [LusidProblemDetails](docs/LusidProblemDetails.md)
  - [LusidValidationProblemDetails](docs/LusidValidationProblemDetails.md)
+ - [McpToolLuminescePayload](docs/McpToolLuminescePayload.md)
+ - [McpToolParameter](docs/McpToolParameter.md)
+ - [McpToolResponse](docs/McpToolResponse.md)
+ - [McpToolSchedulerNotification](docs/McpToolSchedulerNotification.md)
+ - [McpToolSchedulerPayload](docs/McpToolSchedulerPayload.md)
  - [NetworkZoneDefinitionResponse](docs/NetworkZoneDefinitionResponse.md)
  - [NetworkZonesApplyRules](docs/NetworkZonesApplyRules.md)
  - [OAuthApplication](docs/OAuthApplication.md)
@@ -137,6 +147,7 @@ Class | Method | HTTP request | Description
  - [UpdateRoleRequest](docs/UpdateRoleRequest.md)
  - [UpdateUserRequest](docs/UpdateUserRequest.md)
  - [UpdateUserSchemaRequest](docs/UpdateUserSchemaRequest.md)
+ - [UpsertMcpToolRequest](docs/UpsertMcpToolRequest.md)
  - [UserResponse](docs/UserResponse.md)
  - [UserSchemaProperty](docs/UserSchemaProperty.md)
  - [UserSchemaResponse](docs/UserSchemaResponse.md)

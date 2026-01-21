@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3336
+  version: 0.0.3388
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -161,6 +161,8 @@ tags:
   name: Identity Logs
 - description: Endpoints for administering Identity Provider integration
   name: Identity Provider
+- description: "Methods for creating, managing, and retrieving MCP Tool definitions"
+  name: MCP Tools
 - description: Endpoints for getting more information about the current User
   name: Me
 - description: Endpoints for administering Network Zones
@@ -1751,6 +1753,507 @@ paths:
       tags:
       - Identity Logs
       x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/mcptools:
+    get:
+      description: Lists all current MCP tools for the domain
+      operationId: ListMcpTools
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+              - scope: my-scope
+                code: get-instruments
+                name: get-instruments
+                version: 1
+                title: Get Instruments
+                description: Retrieves instruments from LUSID
+                destructive: false
+                idempotent: true
+                openWorld: false
+                readOnly: true
+                parameters:
+                - name: limit
+                  dataType: Integer
+                  description: The maximum number of instruments to return
+                payloadType: Luminesce
+                luminescePayload:
+                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
+                    generate justfile LICENSE.md publish README.md resources test_sdk
+                    from Lusid.Instrument limit @limit
+                createdAt: 2023-01-01T10:00:00.0000000+00:00
+                createdBy: 00u...
+                updatedAt: 2023-01-01T10:00:00.0000000+00:00
+                updatedBy: 00u...
+              schema:
+                items:
+                  $ref: '#/components/schemas/McpToolResponse'
+                type: array
+          description: List MCP Tools
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] ListMcpTools: List all MCP Tools"
+      tags:
+      - MCP Tools
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/mcptools/{scope}/{code}:
+    delete:
+      description: Deletes an MCP tool (soft delete - closes the current version)
+      operationId: DeleteMcpTool
+      parameters:
+      - description: The scope of the MCP tool
+        explode: false
+        in: path
+        name: scope
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The code of the MCP tool
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DeleteMcpTool: Delete an MCP Tool"
+      tags:
+      - MCP Tools
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    get:
+      description: "Retrieves an MCP tool. If version is specified, retrieves that\
+        \ specific version for audit purposes. Otherwise, retrieves the current version."
+      operationId: GetMcpTool
+      parameters:
+      - description: The scope of the MCP tool
+        explode: false
+        in: path
+        name: scope
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The code of the MCP tool
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: "Optional version number to retrieve. If not specified, returns\
+          \ the current version."
+        explode: true
+        in: query
+        name: version
+        required: false
+        schema:
+          format: int32
+          type: integer
+        style: form
+        x-nullable: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                scope: my-scope
+                code: get-instruments
+                name: get-instruments
+                version: 1
+                title: Get Instruments
+                description: Retrieves instruments from LUSID
+                destructive: false
+                idempotent: true
+                openWorld: false
+                readOnly: true
+                parameters:
+                - name: limit
+                  dataType: Integer
+                  description: The maximum number of instruments to return
+                payloadType: Luminesce
+                luminescePayload:
+                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
+                    generate justfile LICENSE.md publish README.md resources test_sdk
+                    from Lusid.Instrument limit @limit
+                createdAt: 2023-01-01T10:00:00.0000000+00:00
+                createdBy: 00u...
+                updatedAt: 2023-01-01T10:00:00.0000000+00:00
+                updatedBy: 00u...
+              schema:
+                $ref: '#/components/schemas/McpToolResponse'
+          description: Get MCP Tool
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetMcpTool: Get an MCP Tool"
+      tags:
+      - MCP Tools
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    post:
+      description: Creates a new MCP tool definition
+      operationId: CreateMcpTool
+      parameters:
+      - description: The scope of the MCP tool
+        explode: false
+        in: path
+        name: scope
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The code of the MCP tool
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+          application/json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+          text/json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+          application/*+json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+        description: The MCP tool definition
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              example:
+                scope: my-scope
+                code: get-instruments
+                name: get-instruments
+                version: 1
+                title: Get Instruments
+                description: Retrieves instruments from LUSID
+                destructive: false
+                idempotent: true
+                openWorld: false
+                readOnly: true
+                parameters:
+                - name: limit
+                  dataType: Integer
+                  description: The maximum number of instruments to return
+                payloadType: Luminesce
+                luminescePayload:
+                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
+                    generate justfile LICENSE.md publish README.md resources test_sdk
+                    from Lusid.Instrument limit @limit
+                createdAt: 2023-01-01T10:00:00.0000000+00:00
+                createdBy: 00u...
+                updatedAt: 2023-01-01T10:00:00.0000000+00:00
+                updatedBy: 00u...
+              schema:
+                $ref: '#/components/schemas/McpToolResponse'
+          description: Create MCP Tool
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] CreateMcpTool: Create an MCP Tool"
+      tags:
+      - MCP Tools
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+    put:
+      description: "Updates an existing MCP tool, creating a new version"
+      operationId: UpdateMcpTool
+      parameters:
+      - description: The scope of the MCP tool
+        explode: false
+        in: path
+        name: scope
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The code of the MCP tool
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+          application/json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+          text/json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+          application/*+json:
+            example:
+              name: get-instruments
+              title: Get Instruments
+              description: Retrieves instruments from LUSID
+              destructive: false
+              idempotent: true
+              openWorld: false
+              readOnly: true
+              parameters:
+              - name: limit
+                dataType: Integer
+                description: The maximum number of instruments to return
+              luminescePayload:
+                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
+                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
+                  limit @limit
+            schema:
+              $ref: '#/components/schemas/UpsertMcpToolRequest'
+        description: The updated MCP tool definition
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                scope: my-scope
+                code: get-instruments
+                name: get-instruments
+                version: 1
+                title: Get Instruments
+                description: Retrieves instruments from LUSID
+                destructive: false
+                idempotent: true
+                openWorld: false
+                readOnly: true
+                parameters:
+                - name: limit
+                  dataType: Integer
+                  description: The maximum number of instruments to return
+                payloadType: Luminesce
+                luminescePayload:
+                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
+                    generate justfile LICENSE.md publish README.md resources test_sdk
+                    from Lusid.Instrument limit @limit
+                createdAt: 2023-01-01T10:00:00.0000000+00:00
+                createdBy: 00u...
+                updatedAt: 2023-01-01T10:00:00.0000000+00:00
+                updatedBy: 00u...
+              schema:
+                $ref: '#/components/schemas/McpToolResponse'
+          description: Update MCP Tool
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] UpdateMcpTool: Update an MCP Tool"
+      tags:
+      - MCP Tools
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/me:
     get:
@@ -5080,6 +5583,241 @@ components:
       - code
       - name
       type: object
+    McpToolLuminescePayload:
+      additionalProperties: false
+      description: Payload data for a Luminesce query MCP tool
+      example:
+        query: query
+      properties:
+        query:
+          description: The Luminesce query to execute
+          maxLength: 50000
+          minLength: 1
+          type: string
+      required:
+      - query
+      type: object
+    McpToolParameter:
+      additionalProperties: false
+      description: A parameter definition for an MCP tool
+      example:
+        dataType: dataType
+        name: name
+        description: description
+      properties:
+        name:
+          description: The name of the parameter (identifier format)
+          maxLength: 50
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        dataType:
+          description: The data type of the parameter
+          minLength: 1
+          type: string
+        description:
+          description: A description of what the parameter is used for
+          maxLength: 2000
+          minLength: 1
+          nullable: true
+          type: string
+      required:
+      - dataType
+      - name
+      type: object
+    McpToolResponse:
+      additionalProperties: false
+      description: The response representation of an MCP tool
+      example:
+        code: code
+        updatedBy: updatedBy
+        description: description
+        readOnly: true
+        title: title
+        version: 0
+        destructive: true
+        idempotent: true
+        openWorld: true
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        payloadType: payloadType
+        createdBy: createdBy
+        scope: scope
+        name: name
+        luminescePayload:
+          query: query
+        parameters:
+        - dataType: dataType
+          name: name
+          description: description
+        - dataType: dataType
+          name: name
+          description: description
+        schedulerPayload:
+          runAs: runAs
+          jobCode: jobCode
+          arguments:
+            key: arguments
+          jobScope: jobScope
+          notifications:
+          - trigger: trigger
+            type: type
+            target: target
+          - trigger: trigger
+            type: type
+            target: target
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        scope:
+          description: The scope of the MCP tool
+          nullable: true
+          type: string
+        code:
+          description: The code of the MCP tool
+          nullable: true
+          type: string
+        name:
+          description: The name of the MCP tool
+          nullable: true
+          type: string
+        version:
+          description: The version number of this MCP tool
+          format: int32
+          type: integer
+        title:
+          description: The title of the MCP tool
+          nullable: true
+          type: string
+        description:
+          description: The description of the MCP tool
+          nullable: true
+          type: string
+        destructive:
+          description: Whether the tool is destructive
+          type: boolean
+        idempotent:
+          description: Whether the tool is idempotent
+          type: boolean
+        openWorld:
+          description: Whether the tool operates in open world
+          type: boolean
+        readOnly:
+          description: Whether the tool is read-only
+          type: boolean
+        parameters:
+          description: The parameters for this MCP tool
+          items:
+            $ref: '#/components/schemas/McpToolParameter'
+          nullable: true
+          type: array
+        payloadType:
+          description: The type of payload (Luminesce or Scheduler)
+          nullable: true
+          type: string
+        luminescePayload:
+          $ref: '#/components/schemas/McpToolLuminescePayload'
+        schedulerPayload:
+          $ref: '#/components/schemas/McpToolSchedulerPayload'
+        createdAt:
+          description: When the MCP tool was created
+          format: date-time
+          type: string
+        createdBy:
+          description: Who created the MCP tool
+          nullable: true
+          type: string
+        updatedAt:
+          description: When the MCP tool was last updated
+          format: date-time
+          type: string
+        updatedBy:
+          description: Who last updated the MCP tool
+          nullable: true
+          type: string
+      type: object
+    McpToolSchedulerNotification:
+      additionalProperties: false
+      description: A notification configuration for a scheduler job
+      example:
+        trigger: trigger
+        type: type
+        target: target
+      properties:
+        type:
+          description: "The type of notification (e.g., \"Email\", \"Webhook\")"
+          maxLength: 50
+          minLength: 1
+          type: string
+        target:
+          description: "The target of the notification (e.g., email address, webhook\
+            \ URL)"
+          maxLength: 250
+          minLength: 1
+          type: string
+        trigger:
+          description: "When to send the notification (e.g., \"OnSuccess\", \"OnFailure\"\
+            , \"Always\")"
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - target
+      - trigger
+      - type
+      type: object
+    McpToolSchedulerPayload:
+      additionalProperties: false
+      description: Payload data for a Scheduler job MCP tool
+      example:
+        runAs: runAs
+        jobCode: jobCode
+        arguments:
+          key: arguments
+        jobScope: jobScope
+        notifications:
+        - trigger: trigger
+          type: type
+          target: target
+        - trigger: trigger
+          type: type
+          target: target
+      properties:
+        jobScope:
+          description: The scope of the scheduler job to run
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        jobCode:
+          description: The code of the scheduler job to run
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        arguments:
+          additionalProperties:
+            nullable: true
+            type: string
+          description: Arguments to pass to the scheduler job (key-value pairs)
+          nullable: true
+          type: object
+        runAs:
+          description: Optional service user identifier to run the job as (if not
+            the current user)
+          maxLength: 64
+          minLength: 1
+          nullable: true
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        notifications:
+          description: Optional additional notifications for the job
+          items:
+            $ref: '#/components/schemas/McpToolSchedulerNotification'
+          nullable: true
+          type: array
+      required:
+      - jobCode
+      - jobScope
+      type: object
     NetworkZoneDefinitionResponse:
       additionalProperties: false
       description: The Client facing representation of a NetworkZone
@@ -6565,6 +7303,83 @@ components:
       required:
       - alternativeUserIds
       type: object
+    UpsertMcpToolRequest:
+      additionalProperties: false
+      description: Request to create or update an MCP tool
+      example:
+        idempotent: true
+        openWorld: true
+        name: name
+        luminescePayload:
+          query: query
+        description: description
+        readOnly: true
+        title: title
+        parameters:
+        - dataType: dataType
+          name: name
+          description: description
+        - dataType: dataType
+          name: name
+          description: description
+        destructive: true
+        schedulerPayload:
+          runAs: runAs
+          jobCode: jobCode
+          arguments:
+            key: arguments
+          jobScope: jobScope
+          notifications:
+          - trigger: trigger
+            type: type
+            target: target
+          - trigger: trigger
+            type: type
+            target: target
+      properties:
+        name:
+          description: "The name of the MCP tool (alphanumeric, underscore, and hyphen)"
+          maxLength: 256
+          minLength: 1
+          pattern: "^[a-zA-Z0-9_-]+$"
+          type: string
+        title:
+          description: The title of the MCP tool
+          maxLength: 256
+          minLength: 1
+          type: string
+        description:
+          description: The description of the MCP tool
+          maxLength: 2000
+          minLength: 1
+          type: string
+        destructive:
+          description: Whether the tool is destructive
+          type: boolean
+        idempotent:
+          description: Whether the tool is idempotent
+          type: boolean
+        openWorld:
+          description: Whether the tool operates in open world
+          type: boolean
+        readOnly:
+          description: Whether the tool is read-only
+          type: boolean
+        parameters:
+          description: The parameters for this MCP tool
+          items:
+            $ref: '#/components/schemas/McpToolParameter'
+          nullable: true
+          type: array
+        luminescePayload:
+          $ref: '#/components/schemas/McpToolLuminescePayload'
+        schedulerPayload:
+          $ref: '#/components/schemas/McpToolSchedulerPayload'
+      required:
+      - description
+      - name
+      - title
+      type: object
     UserResponse:
       additionalProperties: false
       example:
@@ -6815,6 +7630,7 @@ x-tagGroups:
   - External Token Issuers
   - Identity Logs
   - Identity Provider
+  - MCP Tools
   - Me
   - Network Zones
   - Personal Authentication Tokens
