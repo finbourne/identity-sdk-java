@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3388
+  version: 0.0.3393
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1779,9 +1779,9 @@ paths:
                   description: The maximum number of instruments to return
                 payloadType: Luminesce
                 luminescePayload:
-                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
-                    generate justfile LICENSE.md publish README.md resources test_sdk
-                    from Lusid.Instrument limit @limit
+                  query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                    \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                    \ from Lusid.Instrument limit {{{limit}}}"
                 createdAt: 2023-01-01T10:00:00.0000000+00:00
                 createdBy: 00u...
                 updatedAt: 2023-01-01T10:00:00.0000000+00:00
@@ -1912,9 +1912,9 @@ paths:
                   description: The maximum number of instruments to return
                 payloadType: Luminesce
                 luminescePayload:
-                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
-                    generate justfile LICENSE.md publish README.md resources test_sdk
-                    from Lusid.Instrument limit @limit
+                  query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                    \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                    \ from Lusid.Instrument limit {{{limit}}}"
                 createdAt: 2023-01-01T10:00:00.0000000+00:00
                 createdBy: 00u...
                 updatedAt: 2023-01-01T10:00:00.0000000+00:00
@@ -1983,9 +1983,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/json:
@@ -2002,9 +2002,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           text/json:
@@ -2021,9 +2021,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/*+json:
@@ -2040,9 +2040,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
         description: The MCP tool definition
@@ -2068,9 +2068,9 @@ paths:
                   description: The maximum number of instruments to return
                 payloadType: Luminesce
                 luminescePayload:
-                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
-                    generate justfile LICENSE.md publish README.md resources test_sdk
-                    from Lusid.Instrument limit @limit
+                  query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                    \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                    \ from Lusid.Instrument limit {{{limit}}}"
                 createdAt: 2023-01-01T10:00:00.0000000+00:00
                 createdBy: 00u...
                 updatedAt: 2023-01-01T10:00:00.0000000+00:00
@@ -2140,9 +2140,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/json:
@@ -2159,9 +2159,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           text/json:
@@ -2178,9 +2178,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/*+json:
@@ -2197,9 +2197,9 @@ paths:
                 dataType: Integer
                 description: The maximum number of instruments to return
               luminescePayload:
-                query: select docker-compose.yml Dockerfile Dockerfile.cicd docs generate
-                  justfile LICENSE.md publish README.md resources test_sdk from Lusid.Instrument
-                  limit @limit
+                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                  \ from Lusid.Instrument limit {{{limit}}}"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
         description: The updated MCP tool definition
@@ -2225,9 +2225,9 @@ paths:
                   description: The maximum number of instruments to return
                 payloadType: Luminesce
                 luminescePayload:
-                  query: select docker-compose.yml Dockerfile Dockerfile.cicd docs
-                    generate justfile LICENSE.md publish README.md resources test_sdk
-                    from Lusid.Instrument limit @limit
+                  query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                    \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                    \ from Lusid.Instrument limit {{{limit}}}"
                 createdAt: 2023-01-01T10:00:00.0000000+00:00
                 createdBy: 00u...
                 updatedAt: 2023-01-01T10:00:00.0000000+00:00
@@ -3501,7 +3501,7 @@ paths:
         description: Details of the User to be created
         required: true
       responses:
-        "201":
+        "200":
           content:
             application/json:
               example:
