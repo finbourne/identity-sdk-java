@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3412
+  version: 0.0.3441
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -438,6 +438,7 @@ paths:
                 issuerUrl: https://myco.lusid.okta.com/12346
                 samlIdentityProviderId: 0oa14txx1jAiz7T302p7as
                 supportAccessExpiryWithRole: []
+                status: false
               schema:
                 $ref: '#/components/schemas/AuthenticationInformation'
           description: Get authentication information
@@ -4449,6 +4450,7 @@ components:
         samlIdentityProviderId: samlIdentityProviderId
         support:
           expiry: 2000-01-23T04:56:07.000+00:00
+        status: true
       properties:
         issuerUrl:
           minLength: 1
@@ -4468,6 +4470,8 @@ components:
             $ref: '#/components/schemas/SupportAccessExpiryWithRole'
           nullable: true
           type: array
+        status:
+          type: boolean
         links:
           items:
             $ref: '#/components/schemas/Link'

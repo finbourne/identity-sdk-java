@@ -75,6 +75,10 @@ public class AuthenticationInformation {
   @SerializedName(SERIALIZED_NAME_SUPPORT_ACCESS_EXPIRY_WITH_ROLE)
   private List<SupportAccessExpiryWithRole> supportAccessExpiryWithRole;
 
+  public static final String SERIALIZED_NAME_STATUS = "status";
+  @SerializedName(SERIALIZED_NAME_STATUS)
+  private Boolean status;
+
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
   private List<Link> links;
@@ -203,6 +207,27 @@ public class AuthenticationInformation {
   }
 
 
+  public AuthenticationInformation status(Boolean status) {
+    
+    this.status = status;
+    return this;
+  }
+
+   /**
+   * Get status
+   * @return status
+  **/
+  @jakarta.annotation.Nullable
+  public Boolean getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(Boolean status) {
+    this.status = status;
+  }
+
+
   public AuthenticationInformation links(List<Link> links) {
     
     this.links = links;
@@ -247,6 +272,7 @@ public class AuthenticationInformation {
         Objects.equals(this.samlIdentityProviderId, authenticationInformation.samlIdentityProviderId) &&
         Objects.equals(this.support, authenticationInformation.support) &&
         Objects.equals(this.supportAccessExpiryWithRole, authenticationInformation.supportAccessExpiryWithRole) &&
+        Objects.equals(this.status, authenticationInformation.status) &&
         Objects.equals(this.links, authenticationInformation.links);
   }
 
@@ -256,7 +282,7 @@ public class AuthenticationInformation {
 
   @Override
   public int hashCode() {
-    return Objects.hash(issuerUrl, fallbackIssuerUrls, samlIdentityProviderId, support, supportAccessExpiryWithRole, links);
+    return Objects.hash(issuerUrl, fallbackIssuerUrls, samlIdentityProviderId, support, supportAccessExpiryWithRole, status, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -275,6 +301,7 @@ public class AuthenticationInformation {
     sb.append("    samlIdentityProviderId: ").append(toIndentedString(samlIdentityProviderId)).append("\n");
     sb.append("    support: ").append(toIndentedString(support)).append("\n");
     sb.append("    supportAccessExpiryWithRole: ").append(toIndentedString(supportAccessExpiryWithRole)).append("\n");
+    sb.append("    status: ").append(toIndentedString(status)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -303,6 +330,7 @@ public class AuthenticationInformation {
     openapiFields.add("samlIdentityProviderId");
     openapiFields.add("support");
     openapiFields.add("supportAccessExpiryWithRole");
+    openapiFields.add("status");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)

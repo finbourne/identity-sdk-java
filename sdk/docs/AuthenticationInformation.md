@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **samlIdentityProviderId** | **String** |  | [optional] [default to String]
 **support** | [**SupportAccessExpiry**](SupportAccessExpiry.md) |  | [optional] [default to SupportAccessExpiry]
 **supportAccessExpiryWithRole** | [**List&lt;SupportAccessExpiryWithRole&gt;**](SupportAccessExpiryWithRole.md) |  | [optional] [default to List<SupportAccessExpiryWithRole>]
+**status** | **Boolean** |  | [optional] [default to Boolean]
 **links** | [**List&lt;Link&gt;**](Link.md) |  | [optional] [default to List<Link>]
 
 ```java
@@ -22,6 +23,7 @@ String IssuerUrl = "example IssuerUrl";
 @jakarta.annotation.Nullable String SamlIdentityProviderId = "example SamlIdentityProviderId";
 SupportAccessExpiry Support = new SupportAccessExpiry();
 @jakarta.annotation.Nullable List<SupportAccessExpiryWithRole> SupportAccessExpiryWithRole = new List<SupportAccessExpiryWithRole>();
+Boolean Status = true;
 @jakarta.annotation.Nullable List<Link> Links = new List<Link>();
 
 
@@ -31,6 +33,7 @@ AuthenticationInformation authenticationInformationInstance = new Authentication
     .SamlIdentityProviderId(SamlIdentityProviderId)
     .Support(Support)
     .SupportAccessExpiryWithRole(SupportAccessExpiryWithRole)
+    .Status(Status)
     .Links(Links);
 ```
 
