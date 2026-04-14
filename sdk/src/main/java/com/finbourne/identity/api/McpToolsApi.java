@@ -198,6 +198,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -214,6 +215,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -231,6 +233,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -248,6 +251,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -264,6 +268,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -281,6 +286,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -298,6 +304,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -318,6 +325,7 @@ public class McpToolsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 201 </td><td> Create MCP Tool </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> A tool with the same code or name already exists in this domain </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */
@@ -1147,6 +1155,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1163,6 +1172,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1180,6 +1190,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1197,6 +1208,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1213,6 +1225,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1230,6 +1243,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1247,6 +1261,7 @@ public class McpToolsApi {
             <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
             <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
             <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
             <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
          </table>
          */
@@ -1267,6 +1282,7 @@ public class McpToolsApi {
         <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
         <tr><td> 200 </td><td> Update MCP Tool </td><td>  -  </td></tr>
         <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 409 </td><td> Renaming this tool would conflict with an existing tool name in this domain </td><td>  -  </td></tr>
         <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
      </table>
      */

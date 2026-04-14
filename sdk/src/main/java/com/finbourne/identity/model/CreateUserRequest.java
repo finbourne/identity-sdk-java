@@ -186,7 +186,7 @@ public class CreateUserRequest {
   }
 
    /**
-   * The user&#39;s login username, in the form of an email address, which must be unique within the system. For user accounts this should exactly match the user&#39;s email address.
+   * The user&#39;s login username, which must be unique within the system. For user accounts this should exactly match the user&#39;s email address.
    * @return login
   **/
   @jakarta.annotation.Nonnull
