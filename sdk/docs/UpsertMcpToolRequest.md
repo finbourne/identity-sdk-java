@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **parameters** | [**List&lt;McpToolParameter&gt;**](McpToolParameter.md) | The parameters for this MCP tool | [optional] [default to List<McpToolParameter>]
 **luminescePayload** | [**McpToolLuminescePayload**](McpToolLuminescePayload.md) |  | [optional] [default to McpToolLuminescePayload]
 **schedulerPayload** | [**McpToolSchedulerPayload**](McpToolSchedulerPayload.md) |  | [optional] [default to McpToolSchedulerPayload]
+**destructiveActionSummaryTemplate** | **String** | Template for human-readable destructive action summary. Uses {paramName} single-brace placeholders (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;). Required when Destructive is true. | [optional] [default to String]
 
 ```java
 import com.finbourne.identity.model.UpsertMcpToolRequest;
@@ -32,6 +33,7 @@ Boolean ReadOnly = true;
 @jakarta.annotation.Nullable List<McpToolParameter> Parameters = new List<McpToolParameter>();
 McpToolLuminescePayload LuminescePayload = new McpToolLuminescePayload();
 McpToolSchedulerPayload SchedulerPayload = new McpToolSchedulerPayload();
+@jakarta.annotation.Nullable String DestructiveActionSummaryTemplate = "example DestructiveActionSummaryTemplate";
 
 
 UpsertMcpToolRequest upsertMcpToolRequestInstance = new UpsertMcpToolRequest()
@@ -44,7 +46,8 @@ UpsertMcpToolRequest upsertMcpToolRequestInstance = new UpsertMcpToolRequest()
     .ReadOnly(ReadOnly)
     .Parameters(Parameters)
     .LuminescePayload(LuminescePayload)
-    .SchedulerPayload(SchedulerPayload);
+    .SchedulerPayload(SchedulerPayload)
+    .DestructiveActionSummaryTemplate(DestructiveActionSummaryTemplate);
 ```
 
 

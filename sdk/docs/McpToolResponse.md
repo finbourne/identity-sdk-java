@@ -19,6 +19,7 @@ Name | Type | Description | Notes
 **payloadType** | **String** | The type of payload (Luminesce or Scheduler) | [optional] [default to String]
 **luminescePayload** | [**McpToolLuminescePayload**](McpToolLuminescePayload.md) |  | [optional] [default to McpToolLuminescePayload]
 **schedulerPayload** | [**McpToolSchedulerPayload**](McpToolSchedulerPayload.md) |  | [optional] [default to McpToolSchedulerPayload]
+**destructiveActionSummaryTemplate** | **String** | Template for human-readable destructive action summary (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;) | [optional] [default to String]
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) | When the MCP tool was created | [optional] [default to OffsetDateTime]
 **createdBy** | **String** | Who created the MCP tool | [optional] [default to String]
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) | When the MCP tool was last updated | [optional] [default to OffsetDateTime]
@@ -44,6 +45,7 @@ Boolean ReadOnly = true;
 @jakarta.annotation.Nullable String PayloadType = "example PayloadType";
 McpToolLuminescePayload LuminescePayload = new McpToolLuminescePayload();
 McpToolSchedulerPayload SchedulerPayload = new McpToolSchedulerPayload();
+@jakarta.annotation.Nullable String DestructiveActionSummaryTemplate = "example DestructiveActionSummaryTemplate";
 OffsetDateTime CreatedAt = OffsetDateTime.now();
 @jakarta.annotation.Nullable String CreatedBy = "example CreatedBy";
 OffsetDateTime UpdatedAt = OffsetDateTime.now();
@@ -65,6 +67,7 @@ McpToolResponse mcpToolResponseInstance = new McpToolResponse()
     .PayloadType(PayloadType)
     .LuminescePayload(LuminescePayload)
     .SchedulerPayload(SchedulerPayload)
+    .DestructiveActionSummaryTemplate(DestructiveActionSummaryTemplate)
     .CreatedAt(CreatedAt)
     .CreatedBy(CreatedBy)
     .UpdatedAt(UpdatedAt)

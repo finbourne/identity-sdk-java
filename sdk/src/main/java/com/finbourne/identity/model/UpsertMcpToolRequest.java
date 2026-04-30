@@ -95,6 +95,10 @@ public class UpsertMcpToolRequest {
   @SerializedName(SERIALIZED_NAME_SCHEDULER_PAYLOAD)
   private McpToolSchedulerPayload schedulerPayload;
 
+  public static final String SERIALIZED_NAME_DESTRUCTIVE_ACTION_SUMMARY_TEMPLATE = "destructiveActionSummaryTemplate";
+  @SerializedName(SERIALIZED_NAME_DESTRUCTIVE_ACTION_SUMMARY_TEMPLATE)
+  private String destructiveActionSummaryTemplate;
+
   public UpsertMcpToolRequest() {
   }
 
@@ -316,6 +320,27 @@ public class UpsertMcpToolRequest {
   }
 
 
+  public UpsertMcpToolRequest destructiveActionSummaryTemplate(String destructiveActionSummaryTemplate) {
+    
+    this.destructiveActionSummaryTemplate = destructiveActionSummaryTemplate;
+    return this;
+  }
+
+   /**
+   * Template for human-readable destructive action summary. Uses {paramName} single-brace placeholders (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;). Required when Destructive is true.
+   * @return destructiveActionSummaryTemplate
+  **/
+  @jakarta.annotation.Nullable
+  public String getDestructiveActionSummaryTemplate() {
+    return destructiveActionSummaryTemplate;
+  }
+
+
+  public void setDestructiveActionSummaryTemplate(String destructiveActionSummaryTemplate) {
+    this.destructiveActionSummaryTemplate = destructiveActionSummaryTemplate;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -335,7 +360,8 @@ public class UpsertMcpToolRequest {
         Objects.equals(this.readOnly, upsertMcpToolRequest.readOnly) &&
         Objects.equals(this.parameters, upsertMcpToolRequest.parameters) &&
         Objects.equals(this.luminescePayload, upsertMcpToolRequest.luminescePayload) &&
-        Objects.equals(this.schedulerPayload, upsertMcpToolRequest.schedulerPayload);
+        Objects.equals(this.schedulerPayload, upsertMcpToolRequest.schedulerPayload) &&
+        Objects.equals(this.destructiveActionSummaryTemplate, upsertMcpToolRequest.destructiveActionSummaryTemplate);
   }
 
   private static <T> boolean equalsNullable(JsonNullable<T> a, JsonNullable<T> b) {
@@ -344,7 +370,7 @@ public class UpsertMcpToolRequest {
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, title, description, destructive, idempotent, openWorld, readOnly, parameters, luminescePayload, schedulerPayload);
+    return Objects.hash(name, title, description, destructive, idempotent, openWorld, readOnly, parameters, luminescePayload, schedulerPayload, destructiveActionSummaryTemplate);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -368,6 +394,7 @@ public class UpsertMcpToolRequest {
     sb.append("    parameters: ").append(toIndentedString(parameters)).append("\n");
     sb.append("    luminescePayload: ").append(toIndentedString(luminescePayload)).append("\n");
     sb.append("    schedulerPayload: ").append(toIndentedString(schedulerPayload)).append("\n");
+    sb.append("    destructiveActionSummaryTemplate: ").append(toIndentedString(destructiveActionSummaryTemplate)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -400,6 +427,7 @@ public class UpsertMcpToolRequest {
     openapiFields.add("parameters");
     openapiFields.add("luminescePayload");
     openapiFields.add("schedulerPayload");
+    openapiFields.add("destructiveActionSummaryTemplate");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -458,6 +486,9 @@ public class UpsertMcpToolRequest {
       // validate the optional field `schedulerPayload`
       if (jsonObj.get("schedulerPayload") != null && !jsonObj.get("schedulerPayload").isJsonNull()) {
         McpToolSchedulerPayload.validateJsonElement(jsonObj.get("schedulerPayload"));
+      }
+      if ((jsonObj.get("destructiveActionSummaryTemplate") != null && !jsonObj.get("destructiveActionSummaryTemplate").isJsonNull()) && !jsonObj.get("destructiveActionSummaryTemplate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `destructiveActionSummaryTemplate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("destructiveActionSummaryTemplate").toString()));
       }
   }
 

@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3482
+  version: 0.0.3584
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -5638,6 +5638,7 @@ components:
       additionalProperties: false
       description: The response representation of an MCP tool
       example:
+        destructiveActionSummaryTemplate: destructiveActionSummaryTemplate
         code: code
         updatedBy: updatedBy
         description: description
@@ -5726,6 +5727,11 @@ components:
           $ref: '#/components/schemas/McpToolLuminescePayload'
         schedulerPayload:
           $ref: '#/components/schemas/McpToolSchedulerPayload'
+        destructiveActionSummaryTemplate:
+          description: "Template for human-readable destructive action summary (e.g.\
+            \ \"Delete file '{filePath}'\")"
+          nullable: true
+          type: string
         createdAt:
           description: When the MCP tool was created
           format: date-time
@@ -7318,6 +7324,7 @@ components:
       example:
         idempotent: true
         openWorld: true
+        destructiveActionSummaryTemplate: destructiveActionSummaryTemplate
         name: name
         luminescePayload:
           query: query
@@ -7384,6 +7391,15 @@ components:
           $ref: '#/components/schemas/McpToolLuminescePayload'
         schedulerPayload:
           $ref: '#/components/schemas/McpToolSchedulerPayload'
+        destructiveActionSummaryTemplate:
+          description: |-
+            Template for human-readable destructive action summary.
+            Uses {paramName} single-brace placeholders (e.g. "Delete file '{filePath}'").
+            Required when Destructive is true.
+          maxLength: 500
+          minLength: 0
+          nullable: true
+          type: string
       required:
       - description
       - name

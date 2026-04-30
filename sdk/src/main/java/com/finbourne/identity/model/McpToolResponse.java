@@ -112,6 +112,10 @@ public class McpToolResponse {
   @SerializedName(SERIALIZED_NAME_SCHEDULER_PAYLOAD)
   private McpToolSchedulerPayload schedulerPayload;
 
+  public static final String SERIALIZED_NAME_DESTRUCTIVE_ACTION_SUMMARY_TEMPLATE = "destructiveActionSummaryTemplate";
+  @SerializedName(SERIALIZED_NAME_DESTRUCTIVE_ACTION_SUMMARY_TEMPLATE)
+  private String destructiveActionSummaryTemplate;
+
   public static final String SERIALIZED_NAME_CREATED_AT = "createdAt";
   @SerializedName(SERIALIZED_NAME_CREATED_AT)
   private OffsetDateTime createdAt;
@@ -433,6 +437,27 @@ public class McpToolResponse {
   }
 
 
+  public McpToolResponse destructiveActionSummaryTemplate(String destructiveActionSummaryTemplate) {
+    
+    this.destructiveActionSummaryTemplate = destructiveActionSummaryTemplate;
+    return this;
+  }
+
+   /**
+   * Template for human-readable destructive action summary (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;)
+   * @return destructiveActionSummaryTemplate
+  **/
+  @jakarta.annotation.Nullable
+  public String getDestructiveActionSummaryTemplate() {
+    return destructiveActionSummaryTemplate;
+  }
+
+
+  public void setDestructiveActionSummaryTemplate(String destructiveActionSummaryTemplate) {
+    this.destructiveActionSummaryTemplate = destructiveActionSummaryTemplate;
+  }
+
+
   public McpToolResponse createdAt(OffsetDateTime createdAt) {
     
     this.createdAt = createdAt;
@@ -541,6 +566,7 @@ public class McpToolResponse {
         Objects.equals(this.payloadType, mcpToolResponse.payloadType) &&
         Objects.equals(this.luminescePayload, mcpToolResponse.luminescePayload) &&
         Objects.equals(this.schedulerPayload, mcpToolResponse.schedulerPayload) &&
+        Objects.equals(this.destructiveActionSummaryTemplate, mcpToolResponse.destructiveActionSummaryTemplate) &&
         Objects.equals(this.createdAt, mcpToolResponse.createdAt) &&
         Objects.equals(this.createdBy, mcpToolResponse.createdBy) &&
         Objects.equals(this.updatedAt, mcpToolResponse.updatedAt) &&
@@ -553,7 +579,7 @@ public class McpToolResponse {
 
   @Override
   public int hashCode() {
-    return Objects.hash(scope, code, name, version, title, description, destructive, idempotent, openWorld, readOnly, parameters, payloadType, luminescePayload, schedulerPayload, createdAt, createdBy, updatedAt, updatedBy);
+    return Objects.hash(scope, code, name, version, title, description, destructive, idempotent, openWorld, readOnly, parameters, payloadType, luminescePayload, schedulerPayload, destructiveActionSummaryTemplate, createdAt, createdBy, updatedAt, updatedBy);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -581,6 +607,7 @@ public class McpToolResponse {
     sb.append("    payloadType: ").append(toIndentedString(payloadType)).append("\n");
     sb.append("    luminescePayload: ").append(toIndentedString(luminescePayload)).append("\n");
     sb.append("    schedulerPayload: ").append(toIndentedString(schedulerPayload)).append("\n");
+    sb.append("    destructiveActionSummaryTemplate: ").append(toIndentedString(destructiveActionSummaryTemplate)).append("\n");
     sb.append("    createdAt: ").append(toIndentedString(createdAt)).append("\n");
     sb.append("    createdBy: ").append(toIndentedString(createdBy)).append("\n");
     sb.append("    updatedAt: ").append(toIndentedString(updatedAt)).append("\n");
@@ -621,6 +648,7 @@ public class McpToolResponse {
     openapiFields.add("payloadType");
     openapiFields.add("luminescePayload");
     openapiFields.add("schedulerPayload");
+    openapiFields.add("destructiveActionSummaryTemplate");
     openapiFields.add("createdAt");
     openapiFields.add("createdBy");
     openapiFields.add("updatedAt");
@@ -682,6 +710,9 @@ public class McpToolResponse {
       // validate the optional field `schedulerPayload`
       if (jsonObj.get("schedulerPayload") != null && !jsonObj.get("schedulerPayload").isJsonNull()) {
         McpToolSchedulerPayload.validateJsonElement(jsonObj.get("schedulerPayload"));
+      }
+      if ((jsonObj.get("destructiveActionSummaryTemplate") != null && !jsonObj.get("destructiveActionSummaryTemplate").isJsonNull()) && !jsonObj.get("destructiveActionSummaryTemplate").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `destructiveActionSummaryTemplate` to be a primitive type in the JSON string but got `%s`", jsonObj.get("destructiveActionSummaryTemplate").toString()));
       }
       if ((jsonObj.get("createdBy") != null && !jsonObj.get("createdBy").isJsonNull()) && !jsonObj.get("createdBy").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `createdBy` to be a primitive type in the JSON string but got `%s`", jsonObj.get("createdBy").toString()));
