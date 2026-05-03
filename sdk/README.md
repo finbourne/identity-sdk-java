@@ -18,6 +18,14 @@ Class | Method | HTTP request | Description
 *AuthenticationApi* | [**grantSupportAccess**](docs/AuthenticationApi.md#grantsupportaccess) | **POST** /api/authentication/support | GrantSupportAccess: Grants FINBOURNE support access to your account
 *AuthenticationApi* | [**invalidateSupportAccess**](docs/AuthenticationApi.md#invalidatesupportaccess) | **DELETE** /api/authentication/support | InvalidateSupportAccess: Revoke any FINBOURNE support access to your account
 *AuthenticationApi* | [**updatePasswordPolicy**](docs/AuthenticationApi.md#updatepasswordpolicy) | **PUT** /api/authentication/password-policy/{userType} | UpdatePasswordPolicy: Updates password policy for a user type
+*CellManagementApi* | [**acceptCellAttachment**](docs/CellManagementApi.md#acceptcellattachment) | **POST** /api/cellmanagement/acceptattachment | [EARLY ACCESS] AcceptCellAttachment: Accept (or retry) a cell attachment
+*CellManagementApi* | [**detachParentCell**](docs/CellManagementApi.md#detachparentcell) | **PUT** /api/cellmanagement/detach | [EARLY ACCESS] DetachParentCell: Detach this cell from its parent
+*CellManagementApi* | [**getCellParentStatus**](docs/CellManagementApi.md#getcellparentstatus) | **GET** /api/cellmanagement/parentcell | [EARLY ACCESS] GetCellParentStatus: Get cell parent status
+*CellManagementApi* | [**refuseCellAttachment**](docs/CellManagementApi.md#refusecellattachment) | **POST** /api/cellmanagement/refuseattachment | [EARLY ACCESS] RefuseCellAttachment: Refuse a Proposed cell attachment
+*CellManagementApi* | [**removePrimaryDomain**](docs/CellManagementApi.md#removeprimarydomain) | **DELETE** /api/cellmanagement/primarydomain | [EARLY ACCESS] RemovePrimaryDomain: Remove primary domain
+*CellManagementApi* | [**setAttachingKey**](docs/CellManagementApi.md#setattachingkey) | **PUT** /api/cellmanagement/attachingkey | [EARLY ACCESS] SetAttachingKey: Store the Attaching Key pasted from the parent admin portal
+*CellManagementApi* | [**setParentCell**](docs/CellManagementApi.md#setparentcell) | **PUT** /api/cellmanagement/parentcell | [EARLY ACCESS] SetParentCell: Set parent cell
+*CellManagementApi* | [**setPrimaryDomain**](docs/CellManagementApi.md#setprimarydomain) | **PUT** /api/cellmanagement/primarydomain | [EARLY ACCESS] SetPrimaryDomain: Set primary domain
 *ExternalTokenIssuersApi* | [**createExternalTokenIssuer**](docs/ExternalTokenIssuersApi.md#createexternaltokenissuer) | **POST** /api/externaltokenissuers | [EARLY ACCESS] CreateExternalTokenIssuer: Create an External Token Issuer
 *ExternalTokenIssuersApi* | [**deleteExternalTokenIssuer**](docs/ExternalTokenIssuersApi.md#deleteexternaltokenissuer) | **DELETE** /api/externaltokenissuers/{code} | [EARLY ACCESS] DeleteExternalTokenIssuer: Deletes an External Token Issuer by code
 *ExternalTokenIssuersApi* | [**getExternalTokenIssuer**](docs/ExternalTokenIssuersApi.md#getexternaltokenissuer) | **GET** /api/externaltokenissuers/{code} | [EARLY ACCESS] GetExternalTokenIssuer: Gets an External Token Issuer with code
@@ -77,6 +85,7 @@ Class | Method | HTTP request | Description
  - [AddScimResponse](docs/AddScimResponse.md)
  - [ApiKey](docs/ApiKey.md)
  - [AuthenticationInformation](docs/AuthenticationInformation.md)
+ - [CellParentStatusResponse](docs/CellParentStatusResponse.md)
  - [ClaimMappings](docs/ClaimMappings.md)
  - [CreateApiKey](docs/CreateApiKey.md)
  - [CreateApplicationRequest](docs/CreateApplicationRequest.md)
@@ -86,6 +95,7 @@ Class | Method | HTTP request | Description
  - [CreateUserRequest](docs/CreateUserRequest.md)
  - [CreatedApiKey](docs/CreatedApiKey.md)
  - [CurrentUserResponse](docs/CurrentUserResponse.md)
+ - [DetachParentCellRequest](docs/DetachParentCellRequest.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ExternalTokenIssuerResponse](docs/ExternalTokenIssuerResponse.md)
  - [IdSelectorDefinition](docs/IdSelectorDefinition.md)
@@ -127,6 +137,8 @@ Class | Method | HTTP request | Description
  - [ResourceListOfSystemLog](docs/ResourceListOfSystemLog.md)
  - [RoleId](docs/RoleId.md)
  - [RoleResponse](docs/RoleResponse.md)
+ - [SetAttachingKeyRequest](docs/SetAttachingKeyRequest.md)
+ - [SetParentCellRequest](docs/SetParentCellRequest.md)
  - [SetPassword](docs/SetPassword.md)
  - [SetPasswordResponse](docs/SetPasswordResponse.md)
  - [SupportAccessExpiry](docs/SupportAccessExpiry.md)

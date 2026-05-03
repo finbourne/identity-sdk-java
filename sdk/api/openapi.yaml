@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3584
+  version: 0.0.3600
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -155,6 +155,8 @@ tags:
   name: Applications
 - description: Endpoints for getting authentication details for the domain
   name: Authentication
+- description: ""
+  name: CellManagement
 - description: Endpoints for administering External Token Issuers
   name: External Token Issuers
 - description: Endpoints for accessing and querying identity logging
@@ -849,6 +851,400 @@ paths:
       tags:
       - Authentication
       x-fbn-apistatus: Stable
+      x-accepts: application/json
+  /api/cellmanagement/acceptattachment:
+    post:
+      description: |-
+        Confirms a Proposed attachment, or retries one that previously failed: transitions
+        the cell to Attaching and runs the shared registration service to provision the
+        parent-cell service user, mint a PAT, and push it to the parent admin domain.
+        Accepted starting states are `Proposed` (the normal first confirm —
+        anti-circumvention is enforced by requiring a prior `SetAttachingKey`) and
+        `Failed` (recovery from a previous failed attempt). The registration service
+        is idempotent and resumes from the persisted `RegistrationStep` checkpoint,
+        so this is safe to call any number of times after a failure. To abandon a failed
+        attempt instead of retrying, call `Detach`. Only the designated primary
+        domain may call this. Requires JWT authentication.
+      operationId: AcceptCellAttachment
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] AcceptCellAttachment: Accept (or retry) a cell attachment"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/cellmanagement/attachingkey:
+    put:
+      description: |-
+        Persists the Attaching Key PAT to the cell's ParameterStore / Azure Key Vault and
+        records a Proposed attachment against the provided parent admin domain. Only the
+        designated primary domain may call this. Requires JWT authentication (PAT tokens
+        are rejected).
+      operationId: SetAttachingKey
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+              parentDomainName: acme-admin
+              parentAssignedCellId: 42
+            schema:
+              $ref: '#/components/schemas/SetAttachingKeyRequest'
+          application/json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+              parentDomainName: acme-admin
+              parentAssignedCellId: 42
+            schema:
+              $ref: '#/components/schemas/SetAttachingKeyRequest'
+          text/json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+              parentDomainName: acme-admin
+              parentAssignedCellId: 42
+            schema:
+              $ref: '#/components/schemas/SetAttachingKeyRequest'
+          application/*+json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+              parentDomainName: acme-admin
+              parentAssignedCellId: 42
+            schema:
+              $ref: '#/components/schemas/SetAttachingKeyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] SetAttachingKey: Store the Attaching Key pasted from\
+        \ the parent admin portal"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/cellmanagement/detach:
+    put:
+      description: |-
+        Double-invoke pattern. First call with `Confirm=false` transitions the cell into
+        Detaching; second call with `Confirm=true` executes: deactivates the parent-cell
+        service user, deletes the Attaching Key from ParameterStore, and best-effort notifies
+        the parent admin domain. Accepts `Attached`, `Attaching`, `Failed`,
+        and `Detaching` as valid starting states (call `AcceptAttachment` instead
+        if you'd rather retry a Failed cell than abandon it). Only the designated primary
+        domain may call this. Requires JWT authentication.
+      operationId: DetachParentCell
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/DetachParentCellRequest'
+          application/json:
+            example:
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/DetachParentCellRequest'
+          text/json:
+            example:
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/DetachParentCellRequest'
+          application/*+json:
+            example:
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/DetachParentCellRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] DetachParentCell: Detach this cell from its parent"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/cellmanagement/parentcell:
+    get:
+      description: |-
+        Returns the current cell parent relationship status including primary domain,
+        admin domain name, and attachment status.
+      operationId: GetCellParentStatus
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The cell parent status
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] GetCellParentStatus: Get cell parent status"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: |-
+        Sets the parent cell for this cell. Uses a double-invoke pattern:
+        first call (confirm=false) sets status to Proposed, second call (confirm=true) transitions to Attaching.
+        Only the designated primary domain can call this.
+        Requires JWT authentication (PAT tokens are rejected).
+      operationId: SetParentCell
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              adminDomainName: acme-admin
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/SetParentCellRequest'
+          application/json:
+            example:
+              adminDomainName: acme-admin
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/SetParentCellRequest'
+          text/json:
+            example:
+              adminDomainName: acme-admin
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/SetParentCellRequest'
+          application/*+json:
+            example:
+              adminDomainName: acme-admin
+              confirm: false
+            schema:
+              $ref: '#/components/schemas/SetParentCellRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] SetParentCell: Set parent cell"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/cellmanagement/primarydomain:
+    delete:
+      description: |-
+        Removes the primary domain designation for this cell.
+        Only the current primary domain or FINBOURNE staff can perform this.
+        Requires JWT authentication (PAT tokens are rejected).
+      operationId: RemovePrimaryDomain
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] RemovePrimaryDomain: Remove primary domain"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+    put:
+      description: |-
+        Designates the calling domain as the primary domain for this cell.
+        Requires JWT authentication (PAT tokens are rejected).
+      operationId: SetPrimaryDomain
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] SetPrimaryDomain: Set primary domain"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/cellmanagement/refuseattachment:
+    post:
+      description: |-
+        Rejects a Proposed attachment, deletes the Attaching Key from ParameterStore, and
+        returns the cell to Standalone. Only the designated primary domain may call this.
+        Requires JWT authentication.
+      operationId: RefuseCellAttachment
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] RefuseCellAttachment: Refuse a Proposed cell attachment"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
       x-accepts: application/json
   /api/directory:
     get:
@@ -4485,6 +4881,41 @@ components:
       required:
       - issuerUrl
       type: object
+    CellParentStatusResponse:
+      additionalProperties: false
+      description: Response containing the current cell parent status.
+      example:
+        registrationError: registrationError
+        adminDomainName: adminDomainName
+        registrationStep: registrationStep
+        primaryDomainName: primaryDomainName
+        status: status
+      properties:
+        status:
+          description: The current attachment status of the cell.
+          nullable: true
+          type: string
+        adminDomainName:
+          description: "The name of the admin domain in the parent cell, if any."
+          nullable: true
+          type: string
+        primaryDomainName:
+          description: "The domain designated as the primary domain for this cell,\
+            \ if any."
+          nullable: true
+          type: string
+        registrationStep:
+          description: |-
+            The most recently reached registration checkpoint, or null if no registration has started.
+            One of `UserEnsured`, `PATGenerated`, `PATPushed`.
+          nullable: true
+          type: string
+        registrationError:
+          description: "Operator-readable message describing the most recent registration\
+            \ failure, or null on success."
+          nullable: true
+          type: string
+      type: object
     ClaimMappings:
       additionalProperties: false
       example:
@@ -4900,6 +5331,21 @@ components:
       - emailAddress
       - id
       - type
+      type: object
+    DetachParentCellRequest:
+      additionalProperties: false
+      description: |-
+        Request body for `DetachParentCell`. The endpoint uses a double-invoke pattern:
+        the first call (Finbourne.Lydia.WebApi.Dtos.CellManagement.DetachParentCellRequest.Confirm=false) transitions the cell into
+        Finbourne.Lydia.Postgres.Database.DTO.AttachmentStatus.Detaching; the
+        second call (Finbourne.Lydia.WebApi.Dtos.CellManagement.DetachParentCellRequest.Confirm=true) performs the actual detach.
+      example:
+        confirm: true
+      properties:
+        confirm:
+          description: False to mark the cell as `Detaching`; true to execute the
+            detach.
+          type: boolean
       type: object
     ErrorDetail:
       additionalProperties: false
@@ -6631,6 +7077,73 @@ components:
       - roleId
       - source
       type: object
+    SetAttachingKeyRequest:
+      additionalProperties: false
+      description: |-
+        Request body for setting the Attaching Key on a child cell. The three values
+        together identify the parent admin domain, the parent's cell database row, and
+        the PAT used to authenticate the attachment handshake.
+      example:
+        pat: pat
+        parentDomainName: parentDomainName
+        parentAssignedCellId: 1
+      properties:
+        pat:
+          description: |-
+            Attaching Key PAT issued by the parent admin portal's `BeginCellRegistration`
+            endpoint. Length bounds match admin-ui's `RegisterDomainPatRequest`. We apply
+            `StringSecurityCheck` (the Finbourne.Validation catch-all that the recorded
+            baseline tolerates for opaque strings) AND a stricter regex restricting the value
+            to the opaque-token character set so the request body cannot smuggle in HTML/SQL/
+            script content even if the catch-all is later relaxed.
+          maxLength: 2000
+          minLength: 1
+          type: string
+        parentDomainName:
+          description: |-
+            Parent admin domain name (as entered alongside the Attaching Key by the user).
+            Used only as the initial proposal value; the admin domain stored in the DB
+            is the source of truth for all later operations (anti-redirection).
+          maxLength: 30
+          minLength: 3
+          pattern: "^[a-zA-Z]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+          type: string
+        parentAssignedCellId:
+          description: |-
+            Database identifier of this cell in the parent admin-ui's `cell` table.
+            Returned alongside the Attaching Key by the parent's `BeginCellRegistration`
+            response and required to call `POST /admin-ui/api/domains/{cellId}/register`
+            during the Finbourne.Lydia.Postgres.Database.DTO.RegistrationStep.PatPushed
+            step.
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+      - parentDomainName
+      - pat
+      type: object
+    SetParentCellRequest:
+      additionalProperties: false
+      description: Request body for setting the parent cell.
+      example:
+        confirm: true
+        adminDomainName: adminDomainName
+      properties:
+        adminDomainName:
+          description: The name of the admin domain in the parent cell.
+          maxLength: 30
+          minLength: 3
+          pattern: "^[a-zA-Z]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
+          type: string
+        confirm:
+          description: |-
+            Whether to confirm the parent cell attachment (second invocation).
+            First call with false creates a Proposed state; second call with true transitions to Attaching.
+          type: boolean
+      required:
+      - adminDomainName
+      - confirm
+      type: object
     SetPassword:
       additionalProperties: false
       description: Set password request
@@ -7652,6 +8165,7 @@ x-tagGroups:
   - Application Metadata
   - Applications
   - Authentication
+  - CellManagement
   - External Token Issuers
   - Identity Logs
   - Identity Provider
