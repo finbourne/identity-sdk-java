@@ -6,11 +6,13 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 |------------- | ------------- | -------------|
 | [**getAuthenticationInformation**](AuthenticationApi.md#getAuthenticationInformation) | **GET** /api/authentication/information | GetAuthenticationInformation: Gets AuthenticationInformation |
 | [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | GetPasswordPolicy: Gets password policy for a user type |
+| [**getSessionPolicy**](AuthenticationApi.md#getSessionPolicy) | **GET** /api/authentication/session-policy | [EXPERIMENTAL] GetSessionPolicy: Get session policy |
 | [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
 | [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
 | [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | GrantSupportAccess: Grants FINBOURNE support access to your account |
 | [**invalidateSupportAccess**](AuthenticationApi.md#invalidateSupportAccess) | **DELETE** /api/authentication/support | InvalidateSupportAccess: Revoke any FINBOURNE support access to your account |
 | [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | UpdatePasswordPolicy: Updates password policy for a user type |
+| [**updateSessionPolicy**](AuthenticationApi.md#updateSessionPolicy) | **PUT** /api/authentication/session-policy | [EXPERIMENTAL] UpdateSessionPolicy: Update session policy |
 
 
 
@@ -186,6 +188,92 @@ public class AuthenticationApiExample {
 |-------------|-------------|------------------|
 | **200** | Get password policy |  -  |
 | **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getSessionPolicy
+
+> SessionPolicyResponse getSessionPolicy()
+
+[EXPERIMENTAL] GetSessionPolicy: Get session policy
+
+Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
+
+### Example
+
+```java
+import com.finbourne.identity.model.*;
+import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        try {
+            // uncomment the below to set overrides at the request level
+            // SessionPolicyResponse result = apiInstance.getSessionPolicy().execute(opts);
+
+            SessionPolicyResponse result = apiInstance.getSessionPolicy().execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#getSessionPolicy");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**SessionPolicyResponse**](SessionPolicyResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The current session policy |  -  |
 | **0** | Error response |  -  |
 
 [Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
@@ -634,6 +722,97 @@ public class AuthenticationApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Update password policy |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## updateSessionPolicy
+
+> SessionPolicyResponse updateSessionPolicy(updateSessionPolicyRequest)
+
+[EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+
+Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
+
+### Example
+
+```java
+import com.finbourne.identity.model.*;
+import com.finbourne.identity.api.AuthenticationApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class AuthenticationApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // AuthenticationApi apiInstance = apiFactory.build(AuthenticationApi.class);
+
+        AuthenticationApi apiInstance = ApiFactoryBuilder.build(fileName).build(AuthenticationApi.class);
+        UpdateSessionPolicyRequest updateSessionPolicyRequest = new UpdateSessionPolicyRequest(); // UpdateSessionPolicyRequest | The desired session timing settings
+        try {
+            // uncomment the below to set overrides at the request level
+            // SessionPolicyResponse result = apiInstance.updateSessionPolicy(updateSessionPolicyRequest).execute(opts);
+
+            SessionPolicyResponse result = apiInstance.updateSessionPolicy(updateSessionPolicyRequest).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling AuthenticationApi#updateSessionPolicy");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **updateSessionPolicyRequest** | [**UpdateSessionPolicyRequest**](UpdateSessionPolicyRequest.md)| The desired session timing settings | |
+
+### Return type
+
+[**SessionPolicyResponse**](SessionPolicyResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: application/json-patch+json, application/json, text/json, application/*+json
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The session policy as persisted |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

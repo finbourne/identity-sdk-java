@@ -30,10 +30,12 @@ import com.finbourne.identity.model.LusidProblemDetails;
 import com.finbourne.identity.model.LusidValidationProblemDetails;
 import java.time.OffsetDateTime;
 import com.finbourne.identity.model.PasswordPolicyResponse;
+import com.finbourne.identity.model.SessionPolicyResponse;
 import com.finbourne.identity.model.SupportAccessRequest;
 import com.finbourne.identity.model.SupportAccessResponse;
 import com.finbourne.identity.model.SupportRolesResponse;
 import com.finbourne.identity.model.UpdatePasswordPolicyRequest;
+import com.finbourne.identity.model.UpdateSessionPolicyRequest;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -520,6 +522,219 @@ public class AuthenticationApi {
      */
     public APIgetPasswordPolicyRequest getPasswordPolicy(String userType) {
         return new APIgetPasswordPolicyRequest(userType);
+    }
+    private okhttp3.Call getSessionPolicyCall(final ApiCallback _callback) throws ApiException {
+        return getSessionPolicyCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getSessionPolicyCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/authentication/session-policy";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getSessionPolicyValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return getSessionPolicyCall(_callback, opts);
+
+    }
+
+
+    private ApiResponse<SessionPolicyResponse> getSessionPolicyWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = getSessionPolicyValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<SessionPolicyResponse> getSessionPolicyWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getSessionPolicyValidateBeforeCall(null, opts);
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getSessionPolicyAsync(final ApiCallback<SessionPolicyResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getSessionPolicyValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getSessionPolicyAsync(final ApiCallback<SessionPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getSessionPolicyValidateBeforeCall(_callback, opts);
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIgetSessionPolicyRequest {
+
+        private APIgetSessionPolicyRequest() {
+        }
+
+        /**
+         * Build call for getSessionPolicy
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getSessionPolicyCall(_callback);
+        }
+
+        /**
+         * Execute getSessionPolicy request
+         * @return SessionPolicyResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SessionPolicyResponse execute() throws ApiException {
+            ApiResponse<SessionPolicyResponse> localVarResp = getSessionPolicyWithHttpInfo();
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getSessionPolicy request. Use any specified configuration options to override any other configuration for this request only.
+         * @return SessionPolicyResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SessionPolicyResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<SessionPolicyResponse> localVarResp = getSessionPolicyWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getSessionPolicy request with HTTP info returned
+         * @return ApiResponse&lt;SessionPolicyResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SessionPolicyResponse> executeWithHttpInfo() throws ApiException {
+            return getSessionPolicyWithHttpInfo();
+        }
+
+        /**
+         * Execute getSessionPolicy request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;SessionPolicyResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SessionPolicyResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getSessionPolicyWithHttpInfo(opts);
+        }
+
+        /**
+         * Execute getSessionPolicy request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SessionPolicyResponse> _callback) throws ApiException {
+            return getSessionPolicyAsync(_callback);
+        }
+
+        /**
+         * Execute getSessionPolicy request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SessionPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getSessionPolicyAsync(_callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] GetSessionPolicy: Get session policy
+     * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
+     * @return APIgetSessionPolicyRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The current session policy </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetSessionPolicyRequest getSessionPolicy() {
+        return new APIgetSessionPolicyRequest();
     }
     private okhttp3.Call getSupportAccessHistoryCall(OffsetDateTime start, OffsetDateTime end, final ApiCallback _callback) throws ApiException {
         return getSupportAccessHistoryCall(start, end,  _callback, new ConfigurationOptions());
@@ -1675,5 +1890,238 @@ public class AuthenticationApi {
      */
     public APIupdatePasswordPolicyRequest updatePasswordPolicy(String userType) {
         return new APIupdatePasswordPolicyRequest(userType);
+    }
+    private okhttp3.Call updateSessionPolicyCall(UpdateSessionPolicyRequest updateSessionPolicyRequest, final ApiCallback _callback) throws ApiException {
+        return updateSessionPolicyCall(updateSessionPolicyRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call updateSessionPolicyCall(UpdateSessionPolicyRequest updateSessionPolicyRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = updateSessionPolicyRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/authentication/session-policy";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call updateSessionPolicyValidateBeforeCall(UpdateSessionPolicyRequest updateSessionPolicyRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'updateSessionPolicyRequest' is set
+        if (updateSessionPolicyRequest == null) {
+            throw new ApiException("Missing the required parameter 'updateSessionPolicyRequest' when calling updateSessionPolicy(Async)");
+        }
+
+        return updateSessionPolicyCall(updateSessionPolicyRequest, _callback, opts);
+
+    }
+
+
+    private ApiResponse<SessionPolicyResponse> updateSessionPolicyWithHttpInfo(UpdateSessionPolicyRequest updateSessionPolicyRequest) throws ApiException {
+        okhttp3.Call localVarCall = updateSessionPolicyValidateBeforeCall(updateSessionPolicyRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<SessionPolicyResponse> updateSessionPolicyWithHttpInfo(UpdateSessionPolicyRequest updateSessionPolicyRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = updateSessionPolicyValidateBeforeCall(updateSessionPolicyRequest, null, opts);
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call updateSessionPolicyAsync(UpdateSessionPolicyRequest updateSessionPolicyRequest, final ApiCallback<SessionPolicyResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = updateSessionPolicyValidateBeforeCall(updateSessionPolicyRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call updateSessionPolicyAsync(UpdateSessionPolicyRequest updateSessionPolicyRequest, final ApiCallback<SessionPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = updateSessionPolicyValidateBeforeCall(updateSessionPolicyRequest, _callback, opts);
+        Type localVarReturnType = new TypeToken<SessionPolicyResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIupdateSessionPolicyRequest {
+        private final UpdateSessionPolicyRequest updateSessionPolicyRequest;
+
+        private APIupdateSessionPolicyRequest(UpdateSessionPolicyRequest updateSessionPolicyRequest) {
+            this.updateSessionPolicyRequest = updateSessionPolicyRequest;
+        }
+
+        /**
+         * Build call for updateSessionPolicy
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return updateSessionPolicyCall(updateSessionPolicyRequest, _callback);
+        }
+
+        /**
+         * Execute updateSessionPolicy request
+         * @return SessionPolicyResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SessionPolicyResponse execute() throws ApiException {
+            ApiResponse<SessionPolicyResponse> localVarResp = updateSessionPolicyWithHttpInfo(updateSessionPolicyRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateSessionPolicy request. Use any specified configuration options to override any other configuration for this request only.
+         * @return SessionPolicyResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public SessionPolicyResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<SessionPolicyResponse> localVarResp = updateSessionPolicyWithHttpInfo(updateSessionPolicyRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute updateSessionPolicy request with HTTP info returned
+         * @return ApiResponse&lt;SessionPolicyResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SessionPolicyResponse> executeWithHttpInfo() throws ApiException {
+            return updateSessionPolicyWithHttpInfo(updateSessionPolicyRequest);
+        }
+
+        /**
+         * Execute updateSessionPolicy request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;SessionPolicyResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<SessionPolicyResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return updateSessionPolicyWithHttpInfo(updateSessionPolicyRequest, opts);
+        }
+
+        /**
+         * Execute updateSessionPolicy request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SessionPolicyResponse> _callback) throws ApiException {
+            return updateSessionPolicyAsync(updateSessionPolicyRequest, _callback);
+        }
+
+        /**
+         * Execute updateSessionPolicy request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<SessionPolicyResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return updateSessionPolicyAsync(updateSessionPolicyRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+     * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
+     * @param updateSessionPolicyRequest The desired session timing settings (required)
+     * @return APIupdateSessionPolicyRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The session policy as persisted </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIupdateSessionPolicyRequest updateSessionPolicy(UpdateSessionPolicyRequest updateSessionPolicyRequest) {
+        return new APIupdateSessionPolicyRequest(updateSessionPolicyRequest);
     }
 }

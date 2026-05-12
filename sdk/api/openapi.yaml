@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3600
+  version: 0.0.3613
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -620,6 +620,96 @@ paths:
       tags:
       - Authentication
       x-fbn-apistatus: Stable
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/authentication/session-policy:
+    get:
+      description: |-
+        Get the configured session timing settings. These settings dictate the duration of user sessions
+        and the frequency of required re-authentication.
+      operationId: GetSessionPolicy
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                maxSessionIdleMinutes: 60
+              schema:
+                $ref: '#/components/schemas/SessionPolicyResponse'
+          description: The current session policy
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] GetSessionPolicy: Get session policy"
+      tags:
+      - Authentication
+      x-fbn-apistatus: Experimental
+      x-accepts: application/json
+    put:
+      description: |-
+        Update the session timing settings. These settings dictate the duration of user sessions
+        and the frequency of required re-authentication.
+      operationId: UpdateSessionPolicy
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              maxSessionIdleMinutes: 480
+              maxSessionLifetimeMinutes: 720
+            schema:
+              $ref: '#/components/schemas/UpdateSessionPolicyRequest'
+          application/json:
+            example:
+              maxSessionIdleMinutes: 480
+              maxSessionLifetimeMinutes: 720
+            schema:
+              $ref: '#/components/schemas/UpdateSessionPolicyRequest'
+          text/json:
+            example:
+              maxSessionIdleMinutes: 480
+              maxSessionLifetimeMinutes: 720
+            schema:
+              $ref: '#/components/schemas/UpdateSessionPolicyRequest'
+          application/*+json:
+            example:
+              maxSessionIdleMinutes: 480
+              maxSessionLifetimeMinutes: 720
+            schema:
+              $ref: '#/components/schemas/UpdateSessionPolicyRequest'
+        description: The desired session timing settings
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                maxSessionIdleMinutes: 60
+              schema:
+                $ref: '#/components/schemas/SessionPolicyResponse'
+          description: The session policy as persisted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EXPERIMENTAL] UpdateSessionPolicy: Update session policy"
+      tags:
+      - Authentication
+      x-fbn-apistatus: Experimental
       x-content-type: application/json-patch+json
       x-accepts: application/json
   /api/authentication/support:
@@ -7077,6 +7167,26 @@ components:
       - roleId
       - source
       type: object
+    SessionPolicyResponse:
+      additionalProperties: false
+      description: Session timing settings.
+      example:
+        maxSessionLifetimeMinutes: 6
+        maxSessionIdleMinutes: 0
+      properties:
+        maxSessionIdleMinutes:
+          description: Maximum minutes a user's session can be idle before re-authentication
+            is required.
+          format: int64
+          nullable: true
+          type: integer
+        maxSessionLifetimeMinutes:
+          description: "Maximum minutes a user's session can live in total. When absent,\
+            \ sessions do not expire."
+          format: int64
+          nullable: true
+          type: integer
+      type: object
     SetAttachingKeyRequest:
       additionalProperties: false
       description: |-
@@ -7739,6 +7849,33 @@ components:
           nullable: true
           pattern: "^[\\s\\S]*$"
           type: string
+      type: object
+    UpdateSessionPolicyRequest:
+      additionalProperties: false
+      description: Session timing settings.
+      example:
+        maxSessionLifetimeMinutes: 869
+        maxSessionIdleMinutes: 62
+      properties:
+        maxSessionIdleMinutes:
+          description: |-
+            Maximum minutes a user's session can be idle before re-authentication is required.
+            Must be between 5 minutes and 12 hours (720 minutes).
+          format: int64
+          maximum: 720
+          minimum: 5
+          type: integer
+        maxSessionLifetimeMinutes:
+          description: |-
+            Maximum minutes a user's session can live in total. Omit to disable session expiry;
+            otherwise must be between 5 minutes and 24 hours (1440 minutes).
+          format: int64
+          maximum: 1440
+          minimum: 5
+          nullable: true
+          type: integer
+      required:
+      - maxSessionIdleMinutes
       type: object
     UpdateUserRequest:
       additionalProperties: false

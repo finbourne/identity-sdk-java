@@ -148,6 +148,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.ResourceListOfSystemLog.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.RoleId.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.RoleResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SessionPolicyResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SetAttachingKeyRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SetParentCellRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SetPassword.CustomTypeAdapterFactory());
@@ -168,6 +169,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpdatePasswordPolicyRequestConditions.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpdatePasswordPolicyRequestLockout.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpdateRoleRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpdateSessionPolicyRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpdateUserRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpdateUserSchemaRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.UpsertMcpToolRequest.CustomTypeAdapterFactory());
