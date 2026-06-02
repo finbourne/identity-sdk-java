@@ -1015,6 +1015,259 @@ public class RolesApi {
     public APIgetRoleRequest getRole(String id) {
         return new APIgetRoleRequest(id);
     }
+    private okhttp3.Call getRoleByCodeCall(String code, String scope, final ApiCallback _callback) throws ApiException {
+        return getRoleByCodeCall(code, scope,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getRoleByCodeCall(String code, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/roles/byCode/{code}"
+            .replace("{" + "code" + "}", localVarApiClient.escapeString(code.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        if (scope != null) {
+            localVarQueryParams.addAll(localVarApiClient.parameterToPair("scope", scope));
+        }
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getRoleByCodeValidateBeforeCall(String code, String scope, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'code' is set
+        if (code == null) {
+            throw new ApiException("Missing the required parameter 'code' when calling getRoleByCode(Async)");
+        }
+
+        return getRoleByCodeCall(code, scope, _callback, opts);
+
+    }
+
+
+    private ApiResponse<RoleResponse> getRoleByCodeWithHttpInfo(String code, String scope) throws ApiException {
+        okhttp3.Call localVarCall = getRoleByCodeValidateBeforeCall(code, scope, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<RoleResponse> getRoleByCodeWithHttpInfo(String code, String scope, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getRoleByCodeValidateBeforeCall(code, scope, null, opts);
+        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getRoleByCodeAsync(String code, String scope, final ApiCallback<RoleResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getRoleByCodeValidateBeforeCall(code, scope, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getRoleByCodeAsync(String code, String scope, final ApiCallback<RoleResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getRoleByCodeValidateBeforeCall(code, scope, _callback, opts);
+        Type localVarReturnType = new TypeToken<RoleResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIgetRoleByCodeRequest {
+        private final String code;
+        private String scope;
+
+        private APIgetRoleByCodeRequest(String code) {
+            this.code = code;
+        }
+
+        /**
+         * Set scope
+         * @param scope The scope the role lives in. Defaults to \&quot;default\&quot;. (optional, default to default)
+         * @return APIgetRoleByCodeRequest
+         */
+        public APIgetRoleByCodeRequest scope(String scope) {
+            this.scope = scope;
+            return this;
+        }
+
+        /**
+         * Build call for getRoleByCode
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getRoleByCodeCall(code, scope, _callback);
+        }
+
+        /**
+         * Execute getRoleByCode request
+         * @return RoleResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RoleResponse execute() throws ApiException {
+            ApiResponse<RoleResponse> localVarResp = getRoleByCodeWithHttpInfo(code, scope);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRoleByCode request. Use any specified configuration options to override any other configuration for this request only.
+         * @return RoleResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public RoleResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<RoleResponse> localVarResp = getRoleByCodeWithHttpInfo(code, scope, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getRoleByCode request with HTTP info returned
+         * @return ApiResponse&lt;RoleResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RoleResponse> executeWithHttpInfo() throws ApiException {
+            return getRoleByCodeWithHttpInfo(code, scope);
+        }
+
+        /**
+         * Execute getRoleByCode request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;RoleResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<RoleResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getRoleByCodeWithHttpInfo(code, scope, opts);
+        }
+
+        /**
+         * Execute getRoleByCode request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<RoleResponse> _callback) throws ApiException {
+            return getRoleByCodeAsync(code, scope, _callback);
+        }
+
+        /**
+         * Execute getRoleByCode request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+            <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<RoleResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getRoleByCodeAsync(code, scope, _callback, opts);
+        }
+    }
+
+    /**
+     * GetRoleByCode: Get Role By Code
+     * Get the specified role by its code, optionally scoped. Scope defaults to \&quot;default\&quot;. The \&quot;code\&quot; is the same value supplied as \&quot;name\&quot; when the role was created via CreateRole.
+     * @param code The role code (the value supplied as \&quot;name\&quot; when the role was created). (required)
+     * @return APIgetRoleByCodeRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get the specified role </td><td>  -  </td></tr>
+        <tr><td> 404 </td><td> Not Found </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetRoleByCodeRequest getRoleByCode(String code) {
+        return new APIgetRoleByCodeRequest(code);
+    }
     private okhttp3.Call listRolesCall(final ApiCallback _callback) throws ApiException {
         return listRolesCall( _callback, new ConfigurationOptions());
     }

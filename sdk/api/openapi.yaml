@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3629
+  version: 0.0.3639
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -1061,6 +1061,82 @@ paths:
       x-fbn-apistatus: EarlyAccess
       x-content-type: application/json-patch+json
       x-accepts: application/json
+  /api/cellmanagement/attachingkey/rotate:
+    put:
+      description: |-
+        Upserts a new Attaching Key PAT into the cell's ParameterStore / Azure Key Vault at
+        the canonical per-cell path (`Lydia/CellManagement/{primaryDomain}/AttachingKey`)
+        and re-stamps the path on the `cell_status` row. Does not require a prior key
+        to exist in the secret store, and does not change the cell's attachment status or
+        the recorded parent identity. Intended for two callers: the parent admin portal
+        pushing a freshly-rotated PAT, and manual operator use (e.g. to migrate an existing
+        cell onto the per-primary-domain path layout). Requires the cell to be currently
+        `Attached` to a parent admin domain. Only the designated primary domain may
+        call this. Requires JWT authentication (PAT tokens are rejected).
+      operationId: RotateAttachingKey
+      requestBody:
+        content:
+          application/json-patch+json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+            schema:
+              $ref: '#/components/schemas/RotateAttachingKeyRequest'
+          application/json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+            schema:
+              $ref: '#/components/schemas/RotateAttachingKeyRequest'
+          text/json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+            schema:
+              $ref: '#/components/schemas/RotateAttachingKeyRequest'
+          application/*+json:
+            example:
+              pat: abcd1234EFGH5678ijklMNOPqrstUVWXyz09_-.
+            schema:
+              $ref: '#/components/schemas/RotateAttachingKeyRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The updated cell parent status
+        "400":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] RotateAttachingKey: Rotate the stored Attaching Key\
+        \ on an Attached cell"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-content-type: application/json-patch+json
+      x-accepts: application/json
   /api/cellmanagement/detach:
     put:
       description: |-
@@ -1332,6 +1408,47 @@ paths:
       security:
       - oauth2: []
       summary: "[EARLY ACCESS] RefuseCellAttachment: Refuse a Proposed cell attachment"
+      tags:
+      - CellManagement
+      x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/cellmanagement/rotatedomainkeys:
+    post:
+      description: |-
+        Stamps the per-cell rotation cutoff to "now". On its next tick (and any subsequent
+        tick until every provisioned PAT has been refreshed past the cutoff), the steady-state
+        AdminCellSync job force-rotates any provisioned parent-cell PAT whose `CreatedDate`
+        is strictly before the cutoff, regardless of the normal expiry-based window. Used to
+        rapidly invalidate suspected-compromised PATs and to recover a cell whose recent
+        rotations failed to be pushed to the parent admin portal. The cutoff is sticky:
+        re-calling moves it forward, and new PATs naturally have `CreatedDate > cutoff`
+        so subsequent ticks pass the check without further intervention. Only the designated
+        primary domain may call this. Requires JWT authentication (PAT tokens are rejected).
+        Cell must currently be `Attached`.
+      operationId: RotateDomainKeys
+      responses:
+        "200":
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/CellParentStatusResponse'
+          description: The cell parent status after stamping the cutoff
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "[EARLY ACCESS] RotateDomainKeys: Force a sweep-rotation of every parent-cell\
+        \ service-user PAT on this cell"
       tags:
       - CellManagement
       x-fbn-apistatus: EarlyAccess
@@ -3515,6 +3632,74 @@ paths:
       - Roles
       x-fbn-apistatus: Stable
       x-content-type: application/json-patch+json
+      x-accepts: application/json
+  /api/roles/byCode/{code}:
+    get:
+      description: |-
+        Get the specified role by its code, optionally scoped. Scope defaults to "default".
+        The "code" is the same value supplied as "name" when the role was created via CreateRole.
+      operationId: GetRoleByCode
+      parameters:
+      - description: The role code (the value supplied as "name" when the role was
+          created).
+        explode: false
+        in: path
+        name: code
+        required: true
+        schema:
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: simple
+      - description: The scope the role lives in. Defaults to "default".
+        explode: true
+        in: query
+        name: scope
+        required: false
+        schema:
+          default: default
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asnvr5ne35
+                roleId:
+                  scope: LUSID
+                  code: FrontOfficeAdministrator
+                source: LusidUser
+                name: LUSID-FrontOfficeAdministrator
+                description: Front office administration role
+                samlName: LUSID-FrontOfficeAdministrator
+              schema:
+                $ref: '#/components/schemas/RoleResponse'
+          description: Get the specified role
+        "404":
+          description: Not Found
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "GetRoleByCode: Get Role By Code"
+      tags:
+      - Roles
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/roles/{id}:
     delete:
@@ -7166,6 +7351,28 @@ components:
       - name
       - roleId
       - source
+      type: object
+    RotateAttachingKeyRequest:
+      additionalProperties: false
+      description: |-
+        Request body for rotating the Attaching Key on a cell that is already Attached to a
+        parent admin domain. Carries only the new PAT value — the parent identity is
+        already pinned on the cell from the original `SetAttachingKey` handshake and
+        the source of truth for all later operations.
+      example:
+        pat: pat
+      properties:
+        pat:
+          description: |-
+            New Attaching Key PAT to persist. Same length / content constraints as the
+            original Finbourne.Lydia.WebApi.Dtos.CellManagement.SetAttachingKeyRequest.Pat: a `StringSecurityCheck`
+            catch-all plus a strict opaque-token character set so the request body cannot
+            smuggle in HTML / SQL / script content.
+          maxLength: 2000
+          minLength: 1
+          type: string
+      required:
+      - pat
       type: object
     SessionPolicyResponse:
       additionalProperties: false

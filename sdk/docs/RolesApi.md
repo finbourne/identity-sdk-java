@@ -8,6 +8,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**createRole**](RolesApi.md#createRole) | **POST** /api/roles | CreateRole: Create Role |
 | [**deleteRole**](RolesApi.md#deleteRole) | **DELETE** /api/roles/{id} | DeleteRole: Delete Role |
 | [**getRole**](RolesApi.md#getRole) | **GET** /api/roles/{id} | GetRole: Get Role |
+| [**getRoleByCode**](RolesApi.md#getRoleByCode) | **GET** /api/roles/byCode/{code} | GetRoleByCode: Get Role By Code |
 | [**listRoles**](RolesApi.md#listRoles) | **GET** /api/roles | ListRoles: List Roles |
 | [**listUsersInRole**](RolesApi.md#listUsersInRole) | **GET** /api/roles/{id}/users | ListUsersInRole: Get the users in the specified role. |
 | [**removeUserFromRole**](RolesApi.md#removeUserFromRole) | **DELETE** /api/roles/{id}/users/{userId} | RemoveUserFromRole: Remove User from Role |
@@ -360,6 +361,100 @@ public class RolesApiExample {
 | Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **String**| The unique identifier for the role | |
+
+### Return type
+
+[**RoleResponse**](RoleResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Get the specified role |  -  |
+| **404** | Not Found |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getRoleByCode
+
+> RoleResponse getRoleByCode(code, scope)
+
+GetRoleByCode: Get Role By Code
+
+Get the specified role by its code, optionally scoped. Scope defaults to \&quot;default\&quot;. The \&quot;code\&quot; is the same value supplied as \&quot;name\&quot; when the role was created via CreateRole.
+
+### Example
+
+```java
+import com.finbourne.identity.model.*;
+import com.finbourne.identity.api.RolesApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class RolesApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // RolesApi apiInstance = apiFactory.build(RolesApi.class);
+
+        RolesApi apiInstance = ApiFactoryBuilder.build(fileName).build(RolesApi.class);
+        String code = "code_example"; // String | The role code (the value supplied as \"name\" when the role was created).
+        String scope = "default"; // String | The scope the role lives in. Defaults to \"default\".
+        try {
+            // uncomment the below to set overrides at the request level
+            // RoleResponse result = apiInstance.getRoleByCode(code, scope).execute(opts);
+
+            RoleResponse result = apiInstance.getRoleByCode(code, scope).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling RolesApi#getRoleByCode");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **code** | **String**| The role code (the value supplied as \&quot;name\&quot; when the role was created). | |
+| **scope** | **String**| The scope the role lives in. Defaults to \&quot;default\&quot;. | [optional] [default to default] |
 
 ### Return type
 

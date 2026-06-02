@@ -29,6 +29,7 @@ import com.finbourne.identity.model.CellParentStatusResponse;
 import com.finbourne.identity.model.DetachParentCellRequest;
 import com.finbourne.identity.model.LusidProblemDetails;
 import com.finbourne.identity.model.LusidValidationProblemDetails;
+import com.finbourne.identity.model.RotateAttachingKeyRequest;
 import com.finbourne.identity.model.SetAttachingKeyRequest;
 import com.finbourne.identity.model.SetParentCellRequest;
 
@@ -1169,6 +1170,456 @@ public class CellManagementApi {
      */
     public APIremovePrimaryDomainRequest removePrimaryDomain() {
         return new APIremovePrimaryDomainRequest();
+    }
+    private okhttp3.Call rotateAttachingKeyCall(RotateAttachingKeyRequest rotateAttachingKeyRequest, final ApiCallback _callback) throws ApiException {
+        return rotateAttachingKeyCall(rotateAttachingKeyRequest,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call rotateAttachingKeyCall(RotateAttachingKeyRequest rotateAttachingKeyRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = rotateAttachingKeyRequest;
+
+        // create path and map variables
+        String localVarPath = "/api/cellmanagement/attachingkey/rotate";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+            "application/json-patch+json",
+            "application/json",
+            "text/json",
+            "application/*+json"
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "PUT", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call rotateAttachingKeyValidateBeforeCall(RotateAttachingKeyRequest rotateAttachingKeyRequest, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'rotateAttachingKeyRequest' is set
+        if (rotateAttachingKeyRequest == null) {
+            throw new ApiException("Missing the required parameter 'rotateAttachingKeyRequest' when calling rotateAttachingKey(Async)");
+        }
+
+        return rotateAttachingKeyCall(rotateAttachingKeyRequest, _callback, opts);
+
+    }
+
+
+    private ApiResponse<CellParentStatusResponse> rotateAttachingKeyWithHttpInfo(RotateAttachingKeyRequest rotateAttachingKeyRequest) throws ApiException {
+        okhttp3.Call localVarCall = rotateAttachingKeyValidateBeforeCall(rotateAttachingKeyRequest, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<CellParentStatusResponse> rotateAttachingKeyWithHttpInfo(RotateAttachingKeyRequest rotateAttachingKeyRequest, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = rotateAttachingKeyValidateBeforeCall(rotateAttachingKeyRequest, null, opts);
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call rotateAttachingKeyAsync(RotateAttachingKeyRequest rotateAttachingKeyRequest, final ApiCallback<CellParentStatusResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = rotateAttachingKeyValidateBeforeCall(rotateAttachingKeyRequest, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call rotateAttachingKeyAsync(RotateAttachingKeyRequest rotateAttachingKeyRequest, final ApiCallback<CellParentStatusResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = rotateAttachingKeyValidateBeforeCall(rotateAttachingKeyRequest, _callback, opts);
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIrotateAttachingKeyRequest {
+        private final RotateAttachingKeyRequest rotateAttachingKeyRequest;
+
+        private APIrotateAttachingKeyRequest(RotateAttachingKeyRequest rotateAttachingKeyRequest) {
+            this.rotateAttachingKeyRequest = rotateAttachingKeyRequest;
+        }
+
+        /**
+         * Build call for rotateAttachingKey
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return rotateAttachingKeyCall(rotateAttachingKeyRequest, _callback);
+        }
+
+        /**
+         * Execute rotateAttachingKey request
+         * @return CellParentStatusResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CellParentStatusResponse execute() throws ApiException {
+            ApiResponse<CellParentStatusResponse> localVarResp = rotateAttachingKeyWithHttpInfo(rotateAttachingKeyRequest);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute rotateAttachingKey request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CellParentStatusResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CellParentStatusResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CellParentStatusResponse> localVarResp = rotateAttachingKeyWithHttpInfo(rotateAttachingKeyRequest, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute rotateAttachingKey request with HTTP info returned
+         * @return ApiResponse&lt;CellParentStatusResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CellParentStatusResponse> executeWithHttpInfo() throws ApiException {
+            return rotateAttachingKeyWithHttpInfo(rotateAttachingKeyRequest);
+        }
+
+        /**
+         * Execute rotateAttachingKey request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CellParentStatusResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CellParentStatusResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return rotateAttachingKeyWithHttpInfo(rotateAttachingKeyRequest, opts);
+        }
+
+        /**
+         * Execute rotateAttachingKey request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CellParentStatusResponse> _callback) throws ApiException {
+            return rotateAttachingKeyAsync(rotateAttachingKeyRequest, _callback);
+        }
+
+        /**
+         * Execute rotateAttachingKey request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CellParentStatusResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return rotateAttachingKeyAsync(rotateAttachingKeyRequest, _callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] RotateAttachingKey: Rotate the stored Attaching Key on an Attached cell
+     * Upserts a new Attaching Key PAT into the cell&#39;s ParameterStore / Azure Key Vault at the canonical per-cell path (&#x60;Lydia/CellManagement/{primaryDomain}/AttachingKey&#x60;) and re-stamps the path on the &#x60;cell_status&#x60; row. Does not require a prior key to exist in the secret store, and does not change the cell&#39;s attachment status or the recorded parent identity. Intended for two callers: the parent admin portal pushing a freshly-rotated PAT, and manual operator use (e.g. to migrate an existing cell onto the per-primary-domain path layout). Requires the cell to be currently &#x60;Attached&#x60; to a parent admin domain. Only the designated primary domain may call this. Requires JWT authentication (PAT tokens are rejected).
+     * @param rotateAttachingKeyRequest  (required)
+     * @return APIrotateAttachingKeyRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The updated cell parent status </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIrotateAttachingKeyRequest rotateAttachingKey(RotateAttachingKeyRequest rotateAttachingKeyRequest) {
+        return new APIrotateAttachingKeyRequest(rotateAttachingKeyRequest);
+    }
+    private okhttp3.Call rotateDomainKeysCall(final ApiCallback _callback) throws ApiException {
+        return rotateDomainKeysCall( _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call rotateDomainKeysCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/cellmanagement/rotatedomainkeys";
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "text/plain",
+            "application/json",
+            "text/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call rotateDomainKeysValidateBeforeCall(final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        return rotateDomainKeysCall(_callback, opts);
+
+    }
+
+
+    private ApiResponse<CellParentStatusResponse> rotateDomainKeysWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = rotateDomainKeysValidateBeforeCall(null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<CellParentStatusResponse> rotateDomainKeysWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = rotateDomainKeysValidateBeforeCall(null, opts);
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call rotateDomainKeysAsync(final ApiCallback<CellParentStatusResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = rotateDomainKeysValidateBeforeCall(_callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call rotateDomainKeysAsync(final ApiCallback<CellParentStatusResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = rotateDomainKeysValidateBeforeCall(_callback, opts);
+        Type localVarReturnType = new TypeToken<CellParentStatusResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIrotateDomainKeysRequest {
+
+        private APIrotateDomainKeysRequest() {
+        }
+
+        /**
+         * Build call for rotateDomainKeys
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return rotateDomainKeysCall(_callback);
+        }
+
+        /**
+         * Execute rotateDomainKeys request
+         * @return CellParentStatusResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CellParentStatusResponse execute() throws ApiException {
+            ApiResponse<CellParentStatusResponse> localVarResp = rotateDomainKeysWithHttpInfo();
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute rotateDomainKeys request. Use any specified configuration options to override any other configuration for this request only.
+         * @return CellParentStatusResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public CellParentStatusResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<CellParentStatusResponse> localVarResp = rotateDomainKeysWithHttpInfo(opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute rotateDomainKeys request with HTTP info returned
+         * @return ApiResponse&lt;CellParentStatusResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CellParentStatusResponse> executeWithHttpInfo() throws ApiException {
+            return rotateDomainKeysWithHttpInfo();
+        }
+
+        /**
+         * Execute rotateDomainKeys request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;CellParentStatusResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<CellParentStatusResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return rotateDomainKeysWithHttpInfo(opts);
+        }
+
+        /**
+         * Execute rotateDomainKeys request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CellParentStatusResponse> _callback) throws ApiException {
+            return rotateDomainKeysAsync(_callback);
+        }
+
+        /**
+         * Execute rotateDomainKeys request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<CellParentStatusResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return rotateDomainKeysAsync(_callback, opts);
+        }
+    }
+
+    /**
+     * [EARLY ACCESS] RotateDomainKeys: Force a sweep-rotation of every parent-cell service-user PAT on this cell
+     * Stamps the per-cell rotation cutoff to \&quot;now\&quot;. On its next tick (and any subsequent tick until every provisioned PAT has been refreshed past the cutoff), the steady-state AdminCellSync job force-rotates any provisioned parent-cell PAT whose &#x60;CreatedDate&#x60; is strictly before the cutoff, regardless of the normal expiry-based window. Used to rapidly invalidate suspected-compromised PATs and to recover a cell whose recent rotations failed to be pushed to the parent admin portal. The cutoff is sticky: re-calling moves it forward, and new PATs naturally have &#x60;CreatedDate &gt; cutoff&#x60; so subsequent ticks pass the check without further intervention. Only the designated primary domain may call this. Requires JWT authentication (PAT tokens are rejected). Cell must currently be &#x60;Attached&#x60;.
+     * @return APIrotateDomainKeysRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> The cell parent status after stamping the cutoff </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIrotateDomainKeysRequest rotateDomainKeys() {
+        return new APIrotateDomainKeysRequest();
     }
     private okhttp3.Call setAttachingKeyCall(SetAttachingKeyRequest setAttachingKeyRequest, final ApiCallback _callback) throws ApiException {
         return setAttachingKeyCall(setAttachingKeyRequest,  _callback, new ConfigurationOptions());
