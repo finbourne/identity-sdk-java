@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3639
+  version: 0.0.3647
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -4267,6 +4267,66 @@ paths:
       tags:
       - Users
       x-fbn-apistatus: EarlyAccess
+      x-accepts: application/json
+  /api/users/fromlogin/{login}:
+    get:
+      description: Get the userId of a specified User
+      operationId: GetUserFromLogin
+      parameters:
+      - description: The unique login for the User
+        explode: false
+        in: path
+        name: login
+        required: true
+        schema:
+          maxLength: 80
+          minLength: 5
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                id: asybvrs5
+                emailAddress: joe.bloggs@myco.com
+                login: joe.bloggs@myco.com
+                firstName: Joe
+                lastName: Bloggs
+                roles:
+                - id: customrole1
+                  roleId:
+                    scope: default
+                    code: customrole2
+                  source: LusidUser
+                  name: Front Office Administrator
+                  description: Administration role for Front Office staff
+                  samlName: customrole2
+                type: Personal
+                status: ACTIVE
+                external: false
+                userExpiry: 2029-02-12T12:00:00.0000000+00:00
+              schema:
+                $ref: '#/components/schemas/UserResponse'
+          description: Get the specified user from login
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidValidationProblemDetails'
+          description: The details of the input related failure
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "GetUserFromLogin: Get User From Login"
+      tags:
+      - Users
+      x-fbn-apistatus: Stable
       x-accepts: application/json
   /api/users/schema:
     get:

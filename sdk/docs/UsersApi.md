@@ -9,6 +9,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 | [**expirePassword**](UsersApi.md#expirePassword) | **POST** /api/users/{id}/lifecycle/$expirepassword | ExpirePassword: Reset the user&#39;s password to a temporary one |
 | [**findUsersById**](UsersApi.md#findUsersById) | **GET** /api/directory | FindUsersById: Find users by id endpoint |
 | [**getUser**](UsersApi.md#getUser) | **GET** /api/users/{id} | GetUser: Get User |
+| [**getUserFromLogin**](UsersApi.md#getUserFromLogin) | **GET** /api/users/fromlogin/{login} | GetUserFromLogin: Get User From Login |
 | [**getUserSchema**](UsersApi.md#getUserSchema) | **GET** /api/users/schema | [EARLY ACCESS] GetUserSchema: Get User Schema |
 | [**listRunnableUsers**](UsersApi.md#listRunnableUsers) | **GET** /api/users/$runnable | [EARLY ACCESS] ListRunnableUsers: List Runable Users |
 | [**listUsers**](UsersApi.md#listUsers) | **GET** /api/users | ListUsers: List Users |
@@ -476,6 +477,97 @@ public class UsersApiExample {
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Get the specified user |  -  |
+| **400** | The details of the input related failure |  -  |
+| **0** | Error response |  -  |
+
+[Back to top](#) &#8226; [Back to API list](../README.md#documentation-for-api-endpoints) &#8226; [Back to Model list](../README.md#documentation-for-models) &#8226; [Back to README](../README.md)
+
+
+## getUserFromLogin
+
+> UserResponse getUserFromLogin(login)
+
+GetUserFromLogin: Get User From Login
+
+Get the userId of a specified User
+
+### Example
+
+```java
+import com.finbourne.identity.model.*;
+import com.finbourne.identity.api.UsersApi;
+import com.finbourne.identity.extensions.ApiConfigurationException;
+import com.finbourne.identity.extensions.ApiFactoryBuilder;
+import com.finbourne.identity.extensions.auth.FinbourneTokenException;
+
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
+
+public class UsersApiExample {
+
+    public static void main(String[] args) throws FileNotFoundException, UnsupportedEncodingException, ApiConfigurationException, FinbourneTokenException {
+        String fileName = "secrets.json";
+        try(PrintWriter writer = new PrintWriter(fileName, "UTF-8")) {
+          writer.write("{" +
+            "\"api\": {" +
+            "    \"tokenUrl\": \"<your-token-url>\"," +
+            "    \"identityUrl\": \"https://<your-domain>.lusid.com/identity\"," +
+            "    \"username\": \"<your-username>\"," +
+            "    \"password\": \"<your-password>\"," +
+            "    \"clientId\": \"<your-client-id>\"," +
+            "    \"clientSecret\": \"<your-client-secret>\"" +
+            "  }" +
+            "}");
+        }
+
+        // uncomment the below to use configuration overrides
+        // ConfigurationOptions opts = new ConfigurationOptions();
+        // opts.setTotalTimeoutMs(2000);
+        
+        // uncomment the below to use an api factory with overrides
+        // ApiFactory apiFactory = ApiFactoryBuilder.build(fileName, opts);
+        // UsersApi apiInstance = apiFactory.build(UsersApi.class);
+
+        UsersApi apiInstance = ApiFactoryBuilder.build(fileName).build(UsersApi.class);
+        String login = "login_example"; // String | The unique login for the User
+        try {
+            // uncomment the below to set overrides at the request level
+            // UserResponse result = apiInstance.getUserFromLogin(login).execute(opts);
+
+            UserResponse result = apiInstance.getUserFromLogin(login).execute();
+            System.out.println(result.toJson());
+        } catch (ApiException e) {
+            System.err.println("Exception when calling UsersApi#getUserFromLogin");
+            System.err.println("Status code: " + e.getCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+### Parameters
+
+
+| Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **login** | **String**| The unique login for the User | |
+
+### Return type
+
+[**UserResponse**](UserResponse.md)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Get the specified user from login |  -  |
 | **400** | The details of the input related failure |  -  |
 | **0** | Error response |  -  |
 

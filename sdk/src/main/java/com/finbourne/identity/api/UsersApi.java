@@ -1271,6 +1271,236 @@ public class UsersApi {
     public APIgetUserRequest getUser(String id) {
         return new APIgetUserRequest(id);
     }
+    private okhttp3.Call getUserFromLoginCall(String login, final ApiCallback _callback) throws ApiException {
+        return getUserFromLoginCall(login,  _callback, new ConfigurationOptions());
+    }
+
+    private okhttp3.Call getUserFromLoginCall(String login, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        String basePath = null;
+        // Operation Servers
+        String[] localBasePaths = new String[] {  };
+
+        // Determine Base Path to Use
+        if (localCustomBaseUrl != null){
+            basePath = localCustomBaseUrl;
+        } else if ( localBasePaths.length > 0 ) {
+            basePath = localBasePaths[localHostIndex];
+        } else {
+            basePath = null;
+        }
+
+        Object localVarPostBody = null;
+
+        // create path and map variables
+        String localVarPath = "/api/users/fromlogin/{login}"
+            .replace("{" + "login" + "}", localVarApiClient.escapeString(login.toString()));
+
+        List<Pair> localVarQueryParams = new ArrayList<Pair>();
+        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
+        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
+        Map<String, String> localVarCookieParams = new HashMap<String, String>();
+        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
+
+        final String[] localVarAccepts = {
+            "application/json"
+        };
+        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
+        if (localVarAccept != null) {
+            localVarHeaderParams.put("Accept", localVarAccept);
+        }
+
+        final String[] localVarContentTypes = {
+        };
+        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
+        if (localVarContentType != null) {
+            localVarHeaderParams.put("Content-Type", localVarContentType);
+        }
+
+        String[] localVarAuthNames = new String[] { "oauth2" };
+        return localVarApiClient.buildCall(basePath, localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback, opts);
+    }
+
+    @SuppressWarnings("rawtypes")
+    private okhttp3.Call getUserFromLoginValidateBeforeCall(String login, final ApiCallback _callback, ConfigurationOptions opts) throws ApiException {
+        // verify the required parameter 'login' is set
+        if (login == null) {
+            throw new ApiException("Missing the required parameter 'login' when calling getUserFromLogin(Async)");
+        }
+
+        return getUserFromLoginCall(login, _callback, opts);
+
+    }
+
+
+    private ApiResponse<UserResponse> getUserFromLoginWithHttpInfo(String login) throws ApiException {
+        okhttp3.Call localVarCall = getUserFromLoginValidateBeforeCall(login, null, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private ApiResponse<UserResponse> getUserFromLoginWithHttpInfo(String login, ConfigurationOptions opts) throws ApiException {
+        okhttp3.Call localVarCall = getUserFromLoginValidateBeforeCall(login, null, opts);
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        return localVarApiClient.execute(localVarCall, localVarReturnType);
+    }
+
+    private okhttp3.Call getUserFromLoginAsync(String login, final ApiCallback<UserResponse> _callback) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserFromLoginValidateBeforeCall(login, _callback, new ConfigurationOptions());
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    private okhttp3.Call getUserFromLoginAsync(String login, final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+
+        okhttp3.Call localVarCall = getUserFromLoginValidateBeforeCall(login, _callback, opts);
+        Type localVarReturnType = new TypeToken<UserResponse>(){}.getType();
+        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
+        return localVarCall;
+    }
+
+    public class APIgetUserFromLoginRequest {
+        private final String login;
+
+        private APIgetUserFromLoginRequest(String login) {
+            this.login = login;
+        }
+
+        /**
+         * Build call for getUserFromLogin
+         * @param _callback ApiCallback API callback
+         * @return Call to execute
+         * @throws ApiException If fail to serialize the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call buildCall(final ApiCallback _callback) throws ApiException {
+            return getUserFromLoginCall(login, _callback);
+        }
+
+        /**
+         * Execute getUserFromLogin request
+         * @return UserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserResponse execute() throws ApiException {
+            ApiResponse<UserResponse> localVarResp = getUserFromLoginWithHttpInfo(login);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getUserFromLogin request. Use any specified configuration options to override any other configuration for this request only.
+         * @return UserResponse
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public UserResponse execute(ConfigurationOptions opts) throws ApiException {
+            ApiResponse<UserResponse> localVarResp = getUserFromLoginWithHttpInfo(login, opts);
+            return localVarResp.getData();
+        }
+
+        /**
+         * Execute getUserFromLogin request with HTTP info returned
+         * @return ApiResponse&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserResponse> executeWithHttpInfo() throws ApiException {
+            return getUserFromLoginWithHttpInfo(login);
+        }
+
+        /**
+         * Execute getUserFromLogin request with HTTP info returned. Use any specified configuration options to override any other configuration for this request only.
+         * @return ApiResponse&lt;UserResponse&gt;
+         * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public ApiResponse<UserResponse> executeWithHttpInfo(ConfigurationOptions opts) throws ApiException {
+            return getUserFromLoginWithHttpInfo(login, opts);
+        }
+
+        /**
+         * Execute getUserFromLogin request (asynchronously)
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback) throws ApiException {
+            return getUserFromLoginAsync(login, _callback);
+        }
+
+        /**
+         * Execute getUserFromLogin request (asynchronously). Use any specified configuration options to override any other configuration for this request only.
+         * @param _callback The callback to be executed when the API call finishes
+         * @return The request call
+         * @throws ApiException If fail to process the API call, e.g. serializing the request body object
+         * @http.response.details
+         <table summary="Response Details" border="1">
+            <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+            <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+            <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+            <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+         </table>
+         */
+        public okhttp3.Call executeAsync(final ApiCallback<UserResponse> _callback, ConfigurationOptions opts) throws ApiException {
+            return getUserFromLoginAsync(login, _callback, opts);
+        }
+    }
+
+    /**
+     * GetUserFromLogin: Get User From Login
+     * Get the userId of a specified User
+     * @param login The unique login for the User (required)
+     * @return APIgetUserFromLoginRequest
+     * @http.response.details
+     <table summary="Response Details" border="1">
+        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
+        <tr><td> 200 </td><td> Get the specified user from login </td><td>  -  </td></tr>
+        <tr><td> 400 </td><td> The details of the input related failure </td><td>  -  </td></tr>
+        <tr><td> 0 </td><td> Error response </td><td>  -  </td></tr>
+     </table>
+     */
+    public APIgetUserFromLoginRequest getUserFromLogin(String login) {
+        return new APIgetUserFromLoginRequest(login);
+    }
     private okhttp3.Call getUserSchemaCall(final ApiCallback _callback) throws ApiException {
         return getUserSchemaCall( _callback, new ConfigurationOptions());
     }
