@@ -172,7 +172,7 @@ public class UpsertMcpToolRequest {
   }
 
    /**
-   * Whether the tool is destructive
+   * Whether the tool is destructive. When true, DestructiveActionSummaryTemplate is required and is shown to the user at the destructive-action consent gate before the tool runs.
    * @return destructive
   **/
   @jakarta.annotation.Nullable

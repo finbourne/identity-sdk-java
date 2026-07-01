@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 **payloadType** | **String** | The type of payload (Luminesce or Scheduler) | [optional] [default to String]
 **luminescePayload** | [**McpToolLuminescePayload**](McpToolLuminescePayload.md) |  | [optional] [default to McpToolLuminescePayload]
 **schedulerPayload** | [**McpToolSchedulerPayload**](McpToolSchedulerPayload.md) |  | [optional] [default to McpToolSchedulerPayload]
-**destructiveActionSummaryTemplate** | **String** | Template for human-readable destructive action summary (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;) | [optional] [default to String]
+**destructiveActionSummaryTemplate** | **String** | Template for human-readable destructive action summary. Uses {paramName} single-brace placeholders (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;). Required when Destructive is true. | [optional] [default to String]
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) | When the MCP tool was created | [optional] [default to OffsetDateTime]
 **createdBy** | **String** | Who created the MCP tool | [optional] [default to String]
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) | When the MCP tool was last updated | [optional] [default to OffsetDateTime]

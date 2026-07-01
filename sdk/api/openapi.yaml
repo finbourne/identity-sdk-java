@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3647
+  version: 0.0.3665
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -2574,79 +2574,159 @@ paths:
       requestBody:
         content:
           application/json-patch+json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           text/json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/*+json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
         description: The MCP tool definition
@@ -2733,79 +2813,159 @@ paths:
       requestBody:
         content:
           application/json-patch+json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           text/json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
           application/*+json:
-            example:
-              name: get-instruments
-              title: Get Instruments
-              description: Retrieves instruments from LUSID
-              destructive: false
-              idempotent: true
-              openWorld: false
-              readOnly: true
-              parameters:
-              - name: limit
-                dataType: Integer
-                description: The maximum number of instruments to return
-              luminescePayload:
-                query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
-                  \ generate justfile LICENSE.md publish README.md resources test_sdk\
-                  \ from Lusid.Instrument limit {{{limit}}}"
+            examples:
+              Read-only tool:
+                value:
+                  name: get-instruments
+                  title: Get Instruments
+                  description: Retrieves instruments from LUSID
+                  destructive: false
+                  idempotent: true
+                  openWorld: false
+                  readOnly: true
+                  parameters:
+                  - name: limit
+                    dataType: Integer
+                    description: The maximum number of instruments to return
+                  luminescePayload:
+                    query: "select docker-compose.yml Dockerfile Dockerfile.cicd docs\
+                      \ generate justfile LICENSE.md publish README.md resources test_sdk\
+                      \ from Lusid.Instrument limit {{{limit}}}"
+              Destructive tool:
+                value:
+                  name: delete-instrument
+                  title: Delete Instrument
+                  description: Deletes an instrument from LUSID by its LUSID instrument
+                    id
+                  destructive: true
+                  idempotent: false
+                  openWorld: false
+                  readOnly: false
+                  parameters:
+                  - name: instrumentId
+                    dataType: String
+                    description: The LUSID instrument id of the instrument to delete
+                  luminescePayload:
+                    query: "delete from Lusid.Instrument.Writer where LusidInstrumentId\
+                      \ = '{{{instrumentId}}}'"
+                  destructiveActionSummaryTemplate: "Delete instrument '{instrumentId}'"
             schema:
               $ref: '#/components/schemas/UpsertMcpToolRequest'
         description: The updated MCP tool definition
@@ -6509,8 +6669,10 @@ components:
         schedulerPayload:
           $ref: '#/components/schemas/McpToolSchedulerPayload'
         destructiveActionSummaryTemplate:
-          description: "Template for human-readable destructive action summary (e.g.\
-            \ \"Delete file '{filePath}'\")"
+          description: |-
+            Template for human-readable destructive action summary.
+            Uses {paramName} single-brace placeholders (e.g. "Delete file '{filePath}'").
+            Required when Destructive is true.
           nullable: true
           type: string
         createdAt:
@@ -8287,7 +8449,9 @@ components:
           minLength: 1
           type: string
         destructive:
-          description: Whether the tool is destructive
+          description: |-
+            Whether the tool is destructive. When true, DestructiveActionSummaryTemplate is required and is
+            shown to the user at the destructive-action consent gate before the tool runs.
           type: boolean
         idempotent:
           description: Whether the tool is idempotent

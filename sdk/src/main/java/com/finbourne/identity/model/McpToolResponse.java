@@ -444,7 +444,7 @@ public class McpToolResponse {
   }
 
    /**
-   * Template for human-readable destructive action summary (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;)
+   * Template for human-readable destructive action summary. Uses {paramName} single-brace placeholders (e.g. \&quot;Delete file &#39;{filePath}&#39;\&quot;). Required when Destructive is true.
    * @return destructiveActionSummaryTemplate
   **/
   @jakarta.annotation.Nullable
