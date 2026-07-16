@@ -385,7 +385,7 @@ public class IdentityLogsApi {
     }
 
     /**
-     * [BETA] ListLogs: Lists system logs for a domain
+     * ListLogs: Lists system logs for a domain
      * Lists system logs for a domain
      * @return APIlistLogsRequest
      * @http.response.details

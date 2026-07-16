@@ -4,7 +4,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**listLogs**](IdentityLogsApi.md#listLogs) | **GET** /api/logs | [BETA] ListLogs: Lists system logs for a domain |
+| [**listLogs**](IdentityLogsApi.md#listLogs) | **GET** /api/logs | ListLogs: Lists system logs for a domain |
 | [**listUserLogs**](IdentityLogsApi.md#listUserLogs) | **GET** /api/logs/me | ListUserLogs: Lists user logs |
 
 
@@ -13,7 +13,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 
 > ResourceListOfSystemLog listLogs(oktaSince, oktaUntil, oktaFilter, oktaQuery, oktaLimit, oktaSortOrder, oktaAfter)
 
-[BETA] ListLogs: Lists system logs for a domain
+ListLogs: Lists system logs for a domain
 
 Lists system logs for a domain
 
