@@ -79,6 +79,10 @@ public class AuthenticationInformation {
   @SerializedName(SERIALIZED_NAME_STATUS)
   private Boolean status;
 
+  public static final String SERIALIZED_NAME_CODE = "code";
+  @SerializedName(SERIALIZED_NAME_CODE)
+  private Integer code;
+
   public static final String SERIALIZED_NAME_LINKS = "links";
   @SerializedName(SERIALIZED_NAME_LINKS)
   private List<Link> links;
@@ -228,6 +232,27 @@ public class AuthenticationInformation {
   }
 
 
+  public AuthenticationInformation code(Integer code) {
+    
+    this.code = code;
+    return this;
+  }
+
+   /**
+   * Internal provisioning code.
+   * @return code
+  **/
+  @jakarta.annotation.Nullable
+  public Integer getCode() {
+    return code;
+  }
+
+
+  public void setCode(Integer code) {
+    this.code = code;
+  }
+
+
   public AuthenticationInformation links(List<Link> links) {
     
     this.links = links;
@@ -273,6 +298,7 @@ public class AuthenticationInformation {
         Objects.equals(this.support, authenticationInformation.support) &&
         Objects.equals(this.supportAccessExpiryWithRole, authenticationInformation.supportAccessExpiryWithRole) &&
         Objects.equals(this.status, authenticationInformation.status) &&
+        Objects.equals(this.code, authenticationInformation.code) &&
         Objects.equals(this.links, authenticationInformation.links);
   }
 
@@ -282,7 +308,7 @@ public class AuthenticationInformation {
 
   @Override
   public int hashCode() {
-    return Objects.hash(issuerUrl, fallbackIssuerUrls, samlIdentityProviderId, support, supportAccessExpiryWithRole, status, links);
+    return Objects.hash(issuerUrl, fallbackIssuerUrls, samlIdentityProviderId, support, supportAccessExpiryWithRole, status, code, links);
   }
 
   private static <T> int hashCodeNullable(JsonNullable<T> a) {
@@ -302,6 +328,7 @@ public class AuthenticationInformation {
     sb.append("    support: ").append(toIndentedString(support)).append("\n");
     sb.append("    supportAccessExpiryWithRole: ").append(toIndentedString(supportAccessExpiryWithRole)).append("\n");
     sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    code: ").append(toIndentedString(code)).append("\n");
     sb.append("    links: ").append(toIndentedString(links)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -331,6 +358,7 @@ public class AuthenticationInformation {
     openapiFields.add("support");
     openapiFields.add("supportAccessExpiryWithRole");
     openapiFields.add("status");
+    openapiFields.add("code");
     openapiFields.add("links");
 
     // a set of required properties/fields (JSON key names)
