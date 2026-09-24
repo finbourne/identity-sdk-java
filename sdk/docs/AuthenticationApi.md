@@ -6,13 +6,13 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 |------------- | ------------- | -------------|
 | [**getAuthenticationInformation**](AuthenticationApi.md#getAuthenticationInformation) | **GET** /api/authentication/information | GetAuthenticationInformation: Gets AuthenticationInformation |
 | [**getPasswordPolicy**](AuthenticationApi.md#getPasswordPolicy) | **GET** /api/authentication/password-policy/{userType} | GetPasswordPolicy: Gets password policy for a user type |
-| [**getSessionPolicy**](AuthenticationApi.md#getSessionPolicy) | **GET** /api/authentication/session-policy | [EXPERIMENTAL] GetSessionPolicy: Get session policy |
+| [**getSessionPolicy**](AuthenticationApi.md#getSessionPolicy) | **GET** /api/authentication/session-policy | GetSessionPolicy: Get session policy |
 | [**getSupportAccessHistory**](AuthenticationApi.md#getSupportAccessHistory) | **GET** /api/authentication/support | GetSupportAccessHistory: Get the history of all support access granted and any information pertaining to their termination |
 | [**getSupportRoles**](AuthenticationApi.md#getSupportRoles) | **GET** /api/authentication/support-roles | GetSupportRoles: Get mapping of support roles, the internal representation to a human friendly representation |
 | [**grantSupportAccess**](AuthenticationApi.md#grantSupportAccess) | **POST** /api/authentication/support | GrantSupportAccess: Grants FINBOURNE support access to your account |
 | [**invalidateSupportAccess**](AuthenticationApi.md#invalidateSupportAccess) | **DELETE** /api/authentication/support | InvalidateSupportAccess: Revoke any FINBOURNE support access to your account |
 | [**updatePasswordPolicy**](AuthenticationApi.md#updatePasswordPolicy) | **PUT** /api/authentication/password-policy/{userType} | UpdatePasswordPolicy: Updates password policy for a user type |
-| [**updateSessionPolicy**](AuthenticationApi.md#updateSessionPolicy) | **PUT** /api/authentication/session-policy | [EXPERIMENTAL] UpdateSessionPolicy: Update session policy |
+| [**updateSessionPolicy**](AuthenticationApi.md#updateSessionPolicy) | **PUT** /api/authentication/session-policy | UpdateSessionPolicy: Update session policy |
 
 
 
@@ -197,7 +197,7 @@ public class AuthenticationApiExample {
 
 > SessionPolicyResponse getSessionPolicy()
 
-[EXPERIMENTAL] GetSessionPolicy: Get session policy
+GetSessionPolicy: Get session policy
 
 Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
 
@@ -732,7 +732,7 @@ public class AuthenticationApiExample {
 
 > SessionPolicyResponse updateSessionPolicy(updateSessionPolicyRequest)
 
-[EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+UpdateSessionPolicy: Update session policy
 
 Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
 

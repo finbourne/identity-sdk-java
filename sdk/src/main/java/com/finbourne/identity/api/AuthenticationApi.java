@@ -723,7 +723,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] GetSessionPolicy: Get session policy
+     * GetSessionPolicy: Get session policy
      * Get the configured session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @return APIgetSessionPolicyRequest
      * @http.response.details
@@ -2109,7 +2109,7 @@ public class AuthenticationApi {
     }
 
     /**
-     * [EXPERIMENTAL] UpdateSessionPolicy: Update session policy
+     * UpdateSessionPolicy: Update session policy
      * Update the session timing settings. These settings dictate the duration of user sessions and the frequency of required re-authentication.
      * @param updateSessionPolicyRequest The desired session timing settings (required)
      * @return APIupdateSessionPolicyRequest
