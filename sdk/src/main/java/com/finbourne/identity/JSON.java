@@ -94,6 +94,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.AccessControlledResource.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.ActionId.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.AddScimResponse.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.ApiEndpoint.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.ApiKey.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.AuthenticationInformation.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.CellParentStatusResponse.CustomTypeAdapterFactory());
@@ -149,6 +150,7 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.RoleId.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.RoleResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.RotateAttachingKeyRequest.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.ServiceApiEndpoints.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SessionPolicyResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SetAttachingKeyRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.finbourne.identity.model.SetParentCellRequest.CustomTypeAdapterFactory());

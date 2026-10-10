@@ -6,6 +6,7 @@ All URIs are relative to *https://fbn-prd.lusid.com/identity*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *ApplicationMetadataApi* | [**listAccessControlledResources**](docs/ApplicationMetadataApi.md#listaccesscontrolledresources) | **GET** /api/metadata/access/resources | ListAccessControlledResources: Get resources available for access control
+*ApplicationMetadataApi* | [**listApiEndpoints**](docs/ApplicationMetadataApi.md#listapiendpoints) | **GET** /api/metadata/endpoints | ListApiEndpoints: Get the API endpoints available
 *ApplicationsApi* | [**createApplication**](docs/ApplicationsApi.md#createapplication) | **POST** /api/applications | [EARLY ACCESS] CreateApplication: Create Application
 *ApplicationsApi* | [**deleteApplication**](docs/ApplicationsApi.md#deleteapplication) | **DELETE** /api/applications/{id} | [EARLY ACCESS] DeleteApplication: Delete Application
 *ApplicationsApi* | [**getApplication**](docs/ApplicationsApi.md#getapplication) | **GET** /api/applications/{id} | GetApplication: Get Application
@@ -89,6 +90,7 @@ Class | Method | HTTP request | Description
  - [AccessControlledResource](docs/AccessControlledResource.md)
  - [ActionId](docs/ActionId.md)
  - [AddScimResponse](docs/AddScimResponse.md)
+ - [ApiEndpoint](docs/ApiEndpoint.md)
  - [ApiKey](docs/ApiKey.md)
  - [AuthenticationInformation](docs/AuthenticationInformation.md)
  - [CellParentStatusResponse](docs/CellParentStatusResponse.md)
@@ -144,6 +146,7 @@ Class | Method | HTTP request | Description
  - [RoleId](docs/RoleId.md)
  - [RoleResponse](docs/RoleResponse.md)
  - [RotateAttachingKeyRequest](docs/RotateAttachingKeyRequest.md)
+ - [ServiceApiEndpoints](docs/ServiceApiEndpoints.md)
  - [SessionPolicyResponse](docs/SessionPolicyResponse.md)
  - [SetAttachingKeyRequest](docs/SetAttachingKeyRequest.md)
  - [SetParentCellRequest](docs/SetParentCellRequest.md)

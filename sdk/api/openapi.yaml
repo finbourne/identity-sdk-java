@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3739
+  version: 0.0.3743
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -3147,6 +3147,88 @@ paths:
       - Application Metadata
       x-fbn-apistatus: Stable
       x-accepts: application/json
+  /api/metadata/endpoints:
+    get:
+      description: "Get the name of the application and the operation, HTTP method,\
+        \ path, status, summary and description of each of its API endpoints"
+      operationId: ListApiEndpoints
+      responses:
+        "200":
+          content:
+            text/plain:
+              example:
+                application: lydia
+                endpoints:
+                - operation: ListRoles
+                  httpMethod: GET
+                  path: /identity/api/roles
+                  status: Stable
+                  summary: List Roles
+                  description: List the available Roles
+                - operation: ListAccessControlledResources
+                  httpMethod: GET
+                  path: /identity/api/metadata/access/resources
+                  status: Stable
+                  summary: Get resources available for access control
+                  description: Get the comprehensive set of resources that are available
+                    for access control
+                href: https://example.lusid.com/identity/api/metadata/endpoints
+              schema:
+                $ref: '#/components/schemas/ServiceApiEndpoints'
+            application/json:
+              example:
+                application: lydia
+                endpoints:
+                - operation: ListRoles
+                  httpMethod: GET
+                  path: /identity/api/roles
+                  status: Stable
+                  summary: List Roles
+                  description: List the available Roles
+                - operation: ListAccessControlledResources
+                  httpMethod: GET
+                  path: /identity/api/metadata/access/resources
+                  status: Stable
+                  summary: Get resources available for access control
+                  description: Get the comprehensive set of resources that are available
+                    for access control
+                href: https://example.lusid.com/identity/api/metadata/endpoints
+              schema:
+                $ref: '#/components/schemas/ServiceApiEndpoints'
+            text/json:
+              example:
+                application: lydia
+                endpoints:
+                - operation: ListRoles
+                  httpMethod: GET
+                  path: /identity/api/roles
+                  status: Stable
+                  summary: List Roles
+                  description: List the available Roles
+                - operation: ListAccessControlledResources
+                  httpMethod: GET
+                  path: /identity/api/metadata/access/resources
+                  status: Stable
+                  summary: Get resources available for access control
+                  description: Get the comprehensive set of resources that are available
+                    for access control
+                href: https://example.lusid.com/identity/api/metadata/endpoints
+              schema:
+                $ref: '#/components/schemas/ServiceApiEndpoints'
+          description: OK
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LusidProblemDetails'
+          description: Error response
+      security:
+      - oauth2: []
+      summary: "ListApiEndpoints: Get the API endpoints available"
+      tags:
+      - Application Metadata
+      x-fbn-apistatus: Stable
+      x-accepts: application/json
   /api/networkzones:
     get:
       description: Lists all network zones for a domain
@@ -5286,6 +5368,38 @@ components:
         apiToken:
           nullable: true
           type: string
+      type: object
+    ApiEndpoint:
+      additionalProperties: false
+      example:
+        summary: summary
+        path: path
+        description: description
+        httpMethod: httpMethod
+        operation: operation
+        status: status
+      properties:
+        operation:
+          nullable: true
+          type: string
+        httpMethod:
+          minLength: 1
+          type: string
+        path:
+          minLength: 1
+          type: string
+        status:
+          nullable: true
+          type: string
+        summary:
+          nullable: true
+          type: string
+        description:
+          nullable: true
+          type: string
+      required:
+      - httpMethod
+      - path
       type: object
     ApiKey:
       additionalProperties: false
@@ -7601,6 +7715,54 @@ components:
           type: string
       required:
       - pat
+      type: object
+    ServiceApiEndpoints:
+      additionalProperties: false
+      example:
+        endpoints:
+        - summary: summary
+          path: path
+          description: description
+          httpMethod: httpMethod
+          operation: operation
+          status: status
+        - summary: summary
+          path: path
+          description: description
+          httpMethod: httpMethod
+          operation: operation
+          status: status
+        application: application
+        links:
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        - method: method
+          description: description
+          href: https://openapi-generator.tech
+          relation: relation
+        href: https://openapi-generator.tech
+      properties:
+        application:
+          minLength: 1
+          type: string
+        endpoints:
+          items:
+            $ref: '#/components/schemas/ApiEndpoint'
+          type: array
+        href:
+          format: uri
+          nullable: true
+          type: string
+        links:
+          items:
+            $ref: '#/components/schemas/Link'
+          nullable: true
+          type: array
+      required:
+      - application
+      - endpoints
       type: object
     SessionPolicyResponse:
       additionalProperties: false
