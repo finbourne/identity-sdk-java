@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3743
+  version: 0.0.3780
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -7811,7 +7811,7 @@ components:
             Parent admin domain name (as entered alongside the Attaching Key by the user).
             Used only as the initial proposal value; the admin domain stored in the DB
             is the source of truth for all later operations (anti-redirection).
-          maxLength: 30
+          maxLength: 57
           minLength: 3
           pattern: "^[a-zA-Z]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           type: string
@@ -7838,7 +7838,7 @@ components:
       properties:
         adminDomainName:
           description: The name of the admin domain in the parent cell.
-          maxLength: 30
+          maxLength: 57
           minLength: 3
           pattern: "^[a-zA-Z]([a-zA-Z0-9-]*[a-zA-Z0-9])?$"
           type: string
