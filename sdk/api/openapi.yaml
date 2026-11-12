@@ -49,7 +49,7 @@ info:
     | <a name="2200">2200</a>|Tenant Scheduler Domain Job Error| |
   termsOfService: https://www.finbourne.com/legal/terms-conditions
   title: FINBOURNE Identity Service API
-  version: 0.0.3780
+  version: 0.0.2950
   x-logo:
     url: https://www.lusid.com/app/assets/logo_white.png
     backgroundColor: '#415464'
@@ -145,7 +145,7 @@ info:
     \ the setup of both personal and service user accounts. It works in conjunction\
     \ with the Access SDK."
 servers:
-- url: https://fbn-prd.lusid.com/identity
+- url: https://fbn-ci.lusid.com/identity
 security:
 - {}
 tags:
@@ -5645,47 +5645,6 @@ components:
       - displayName
       - type
       type: object
-    CreatedApiKey:
-      additionalProperties: false
-      description: A newly created API key
-      example:
-        deactivationDate: 2000-01-23T04:56:07.000+00:00
-        createdDate: 2000-01-23T04:56:07.000+00:00
-        displayName: displayName
-        id: id
-        key: key
-      properties:
-        key:
-          description: The API Key value
-          minLength: 1
-          type: string
-        id:
-          description: The unique Id of the API key
-          maxLength: 64
-          minLength: 1
-          pattern: "^[a-zA-Z0-9\\-_]+$"
-          type: string
-        displayName:
-          description: The display name of the API key
-          maxLength: 512
-          minLength: 1
-          pattern: "^[\\s\\S]*$"
-          type: string
-        createdDate:
-          description: The creation date of the API key
-          format: date-time
-          type: string
-        deactivationDate:
-          description: The deactivation date of the API key
-          format: date-time
-          nullable: true
-          type: string
-      required:
-      - createdDate
-      - displayName
-      - id
-      - key
-      type: object
     CreateExternalTokenIssuerRequest:
       additionalProperties: false
       description: Client input for creating an external token issuer.
@@ -5888,6 +5847,47 @@ components:
       - login
       - type
       type: object
+    CreatedApiKey:
+      additionalProperties: false
+      description: A newly created API key
+      example:
+        deactivationDate: 2000-01-23T04:56:07.000+00:00
+        createdDate: 2000-01-23T04:56:07.000+00:00
+        displayName: displayName
+        id: id
+        key: key
+      properties:
+        key:
+          description: The API Key value
+          minLength: 1
+          type: string
+        id:
+          description: The unique Id of the API key
+          maxLength: 64
+          minLength: 1
+          pattern: "^[a-zA-Z0-9\\-_]+$"
+          type: string
+        displayName:
+          description: The display name of the API key
+          maxLength: 512
+          minLength: 1
+          pattern: "^[\\s\\S]*$"
+          type: string
+        createdDate:
+          description: The creation date of the API key
+          format: date-time
+          type: string
+        deactivationDate:
+          description: The deactivation date of the API key
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - createdDate
+      - displayName
+      - id
+      - key
+      type: object
     CurrentUserResponse:
       additionalProperties: false
       example:
@@ -6024,6 +6024,46 @@ components:
           nullable: true
           type: string
       type: object
+    IdSelectorDefinition:
+      additionalProperties: false
+      example:
+        identifier:
+          key: identifier
+        name: name
+        description: description
+        actions:
+        - activity: activity
+          scope: scope
+          entity: entity
+        - activity: activity
+          scope: scope
+          entity: entity
+      properties:
+        identifier:
+          additionalProperties:
+            nullable: true
+            type: string
+          minLength: 1
+          type: object
+        actions:
+          items:
+            $ref: '#/components/schemas/ActionId'
+          minItems: 1
+          type: array
+        name:
+          maxLength: 100
+          minLength: 0
+          nullable: true
+          type: string
+        description:
+          maxLength: 1024
+          minLength: 0
+          nullable: true
+          type: string
+      required:
+      - actions
+      - identifier
+      type: object
     IdentifierPartSchema:
       additionalProperties: false
       example:
@@ -6067,46 +6107,6 @@ components:
       - index
       - name
       - required
-      type: object
-    IdSelectorDefinition:
-      additionalProperties: false
-      example:
-        identifier:
-          key: identifier
-        name: name
-        description: description
-        actions:
-        - activity: activity
-          scope: scope
-          entity: entity
-        - activity: activity
-          scope: scope
-          entity: entity
-      properties:
-        identifier:
-          additionalProperties:
-            nullable: true
-            type: string
-          minLength: 1
-          type: object
-        actions:
-          items:
-            $ref: '#/components/schemas/ActionId'
-          minItems: 1
-          type: array
-        name:
-          maxLength: 100
-          minLength: 0
-          nullable: true
-          type: string
-        description:
-          maxLength: 1024
-          minLength: 0
-          nullable: true
-          type: string
-      required:
-      - actions
-      - identifier
       type: object
     IpAddressDefinition:
       additionalProperties: false
@@ -8892,7 +8892,7 @@ components:
       description: OAuth2 Implicit Grant
       flows:
         implicit:
-          authorizationUrl: https://lusid.okta.com/oauth2/default/v1/authorize
+          authorizationUrl: https://lusid-dev.okta.com/oauth2/v1/authorize
           scopes: {}
       type: oauth2
 x-tagGroups:

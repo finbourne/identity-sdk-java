@@ -1,6 +1,6 @@
 # NetworkZonesApi
 
-All URIs are relative to *https://fbn-prd.lusid.com/identity*
+All URIs are relative to *https://fbn-ci.lusid.com/identity*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|

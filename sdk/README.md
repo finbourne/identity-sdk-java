@@ -1,7 +1,7 @@
 <a id="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://fbn-prd.lusid.com/identity*
+All URIs are relative to *https://fbn-ci.lusid.com/identity*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

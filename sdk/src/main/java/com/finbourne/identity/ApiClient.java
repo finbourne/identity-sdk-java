@@ -66,10 +66,10 @@ import com.finbourne.identity.extensions.RateLimitRetryInterceptor;
  */
 public class ApiClient {
 
-    private String basePath = "https://fbn-prd.lusid.com/identity";
+    private String basePath = "https://fbn-ci.lusid.com/identity";
     protected List<ServerConfiguration> servers = new ArrayList<ServerConfiguration>(Arrays.asList(
     new ServerConfiguration(
-      "https://fbn-prd.lusid.com/identity",
+      "https://fbn-ci.lusid.com/identity",
       "No description provided",
       new HashMap<String, ServerVariable>()
     )
@@ -212,7 +212,7 @@ public class ApiClient {
         json = new JSON();
 
         // Set default User-Agent.
-        setUserAgent("OpenAPI-Generator/2.1.24/java");
+        setUserAgent("OpenAPI-Generator/2.1.25/java");
 
         authentications = new HashMap<String, Authentication>();
     }
@@ -229,7 +229,7 @@ public class ApiClient {
     /**
      * Set base path
      *
-     * @param basePath Base path of the URL (e.g https://fbn-prd.lusid.com/identity
+     * @param basePath Base path of the URL (e.g https://fbn-ci.lusid.com/identity
      * @return An instance of OkHttpClient
      */
     public ApiClient setBasePath(String basePath) {
